@@ -1,4 +1,4 @@
-# scrapers project by Mark Veltzer
+# *scrapers* project by Mark Veltzer
 
 ## What is it?
 
