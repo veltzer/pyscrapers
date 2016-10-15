@@ -1,0 +1,1 @@
+- add an installer and turn this into a real python module.
