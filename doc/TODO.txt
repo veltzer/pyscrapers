@@ -2,3 +2,6 @@
 - the final saving of all the urls is the same code in all scrapers -
 	make it shared code.
 - do crawler for instagram.
+- make a debian package out of this and upload to my launchpad.
+- take some ideas from the google 'photograbber' project here:
+	https://code.google.com/archive/p/photograbber/downloads
