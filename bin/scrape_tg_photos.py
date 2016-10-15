@@ -22,6 +22,7 @@ import sys # for argv
 import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
 import urllib.parse # for urljoin
+import browser_cookie3
 
 def get_real_content(r):
     assert r.status_code==200
@@ -58,8 +59,11 @@ args = parser.parse_args()
 if args.id is None:
     parser.error('-i/--id must be given')
 
+# load cookies from browser
+cookies=browser_cookie3.firefox()
+
 main_url='http://www.travelgirls.com/member/{id}'.format(id=args.id)
-r = requests.get(main_url)
+r = requests.get(main_url, cookies=cookies)
 root = get_real_content(r)
 
 urls=[]
