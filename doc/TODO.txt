@@ -5,3 +5,5 @@
 - make a debian package out of this and upload to my launchpad.
 - take some ideas from the google 'photograbber' project here:
 	https://code.google.com/archive/p/photograbber/downloads
+- use the facebook graph API to download from facebook:
+	https://developers.facebook.com/docs/graph-api/reference/photo
