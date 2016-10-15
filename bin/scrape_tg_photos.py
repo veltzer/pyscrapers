@@ -22,7 +22,7 @@ import sys # for argv
 import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
 import urllib.parse # for urljoin
-import browser_cookie3
+import browser_cookie3 # for firefox
 
 def get_real_content(r):
     assert r.status_code==200
@@ -69,7 +69,7 @@ root = get_real_content(r)
 urls=[]
 e_a = root.xpath('//a[contains(@class,\'photo\')]')
 for x in e_a:
-    print(lxml.etree.tostring(x, pretty_print=True))
+    #print(lxml.etree.tostring(x, pretty_print=True))
     children=x.getchildren()
     assert len(children)==1
     img=children[0]
