@@ -3,10 +3,10 @@
 '''
 This script scrapes photos from travelgirls.com
 
-For instance if you see a url like this:
-    http://www.travelgirls.com/member/2126319
+For instance if you see a profile of a user like this:
+    https://www.facebook.com/profile.php?id=100009255122147&fref=ts
 then the id for this script will be:
-    2126319 
+    100009255122147 
 
 References:
 - http://docs.python-requests.org/en/master
@@ -21,7 +21,6 @@ import shutil # for copyfileobj
 import sys # for argv
 import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
-import urllib.parse # for urljoin
 
 def get_real_content(r):
     assert r.status_code==200
@@ -31,18 +30,15 @@ def get_real_content(r):
     root=lxml.html.fromstring(c)
     return root
 
-def add_http(url, main_url):
-    return urllib.parse.urljoin(main_url, url)
-
 # set up the logger
 logging.basicConfig()
 logger=logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-#logger.setLevel(logging.DEBUG)
+#logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 # command line parsing
 parser = argparse.ArgumentParser(
-        description='''download photos from travelgirls'''
+        description='''download photos from facebook'''
 )
 parser.add_argument(
         '-i',
@@ -58,18 +54,18 @@ args = parser.parse_args()
 if args.id is None:
     parser.error('-i/--id must be given')
 
-main_url='http://www.travelgirls.com/member/{id}'.format(id=args.id)
-r = requests.get(main_url)
+url='http://www.travelgirls.com/member/{id}'.format(id=args.id)
+r = requests.get(url)
 root = get_real_content(r)
 
 urls=[]
 e_a = root.xpath('//a[contains(@class,\'photo\')]')
 for x in e_a:
-    print(lxml.etree.tostring(x, pretty_print=True))
+    #print(lxml.etree.tostring(x, pretty_print=True))
     children=x.getchildren()
     assert len(children)==1
     img=children[0]
-    url=add_http(img.attrib['src'], main_url)
+    url='http:'+img.attrib['src']
     url=url.replace('mini','')
     urls.append(url)
 
