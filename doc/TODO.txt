@@ -1,3 +1,4 @@
 - add an installer and turn this into a real python module.
 - the final saving of all the urls is the same code in all scrapers -
 	make it shared code.
+- do crawler for instagram.
