@@ -1,10 +1,12 @@
-# *scrapers* project by Mark Veltzer
+# *scrapers* project by ${tdefs.personal_fullname}
 
+## What is it?
 
 Scrapers for various stuff that I need off the web, maybe other people will like them too...:)
 
 Currently I support downloading the public albums of a vk user.
 
+## Installing
 
 * Clone the repo
   `$ git clone https://github.com/veltzer/scrapers.git`
@@ -15,6 +17,7 @@ Currently I support downloading the public albums of a vk user.
 * Install requirements using:
   `$ pip3 install --upgrade -r requirements.txt`
 
+## Running
 
   `$ ./bin/scrape_vk_albums.py [user_id_in_vk]`
   `$ ./bin/scrape_tg_albums.py [user_id_in_tg]`
