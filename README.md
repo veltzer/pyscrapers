@@ -1,7 +1,7 @@
 scrapers
 ========
 
-version: 3
+version: 4
 
 Scrapers is a project to produce various useful scrapers
 
