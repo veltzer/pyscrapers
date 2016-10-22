@@ -1,7 +1,7 @@
 scrapers
 ========
 
-version: 8
+version: 9
 
 project to produce various useful scrapers
 
