@@ -93,3 +93,4 @@ ENV/
 
 # packaging
 /debian/
+/setup.py
