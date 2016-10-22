@@ -8,6 +8,7 @@ def populate(d):
     d.project_website='https://{project_github_username}.github.io/{project_name}'.format(**d)
     d.project_website_source='https://github.com/{project_github_username}/{project_name}'.format(**d)
     d.project_website_git='git://github.com/{project_github_username}/{project_name}.git'.format(**d)
+    d.project_website_download='https://launchpad.net/~mark-veltzer/+archive/ubuntu/ppa'
     #d.project_paypal_donate_button_id='ASPRXR59H2NTQ'
     #d.project_google_analytics_tracking_id='UA-56436979-1'
     d.project_long_description='Scrapers is a project to produce various useful scrapers'
