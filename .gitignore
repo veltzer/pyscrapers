@@ -90,3 +90,6 @@ ENV/
 
 # our output folder
 /out
+
+# packaging
+/debian/
