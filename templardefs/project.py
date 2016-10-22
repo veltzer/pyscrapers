@@ -24,9 +24,9 @@ def populate(d):
     d.project_year_started='2016'
     d.project_description='''What is Scrapers?
 Look in the "doc" subfolder of the source code...'''.format(**d)
-
-    # deb
-    d.deb_package=True
+    d.project_platforms=[
+        'ALL',
+    ]
 
 def getdeps():
     return [
