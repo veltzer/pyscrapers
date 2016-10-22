@@ -1,6 +1,8 @@
 '''
-project definitions for templar
+project definitions
 '''
+
+import templar.utils # for hlp_files_under
 
 def populate(d):
     d.project_github_username='veltzer'
@@ -27,6 +29,20 @@ Look in the "doc" subfolder of the source code...'''.format(**d)
     d.project_platforms=[
         'ALL',
     ]
+    d.project_classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: LGPL',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Topic :: Software Development :: Building',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Utilities',
+    ]
+    d.project_data_files=[]
+    d.project_data_files.append(templar.utils.hlp_files_under('/usr/bin', 'src/*'))
 
 def getdeps():
     return [
