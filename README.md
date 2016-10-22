@@ -1,9 +1,9 @@
 scrapers
 ========
 
-version: 7
+version: 8
 
-Scrapers is a project to produce various useful scrapers
+project to produce various useful scrapers
 
 What is Scrapers? Look in the "doc" subfolder of the source code...
 
