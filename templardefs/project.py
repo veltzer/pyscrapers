@@ -24,8 +24,7 @@ def populate(d):
     ]
     d.project_license='GPLV3'
     d.project_year_started='2016'
-    d.project_description='''What is Scrapers?
-Look in the "doc" subfolder of the source code...'''.format(**d)
+    d.project_description='''What is Scrapers? Look in the "doc" subfolder of the source code...'''.format(**d)
     d.project_platforms=[
         'ALL',
     ]
