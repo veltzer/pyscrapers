@@ -4,6 +4,8 @@ import requests # for post
 import logging # for basicConfig, getLogger
 import shutil # for copyfileobj
 import urllib.parse # for urljoin
+import sys # for exit
+import http.client # for HTTPConnection
 
 logging.basicConfig()
 logger=logging.getLogger(__name__)
@@ -12,6 +14,12 @@ logger.setLevel(logging.INFO)
 
 def get_real_content(r):
     assert r.status_code==200
+    '''
+    if r.status_code!=200:
+        print('got error')
+        print(r.content.decode())
+        sys.exit(1)
+    '''
     strcontent=r.content.decode()
     root=lxml.html.fromstring(strcontent)
     return root
@@ -38,3 +46,6 @@ def debug_requests():
 
 def add_http(url, main_url):
     return urllib.parse.urljoin(main_url, url)
+
+def print_element(e):
+    print(lxml.etree.tostring(e, pretty_print=True))
