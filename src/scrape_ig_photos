@@ -1,15 +1,12 @@
 #!/usr/bin/python3
 
 '''
-This script scrapes photos from travelgirls.com
+This script scrapes photos from instagram.com
 
 For instance if you see a profile of a user like this:
-    https://www.facebook.com/profile.php?id=100009255122147&fref=ts
+    https://www.instagram.com/ada_123456789
 then the id for this script will be:
-    100009255122147 
-If the url is this way:
-    https://www.facebook.com/irina.arkhipova.1466
-then we will see
+    ada_123456789
 
 References:
 - http://docs.python-requests.org/en/master
@@ -25,13 +22,14 @@ import sys # for argv
 import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
 import browser_cookie3 # for firefox
+import http.client # for HTTPConnection
+
+# code
 
 def get_real_content(r):
     assert r.status_code==200
-    strcontent=r.content.decode(errors='ignore')
-    strcontent=strcontent[strcontent.find('<input'):]
-    c=str.encode('<html><body>')+str.encode(strcontent)+str.encode('</body></html>')
-    root=lxml.html.fromstring(c)
+    strcontent=r.content.decode()
+    root=lxml.html.fromstring(strcontent)
     return root
 
 def download_urls(urls):
@@ -48,11 +46,17 @@ def download_urls(urls):
         logger.info('written [%s]...', filename)
         cnt+=1
 
+def debug_requests():
+    http.client.HTTPConnection.debuglevel=1
+    requests_log = logging.getLogger("requests.packages.urllib3")
+    requests_log.setLevel(logging.DEBUG)
+    requests_log.propagate = True
+
 # set up the logger
 logging.basicConfig()
 logger=logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-#logger.setLevel(logging.DEBUG)
+#logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 # command line parsing
 parser = argparse.ArgumentParser(
@@ -63,24 +67,30 @@ parser.add_argument(
         '--id', 
         help='''id of the user to download the albums of
         For instance if you see a url like this:
-            http://www.travelgirls.com/member/2126319
+            https://www.instagram.com/ada_123456789
         then the id for this script will be:
-            2126319 
+            ada_123456789
         '''
+)
+parser.add_argument(
+        '-d',
+        '--debug',
+        help='debug requests',
+        default=False,
+        action='store_true',
 )
 args = parser.parse_args()
 if args.id is None:
     parser.error('-i/--id must be given')
+if args.debug:
+    debug_requests()
 
-# load cookies from browser
-cookies=browser_cookie3.firefox()
-
-url='https://www.facebook.com/{id}/photos'.format(id=args.id)
+url='https://www.instagram.com/{id}/'.format(id=args.id)
 logger.debug('url is [%s]', url)
 r = requests.get(url)
 root = get_real_content(r)
-#print(lxml.etree.tostring(root, pretty_print=True))
-#sys.exit(1)
+print(lxml.etree.tostring(root, pretty_print=True))
+sys.exit(1)
 
 urls=[]
 e_a = root.xpath('//img')
