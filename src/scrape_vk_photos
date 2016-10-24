@@ -25,19 +25,25 @@ import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
 import scrape.utils # for download_urls
 
-def get_real_content(r):
-    assert r.status_code==200
-    strcontent=r.content.decode(errors='ignore')
-    strcontent=strcontent[strcontent.find('<input'):]
-    c=str.encode('<html><body>')+str.encode(strcontent)+str.encode('</body></html>')
-    root=lxml.html.fromstring(c)
-    return root
-
 # set up the logger
 logging.basicConfig()
 logger=logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 #logger.setLevel(logging.DEBUG)
+
+def get_my_content(r):
+    '''
+    the return from the server in vk is not a standard HTML.
+    this is why we must cut it up and cant use the regular
+    'get_real_content' helper.
+    '''
+    assert r.status_code==200
+    #strcontent=r.content.decode(errors='ignore')
+    strcontent=r.content.decode()
+    strcontent=strcontent[strcontent.find('<input'):]
+    c=str.encode('<html><body>')+str.encode(strcontent)+str.encode('</body></html>')
+    root=lxml.html.fromstring(c)
+    return root
 
 # command line parsing
 parser = argparse.ArgumentParser(
@@ -65,7 +71,7 @@ data={
     'owner': owner,
 }
 r = requests.post(url, data = data)
-root=get_real_content(r)
+root=get_my_content(r)
 
 e_albums = root.xpath('//div[@class="photos_album_title_wrap"]')
 albums=dict()
@@ -93,7 +99,7 @@ while got:
     }
     logger.debug('doing request %d', count)
     r = requests.post(url, data = data)
-    root=get_real_content(r)
+    root=get_my_content(r)
     e_a = root.xpath('//a[@onclick]')
     for x in e_a:
         onclick=x.attrib['onclick']

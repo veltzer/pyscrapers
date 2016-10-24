@@ -4,9 +4,9 @@
 This script scrapes photos from travelgirls.com
 
 For instance if you see a url like this:
-    http://www.travelgirls.com/member/2126319
+    http://www.travelgirls.com/member/2129215
 then the id for this script will be:
-    2126319 
+    2129215 
 
 References:
 - http://docs.python-requests.org/en/master
@@ -21,7 +21,6 @@ import shutil # for copyfileobj
 import sys # for argv
 import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
-import urllib.parse # for urljoin
 import browser_cookie3 # for firefox
 import scrape.utils # for download_urls, get_real_content
 
@@ -41,9 +40,9 @@ parser.add_argument(
         '--id', 
         help='''id of the user to download the albums of
         For instance if you see a url like this:
-            http://www.travelgirls.com/member/2126319
+            http://www.travelgirls.com/member/2129215
         then the id for this script will be:
-            2126319 
+            2129215 
         '''
 )
 args = parser.parse_args()

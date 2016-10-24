@@ -3,6 +3,7 @@ import lxml.etree # for tostring
 import requests # for post
 import logging # for basicConfig, getLogger
 import shutil # for copyfileobj
+import urllib.parse # for urljoin
 
 logging.basicConfig()
 logger=logging.getLogger(__name__)
