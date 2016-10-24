@@ -52,6 +52,12 @@ def debug_requests():
     requests_log.setLevel(logging.DEBUG)
     requests_log.propagate = True
 
+# register regular expressions with lxml
+# this means that we can use regular expression functions like 'match'
+# by specifying 're:match' in our xpath expressions
+ns = lxml.etree.FunctionNamespace("http://exslt.org/regular-expressions")
+ns.prefix = 're'
+
 # set up the logger
 logging.basicConfig()
 logger=logging.getLogger(__name__)
@@ -89,12 +95,13 @@ url='https://www.instagram.com/{id}/'.format(id=args.id)
 logger.debug('url is [%s]', url)
 r = requests.get(url)
 root = get_real_content(r)
-print(lxml.etree.tostring(root, pretty_print=True))
-sys.exit(1)
+#print(lxml.etree.tostring(root, pretty_print=True))
+#sys.exit(1)
 
 urls=[]
-e_a = root.xpath('//img')
-for x in e_a:
-    print(lxml.etree.tostring(x, pretty_print=True))
+e_a = root.xpath('//script[re:match(text(), "^window._sharedData")]')
+assert len(e_a)==1
+e_a = e_a[0]
+print(lxml.etree.tostring(e_a, pretty_print=True))
 
-download_urls(urls)
+#download_urls(urls)
