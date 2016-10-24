@@ -23,17 +23,8 @@ import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
 import urllib.parse # for urljoin
 import browser_cookie3 # for firefox
+import scrape.utils # for download_urls, get_real_content
 
-def get_real_content(r):
-    assert r.status_code==200
-    strcontent=r.content.decode(errors='ignore')
-    strcontent=strcontent[strcontent.find('<input'):]
-    c=str.encode('<html><body>')+str.encode(strcontent)+str.encode('</body></html>')
-    root=lxml.html.fromstring(c)
-    return root
-
-def add_http(url, main_url):
-    return urllib.parse.urljoin(main_url, url)
 
 # set up the logger
 logging.basicConfig()
@@ -64,7 +55,7 @@ cookies=browser_cookie3.firefox()
 
 main_url='http://www.travelgirls.com/member/{id}'.format(id=args.id)
 r = requests.get(main_url, cookies=cookies)
-root = get_real_content(r)
+root = scrape.utils.get_real_content(r)
 
 urls=[]
 e_a = root.xpath('//a[contains(@class,\'photo\')]')
@@ -73,19 +64,8 @@ for x in e_a:
     children=x.getchildren()
     assert len(children)==1
     img=children[0]
-    url=add_http(img.attrib['src'], main_url)
+    url=scrape.utils.add_http(img.attrib['src'], main_url)
     url=url.replace('mini','')
     urls.append(url)
 
-cnt=0
-logger.info('got [%d] real urls', len(urls))
-for url in urls:
-    logger.debug(url)
-    r=requests.get(url, stream=True)
-    assert r.status_code==200
-    filename='image{0:04}.jpg'.format(cnt)
-    with open(filename, 'wb') as f:
-        r.raw.decode_content = True
-        shutil.copyfileobj(r.raw, f)
-    logger.info('written [%s]...', filename)
-    cnt+=1
+scrape.utils.download_urls(urls)

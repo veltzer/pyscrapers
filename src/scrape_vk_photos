@@ -23,6 +23,7 @@ import shutil # for copyfileobj
 import sys # for argv
 import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
+import scrape.utils # for download_urls
 
 def get_real_content(r):
     assert r.status_code==200
@@ -128,15 +129,4 @@ while got:
                 got+=1
     count+=got
 
-cnt=0
-logger.info('got [%d] real urls', len(urls))
-for url in urls:
-    logger.debug(url)
-    r=requests.get(url, stream=True)
-    assert r.status_code==200
-    filename='image{0:04}.jpg'.format(cnt)
-    with open(filename, 'wb') as f:
-        r.raw.decode_content = True
-        shutil.copyfileobj(r.raw, f)
-    logger.info('written [%s]...', filename)
-    cnt+=1
+scrape.utils.download_urls(urls)

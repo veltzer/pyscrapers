@@ -23,34 +23,9 @@ import logging # for basicConfig, getLogger
 import argparse  # for ArgumentParser
 import browser_cookie3 # for firefox
 import http.client # for HTTPConnection
+import scrape.utils # for download_urls, get_real_content
 
 # code
-
-def get_real_content(r):
-    assert r.status_code==200
-    strcontent=r.content.decode()
-    root=lxml.html.fromstring(strcontent)
-    return root
-
-def download_urls(urls):
-    cnt=0
-    logger.info('got [%d] real urls', len(urls))
-    for url in urls:
-        logger.debug(url)
-        r=requests.get(url, stream=True)
-        assert r.status_code==200
-        filename='image{0:04}.jpg'.format(cnt)
-        with open(filename, 'wb') as f:
-            r.raw.decode_content = True
-            shutil.copyfileobj(r.raw, f)
-        logger.info('written [%s]...', filename)
-        cnt+=1
-
-def debug_requests():
-    http.client.HTTPConnection.debuglevel=1
-    requests_log = logging.getLogger("requests.packages.urllib3")
-    requests_log.setLevel(logging.DEBUG)
-    requests_log.propagate = True
 
 # register regular expressions with lxml
 # this means that we can use regular expression functions like 'match'
@@ -66,7 +41,7 @@ logger.setLevel(logging.INFO)
 
 # command line parsing
 parser = argparse.ArgumentParser(
-        description='''download photos from facebook'''
+        description='''download photos from instagram'''
 )
 parser.add_argument(
         '-i',
@@ -94,7 +69,7 @@ if args.debug:
 url='https://www.instagram.com/{id}/'.format(id=args.id)
 logger.debug('url is [%s]', url)
 r = requests.get(url)
-root = get_real_content(r)
+root = scrape.utils.get_real_content(r)
 
 urls=[]
 e_a = root.xpath('//script[re:match(text(), "^window._sharedData")]')
@@ -114,4 +89,4 @@ list_node=c['media']['nodes']
 for x in list_node:
     urls.append(x['display_src'])
 
-download_urls(urls)
+scrape.utils.download_urls(urls)
