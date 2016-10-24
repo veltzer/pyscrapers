@@ -37,7 +37,7 @@ endif # DO_TOOLS
 # do not touch this rule
 all: $(ALL) $(ALL_DEP)
 
-$(TOOLS): requirements.txt
+$(TOOLS): templardefs/deps.py
 	$(info doing [$@])
 	$(Q)templar_cmd install_deps
 	$(Q)make_helper touch-mkdir $@
