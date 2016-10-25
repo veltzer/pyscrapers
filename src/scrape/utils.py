@@ -24,8 +24,8 @@ def get_real_content(r):
     root=lxml.html.fromstring(strcontent)
     return root
 
-def download_urls(urls):
-    cnt=0
+def download_urls(urls, start=0):
+    cnt=start
     logger.info('got [%d] real urls', len(urls))
     for url in urls:
         logger.debug(url)

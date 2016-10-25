@@ -65,6 +65,13 @@ parser.add_argument(
         default=False,
         action='store_true',
 )
+parser.add_argument(
+        '-s',
+        '--start',
+        help='start number for image names',
+        type=int,
+        default=0,
+)
 args = parser.parse_args()
 if args.id is None:
     parser.error('-i/--id must be given')
@@ -89,7 +96,10 @@ d=json.loads(json_text)
 l=d['entry_data']['ProfilePage']
 assert(len(l)==1)
 c=l[0]["user"]
-urls.append(c['profile_pic_url_hd'])
+if 'profile_pic_url_hd' in c:
+    urls.append(c['profile_pic_url_hd'])
+if 'profile_pic_url' in c:
+    urls.append(c['profile_pic_url'])
 user_id=c['id']
 #json.dump(c, sys.stdout, indent=4)
 list_node=c['media']['nodes']
@@ -119,4 +129,4 @@ for node in res['media']['nodes']:
     urls.append(node['display_src'])
 #scrape.utils.print_element(root)
 
-scrape.utils.download_urls(urls)
+scrape.utils.download_urls(urls, start=args.start)
