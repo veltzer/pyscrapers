@@ -7,10 +7,11 @@ import urllib.parse # for urljoin
 import sys # for exit
 import http.client # for HTTPConnection
 
-logging.basicConfig()
 logger=logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-#logger.setLevel(logging.DEBUG)
+
+def print_cookies(cookies, domain):
+    for cookie in cookies:
+        print(cookie)
 
 def get_real_content(r):
     assert r.status_code==200
@@ -21,6 +22,7 @@ def get_real_content(r):
         sys.exit(1)
     '''
     strcontent=r.content.decode()
+    #print('content is', strcontent)
     root=lxml.html.fromstring(strcontent)
     return root
 
