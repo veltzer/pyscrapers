@@ -4,9 +4,9 @@
 This script scrapes photos from instagram.com
 
 For instance if you see a profile of a user like this:
-    https://www.instagram.com/ada_123456789
+    https://www.instagram.com/[user_id]
 then the id for this script will be:
-    ada_123456789
+    [user_id]
 
 How this works?
 When you fetch the page of a user on instagram you get an html with a javascript embedded
@@ -56,9 +56,9 @@ parser.add_argument(
         '--id', 
         help='''id of the user to download the albums of
         For instance if you see a url like this:
-            https://www.instagram.com/ada_123456789
+            https://www.instagram.com/[user_id]
         then the id for this script will be:
-            ada_123456789
+            [user_id]
         '''
 )
 parser.add_argument(

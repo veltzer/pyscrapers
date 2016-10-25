@@ -4,12 +4,13 @@
 This script scrapes photos from travelgirls.com
 
 For instance if you see a profile of a user like this:
-    https://www.facebook.com/profile.php?id=100009255122147&fref=ts
+    https://www.facebook.com/profile.php?id=[user_id]&fref=ts
 then the id for this script will be:
-    100009255122147 
+    [user_id]
 If the url is this way:
-    https://www.facebook.com/irina.arkhipova.1466
-then we will see
+    https://www.facebook.com/[user_id]
+then the id fro this script will be:
+    [user_id]
 
 References:
 - http://docs.python-requests.org/en/master
@@ -42,9 +43,9 @@ parser.add_argument(
         '--id', 
         help='''id of the user to download the albums of
         For instance if you see a url like this:
-            http://www.travelgirls.com/member/2126319
+            http://www.travelgirls.com/member/[user_id]
         then the id for this script will be:
-            2126319 
+            [user_id]
         '''
 )
 args = parser.parse_args()
