@@ -6,9 +6,9 @@ You need to supply the user id. This is something you see in the
 url when you surf the users account at vk.com
 
 For instance if you see a url like this:
-    https://vk.com/id275458801?z=albums275458801
+    https://vk.com/id[user_id]?z=albums275458801
 then the id for this script will be:
-    275458801
+    [user_id]
 
 References:
 - http://docs.python-requests.org/en/master
@@ -54,9 +54,9 @@ parser.add_argument(
         '--id', 
         help='''id of the user to download the albums of
         For instance if you see a url like this:
-            https://vk.com/id275458801?z=albums275458801
+            https://vk.com/id[user_id]?z=albums275458801
         then the id for this script will be:
-            275458801
+            [user_id]
         '''
 )
 args = parser.parse_args()

@@ -19,6 +19,7 @@ Currently I support downloading the public albums of a vk user.
 
 ## Running
 
-  `$ ./bin/scrape_vk_albums.py [user_id_in_vk]`
-  `$ ./bin/scrape_tg_albums.py [user_id_in_tg]`
-  `$ ./bin/scrape_fb_albums.py [user_id_in_fb]`
+  `$ ./bin/scrape_vk_albums.py [user id in vk]`
+  `$ ./bin/scrape_tg_albums.py [user id in travelgirls]`
+  `$ ./bin/scrape_fb_albums.py [user id in facebook]`
+  `$ ./bin/scrape_ig_albums.py [user id in instagram]`
