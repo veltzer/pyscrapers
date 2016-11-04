@@ -94,3 +94,6 @@ ENV/
 # packaging
 /debian/
 /setup.py
+
+# tools
+/tools.stamp
