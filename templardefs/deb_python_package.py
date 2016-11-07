@@ -37,7 +37,6 @@ def populate(d):
             'scape_vk_photos=scrape.scape_vk_photos:cli',
         ],
     }
-},
 
 def getdeps():
     return [
