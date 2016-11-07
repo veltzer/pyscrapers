@@ -29,6 +29,15 @@ def populate(d):
     d.deb_x_python_version='>= 3.4'
     d.deb_x_python3_version='>= 3.4'
     d.deb_urgency='low'
+    d.entry_points={
+        'console_scripts': [
+            'scape_fb_photos=scrape.scape_fb_photos:cli',
+            'scape_tg_photos=scrape.scape_tg_photos:cli',
+            'scape_ig_photos=scrape.scape_ig_photos:cli',
+            'scape_vk_photos=scrape.scape_vk_photos:cli',
+        ],
+    }
+},
 
 def getdeps():
     return [
