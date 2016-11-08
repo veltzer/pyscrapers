@@ -31,10 +31,10 @@ def populate(d):
     d.deb_urgency='low'
     d.entry_points={
         'console_scripts': [
-            'scape_fb_photos=scrape.scape_fb_photos:cli',
-            'scape_tg_photos=scrape.scape_tg_photos:cli',
-            'scape_ig_photos=scrape.scape_ig_photos:cli',
-            'scape_vk_photos=scrape.scape_vk_photos:cli',
+            'scrape_fb_photos=scrape.scape_fb_photos:cli',
+            'scrape_tg_photos=scrape.scape_tg_photos:cli',
+            'scrape_ig_photos=scrape.scape_ig_photos:cli',
+            'scrape_vk_photos=scrape.scape_vk_photos:cli',
         ],
     }
 
