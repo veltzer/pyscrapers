@@ -34,37 +34,41 @@ logger=logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 #logger.setLevel(logging.DEBUG)
 
-# command line parsing
-parser = argparse.ArgumentParser(
-        description='''download photos from facebook'''
-)
-parser.add_argument(
-        '-i',
-        '--id', 
-        help='''id of the user to download the albums of
-        For instance if you see a url like this:
-            http://www.travelgirls.com/member/[user_id]
-        then the id for this script will be:
-            [user_id]
-        '''
-)
-args = parser.parse_args()
-if args.id is None:
-    parser.error('-i/--id must be given')
+def main():
+    # command line parsing
+    parser = argparse.ArgumentParser(
+            description='''download photos from facebook'''
+    )
+    parser.add_argument(
+            '-i',
+            '--id', 
+            help='''id of the user to download the albums of
+            For instance if you see a url like this:
+                http://www.travelgirls.com/member/[user_id]
+            then the id for this script will be:
+                [user_id]
+            '''
+    )
+    args = parser.parse_args()
+    if args.id is None:
+        parser.error('-i/--id must be given')
 
-# load cookies from browser
-cookies=browser_cookie3.firefox()
+    # load cookies from browser
+    cookies=browser_cookie3.firefox()
 
-url='https://www.facebook.com/{id}/photos'.format(id=args.id)
-logger.debug('url is [%s]', url)
-r = requests.get(url)
-root = get_real_content(r)
-#print(lxml.etree.tostring(root, pretty_print=True))
-#sys.exit(1)
+    url='https://www.facebook.com/{id}/photos'.format(id=args.id)
+    logger.debug('url is [%s]', url)
+    r = requests.get(url)
+    root = get_real_content(r)
+    #print(lxml.etree.tostring(root, pretty_print=True))
+    #sys.exit(1)
 
-urls=[]
-e_a = root.xpath('//img')
-for x in e_a:
-    print(lxml.etree.tostring(x, pretty_print=True))
+    urls=[]
+    e_a = root.xpath('//img')
+    for x in e_a:
+        print(lxml.etree.tostring(x, pretty_print=True))
 
-scrape.utils.download_urls(urls)
+    scrape.utils.download_urls(urls)
+
+if __name__ == '__main__':
+    main()
