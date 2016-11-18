@@ -1,3 +1,4 @@
+- add scraper for mamba.
 - do website for this project and publish to github.
 	use the tool that they all use for python.
 - use sessions in all of the scrapers and not just in the instagram one.
