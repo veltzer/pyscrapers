@@ -7,10 +7,6 @@ For instance if you see a url like this:
     http://www.travelgirls.com/member/[user_id]
 then the id for this script will be:
     [user_id]
-
-References:
-- http://docs.python-requests.org/en/master
-- http://docs.python-guide.org/en/latest/scenarios/scrape
 '''
 
 import requests # for post

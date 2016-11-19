@@ -1,16 +1,12 @@
 #!/usr/bin/python3
 
 '''
-This script scrapes photos from travelgirls.com
+This script scrapes photos from mamba.ru.
 
-For instance if you see a profile of a user like this:
-    https://www.facebook.com/profile.php?id=[user_id]&fref=ts
+For instance if you see a url like this:
+    http://www.mamba.ru/mb[number]
 then the id for this script will be:
-    [user_id]
-If the url is this way:
-    https://www.facebook.com/[user_id]
-then the id fro this script will be:
-    [user_id]
+    mb[number]
 '''
 
 import requests # for post
@@ -24,6 +20,7 @@ import argparse  # for ArgumentParser
 import browser_cookie3 # for firefox
 import scrape.utils # for download_urls, get_real_content
 
+
 # set up the logger
 logging.basicConfig()
 logger=logging.getLogger(__name__)
@@ -33,7 +30,7 @@ logger.setLevel(logging.INFO)
 def main():
     # command line parsing
     parser = argparse.ArgumentParser(
-            description='''download photos from facebook'''
+            description='''download photos from travelgirls'''
     )
     parser.add_argument(
             '-i',
@@ -52,17 +49,20 @@ def main():
     # load cookies from browser
     cookies=browser_cookie3.firefox()
 
-    url='https://www.facebook.com/{id}/photos'.format(id=args.id)
-    logger.debug('url is [%s]', url)
-    r = requests.get(url)
-    root = get_real_content(r)
-    #print(lxml.etree.tostring(root, pretty_print=True))
-    #sys.exit(1)
+    main_url='http://www.travelgirls.com/member/{id}'.format(id=args.id)
+    r = requests.get(main_url, cookies=cookies)
+    root = scrape.utils.get_real_content(r)
 
     urls=[]
-    e_a = root.xpath('//img')
+    e_a = root.xpath('//a[contains(@class,\'photo\')]')
     for x in e_a:
-        print(lxml.etree.tostring(x, pretty_print=True))
+        #print(lxml.etree.tostring(x, pretty_print=True))
+        children=x.getchildren()
+        assert len(children)==1
+        img=children[0]
+        url=scrape.utils.add_http(img.attrib['src'], main_url)
+        url=url.replace('mini','')
+        urls.append(url)
 
     scrape.utils.download_urls(urls)
 

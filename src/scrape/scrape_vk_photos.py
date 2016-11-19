@@ -9,10 +9,6 @@ For instance if you see a url like this:
     https://vk.com/id[user_id]?z=albums275458801
 then the id for this script will be:
     [user_id]
-
-References:
-- http://docs.python-requests.org/en/master
-- http://docs.python-guide.org/en/latest/scenarios/scrape
 '''
 
 import requests # for post
