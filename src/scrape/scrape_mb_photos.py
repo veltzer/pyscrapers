@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import requests  # for post
 import logging  # for basicConfig, getLogger
 import argparse  # for ArgumentParser

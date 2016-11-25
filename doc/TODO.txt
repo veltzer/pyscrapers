@@ -1,8 +1,9 @@
 - add scraper for mamba.
 - do website for this project and publish to github.
-	use the tool that they all use for python.
+	use sphinx
+- unify all scrapers to just one command line tool.
+
 - use sessions in all of the scrapers and not just in the instagram one.
-- add an installer and turn this into a real python module.
 - take some ideas from the google 'photograbber' project here:
 	https://code.google.com/archive/p/photograbber/downloads
 - use the facebook graph API to download from facebook:
