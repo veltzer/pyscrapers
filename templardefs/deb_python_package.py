@@ -1,5 +1,5 @@
 """
-packging definitions
+packaging definitions
 """
 
 

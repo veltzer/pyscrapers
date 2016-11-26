@@ -1,10 +1,10 @@
-import requests  # for post
-import lxml.html  # for fromstring
-import lxml.etree  # for tostring
-import json  # for loads
-import logging  # for basicConfig, getLogger
-import argparse  # for ArgumentParser
-import scrape.utils  # for download_urls
+import requests
+import lxml.html
+import lxml.etree
+import json
+import logging
+import argparse
+import scrape.utils
 
 # set up the logger
 logging.basicConfig()

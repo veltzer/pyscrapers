@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 """
 How does this work?
 When you fetch the page of a user on instagram you get an html with a javascript embedded
@@ -9,12 +7,12 @@ If you want to more photos you have to do a follow-up AJAX request to the server
 """
 
 from lxml import etree
-import requests  # for post
-import json  # for loads
-import logging  # for basicConfig, getLogger
-import argparse  # for ArgumentParser
-import browser_cookie3  # for firefox
-import scrape.utils  # for download_urls, get_real_content, debug_requests
+import requests
+import json
+import logging
+import argparse
+import browser_cookie3
+import scrape.utils
 
 # code
 

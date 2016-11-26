@@ -1,10 +1,10 @@
 from lxml import etree
-import lxml.html  # for fromstring
-import requests  # for post
-import logging  # for basicConfig, getLogger
-import shutil  # for copyfileobj
-import urllib.parse  # for urljoin
-import http.client  # for HTTPConnection
+import lxml.html
+import requests
+import logging
+import shutil
+import urllib.parse
+import http.client
 
 logger = logging.getLogger(__name__)
 

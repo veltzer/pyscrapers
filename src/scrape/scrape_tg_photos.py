@@ -1,8 +1,8 @@
-import requests  # for post
-import logging  # for basicConfig, getLogger
-import argparse  # for ArgumentParser
-import browser_cookie3  # for firefox
-import scrape.utils  # for download_urls, get_real_content
+import requests
+import logging
+import argparse
+import browser_cookie3
+import scrape.utils
 
 
 # set up the logger
