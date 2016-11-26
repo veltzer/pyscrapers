@@ -19,7 +19,7 @@ def main():
     )
     parser.add_argument(
             '-i',
-            '--id', 
+            '--id',
             help='''id of the user to download the albums of
             For instance if you see a url like this:
                 http://www.mamba.ru/mb[number]
