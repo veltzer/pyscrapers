@@ -43,7 +43,7 @@ def populate(d):
     d.project_data_files=[]
     d.project_data_files.append(templar.utils.hlp_files_under('/usr/bin', 'src/*'))
 
-def getdeps():
+def get_deps():
     return [
         __file__, # myself
     ]

@@ -9,7 +9,7 @@ def populate(d):
         'browser-cookie3',
     ]
 
-def getdeps():
+def get_deps():
     return [
         __file__, # myself
     ]

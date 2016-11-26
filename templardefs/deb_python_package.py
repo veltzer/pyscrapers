@@ -40,7 +40,7 @@ def populate(d):
     }
 
 
-def getdeps():
+def get_deps():
     return [
         __file__,  # myself
     ]
