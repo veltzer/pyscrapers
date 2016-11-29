@@ -97,6 +97,3 @@ ENV/
 
 # tools
 /tools.stamp
-
-# idea
-/.idea/workspace.xml
