@@ -1,4 +1,4 @@
-# *scrapers* project by ${tdefs.personal_fullname}
+# **scrapers** project by ${tdefs.personal_fullname}
 
 ## What is it?
 
@@ -9,17 +9,27 @@ Currently I support downloading the public albums of a vk user.
 ## Installing
 
 * Clone the repo
-  `$ git clone https://github.com/veltzer/scrapers.git`
+```bash
+$ git clone https://github.com/veltzer/scrapers.git
+```
 * You need python3 installed. Usually it is but if it isn't:
-  `$ sudo apt install python3`
-  or
-  `$ sudo yum install python3`
+```bash
+$ sudo apt install python3
+```
+or
+```bash
+$ sudo yum install python3
+```
 * Install requirements using:
-  `$ pip3 install --upgrade -r requirements.txt`
+```bash
+$ pip3 install --upgrade -r requirements.txt
+```
 
 ## Running
 
-  `$ ./bin/scrape_vk_albums.py [user id in vk]`
-  `$ ./bin/scrape_tg_albums.py [user id in travelgirls]`
-  `$ ./bin/scrape_fb_albums.py [user id in facebook]`
-  `$ ./bin/scrape_ig_albums.py [user id in instagram]`
+```bash
+  $ ./bin/scrape_vk_albums.py [user id in vk]
+  $ ./bin/scrape_tg_albums.py [user id in travelgirls]
+  $ ./bin/scrape_fb_albums.py [user id in facebook]
+  $ ./bin/scrape_ig_albums.py [user id in instagram]
+```
