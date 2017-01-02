@@ -1,4 +1,4 @@
-# **scrapers** project by Mark Veltzer
+# **pyscrapers** project by Mark Veltzer
 
 
 Scrapers for various stuff that I need off the web, maybe other people will like them too...:)
@@ -8,7 +8,7 @@ Currently I support downloading the public albums of a vk user.
 
 * Clone the repo
 ```bash
-$ git clone https://github.com/veltzer/scrapers.git
+$ git clone https://github.com/veltzer/pyscrapers.git
 ```
 * You need python3 installed. Usually it is but if it isn't:
 ```bash

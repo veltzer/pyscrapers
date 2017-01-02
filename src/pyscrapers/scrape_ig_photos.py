@@ -12,7 +12,7 @@ import json
 import logging
 import argparse
 import browser_cookie3
-import scrape.utils
+import pyscrapers.utils
 
 # code
 

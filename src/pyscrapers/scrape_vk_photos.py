@@ -4,7 +4,7 @@ import lxml.etree
 import json
 import logging
 import argparse
-import scrape.utils
+import pyscrapers.utils
 
 # set up the logger
 logging.basicConfig()

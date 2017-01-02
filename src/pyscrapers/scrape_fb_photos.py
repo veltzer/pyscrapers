@@ -3,7 +3,7 @@ from lxml import etree
 import logging
 import argparse
 import browser_cookie3
-import scrape.utils
+import pyscrapers.utils
 
 # set up the logger
 logging.basicConfig()

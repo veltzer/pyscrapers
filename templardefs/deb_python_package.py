@@ -9,7 +9,7 @@ def populate(d):
     d.deb_section = 'python'
     d.deb_priority = 'optional'
     d.deb_architecture = 'all'
-    d.deb_pkgname = 'scrapers'
+    d.deb_pkgname = 'pyscrapers'
     # to which series to publish the package?
     d.deb_series = [
         'yakkety',

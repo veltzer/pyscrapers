@@ -1,4 +1,4 @@
-# **scrapers** project by ${tdefs.personal_fullname}
+# **pyscrapers** project by ${tdefs.personal_fullname}
 
 ## What is it?
 
@@ -10,7 +10,7 @@ Currently I support downloading the public albums of a vk user.
 
 * Clone the repo
 ```bash
-$ git clone https://github.com/veltzer/scrapers.git
+$ git clone https://github.com/veltzer/pyscrapers.git
 ```
 * You need python3 installed. Usually it is but if it isn't:
 ```bash
