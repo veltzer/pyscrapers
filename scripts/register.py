@@ -28,6 +28,7 @@ TODO:
 import common
 import os
 
+do_clean = False
 do_use_setup = False
 do_use_twine = True
     
@@ -60,11 +61,21 @@ def register_by_twine():
         full_filename,
     ])
 
-common.git_clean_full()
+if do_clean:
+    common.git_clean_full()
 try:
     if do_use_setup:
         register_by_setup()
     if do_use_twine:
         register_by_twine()
 finally:
+    if do_clean:
+        common.git_clean_full()
+try:
+    if do_use_setup:
+        register_by_setup()
+    if do_use_twine:
+        register_by_twine()
+finally:
+    common.git_clean_full()
     common.git_clean_full()

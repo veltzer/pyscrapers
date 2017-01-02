@@ -33,11 +33,9 @@ def populate(d):
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: LGPL',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Topic :: Software Development :: Building',
         'Topic :: Software Development :: Libraries',
         'Topic :: Utilities',
     ]

@@ -25,6 +25,7 @@ import os
 import os.path
 import common
 
+do_clean = False
 do_use_setup = True
 do_use_twine = False
     
@@ -60,11 +61,13 @@ def upload_by_twine():
         # common.config_file,
     ])
 
-common.git_clean_full()
+if do_clean:
+    common.git_clean_full()
 try:
     if do_use_setup:
         upload_by_setup()
     if do_use_twine:
         upload_by_twine()
 finally:
-    common.git_clean_full()
+    if do_clean:
+        common.git_clean_full()
