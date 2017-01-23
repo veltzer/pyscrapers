@@ -23,7 +23,7 @@ def populate(d):
         'images',
         'social',
     ]
-    d.project_license = 'GPLV3'
+    d.project_license = 'MIT'
     d.project_year_started = '2016'
     d.project_description = '''What is Scrapers? Look in the "doc" subfolder of the source code...'''.format(**d)
     d.project_platforms = [
@@ -32,11 +32,9 @@ def populate(d):
     d.project_classifiers = [
         'Development Status :: 4 - Beta',
         'Environment :: Console',
-        'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Topic :: Software Development :: Libraries',
         'Topic :: Utilities',
     ]
     d.project_data_files = []
