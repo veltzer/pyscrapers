@@ -35,7 +35,7 @@ def main():
 
     main_url = 'http://www.travelgirls.com/member/{id}'.format(id=args.id)
     r = requests.get(main_url, cookies=cookies)
-    root = scrape.utils.get_real_content(r)
+    root = pyscrapers.utils.get_real_content(r)
 
     urls = []
     e_a = root.xpath('//a[contains(@class,\'photo\')]')
@@ -44,11 +44,11 @@ def main():
         children = x.getchildren()
         assert len(children) == 1
         img = children[0]
-        url = scrape.utils.add_http(img.attrib['src'], main_url)
+        url = pyscrapers.utils.add_http(img.attrib['src'], main_url)
         url = url.replace('mini', '')
         urls.append(url)
 
-    scrape.utils.download_urls(urls)
+    pyscrapers.utils.download_urls(urls)
 
 if __name__ == '__main__':
     main()

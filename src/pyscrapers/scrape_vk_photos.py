@@ -5,6 +5,7 @@ import json
 import logging
 import argparse
 import pyscrapers.utils
+import sys
 
 # set up the logger
 logging.basicConfig()
@@ -21,7 +22,14 @@ def get_my_content(r):
     """
     assert r.status_code == 200
     # str_content=r.content.decode(errors='ignore')
-    str_content = r.content.decode()
+    try:
+        content = r.content  # type: bytes
+        str_content = content.decode(errors='ignore')
+    except Exception as e:
+        print(e)
+        print('could not decode')
+        print(r.content)
+        sys.exit(1)
     str_content = str_content[str_content.find('<input'):]
     c = str.encode('<html><body>')+str.encode(str_content)+str.encode('</body></html>')
     root = lxml.html.fromstring(c)
@@ -119,7 +127,7 @@ def main():
                     got += 1
         count += got
 
-    scrape.utils.download_urls(urls)
+    pyscrapers.utils.download_urls(urls)
 
 if __name__ == '__main__':
     main()

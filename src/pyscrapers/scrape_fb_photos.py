@@ -44,7 +44,7 @@ def main():
     url = 'https://www.facebook.com/{id}/photos'.format(id=args.id)
     logger.debug('url is [%s]', url)
     r = s.get(url)
-    root = scrape.utils.get_real_content(r)
+    root = pyscrapers.utils.get_real_content(r)
     # print(etree.tostring(root, pretty_print=True))
     # sys.exit(1)
 
@@ -53,7 +53,7 @@ def main():
     for x in e_a:
         print(etree.tostring(x, pretty_print=True))
 
-    scrape.utils.download_urls(urls)
+    pyscrapers.utils.download_urls(urls)
 
 if __name__ == '__main__':
     main()

@@ -66,12 +66,12 @@ def main():
         parser.error('-i/--id must be given')
     if args.debug:
         logger.setLevel(logging.DEBUG)
-        scrape.utils.debug_requests()
+        pyscrapers.utils.debug_requests()
 
     # load cookies from browser
     cookies = browser_cookie3.firefox()
     if args.debug:
-        scrape.utils.print_cookies(cookies, domain)
+        pyscrapers.utils.print_cookies(cookies, domain)
 
     url = '{base}/{id}/'.format(base=base, id=args.id)
     logger.debug('url is [%s]', url)
@@ -81,7 +81,7 @@ def main():
     s.cookies = cookies
 
     r = s.get(url)
-    root = scrape.utils.get_real_content(r)
+    root = pyscrapers.utils.get_real_content(r)
     # scrape.utils.print_element(root)
 
     urls = []
@@ -130,13 +130,13 @@ def main():
     }
     # you must send cookies and headers to get the data...
     r2 = s.post(url2, data=data, headers=headers)
-    root = scrape.utils.get_real_content(r2)
+    root = pyscrapers.utils.get_real_content(r2)
     res = json.loads(root.text)
     for node in res['media']['nodes']:
         urls.append(node['display_src'])
     # scrape.utils.print_element(root)
 
-    scrape.utils.download_urls(urls, start=args.start)
+    pyscrapers.utils.download_urls(urls, start=args.start)
 
 if __name__ == '__main__':
     main()

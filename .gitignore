@@ -100,3 +100,5 @@ ENV/
 
 # sphynx
 /doc/build
+
+/.idea/workspace.xml

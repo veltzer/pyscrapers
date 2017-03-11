@@ -36,7 +36,7 @@ def main():
 
     main_url = 'http://www.mamba.ru/{id}'.format(id=args.id)
     r = requests.get(main_url, cookies=cookies)
-    root = scrape.utils.get_real_content(r)
+    root = pyscrapers.utils.get_real_content(r)
     print(root)
 
 if __name__ == '__main__':
