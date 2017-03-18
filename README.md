@@ -1,10 +1,32 @@
-pyscrapers
-==========
+# **pyscrapers** project by Mark Veltzer
 
-version: 21
 
-project to produce various useful scrapers
+Scrapers for various stuff that I need off the web, maybe other people will like them too...:)
 
-What is Scrapers? Look in the "doc" subfolder of the source code...
+Currently I support downloading the public albums of a vk user.
 
-	Mark Veltzer <mark.veltzer@gmail.com>, 2016-2017
+
+* Clone the repo
+```bash
+$ git clone https://github.com/veltzer/pyscrapers.git
+```
+* You need python3 installed. Usually it is but if it isn't:
+```bash
+$ sudo apt install python3
+```
+or
+```bash
+$ sudo yum install python3
+```
+* Install requirements using:
+```bash
+$ pip3 install --upgrade -r requirements.txt
+```
+
+
+```bash
+  $ ./bin/scrape_vk_albums.py [user id in vk]
+  $ ./bin/scrape_tg_albums.py [user id in travelgirls]
+  $ ./bin/scrape_fb_albums.py [user id in facebook]
+  $ ./bin/scrape_ig_albums.py [user id in instagram]
+```
