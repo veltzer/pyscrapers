@@ -1,3 +1,5 @@
+import os
+
 from lxml import etree
 import lxml.html
 import requests
@@ -7,6 +9,7 @@ import urllib.parse
 import http.client
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 def print_cookies(cookies, domain):
@@ -55,4 +58,21 @@ def add_http(url, main_url):
 
 
 def print_element(e):
-    print(etree.tostring(e, pretty_print=True))
+    print(etree.tostring(e, pretty_print=True).decode())
+
+
+def download_url(source: str, target: str) -> None:
+    logger.info('downloading [%s] to [%s]', source, target)
+    if os.path.isfile(target):
+        logger.info('skipping [%s]', target)
+        return
+    # noinspection PyBroadException
+    try:
+        r = requests.get(source, stream=True)
+        assert r.status_code == 200
+        with open(target, 'wb') as f:
+            r.raw.decode_content = True
+            shutil.copyfileobj(r.raw, f)
+    except:
+        os.unlink(target)
+    logger.info('written [%s]...', target)

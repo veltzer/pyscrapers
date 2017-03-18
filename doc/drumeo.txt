@@ -1,17 +1,8 @@
 writing a spider for drumeo instructions.
 
-- getting the courses list:
-	https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=1
-	https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=2
-	until you have no more.
-	inside you will find the course number list in the form of urls like this:
-		<a href=\"https:\/\/www.drumeo.com\/laravel\/public\/members\/lessons\/courses\/29049\">
-	get all of them.
-
 - once you have a course number (lets say 28705)
 	you need to download its page from:
 		https://www.drumeo.com/members/lessons/courses/28705
-	the name of the course is in the <title></title> element of the HTML.
 	and then look for urls like this:
 		<a href="https://www.drumeo.com/laravel/public/members/lessons/courses/28707" class="course-lesson">
 	which will give you all the lessons within the course.
