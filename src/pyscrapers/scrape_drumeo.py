@@ -6,11 +6,9 @@ import requests
 import logging
 import lxml.html
 
-# set up the logger
-from itertools import islice
-
 import pyscrapers.utils
 
+# set up the logger
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -107,6 +105,7 @@ def get_course_details(course: Course):
 
 
 def get_course_urls(course):
+    logger.info("doing course [%s]", course)
     for lesson in course.lessons:
         url = "https://www.drumeo.com/members/lessons/courses/{}".format(lesson)
         r = requests.get(url, cookies=cookies)
@@ -126,7 +125,7 @@ def get_course_urls(course):
         course.add_video(best_vid)
 
 
-def download_course(course):
+def download_course(course, urls):
     folder_name = os.path.join("drumeo", course.number)
     if not os.path.isdir(folder_name):
         os.mkdir(folder_name)
@@ -137,18 +136,20 @@ def download_course(course):
         print("course_difficulty: {}".format(course.diff), file=file_handle)
         print("instructor: {}".format(course.instructor), file=file_handle)
     if course.resources is not None:
-        pyscrapers.utils.download_url(course.resources, os.path.join(folder_name, "resources.zip"))
+        urls.add_url(course.resources, os.path.join(folder_name, "resources.zip"))
     for i, video in enumerate(course.videos):
-        pyscrapers.utils.download_url(video, os.path.join(folder_name, "{}.mp4".format(i)))
+        urls.add_url(video, os.path.join(folder_name, "{}.mp4".format(i)))
 
 
 def main():
+    urls = pyscrapers.utils.Urls()
     pages = get_number_of_pages()
     courses = get_courses(pages)
-    for course in islice(courses, 1000):
+    for course in courses:
         get_course_details(course)
         get_course_urls(course)
-        download_course(course)
+        download_course(course, urls)
+    urls.print()
 
 if __name__ == '__main__':
     main()

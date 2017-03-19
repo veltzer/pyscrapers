@@ -76,3 +76,20 @@ def download_url(source: str, target: str) -> None:
     except:
         os.unlink(target)
     logger.info('written [%s]...', target)
+
+
+class Urls:
+    """ list of urls to download and to where """
+    def __init__(self):
+        self.list = []
+
+    def add_url(self, source, target):
+        self.list.append((source, target))
+
+    def print(self):
+        for (source, target) in self.list:
+            print(source, target, sep="\t")
+
+    def download(self):
+        for (source, target) in self.list:
+            download_url(source, target)
