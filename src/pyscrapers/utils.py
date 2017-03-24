@@ -80,11 +80,14 @@ def download_url(source: str, target: str) -> None:
 
 class Urls:
     """ list of urls to download and to where """
-    def __init__(self):
+    def __init__(self, download_as_collecting=False):
         self.list = []
+        self.download_as_collecting = download_as_collecting
 
     def add_url(self, source, target):
         self.list.append((source, target))
+        if self.download_as_collecting:
+            download_url(source=source, target=target)
 
     def print(self):
         for (source, target) in self.list:
@@ -92,4 +95,4 @@ class Urls:
 
     def download(self):
         for (source, target) in self.list:
-            download_url(source, target)
+            download_url(source=source, target=target)

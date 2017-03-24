@@ -1,0 +1,4 @@
+notes about scraping facebook images.
+
+There is a python package called fbscraper which I was not able to get working but maybe contain some good
+code to borrow from.

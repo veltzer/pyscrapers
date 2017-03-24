@@ -1,12 +1,14 @@
 import json
 import os
+import shelve
 
 import browser_cookie3
 import requests
 import logging
 import lxml.html
 
-import pyscrapers.utils
+
+from pyscrapers.utils import download_url
 
 # set up the logger
 logging.basicConfig()
@@ -50,8 +52,8 @@ class Course:
     def add_lesson(self, lesson):
         self.lessons.append(lesson)
 
-    def add_video(self, video):
-        self.videos.append(video)
+    def add_video(self, video, quality):
+        self.videos.append((video, quality))
 
 
 def get_courses(pages):
@@ -115,41 +117,56 @@ def get_course_urls(course):
         videos = root.xpath('//div[@data-video-load-url]')
         assert len(videos) == 1
         video = videos[0].get('data-video-load-url')
+        logger.info("url for video info is [%s]", video)
         r = requests.get(video, cookies=cookies)
         assert r.status_code == 200
         content = r.content.decode()
         data = json.loads(content)
+        if 'error' in data:
+            logger.info("error [%s]", data['error'])
+            raise ValueError("errors, try later")
+        if 'video-quality-urls' not in data:
+            logger.info("did not find video-quality-urls")
+            continue
         video_urls = data['video-quality-urls']
-        best_vid_key = sorted(video_urls.keys())[0]
+        quality_numbers = sorted([int(x) for x in video_urls.keys()])
+        best_vid_key = str(quality_numbers[-1])
+        # print(quality_numbers, best_vid_key)
         best_vid = video_urls[best_vid_key]
-        course.add_video(best_vid)
+        course.add_video(best_vid, best_vid_key)
 
 
-def download_course(course, urls):
+def download_course(course):
     folder_name = os.path.join("drumeo", course.number)
     if not os.path.isdir(folder_name):
         os.mkdir(folder_name)
     details = os.path.join(folder_name, "details.txt")
-    with open(details, "wt") as file_handle:
-        print("course_number: {}".format(course.number), file=file_handle)
-        print("course_name: {}".format(course.name), file=file_handle)
-        print("course_difficulty: {}".format(course.diff), file=file_handle)
-        print("instructor: {}".format(course.instructor), file=file_handle)
+    if not os.path.isfile(details):
+        with open(details, "wt") as file_handle:
+            print("course_number: {}".format(course.number), file=file_handle)
+            print("course_name: {}".format(course.name), file=file_handle)
+            print("course_difficulty: {}".format(course.diff), file=file_handle)
+            print("instructor: {}".format(course.instructor), file=file_handle)
     if course.resources is not None:
-        urls.add_url(course.resources, os.path.join(folder_name, "resources.zip"))
-    for i, video in enumerate(course.videos):
-        urls.add_url(video, os.path.join(folder_name, "{}.mp4".format(i)))
+        download_url(course.resources, os.path.join(folder_name, "resources.zip"))
+    for i, (video, quality) in enumerate(course.videos):
+        download_url(video, os.path.join(folder_name, "{}.mp4".format(i)))
 
 
 def main():
-    urls = pyscrapers.utils.Urls()
     pages = get_number_of_pages()
     courses = get_courses(pages)
-    for course in courses:
-        get_course_details(course)
-        get_course_urls(course)
-        download_course(course, urls)
-    urls.print()
+    with shelve.open("cache.db") as d:
+        for i, course in enumerate(courses):
+            logger.info("course number [%s]", i)
+            if course.number in d:
+                courses[i] = d[course.number]
+                logger.info("got from cache [%s]", courses[i])
+            else:
+                get_course_details(course)
+                get_course_urls(course)
+                d[course.number] = course
+            # download_course(courses[i])
 
 if __name__ == '__main__':
     main()
