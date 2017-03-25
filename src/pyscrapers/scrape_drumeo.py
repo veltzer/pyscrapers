@@ -25,8 +25,11 @@ ns = lxml.etree.FunctionNamespace("http://exslt.org/regular-expressions")
 ns.prefix = 're'
 
 
-def get_number_of_pages():
-    url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=1"
+def get_number_of_pages(courses: bool) -> int:
+    if courses:
+        url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=1"
+    else:
+        url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page=1"
     r = requests.get(url, cookies=cookies)
     assert r.status_code == 200
     content = r.content.decode()
@@ -56,10 +59,13 @@ class Course:
         self.videos.append((video, quality))
 
 
-def get_courses(pages):
-    courses = []
+def get_courses(pages, courses: bool):
+    collected_courses = []
     for i in range(1, pages + 1):
-        url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page={}".format(i)
+        if courses:
+            url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page={}".format(i)
+        else:
+            url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page={}".format(i)
         r = requests.get(url, cookies=cookies)
         assert r.status_code == 200
         content = r.content.decode()
@@ -68,7 +74,10 @@ def get_courses(pages):
         for l in d_lessons:
             root = lxml.html.fromstring(l)
             # pyscrapers.utils.print_element(root)
-            link_re = r"https://www.drumeo.com/laravel/public/members/lessons/courses/\d+"
+            if courses:
+                link_re = r"https://www.drumeo.com/laravel/public/members/lessons/courses/\d+"
+            else:
+                link_re = r"https://www.drumeo.com/laravel/public/members/lessons/library/\d+"
             links = root.xpath('//a[re:match(@href,"{}")]'.format(link_re))
             assert len(links) == 2, len(links)
             course_number = links[0].get('href').split("/")[-1]
@@ -86,17 +95,24 @@ def get_courses(pages):
             c.name = title
             c.number = course_number
             c.diff = diff
-            courses.append(c)
-    return courses
+            collected_courses.append(c)
+    return collected_courses
 
 
-def get_course_details(course: Course):
-    url = "https://www.drumeo.com/members/lessons/courses/{}".format(course.number)
+def get_course_details(course: Course, courses: bool):
+    if courses:
+        url = "https://www.drumeo.com/members/lessons/courses/{}".format(course.number)
+    else:
+        url = "https://www.drumeo.com/members/lessons/library/{}".format(course.number)
     r = requests.get(url, cookies=cookies)
     assert r.status_code == 200
     content = r.content.decode()
     root = lxml.html.fromstring(content)
-    lessons = root.xpath('//a[@class="course-lesson"]')
+    if courses:
+        class_text = "course-lesson"
+    else:
+        class_text = "event-toggle download-lesson"
+    lessons = root.xpath('//a[@class="{}"]'.format(class_text))
     for lesson in lessons:
         lesson_num = lesson.get('href').split('/')[-1]
         course.add_lesson(lesson_num)
@@ -104,42 +120,54 @@ def get_course_details(course: Course):
     if len(resources) == 1:
         resource = resources[0].get('href')
         course.resources = "http:"+resource
+    if not courses:
+        get_videos(root, course)
 
 
-def get_course_urls(course):
+def get_course_urls(course, courses: bool):
+    if not courses:
+        return
     logger.info("doing course [%s]", course)
     for lesson in course.lessons:
-        url = "https://www.drumeo.com/members/lessons/courses/{}".format(lesson)
+        if courses:
+            url = "https://www.drumeo.com/members/lessons/courses/{}".format(lesson)
+        else:
+            url = "https://www.drumeo.com/members/lessons/library/{}".format(lesson)
         r = requests.get(url, cookies=cookies)
         assert r.status_code == 200
         content = r.content.decode()
+        print(content)
         root = lxml.html.fromstring(content)
+        get_videos(root, course)
+
+
+def get_videos(root, course):
         videos = root.xpath('//div[@data-video-load-url]')
-        assert len(videos) == 1
-        video = videos[0].get('data-video-load-url')
-        logger.info("url for video info is [%s]", video)
-        r = requests.get(video, cookies=cookies)
-        assert r.status_code == 200
-        content = r.content.decode()
-        data = json.loads(content)
-        if 'error' in data:
-            logger.info("error [%s]", data['error'])
-            raise ValueError("errors, try later")
-        if 'video-quality-urls' not in data:
-            logger.info("did not find video-quality-urls")
-            continue
-        video_urls = data['video-quality-urls']
-        quality_numbers = sorted([int(x) for x in video_urls.keys()])
-        best_vid_key = str(quality_numbers[-1])
-        # print(quality_numbers, best_vid_key)
-        best_vid = video_urls[best_vid_key]
-        course.add_video(best_vid, best_vid_key)
+        for video in videos:
+            video_url = video.get('data-video-load-url')
+            logger.info("url for video info is [%s]", video_url)
+            r = requests.get(video_url, cookies=cookies)
+            assert r.status_code == 200
+            content = r.content.decode()
+            data = json.loads(content)
+            if 'error' in data:
+                logger.info("error [%s]", data['error'])
+                raise ValueError("errors, try later")
+            if 'video-quality-urls' not in data:
+                logger.info("did not find video-quality-urls")
+                return
+            video_urls = data['video-quality-urls']
+            quality_numbers = sorted([int(x) for x in video_urls.keys()])
+            best_vid_key = str(quality_numbers[-1])
+            # print(quality_numbers, best_vid_key)
+            best_vid = video_urls[best_vid_key]
+            course.add_video(best_vid, best_vid_key)
 
 
 def download_course(course):
     folder_name = os.path.join("drumeo", course.number)
     if not os.path.isdir(folder_name):
-        os.mkdir(folder_name)
+        os.makedirs(folder_name)
     details = os.path.join(folder_name, "details.txt")
     if not os.path.isfile(details):
         with open(details, "wt") as file_handle:
@@ -154,20 +182,30 @@ def download_course(course):
 
 
 def main():
-    pages = get_number_of_pages()
-    courses = get_courses(pages)
+    courses = False
     reload = set()
     with shelve.open("cache.db") as d:
-        for i, course in enumerate(courses):
+        if "courses" in d:
+            list_of_courses = d["courses"]
+            print("got from cache [{}] courses".format(len(list_of_courses)))
+        else:
+            pages = get_number_of_pages(courses=courses)
+            print("number of pages is [{}]".format(pages))
+            list_of_courses = get_courses(pages, courses=courses)
+            print("got [{}] courses".format(len(list_of_courses)))
+            d["courses"] = list_of_courses
+        for i, course in enumerate(list_of_courses):
             logger.info("course number [%s]", i)
             if course.number in d and course.number not in reload:
-                courses[i] = d[course.number]
-                logger.info("got from cache [%s]", courses[i])
+                list_of_courses[i] = d[course.number]
+                logger.info("got from cache [%s]", list_of_courses[i])
             else:
-                get_course_details(course)
-                get_course_urls(course)
+                get_course_details(course, courses=courses)
+                get_course_urls(course, courses=courses)
+                print(course)
                 d[course.number] = course
-            download_course(courses[i])
+            download_course(list_of_courses[i])
+
 
 if __name__ == '__main__':
     main()

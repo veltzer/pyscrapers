@@ -35,15 +35,12 @@ def probe(vid_file_path):
 
 def width(vid):
     _json = probe(vid)
-    print(_json)
     return int(_json["streams"][0]["width"])
 
 
 def height(vid):
     _json = probe(vid)
-    print(_json)
     return int(_json["streams"][0]["height"])
-
 
 
 def duration(vid_file_path):
