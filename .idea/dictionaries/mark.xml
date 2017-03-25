@@ -6,9 +6,11 @@
       <w>csrftoken</w>
       <w>debhelper</w>
       <w>drumeo</w>
+      <w>ffprobe</w>
       <w>fref</w>
       <w>gcloud</w>
       <w>instagram</w>
+      <w>loglevel</w>
       <w>lxml</w>
       <w>photograbber</w>
       <w>phpadmin</w>

@@ -8,6 +8,8 @@ import shutil
 import urllib.parse
 import http.client
 
+from pyscrapers import ffprobe
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -66,6 +68,27 @@ def download_url(source: str, target: str) -> None:
     if os.path.isfile(target):
         logger.info('skipping [%s]', target)
         return
+    # noinspection PyBroadException
+    try:
+        r = requests.get(source, stream=True)
+        assert r.status_code == 200
+        with open(target, 'wb') as f:
+            r.raw.decode_content = True
+            shutil.copyfileobj(r.raw, f)
+    except:
+        os.unlink(target)
+    logger.info('written [%s]...', target)
+
+
+def download_video_if_wider(source: str, target: str, width: int) -> None:
+    logger.info('downloading [%s] to [%s]', source, target)
+    if os.path.isfile(target):
+        file_width = ffprobe.height(target)
+        if file_width >= width:
+            logger.info('skipping because video with width exists [%s] %s %s', target, file_width, width)
+            return
+        else:
+            logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
     # noinspection PyBroadException
     try:
         r = requests.get(source, stream=True)

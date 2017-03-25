@@ -8,7 +8,7 @@ import logging
 import lxml.html
 
 
-from pyscrapers.utils import download_url
+from pyscrapers.utils import download_url, download_video_if_wider
 
 # set up the logger
 logging.basicConfig()
@@ -150,23 +150,24 @@ def download_course(course):
     if course.resources is not None:
         download_url(course.resources, os.path.join(folder_name, "resources.zip"))
     for i, (video, quality) in enumerate(course.videos):
-        download_url(video, os.path.join(folder_name, "{}.mp4".format(i)))
+        download_video_if_wider(video, os.path.join(folder_name, "{}.mp4".format(i)), width=int(quality))
 
 
 def main():
     pages = get_number_of_pages()
     courses = get_courses(pages)
+    reload = set()
     with shelve.open("cache.db") as d:
         for i, course in enumerate(courses):
             logger.info("course number [%s]", i)
-            if course.number in d:
+            if course.number in d and course.number not in reload:
                 courses[i] = d[course.number]
                 logger.info("got from cache [%s]", courses[i])
             else:
                 get_course_details(course)
                 get_course_urls(course)
                 d[course.number] = course
-            # download_course(courses[i])
+            download_course(courses[i])
 
 if __name__ == '__main__':
     main()
