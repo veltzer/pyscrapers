@@ -82,13 +82,14 @@ def download_url(source: str, target: str) -> None:
 
 FAIL = True
 
-def download_video_if_wider(source: str, target: str, width: int) -> None:
+
+def download_video_if_wider(source: str, target: str, width: int) -> bool:
     logger.info('downloading [%s] to [%s]', source, target)
     if os.path.isfile(target):
         file_width = ffprobe.height(target)
         if file_width >= width:
             logger.info('skipping because video with width exists [%s] %s %s', target, file_width, width)
-            return
+            return True
         else:
             logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
     # noinspection PyBroadException
