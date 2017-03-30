@@ -80,6 +80,8 @@ def download_url(source: str, target: str) -> None:
     logger.info('written [%s]...', target)
 
 
+FAIL = True
+
 def download_video_if_wider(source: str, target: str, width: int) -> None:
     logger.info('downloading [%s] to [%s]', source, target)
     if os.path.isfile(target):
@@ -92,13 +94,25 @@ def download_video_if_wider(source: str, target: str, width: int) -> None:
     # noinspection PyBroadException
     try:
         r = requests.get(source, stream=True)
-        assert r.status_code == 200
+        if FAIL:
+            assert r.status_code == 200
+        else:
+            if r.status_code != 200:
+                logger.info("got bad error code [%s] and failed to download", r.status_code)
+                return False
         with open(target, 'wb') as f:
             r.raw.decode_content = True
             shutil.copyfileobj(r.raw, f)
     except:
-        os.unlink(target)
+        if os.path.isfile(target):
+            os.unlink(target)
+        if FAIL:
+            raise ValueError("count not download")
+        else:
+            logger.info("failed to download file")
+            return False
     logger.info('written [%s]...', target)
+    return True
 
 
 class Urls:

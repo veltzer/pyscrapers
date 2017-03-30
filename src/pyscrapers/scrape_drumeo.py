@@ -183,7 +183,7 @@ def download_course(course):
 
 def main():
     courses = False
-    reload = set()
+    reload = {}
     with shelve.open("cache.db") as d:
         if "courses" in d:
             list_of_courses = d["courses"]
