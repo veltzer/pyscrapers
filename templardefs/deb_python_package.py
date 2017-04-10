@@ -32,10 +32,10 @@ def populate(d):
     d.deb_urgency = 'low'
     d.entry_points = {
         'console_scripts': [
-            'scrape_fb_photos=scrape.scrape_fb_photos:main',
-            'scrape_tg_photos=scrape.scrape_tg_photos:main',
-            'scrape_ig_photos=scrape.scrape_ig_photos:main',
-            'scrape_vk_photos=scrape.scrape_vk_photos:main',
+            'pyscrapers_fb_photos=pyscrapers.scripts.fb_photos:main',
+            'pyscrapers_tg_photos=pyscrapers.scripts.tg_photos:main',
+            'pyscrapers_ig_photos=pyscrapers.scripts.ig_photos:main',
+            'pyscrapers_vk_photos=pyscrapers.scripts.vk_photos:main',
         ],
     }
 
