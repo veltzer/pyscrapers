@@ -1,7 +1,7 @@
 pyscrapers
 ==========
 
-version: 22
+version: 23
 
 project to produce various useful scrapers
 
