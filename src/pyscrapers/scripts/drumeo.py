@@ -1,6 +1,7 @@
 import json
 import os
 import shelve
+from typing import IO
 
 import browser_cookie3
 import requests
@@ -170,7 +171,7 @@ def download_course(course):
         os.makedirs(folder_name)
     details = os.path.join(folder_name, "details.txt")
     if not os.path.isfile(details):
-        with open(details, "wt") as file_handle:
+        with open(details, "wt") as file_handle:  # type: IO[str]
             print("course_number: {}".format(course.number), file=file_handle)
             print("course_name: {}".format(course.name), file=file_handle)
             print("course_difficulty: {}".format(course.diff), file=file_handle)
