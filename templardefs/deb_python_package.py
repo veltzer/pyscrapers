@@ -26,7 +26,7 @@ def populate(d):
         # 'raring',
     ]
     d.deb_depends = '${misc:Depends}, ${python3:Depends}, python3-mako'
-    d.deb_builddepends = 'python3, python3-setuptools, debhelper (>=10), dh-python'
+    d.deb_builddepends = 'python3, python3-setuptools, debhelper, dh-python'
     d.deb_standards_version = '3.9.8'
     d.deb_x_python_version = '>= 3.4'
     d.deb_x_python3_version = '>= 3.4'
