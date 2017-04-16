@@ -28,8 +28,8 @@ $ pip3 install --upgrade -r requirements.txt
 ## Running
 
 ```bash
-  $ ./bin/scrape_vk_albums.py [user id in vk]
-  $ ./bin/scrape_tg_albums.py [user id in travelgirls]
-  $ ./bin/scrape_fb_albums.py [user id in facebook]
-  $ ./bin/scrape_ig_albums.py [user id in instagram]
+  $ pyscrapers_vk_albums [user id in vk]
+  $ pyscrapers_tg_albums [user id in travelgirls]
+  $ pyscrapers_fb_albums [user id in facebook]
+  $ pyscrapers_ig_albums [user id in instagram]
 ```
