@@ -61,7 +61,6 @@ def main():
     if args.id is None:
         parser.error('-i/--id must be given')
     if args.debug:
-        logger.setLevel(logging.DEBUG)
         pyscrapers.utils.debug_requests()
 
     # load cookies from browser
