@@ -22,13 +22,9 @@ import pyscrapers.utils
 ns = etree.FunctionNamespace("http://exslt.org/regular-expressions")
 ns.prefix = 're'
 
-# set up the logger
-logging.basicConfig()
-logger = logging.getLogger('scrape')
-logger.setLevel(logging.INFO)
-
 
 def main():
+    logger = logging.getLogger(__name__)
     # constants
     domain = 'www.instagram.com'
     base = 'https://{domain}'.format(domain=domain)

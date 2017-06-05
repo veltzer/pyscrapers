@@ -5,14 +5,8 @@ import browser_cookie3
 import pyscrapers.utils
 
 
-# set up the logger
-logging.basicConfig()
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-# logger.setLevel(logging.DEBUG)
-
-
 def main():
+    logger = logging.getLogger(__name__)
     # command line parsing
     parser = argparse.ArgumentParser(
             description='''download photos from mamba.ru'''

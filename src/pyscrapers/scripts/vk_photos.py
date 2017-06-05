@@ -7,11 +7,6 @@ import argparse
 import pyscrapers.utils
 import sys
 
-# set up the logger
-logging.basicConfig()
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-# logger.setLevel(logging.DEBUG)
 
 
 def get_my_content(r):
@@ -37,6 +32,7 @@ def get_my_content(r):
 
 
 def main():
+    logger = logging.getLogger(__name__)
     # command line parsing
     parser = argparse.ArgumentParser(
             description='''download albums of a vk.com public user or user you have access to'''

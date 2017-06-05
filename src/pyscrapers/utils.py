@@ -10,8 +10,6 @@ import http.client
 
 from pyscrapers import ffprobe
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
 
 def print_cookies(cookies, domain):
@@ -34,6 +32,7 @@ def get_real_content(r):
 
 
 def download_urls(urls, start=0):
+    logger = logging.getLogger(__name__)
     cnt = start
     logger.info('got [%d] real urls', len(urls))
     for url in urls:
@@ -64,6 +63,7 @@ def print_element(e):
 
 
 def download_url(source: str, target: str) -> None:
+    logger = logging.getLogger(__name__)
     logger.info('downloading [%s] to [%s]', source, target)
     if os.path.isfile(target):
         logger.info('skipping [%s]', target)
@@ -84,6 +84,7 @@ FAIL = True
 
 
 def download_video_if_wider(source: str, target: str, width: int) -> bool:
+    logger = logging.getLogger(__name__)
     logger.info('downloading [%s] to [%s]', source, target)
     if os.path.isfile(target):
         file_width = ffprobe.height(target)

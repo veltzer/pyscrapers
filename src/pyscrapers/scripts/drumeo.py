@@ -11,11 +11,6 @@ import lxml.html
 
 from pyscrapers.utils import download_url, download_video_if_wider
 
-# set up the logger
-logging.basicConfig()
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-# logger.setLevel(logging.DEBUG)
 
 # load cookies from browser
 cookies = browser_cookie3.firefox()
@@ -128,6 +123,7 @@ def get_course_details(course: Course, courses: bool):
 def get_course_urls(course, courses: bool):
     if not courses:
         return
+    logger = logging.getLogger(__name__)
     logger.info("doing course [%s]", course)
     for lesson in course.lessons:
         if courses:
@@ -143,26 +139,27 @@ def get_course_urls(course, courses: bool):
 
 
 def get_videos(root, course):
-        videos = root.xpath('//div[@data-video-load-url]')
-        for video in videos:
-            video_url = video.get('data-video-load-url')
-            logger.info("url for video info is [%s]", video_url)
-            r = requests.get(video_url, cookies=cookies)
-            assert r.status_code == 200
-            content = r.content.decode()
-            data = json.loads(content)
-            if 'error' in data:
-                logger.info("error [%s]", data['error'])
-                raise ValueError("errors, try later")
-            if 'video-quality-urls' not in data:
-                logger.info("did not find video-quality-urls")
-                return
-            video_urls = data['video-quality-urls']
-            quality_numbers = sorted([int(x) for x in video_urls.keys()])
-            best_vid_key = str(quality_numbers[-1])
-            # print(quality_numbers, best_vid_key)
-            best_vid = video_urls[best_vid_key]
-            course.add_video(best_vid, best_vid_key)
+    logger = logging.getLogger(__name__)
+    videos = root.xpath('//div[@data-video-load-url]')
+    for video in videos:
+        video_url = video.get('data-video-load-url')
+        logger.info("url for video info is [%s]", video_url)
+        r = requests.get(video_url, cookies=cookies)
+        assert r.status_code == 200
+        content = r.content.decode()
+        data = json.loads(content)
+        if 'error' in data:
+            logger.info("error [%s]", data['error'])
+            raise ValueError("errors, try later")
+        if 'video-quality-urls' not in data:
+            logger.info("did not find video-quality-urls")
+            return
+        video_urls = data['video-quality-urls']
+        quality_numbers = sorted([int(x) for x in video_urls.keys()])
+        best_vid_key = str(quality_numbers[-1])
+        # print(quality_numbers, best_vid_key)
+        best_vid = video_urls[best_vid_key]
+        course.add_video(best_vid, best_vid_key)
 
 
 def download_course(course):
@@ -183,6 +180,7 @@ def download_course(course):
 
 
 def main():
+    logger = logging.getLogger(__name__)
     courses = False
     reload = {}
     with shelve.open("cache.db") as d:
