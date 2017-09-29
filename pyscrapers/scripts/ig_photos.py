@@ -5,13 +5,14 @@ in it with a json object embedded in that. This json object describes the user, 
 his profile photo and the first 12 images for that user.
 If you want to more photos you have to do a follow-up AJAX request to the server.
 """
-
-from lxml import etree
-import requests
+import argparse
 import json
 import logging
-import argparse
+
 import browser_cookie3
+import requests
+from lxml import etree
+
 import pyscrapers.utils
 
 # code
@@ -94,17 +95,20 @@ def main():
     elif 'profile_pic_url' in c:
         urls.append(c['profile_pic_url'])
     user_id = c['id']
+    print("in here")
     # json.dump(c, sys.stdout, indent=4)
     # list_node = c['media']['nodes']
     # for x in list_node:
     #    urls.append(x['display_src'])
 
     # now we need to do the follow up query
-    url2 = '{base}/query/'.format(base=base)
+    # url2 = '{base}/query/'.format(base=base)
+
     """ g_user(278094193)+{+media.after(732083027810814056,+12)+{++count,++nodes+{++++caption,++++code,
     ++++comments+{++++++count++++},++++comments_disabled,++++date,++++dimensions+{++++++height,++++++width++++},
     ++++display_src,++++id,++++is_video,++++likes+{++++++count++++},++++owner+{++++++id++++},++++thumbnail_src,
     ++++video_views++},++page_info}+}" """
+    """
     data = {
         # the 5000 is the number of images you want (big number to get all)
         # the 0 in media.after is after what. 0 seems to return everything I think
@@ -118,6 +122,7 @@ def main():
         'query_id': '17842962958175392',
     }
     cookie_to_search = 'csrftoken'
+    cookie_value = r.cookies[cookie_to_search]
     headers = {
         # these two are necessary or you wont get response from instagram
         'X-CSRFToken': r.cookies[cookie_to_search],
@@ -125,12 +130,23 @@ def main():
     }
     # you must send cookies and headers to get the data...
     r2 = s.post(url2, data=data, headers=headers)
-    root = pyscrapers.utils.get_real_content(r2)
-    res = json.loads(root.text)
     for node in res['media']['nodes']:
         urls.append(node['display_src'])
-    # scrape.utils.print_element(root)
+    """
 
+    url2 = '{base}/graphql/query/'.format(base=base)
+    params = {
+        'query_id': 17888483320059182,
+        'variables': json.dumps({
+            'id': user_id,
+            'first': 5000,
+        })
+    }
+    r2 = s.get(url2, params=params, cookies=r.cookies)
+    root = pyscrapers.utils.get_real_content(r2)
+    res = json.loads(root.text)
+    for node in res['data']['user']['edge_owner_to_timeline_media']['edges']:
+        urls.append(node['node']['display_url'])
     pyscrapers.utils.download_urls(urls, start=args.start)
 
 
