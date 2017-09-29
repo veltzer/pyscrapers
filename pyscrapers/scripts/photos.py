@@ -23,14 +23,14 @@ def main():
     )
     parser.add_argument(
         '-u',
-        '--user-id',
+        '--user_id',
         help='''id of the user to download the albums of
-            https://www.facebook.com/profile.php?id=[user_id]&fref=ts
+            https://www.facebook.com/profile.php?id=[user_id]
             https://www.instagram.com/[user_id]
             http://www.travelgirls.com/member/[user_id]
-            https://vk.com/id[user_id]?z=albums275458801
+            https://vk.com/id[user_id]
             http://www.mamba.ru/mb[user_id]
-            '''
+        ''',
     )
     parser.add_argument(
         '-d',
@@ -47,8 +47,8 @@ def main():
         default=0,
     )
     args = parser.parse_args()
-    if args.id is None:
-        parser.error('-i/--id must be given')
+    if args.user_id is None:
+        parser.error('-u/--user_id must be given')
     if args.debug:
         pyscrapers.core.utils.debug_requests()
 
@@ -57,15 +57,15 @@ def main():
 
     urls = []
     if args.type == "facebook":
-        urls = scrape_facebook(args.id, cookies)
+        urls = scrape_facebook(args.user_id, cookies)
     if args.type == "instagram":
-        urls = scrape_instagram(args.id, cookies)
+        urls = scrape_instagram(args.user_id, cookies)
     if args.type == "travelgirls":
-        urls = scrape_travelgirls(args.id, cookies)
+        urls = scrape_travelgirls(args.user_id, cookies)
     if args.type == "vk":
-        urls = scrape_vk(args.id, cookies)
+        urls = scrape_vk(args.user_id, cookies)
     if args.type == "mamba.ur":
-        urls = scrape_mambaru(args.id, cookies)
+        urls = scrape_mambaru(args.user_id, cookies)
     pyscrapers.core.utils.download_urls(urls, start=args.start)
 
 
