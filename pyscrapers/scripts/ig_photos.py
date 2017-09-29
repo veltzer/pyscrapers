@@ -95,7 +95,6 @@ def main():
     elif 'profile_pic_url' in c:
         urls.append(c['profile_pic_url'])
     user_id = c['id']
-    print("in here")
     # json.dump(c, sys.stdout, indent=4)
     # list_node = c['media']['nodes']
     # for x in list_node:
