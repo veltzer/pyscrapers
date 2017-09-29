@@ -9,6 +9,7 @@ import sys
 if not sys.version_info[0] == 3:
     sys.exit("Sorry, only python version 3 is supported")
 
+# noinspection PyPep8
 setuptools.setup(
     name='${tdefs.project_name}',
     version='${tdefs.git_lasttag}',
@@ -25,6 +26,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     # include_package_data=True,
     install_requires=${tdefs.requirements3},
+    # noinspection PyBroadException,PyPep8
     classifiers=${tdefs.project_classifiers},
     data_files=${tdefs.project_data_files},
     entry_points=${tdefs.entry_points},

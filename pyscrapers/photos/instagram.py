@@ -5,71 +5,23 @@ in it with a json object embedded in that. This json object describes the user, 
 his profile photo and the first 12 images for that user.
 If you want to more photos you have to do a follow-up AJAX request to the server.
 """
-import argparse
 import json
 import logging
+from typing import List
 
-import browser_cookie3
 import requests
 from lxml import etree
 
-import pyscrapers.utils
-
-# code
-
-# register regular expressions with lxml
-# this means that we can use regular expression functions like 'match'
-# by specifying 're:match' in our xpath expressions
-ns = etree.FunctionNamespace("http://exslt.org/regular-expressions")
-ns.prefix = 're'
+import pyscrapers.core.utils
 
 
-def main():
+def scrape_instagram(user_id: str, cookies) -> List[str]:
     logger = logging.getLogger(__name__)
     # constants
     domain = 'www.instagram.com'
     base = 'https://{domain}'.format(domain=domain)
 
-    # command line parsing
-    parser = argparse.ArgumentParser(
-            description='''download photos from instagram'''
-    )
-    parser.add_argument(
-            '-i',
-            '--id', 
-            help='''id of the user to download the albums of
-            For instance if you see a url like this:
-                https://www.instagram.com/[user_id]
-            then the id for this script will be:
-                [user_id]
-            '''
-    )
-    parser.add_argument(
-            '-d',
-            '--debug',
-            help='debug requests',
-            default=False,
-            action='store_true',
-    )
-    parser.add_argument(
-            '-s',
-            '--start',
-            help='start number for image names',
-            type=int,
-            default=0,
-    )
-    args = parser.parse_args()
-    if args.id is None:
-        parser.error('-i/--id must be given')
-    if args.debug:
-        pyscrapers.utils.debug_requests()
-
-    # load cookies from browser
-    cookies = browser_cookie3.firefox()
-    if args.debug:
-        pyscrapers.utils.print_cookies(cookies, domain)
-
-    url = '{base}/{id}/'.format(base=base, id=args.id)
+    url = '{base}/{user_id}/'.format(base=base, user_id=user_id)
     logger.debug('url is [%s]', url)
 
     # start a session
@@ -77,18 +29,23 @@ def main():
     s.cookies = cookies
 
     r = s.get(url)
-    root = pyscrapers.utils.get_real_content(r)
+    root = pyscrapers.core.utils.get_real_content(r)
     # scrape.utils.print_element(root)
 
     urls = []
+    # register regular expressions with lxml
+    # this means that we can use regular expression functions like 'match'
+    # by specifying 're:match' in our xpath expressions
+    ns = etree.FunctionNamespace("http://exslt.org/regular-expressions")
+    ns.prefix = 're'
     e_a = root.xpath('//script[re:match(text(), "^window._sharedData")]')
     assert len(e_a) == 1
     e_a = e_a[0]
     data = e_a.text
-    json_text = data[data.find('{'):data.rfind('}')+1]
+    json_text = data[data.find('{'):data.rfind('}') + 1]
     d = json.loads(json_text)
     my_list = d['entry_data']['ProfilePage']
-    assert(len(my_list) == 1)
+    assert (len(my_list) == 1)
     c = my_list[0]["user"]
     if 'profile_pic_url_hd' in c:
         urls.append(c['profile_pic_url_hd'])
@@ -142,12 +99,8 @@ def main():
         })
     }
     r2 = s.get(url2, params=params, cookies=r.cookies)
-    root = pyscrapers.utils.get_real_content(r2)
+    root = pyscrapers.core.utils.get_real_content(r2)
     res = json.loads(root.text)
     for node in res['data']['user']['edge_owner_to_timeline_media']['edges']:
         urls.append(node['node']['display_url'])
-    pyscrapers.utils.download_urls(urls, start=args.start)
-
-
-if __name__ == '__main__':
-    main()
+    return urls

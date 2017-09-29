@@ -1,16 +1,14 @@
 import json
+import logging
 import os
 import shelve
 from typing import IO
 
 import browser_cookie3
-import requests
-import logging
 import lxml.html
+import requests
 
-
-from pyscrapers.utils import download_url, download_video_if_wider
-
+from pyscrapers.core.utils import download_url, download_video_if_wider
 
 # load cookies from browser
 cookies = browser_cookie3.firefox()

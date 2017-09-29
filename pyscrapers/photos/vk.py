@@ -1,11 +1,11 @@
-import requests
-import lxml.html
-import lxml.etree
 import json
 import logging
-import argparse
-import pyscrapers.utils
 import sys
+from typing import List
+
+import lxml.etree
+import lxml.html
+import requests
 
 
 def get_my_content(r):
@@ -30,32 +30,13 @@ def get_my_content(r):
     return root
 
 
-def main():
+def scrape_vk(user_id: str, _cookies) -> List[str]:
     logger = logging.getLogger(__name__)
-    # command line parsing
-    parser = argparse.ArgumentParser(
-            description='''download albums of a vk.com public user or user you have access to'''
-    )
-    parser.add_argument(
-            '-i',
-            '--id', 
-            help='''id of the user to download the albums of
-            For instance if you see a url like this:
-                https://vk.com/id[user_id]?z=albums275458801
-            then the id for this script will be:
-                [user_id]
-            '''
-    )
-    args = parser.parse_args()
-    if args.id is None:
-        parser.error('-i/--id must be given')
-
-    owner = args.id
     url = 'https://vk.com/al_photos.php'
     data = {
         'act': 'show_albums',
         'al': '1',
-        'owner': owner,
+        'owner': user_id,
     }
     r = requests.post(url, data=data)
     root = get_my_content(r)
@@ -81,7 +62,7 @@ def main():
         data = {
             'act': 'show_albums',
             'al': '2',
-            'owner': owner,
+            'owner': user_id,
             'offset': count,
         }
         logger.debug('doing request %d', count)
@@ -121,9 +102,4 @@ def main():
                                 urls.add(full_url)
                     got += 1
         count += got
-
-    pyscrapers.utils.download_urls(urls)
-
-
-if __name__ == '__main__':
-    main()
+    return list(urls)
