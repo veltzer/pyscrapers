@@ -24,6 +24,7 @@ setuptools.setup(
     platforms=${tdefs.project_platforms},
     packages=setuptools.find_packages(),
     #include_package_data=True,
+    install_requires=${tdefs.requirements3},
     classifiers=${tdefs.project_classifiers},
     data_files=${tdefs.project_data_files},
     entry_points=${tdefs.entry_points},

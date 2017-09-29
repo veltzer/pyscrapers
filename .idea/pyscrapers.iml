@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/doc/source" />
       <excludeFolder url="file://$MODULE_DIR$/out" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.5.2+ (/usr/bin/python3.5)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.5.3 virtualenv at ~/.virtualenvs/pyscrapers" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
