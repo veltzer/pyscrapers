@@ -1,6 +1,6 @@
 """
 This is the installation tool. use minimal packages here.
-don't use setuptools, don't use subprocess.
+don't use subprocess.
 """
 
 import setuptools
@@ -23,7 +23,7 @@ setuptools.setup(
     license='${tdefs.project_license}',
     platforms=${tdefs.project_platforms},
     packages=setuptools.find_packages(),
-    #include_package_data=True,
+    # include_package_data=True,
     install_requires=${tdefs.requirements3},
     classifiers=${tdefs.project_classifiers},
     data_files=${tdefs.project_data_files},

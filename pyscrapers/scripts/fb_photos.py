@@ -51,5 +51,6 @@ def main():
 
     pyscrapers.utils.download_urls(urls)
 
+
 if __name__ == '__main__':
     main()

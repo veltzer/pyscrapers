@@ -11,7 +11,6 @@ import http.client
 from pyscrapers import ffprobe
 
 
-
 def print_cookies(cookies, domain):
     print(domain)
     for cookie in cookies:
@@ -67,7 +66,7 @@ def download_url(source: str, target: str) -> None:
     if os.path.isfile(target):
         logger.info('skipping [%s]', target)
         return
-    # noinspection PyBroadException
+    # noinspection PyBroadException,PyPep8
     try:
         r = requests.get(source, stream=True)
         assert r.status_code == 200
@@ -92,7 +91,7 @@ def download_video_if_wider(source: str, target: str, width: int) -> bool:
             return True
         else:
             logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
-    # noinspection PyBroadException
+    # noinspection PyPep8,PyBroadException
     try:
         r = requests.get(source, stream=True)
         if FAIL:

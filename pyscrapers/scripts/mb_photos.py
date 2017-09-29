@@ -1,12 +1,12 @@
-import requests
-import logging
 import argparse
+
 import browser_cookie3
+import requests
+
 import pyscrapers.utils
 
 
 def main():
-    logger = logging.getLogger(__name__)
     # command line parsing
     parser = argparse.ArgumentParser(
             description='''download photos from mamba.ru'''
@@ -32,6 +32,7 @@ def main():
     r = requests.get(main_url, cookies=cookies)
     root = pyscrapers.utils.get_real_content(r)
     print(root)
+
 
 if __name__ == '__main__':
     main()

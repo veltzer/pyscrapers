@@ -1,12 +1,12 @@
-import requests
-import logging
 import argparse
+
 import browser_cookie3
+import requests
+
 import pyscrapers.utils
 
 
 def main():
-    logger = logging.getLogger(__name__)
     # command line parsing
     parser = argparse.ArgumentParser(
             description='''download photos from travelgirls.com'''
@@ -44,6 +44,7 @@ def main():
         urls.append(url)
 
     pyscrapers.utils.download_urls(urls)
+
 
 if __name__ == '__main__':
     main()

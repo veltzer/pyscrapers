@@ -2,6 +2,7 @@
 project definitions
 """
 
+# noinspection PyUnresolvedReferences,PyPackageRequirements
 import templar.utils
 
 

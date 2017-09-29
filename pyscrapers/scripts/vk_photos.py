@@ -8,7 +8,6 @@ import pyscrapers.utils
 import sys
 
 
-
 def get_my_content(r):
     """
     the return from the server in vk is not a standard HTML.
@@ -124,6 +123,7 @@ def main():
         count += got
 
     pyscrapers.utils.download_urls(urls)
+
 
 if __name__ == '__main__':
     main()

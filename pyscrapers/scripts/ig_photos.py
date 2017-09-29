@@ -86,9 +86,9 @@ def main():
     data = e_a.text
     json_text = data[data.find('{'):data.rfind('}')+1]
     d = json.loads(json_text)
-    l = d['entry_data']['ProfilePage']
-    assert(len(l) == 1)
-    c = l[0]["user"]
+    my_list = d['entry_data']['ProfilePage']
+    assert(len(my_list) == 1)
+    c = my_list[0]["user"]
     if 'profile_pic_url_hd' in c:
         urls.append(c['profile_pic_url_hd'])
     elif 'profile_pic_url' in c:
@@ -132,6 +132,7 @@ def main():
     # scrape.utils.print_element(root)
 
     pyscrapers.utils.download_urls(urls, start=args.start)
+
 
 if __name__ == '__main__':
     main()
