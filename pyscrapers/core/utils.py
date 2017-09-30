@@ -39,6 +39,7 @@ def download_urls(urls, start=0):
         r = requests.get(url, stream=True)
         assert r.status_code == 200
         filename = 'image{0:04}.jpg'.format(cnt)
+        assert not os.path.isfile(filename)
         with open(filename, 'wb') as f:
             r.raw.decode_content = True
             shutil.copyfileobj(r.raw, f)
