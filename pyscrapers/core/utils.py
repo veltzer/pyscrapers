@@ -35,7 +35,7 @@ def download_urls(urls, start=0):
     cnt = start
     logger.info('got [%d] real urls', len(urls))
     for url in urls:
-        logger.debug(url)
+        logger.info('downloading [%s]...', url)
         r = requests.get(url, stream=True)
         assert r.status_code == 200
         filename = 'image{0:04}.jpg'.format(cnt)
