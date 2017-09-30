@@ -19,5 +19,6 @@ def scrape_travelgirls(user_id: str, cookies) -> List[str]:
         img = children[0]
         url = pyscrapers.core.utils.add_http(img.attrib['src'], main_url)
         url = url.replace('mini', '')
+        url = url.replace('thumb', '')
         urls.append(url)
     return urls
