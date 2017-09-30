@@ -1,5 +1,4 @@
-click
-pypitools
 lxml
 requests
 browser_cookie3
+pylogconf

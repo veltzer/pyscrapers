@@ -66,14 +66,13 @@ def download_url(source: str, target: str) -> None:
     if os.path.isfile(target):
         logger.info('skipping [%s]', target)
         return
-    # noinspection PyBroadException,PyPep8
     try:
         r = requests.get(source, stream=True)
         assert r.status_code == 200
         with open(target, 'wb') as f:
             r.raw.decode_content = True
             shutil.copyfileobj(r.raw, f)
-    except:
+    except IOError:
         os.unlink(target)
     logger.info('written [%s]...', target)
 
@@ -91,7 +90,6 @@ def download_video_if_wider(source: str, target: str, width: int) -> bool:
             return True
         else:
             logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
-    # noinspection PyPep8,PyBroadException
     try:
         r = requests.get(source, stream=True)
         if FAIL:
@@ -103,7 +101,7 @@ def download_video_if_wider(source: str, target: str, width: int) -> bool:
         with open(target, 'wb') as f:
             r.raw.decode_content = True
             shutil.copyfileobj(r.raw, f)
-    except:
+    except IOError:
         if os.path.isfile(target):
             os.unlink(target)
         if FAIL:

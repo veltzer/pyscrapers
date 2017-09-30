@@ -9,8 +9,11 @@ from pyscrapers.photos.mambaru import scrape_mambaru
 from pyscrapers.photos.travelgirls import scrape_travelgirls
 from pyscrapers.photos.vk import scrape_vk
 
+import pylogconf
+
 
 def main():
+    pylogconf.setup()
     # command line parsing
     parser = argparse.ArgumentParser(
         description='''download photos from various sites'''

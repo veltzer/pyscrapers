@@ -8,6 +8,7 @@ def populate(d):
         'lxml',
         'requests',
         'browser-cookie3',
+        'pylogconf',
     ]
 
 

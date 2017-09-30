@@ -6,6 +6,7 @@ from typing import IO
 
 import browser_cookie3
 import lxml.html
+import pylogconf
 import requests
 
 from pyscrapers.core.utils import download_url, download_video_if_wider
@@ -178,6 +179,7 @@ def download_course(course):
 
 
 def main():
+    pylogconf.setup()
     logger = logging.getLogger(__name__)
     courses = False
     reload = {}
