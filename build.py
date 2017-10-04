@@ -9,4 +9,4 @@ pydmt.add(MakoBuilder(
     targets=["README.md.mako"],
 ))
 
-pdmt.build()
+pydmt.build()
