@@ -29,7 +29,7 @@ def scrape_instagram(user_id: str, cookies) -> List[str]:
     s.cookies = cookies
 
     r = s.get(url)
-    root = pyscrapers.core.utils.get_real_content(r)
+    root = pyscrapers.core.utils.get_html_dom_content(r)
     # scrape.utils.print_element(root)
 
     urls = []
@@ -99,7 +99,7 @@ def scrape_instagram(user_id: str, cookies) -> List[str]:
         })
     }
     r2 = s.get(url2, params=params, cookies=r.cookies)
-    root = pyscrapers.core.utils.get_real_content(r2)
+    root = pyscrapers.core.utils.get_html_dom_content(r2)
     res = json.loads(root.text)
     for node in res['data']['user']['edge_owner_to_timeline_media']['edges']:
         urls.append(node['node']['display_url'])

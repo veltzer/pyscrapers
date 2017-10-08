@@ -27,17 +27,13 @@ def print_cookies(cookies, domain):
         print(cookie)
 
 
-def get_real_content(response):
+def get_html_dom_content(response):
     """
     Get the content from a request
     :param response:
     :return:
     """
-    assert response.status_code == 200
-    # if r.status_code!=200:
-    #     print('got error')
-    #     print(r.content.decode())
-    #     sys.exit(1)
+    assert response.status_code == 200, response.content
     str_content = response.content.decode()
     root = html.fromstring(str_content)
     return root
@@ -55,13 +51,13 @@ def download_urls(urls, start=0):
     logger.info('got [%d] real urls', len(urls))
     for url in urls:
         logger.info('downloading [%s]...', url)
-        responose = requests.get(url, stream=True)
-        assert responose.status_code == 200
+        response = requests.get(url, stream=True)
+        assert response.status_code == 200, response.content
         filename = 'image{0:04}.jpg'.format(counter)
         assert not os.path.isfile(filename)
         with open(filename, 'wb') as file_handle:
-            responose.raw.decode_content = True
-            shutil.copyfileobj(responose.raw, file_handle)
+            response.raw.decode_content = True
+            shutil.copyfileobj(response.raw, file_handle)
         logger.info('written [%s]...', filename)
         counter += 1
 
@@ -106,7 +102,7 @@ def download_url(source: str, target: str) -> None:
         return
     try:
         response = requests.get(source, stream=True)
-        assert response.status_code == 200
+        assert response.status_code == 200, response.content
         with open(target, 'wb') as file_handle:
             response.raw.decode_content = True
             shutil.copyfileobj(response.raw, file_handle)
@@ -138,7 +134,7 @@ def download_video_if_wider(source: str, target: str, width: int) -> bool:
     try:
         response = requests.get(source, stream=True)
         if FAIL:
-            assert response.status_code == 200
+            assert response.status_code == 200, response.content
         else:
             if response.status_code != 200:
                 logger.info("got bad error code [%s] and failed to download", response.status_code)

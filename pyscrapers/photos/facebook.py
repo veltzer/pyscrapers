@@ -15,7 +15,7 @@ def scrape_facebook(user_id: str, cookies) -> List[str]:
     url = 'https://www.facebook.com/{user_id}/photos'.format(user_id=user_id)
     logger.debug('url is [%s]', url)
     r = s.get(url)
-    root = pyscrapers.core.utils.get_real_content(r)
+    root = pyscrapers.core.utils.get_html_dom_content(r)
     # print(etree.tostring(root, pretty_print=True))
     # sys.exit(1)
 
