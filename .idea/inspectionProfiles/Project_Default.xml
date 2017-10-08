@@ -23,6 +23,7 @@
           <option value="twisted.internet.reactor.listenTCP" />
           <option value="pyinotify.IN_CREATE" />
           <option value="lxml.etree" />
+          <option value="requests.status_code" />
         </list>
       </option>
     </inspection_tool>

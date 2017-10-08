@@ -27,13 +27,27 @@ def print_cookies(cookies, domain):
         print(cookie)
 
 
+def get_http_status_string(code: int):
+    """
+    This function returns a description of an HTTP status code (404 - not found etc).
+    Unfortunately, the requests module does not provide a clean API for this so
+    we must access a protected member (underscore member) of 'requests.status_code'.
+    See:
+    https://stackoverflow.com/questions/24718557/get-the-description-of-a-status-code-in-python-requests
+    :param code:
+    :return:
+    """
+    # noinspection PyProtectedMember
+    return "http code [{}], [{}]".format(code, requests.status_codes._codes[code][0])
+
+
 def get_html_dom_content(response):
     """
     Get the content from a request
     :param response:
     :return:
     """
-    assert response.status_code == 200, response.content
+    assert response.status_code == 200, get_http_status_string(response.status_code)
     str_content = response.content.decode()
     root = html.fromstring(str_content)
     return root
