@@ -9,7 +9,8 @@ import templar.utils
 def populate(d):
     d.project_github_username = 'veltzer'
     d.project_name = 'pyscrapers'
-    d.project_website = 'https://{project_github_username}.github.io/{project_name}'.format(**d)
+    # d.project_website = 'https://{project_github_username}.github.io/{project_name}'.format(**d)
+    d.project_website = 'https://github.com/{project_github_username}/{project_name}'.format(**d)
     d.project_website_source = 'https://github.com/{project_github_username}/{project_name}'.format(**d)
     d.project_website_git = 'git://github.com/{project_github_username}/{project_name}.git'.format(**d)
     d.project_website_download = 'https://launchpad.net/~mark-veltzer/+archive/ubuntu/ppa'
@@ -20,15 +21,20 @@ def populate(d):
     # keywords to put on html pages or for search, dont put the name of the project or my details
     # as they will be added automatically...
     d.project_keywords = [
-        'scape',
+        'scrape',
         'images',
         'social',
+        'facebook',
+        'instagram',
+        'vk.com',
+        'download',
+        'pics',
     ]
     d.project_license = 'MIT'
     d.project_year_started = '2016'
-    d.project_description = '''What is Scrapers? Look in the "doc" subfolder of the source code...'''.format(**d)
+    d.project_description = 'A collection of scrapers for the web'
     d.project_platforms = [
-        'ALL',
+        'python3',
     ]
     d.project_classifiers = [
         'Development Status :: 4 - Beta',
