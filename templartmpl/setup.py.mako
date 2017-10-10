@@ -12,6 +12,7 @@ setuptools.setup(
     maintainer_email='${tdefs.personal_email}',
     keywords=${tdefs.project_keywords},
     url='${tdefs.project_website}',
+    download_url='${tdefs.project_website_download}',
     license='${tdefs.project_license}',
     platforms=${tdefs.project_platforms},
     packages=setuptools.find_packages(),
