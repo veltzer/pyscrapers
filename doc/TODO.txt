@@ -1,3 +1,10 @@
+- the current instagram downloader does not download videos
+	It does download images for the videos.
+	It currently download number of images = number of user
+	posts + 1 (the main image of the user).
+	So it downloads the images for the videos just not the
+	videos themselves.
+	fix this.
 - add flag to control whether or not we add cookies from firefox
 	or google or not at all.
 	(default should be firefox).
