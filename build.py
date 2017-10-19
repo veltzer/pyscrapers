@@ -5,9 +5,9 @@ from pydmt.builders import Mako
 
 pydmt = PyDMT()
 pydmt.add(Mako(
-    source="templartmpl/README.md.mako",
+    source="templates/README.md.mako",
     target="README.md.mako",
-    parameters=
+    defs=['defs/project.py'],
 ))
 
 pydmt.build()
