@@ -1,7 +1,7 @@
 pyscrapers
 ==========
 
-version: 34
+version: 35
 
 project to produce various useful scrapers
 
