@@ -12,18 +12,10 @@ def populate(d):
     d.deb_pkgname = 'pyscrapers'
     # to which series to publish the package?
     d.deb_series = [
+        'artful',
         'zesty',
-        'yakkety',
         'xenial',
-        # 'wily',
-        'vivid',
-        # end of life
-        # 'utopic',
         'trusty',
-        # does not accept new uploads
-        # 'saucy',
-        # does not accept new uploads
-        # 'raring',
     ]
     d.deb_depends = '${misc:Depends}, ${python3:Depends}, python3-mako'
     d.deb_builddepends = 'python3, python3-setuptools, debhelper, dh-python'
