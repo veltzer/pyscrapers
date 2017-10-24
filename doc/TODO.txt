@@ -1,3 +1,4 @@
+- add scraper for pinterest.
 - the current instagram downloader does not download videos
 	It does download images for the videos.
 	It currently download number of images = number of user
@@ -8,7 +9,7 @@
 - add flag to control whether or not we add cookies from firefox
 	or google or not at all.
 	(default should be firefox).
-- add scraper for mamba.
+- add scraper for mamba.ru.
 - do website for this project and publish to github.
 	use sphinx
 - use sessions in all of the scrapers and not just in the instagram one.
