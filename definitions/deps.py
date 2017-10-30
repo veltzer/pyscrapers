@@ -10,9 +10,3 @@ def populate(d):
         'browser-cookie3',
         'pylogconf',
     ]
-
-
-def get_deps():
-    return [
-        __file__,  # myself
-    ]

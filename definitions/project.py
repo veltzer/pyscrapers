@@ -2,10 +2,6 @@
 project definitions
 """
 
-# noinspection PyUnresolvedReferences,PyPackageRequirements
-import templar.utils
-
-
 def populate(d):
     d.project_github_username = 'veltzer'
     d.project_name = 'pyscrapers'
@@ -45,10 +41,4 @@ def populate(d):
         'Topic :: Utilities',
     ]
     d.project_data_files = []
-    d.project_data_files.append(templar.utils.hlp_files_under('/usr/bin', 'src/*'))
-
-
-def get_deps():
-    return [
-        __file__,  # myself
-    ]
+    # d.project_data_files.append(templar.utils.hlp_files_under('/usr/bin', 'src/*'))
