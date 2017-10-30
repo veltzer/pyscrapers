@@ -9,7 +9,7 @@ def populate(d):
     d.deb_section = 'python'
     d.deb_priority = 'optional'
     d.deb_architecture = 'all'
-    d.deb_pkgname = 'pyscrapers'
+    d.deb_package_name = 'pyscrapers'
     # to which series to publish the package?
     d.deb_series = [
         'artful',
@@ -28,9 +28,3 @@ def populate(d):
             'pyscrapers_photos=pyscrapers.scripts.photos:main',
         ],
     }
-
-
-def get_deps():
-    return [
-        __file__,  # myself
-    ]

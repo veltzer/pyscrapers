@@ -8,25 +8,32 @@
       <w>csrftoken</w>
       <w>debhelper</w>
       <w>dont</w>
+      <w>dpkg</w>
       <w>drumeo</w>
       <w>fbscraper</w>
       <w>ffprobe</w>
       <w>fref</w>
       <w>gcloud</w>
+      <w>gmail</w>
       <w>graphql</w>
       <w>ifeq</w>
       <w>instagram</w>
       <w>loglevel</w>
       <w>lxml</w>
+      <w>mailto</w>
       <w>mambaru</w>
       <w>mkdbg</w>
+      <w>pageview</w>
+      <w>paypal</w>
       <w>photograbber</w>
       <w>phpadmin</w>
+      <w>pinterest</w>
       <w>pydmt</w>
       <w>pyscrapers</w>
       <w>quickstart</w>
       <w>receipe</w>
       <w>referer</w>
+      <w>snipplet</w>
       <w>subfolder</w>
       <w>timeline</w>
       <w>toctree</w>
@@ -34,6 +41,7 @@
       <w>utopic</w>
       <w>vimeo</w>
       <w>widescreen</w>
+      <w>xclick</w>
       <w>xenial</w>
       <w>yakkety</w>
     </words>
