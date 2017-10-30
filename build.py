@@ -1,10 +1,11 @@
 #!/usr/bin/env python
+import os
 from pydmt.builders.mako import Mako
 from pydmt.core.pydmt import PyDMT, BuildProcessStats
 
 pydmt = PyDMT()
 b = Mako(
-    definitions_folder='definitions',
+    definitions_folders=['definitions', os.path.expanduser("~/.config/pydmt")],
     source="templates/README.rst.mako",
     target="README.rst",
 )
