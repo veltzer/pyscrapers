@@ -2,6 +2,7 @@
 project definitions
 """
 
+
 def populate(d):
     d.project_github_username = 'veltzer'
     d.project_name = 'pyscrapers'
