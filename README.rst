@@ -1,17 +1,28 @@
-# **pyscrapers** project by Mark Veltzer
+=======================
+**pyscrapers** project by Mark Veltzer
+=======================
 
+What is it?
+-----------
 
 Scrapers for various stuff that I need off the web, maybe other people will like them too...:)
 
 Currently supports downloading photos from the following sites:
-['facebook', 'instagram', 'travelgirls', 'vk', 'mamba.ru']
+- facebook
+- instagram
+- travelgirls
+- vk
+- mamba.ru
 
+Installing
+----------
 
-* Clone the repo
+- Clone the repo
 ```bash
 $ git clone https://github.com/veltzer/pyscrapers.git
 ```
-* You need python3 installed. Usually it is but if it isn't:
+
+- You need python3 installed. Usually it is but if it isn't:
 ```bash
 $ sudo apt install python3
 ```
@@ -19,11 +30,14 @@ or
 ```bash
 $ sudo yum install python3
 ```
-* Install requirements using:
+- Install requirements using:
 ```bash
 $ pip3 install --upgrade -r requirements.txt
 ```
 
+Running
+-------
 
 ```bash
-  $ pyscrapers_photos --u [user_id] -t [type_of_site]
+$ pyscrapers_photos --u [user_id] -t [type_of_site]
+```
