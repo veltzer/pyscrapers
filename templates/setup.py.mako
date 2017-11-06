@@ -15,7 +15,8 @@ setuptools.setup(
     download_url='${tdefs.project_website_download}',
     license='${tdefs.project_license}',
     platforms=${tdefs.project_platforms},
-    packages=setuptools.find_packages(),
+    packages=[ '${tdefs.project_name}' ],
+    # packages=setuptools.find_packages(),
     # include_package_data=True,
     install_requires=${tdefs.requirements3},
     # noinspection PyBroadException,PyPep8
