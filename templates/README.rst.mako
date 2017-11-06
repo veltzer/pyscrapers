@@ -17,8 +17,8 @@ Installing
 ----------
 
 - Clone the repo
-  .. code-block:: bash
-	$ git clone https://github.com/veltzer/pyscrapers.git
+	.. code-block:: bash
+		$ git clone https://github.com/veltzer/pyscrapers.git
 
 - You need python3 installed. Usually it is but if it isn't:
   .. code-block:: bash
