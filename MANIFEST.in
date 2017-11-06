@@ -1,1 +1,2 @@
-prune definitions 
+prune definitions
+prune tests
