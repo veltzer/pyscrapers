@@ -1,5 +1,5 @@
 =======================
-**pyscrapers** project by ${tdefs.personal_fullname}
+*pyscrapers* project by ${tdefs.personal_fullname}
 =======================
 
 What is it?
@@ -17,24 +17,22 @@ Installing
 ----------
 
 - Clone the repo
-  ```bash
+.. code-block:: bash
   $ git clone https://github.com/veltzer/pyscrapers.git
-  ```
+
 - You need python3 installed. Usually it is but if it isn't:
-  ```bash
+.. code-block:: bash
   $ sudo apt install python3
-  ```
+
   or
-  ```bash
+.. code-block:: bash
   $ sudo yum install python3
-  ```
+
 - Install requirements using:
-  ```bash
+.. code-block:: bash
   $ pip3 install --upgrade -r requirements.txt
-  ```
 
 Running
 -------
-```bash
+.. code-block:: bash
 $ pyscrapers_photos --u [user_id] -t [type_of_site]
-```
