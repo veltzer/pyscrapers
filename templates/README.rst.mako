@@ -37,3 +37,4 @@ Running
 
 .. code-block:: bash
 	$ pyscrapers_photos --u [user_id] -t [type_of_site]
+
