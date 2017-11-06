@@ -9,6 +9,7 @@ import os
 import glob
 import socket
 import pprint
+import pyscrapers.core.config
 
 '''
 this function finds all the python packages under a folder and
@@ -168,4 +169,6 @@ alt="PayPal - The safer, easier way to pay online!">
 
     # composites
     d.deb_version = '{0}~{1}'.format(d.git_version, d.apt_codename)
+
+    d.types = pyscrapers.core.config.types
 

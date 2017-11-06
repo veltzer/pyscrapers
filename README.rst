@@ -3,7 +3,8 @@
 
 Scrapers for various stuff that I need off the web, maybe other people will like them too...:)
 
-Currently I support downloading the public albums of a vk user.
+Currently supports downloading photos from the following sites:
+['facebook', 'instagram', 'travelgirls', 'vk', 'mamba.ru']
 
 
 * Clone the repo
@@ -25,8 +26,6 @@ $ pip3 install --upgrade -r requirements.txt
 
 
 ```bash
-  $ pyscrapers_vk_albums [user id in vk]
-  $ pyscrapers_tg_albums [user id in travelgirls]
-  $ pyscrapers_fb_albums [user id in facebook]
-  $ pyscrapers_ig_albums [user id in instagram]
-```
+  $ pyscrapers_photos --u [user_id] -t [type_of_site]
+
+
