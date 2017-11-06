@@ -8,12 +8,14 @@ What is it?
 Scrapers for various stuff that I need off the web, maybe other people will like them too...:)
 
 Currently supports downloading photos from the following sites:
+
 % for a in tdefs.types:
 - ${a}
 % endfor
 
 Installing
 ----------
+
 - Clone the repo
   ```bash
   $ git clone https://github.com/veltzer/pyscrapers.git
