@@ -3,7 +3,7 @@ import setuptools
 # noinspection PyPep8
 setuptools.setup(
     name='${tdefs.project_name}',
-    version='${tdefs.git_last_tag}',
+    version='0.0.2',
     description='${tdefs.project_description}',
     long_description='${tdefs.project_long_description}',
     author='${tdefs.personal_fullname}',
