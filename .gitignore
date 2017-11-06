@@ -86,15 +86,9 @@ celerybeat-schedule
 # Rope project settings
 .ropeproject
 
-# our output folder
-/out
-
 # packaging
 /debian/
 /setup.py
-
-# tools
-/tools.stamp
 
 # sphynx
 /doc/build

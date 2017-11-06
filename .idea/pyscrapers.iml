@@ -4,8 +4,6 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/doc/source" />
-      <excludeFolder url="file://$MODULE_DIR$/out" />
-      <excludeFolder url="file://$MODULE_DIR$/templartmpl" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.6.3 virtualenv at ~/.virtualenvs/pyscrapers" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
