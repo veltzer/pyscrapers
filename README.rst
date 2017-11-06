@@ -19,18 +19,22 @@ Installing
 ----------
 
 Clone the repo
+
 .. code-block:: bash
 	$ git clone https://github.com/veltzer/pyscrapers.git
 
 You need python3 installed. Usually it is but if it isn't:
+
 .. code-block:: bash
 	$ sudo apt install python3
 
 or
+
 .. code-block:: bash
 	$ sudo yum install python3
 
 Install requirements using:
+
 .. code-block:: bash
 	$ pip3 install --upgrade -r requirements.txt
 
