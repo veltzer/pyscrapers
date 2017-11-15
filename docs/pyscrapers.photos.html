@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pyscrapers.photos package &#8212; pyscrapers 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pyscrapers.scripts package" href="pyscrapers.scripts.html" />
+    <link rel="prev" title="pyscrapers.core package" href="pyscrapers.core.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pyscrapers-photos-package">
+<h1>pyscrapers.photos package<a class="headerlink" href="#pyscrapers-photos-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyscrapers.photos.facebook">
+<span id="pyscrapers-photos-facebook-module"></span><h2>pyscrapers.photos.facebook module<a class="headerlink" href="#module-pyscrapers.photos.facebook" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyscrapers.photos.facebook.scrape_facebook">
+<code class="descclassname">pyscrapers.photos.facebook.</code><code class="descname">scrape_facebook</code><span class="sig-paren">(</span><em>user_id: str</em>, <em>cookies</em><span class="sig-paren">)</span> &#x2192; typing.List[str]<a class="reference internal" href="_modules/pyscrapers/photos/facebook.html#scrape_facebook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.photos.facebook.scrape_facebook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyscrapers.photos.instagram">
+<span id="pyscrapers-photos-instagram-module"></span><h2>pyscrapers.photos.instagram module<a class="headerlink" href="#module-pyscrapers.photos.instagram" title="Permalink to this headline">¶</a></h2>
+<p>How does this work?
+When you fetch the page of a user on instagram you get an html with a javascript embedded
+in it with a json object embedded in that. This json object describes the user, his id,
+his profile photo and the first 12 images for that user.
+If you want to more photos you have to do a follow-up AJAX request to the server.</p>
+<dl class="function">
+<dt id="pyscrapers.photos.instagram.scrape_instagram">
+<code class="descclassname">pyscrapers.photos.instagram.</code><code class="descname">scrape_instagram</code><span class="sig-paren">(</span><em>user_id: str</em>, <em>cookies</em><span class="sig-paren">)</span> &#x2192; typing.List[str]<a class="reference internal" href="_modules/pyscrapers/photos/instagram.html#scrape_instagram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.photos.instagram.scrape_instagram" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyscrapers.photos.mambaru">
+<span id="pyscrapers-photos-mambaru-module"></span><h2>pyscrapers.photos.mambaru module<a class="headerlink" href="#module-pyscrapers.photos.mambaru" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyscrapers.photos.mambaru.scrape_mambaru">
+<code class="descclassname">pyscrapers.photos.mambaru.</code><code class="descname">scrape_mambaru</code><span class="sig-paren">(</span><em>user_id: str</em>, <em>cookies</em><span class="sig-paren">)</span> &#x2192; typing.List[str]<a class="reference internal" href="_modules/pyscrapers/photos/mambaru.html#scrape_mambaru"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.photos.mambaru.scrape_mambaru" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyscrapers.photos.travelgirls">
+<span id="pyscrapers-photos-travelgirls-module"></span><h2>pyscrapers.photos.travelgirls module<a class="headerlink" href="#module-pyscrapers.photos.travelgirls" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyscrapers.photos.travelgirls.scrape_travelgirls">
+<code class="descclassname">pyscrapers.photos.travelgirls.</code><code class="descname">scrape_travelgirls</code><span class="sig-paren">(</span><em>user_id: str</em>, <em>cookies</em><span class="sig-paren">)</span> &#x2192; typing.List[str]<a class="reference internal" href="_modules/pyscrapers/photos/travelgirls.html#scrape_travelgirls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.photos.travelgirls.scrape_travelgirls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyscrapers.photos.vk">
+<span id="pyscrapers-photos-vk-module"></span><h2>pyscrapers.photos.vk module<a class="headerlink" href="#module-pyscrapers.photos.vk" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyscrapers.photos.vk.get_my_content">
+<code class="descclassname">pyscrapers.photos.vk.</code><code class="descname">get_my_content</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/photos/vk.html#get_my_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.photos.vk.get_my_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>the return from the server in vk is not a standard HTML.
+this is why we must cut it up and cant use the regular
+‘get_real_content’ helper.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.photos.vk.scrape_vk">
+<code class="descclassname">pyscrapers.photos.vk.</code><code class="descname">scrape_vk</code><span class="sig-paren">(</span><em>user_id: str</em>, <em>_cookies</em><span class="sig-paren">)</span> &#x2192; typing.List[str]<a class="reference internal" href="_modules/pyscrapers/photos/vk.html#scrape_vk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.photos.vk.scrape_vk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyscrapers.photos">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscrapers.photos" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">pyscrapers</a><ul>
+  <li><a href="pyscrapers.html">pyscrapers package</a><ul>
+      <li>Previous: <a href="pyscrapers.core.html" title="previous chapter">pyscrapers.core package</a></li>
+      <li>Next: <a href="pyscrapers.scripts.html" title="next chapter">pyscrapers.scripts package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Mark Veltzer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pyscrapers.photos.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

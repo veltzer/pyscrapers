@@ -1,0 +1,242 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pyscrapers.core package &#8212; pyscrapers 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pyscrapers.photos package" href="pyscrapers.photos.html" />
+    <link rel="prev" title="pyscrapers package" href="pyscrapers.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pyscrapers-core-package">
+<h1>pyscrapers.core package<a class="headerlink" href="#pyscrapers-core-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyscrapers.core.config">
+<span id="pyscrapers-core-config-module"></span><h2>pyscrapers.core.config module<a class="headerlink" href="#module-pyscrapers.core.config" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyscrapers.core.ffprobe">
+<span id="pyscrapers-core-ffprobe-module"></span><h2>pyscrapers.core.ffprobe module<a class="headerlink" href="#module-pyscrapers.core.ffprobe" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyscrapers.core.ffprobe.duration">
+<code class="descclassname">pyscrapers.core.ffprobe.</code><code class="descname">duration</code><span class="sig-paren">(</span><em>vid_file_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Video’s duration in seconds, return a float number</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.ffprobe.height">
+<code class="descclassname">pyscrapers.core.ffprobe.</code><code class="descname">height</code><span class="sig-paren">(</span><em>vid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#height"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.height" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.ffprobe.probe">
+<code class="descclassname">pyscrapers.core.ffprobe.</code><code class="descname">probe</code><span class="sig-paren">(</span><em>vid_file_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#probe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.probe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give a json from ffprobe command line</p>
+<p>&#64;vid_file_path : The absolute (full) path of the video file, string.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.ffprobe.width">
+<code class="descclassname">pyscrapers.core.ffprobe.</code><code class="descname">width</code><span class="sig-paren">(</span><em>vid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#width"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyscrapers.core.utils">
+<span id="pyscrapers-core-utils-module"></span><h2>pyscrapers.core.utils module<a class="headerlink" href="#module-pyscrapers.core.utils" title="Permalink to this headline">¶</a></h2>
+<p>This module is s set of utilities for this entire project</p>
+<dl class="class">
+<dt id="pyscrapers.core.utils.Urls">
+<em class="property">class </em><code class="descclassname">pyscrapers.core.utils.</code><code class="descname">Urls</code><span class="sig-paren">(</span><em>download_as_collecting=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#Urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.Urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>list of urls to download and to where</p>
+<dl class="method">
+<dt id="pyscrapers.core.utils.Urls.add_url">
+<code class="descname">add_url</code><span class="sig-paren">(</span><em>source</em>, <em>target</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#Urls.add_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.Urls.add_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>add url to the list
+:param source:
+:param target:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyscrapers.core.utils.Urls.download">
+<code class="descname">download</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#Urls.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.Urls.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>download the list
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyscrapers.core.utils.Urls.print">
+<code class="descname">print</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#Urls.print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.Urls.print" title="Permalink to this definition">¶</a></dt>
+<dd><p>print the list
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.add_http">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">add_http</code><span class="sig-paren">(</span><em>url</em>, <em>main_url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#add_http"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.add_http" title="Permalink to this definition">¶</a></dt>
+<dd><p>add two urls together
+:param url:
+:param main_url:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.debug_requests">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">debug_requests</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#debug_requests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.debug_requests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activate the debugging features of the requests module
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.download_url">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">download_url</code><span class="sig-paren">(</span><em>source: str</em>, <em>target: str</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pyscrapers/core/utils.html#download_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.download_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a single url to a file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.download_urls">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">download_urls</code><span class="sig-paren">(</span><em>urls</em>, <em>start=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#download_urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.download_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a list of urls
+:param urls:
+:param start:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.download_video_if_wider">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">download_video_if_wider</code><span class="sig-paren">(</span><em>source: str</em>, <em>target: str</em>, <em>width: int</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/pyscrapers/core/utils.html#download_video_if_wider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.download_video_if_wider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a video if it is wider than a certain width
+:param source:
+:param target:
+:param width:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.get_html_dom_content">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">get_html_dom_content</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#get_html_dom_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.get_html_dom_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the content from a request
+:param response:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.get_http_status_string">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">get_http_status_string</code><span class="sig-paren">(</span><em>code: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#get_http_status_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.get_http_status_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns a description of an HTTP status code (404 - not found etc).
+Unfortunately, the requests module does not provide a clean API for this so
+we must access a protected member (underscore member) of ‘requests.status_code’.
+See:
+<a class="reference external" href="https://stackoverflow.com/questions/24718557/get-the-description-of-a-status-code-in-python-requests">https://stackoverflow.com/questions/24718557/get-the-description-of-a-status-code-in-python-requests</a>
+:param code:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.print_cookies">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">print_cookies</code><span class="sig-paren">(</span><em>cookies</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#print_cookies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.print_cookies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the cookies from a specific domain
+:param cookies:
+:param domain:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyscrapers.core.utils.print_element">
+<code class="descclassname">pyscrapers.core.utils.</code><code class="descname">print_element</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#print_element"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.print_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>from xml elements from etree
+:param element:
+:return:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyscrapers.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscrapers.core" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">pyscrapers</a><ul>
+  <li><a href="pyscrapers.html">pyscrapers package</a><ul>
+      <li>Previous: <a href="pyscrapers.html" title="previous chapter">pyscrapers package</a></li>
+      <li>Next: <a href="pyscrapers.photos.html" title="next chapter">pyscrapers.photos package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Mark Veltzer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pyscrapers.core.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
