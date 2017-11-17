@@ -28,3 +28,9 @@ def populate(d):
             'pyscrapers_photos=pyscrapers.scripts.photos:main',
         ],
     }
+    d.requirements3 = [
+        'lxml',
+        'requests',
+        'browser-cookie3',
+        'pylogconf',
+    ]
