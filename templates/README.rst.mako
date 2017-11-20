@@ -1,5 +1,5 @@
 =======================
-*pyscrapers* project by ${tdefs.personal_fullname}
+*${config.python.project_name}* project by ${config.personal.personal_fullname}
 =======================
 
 What is it?
@@ -9,7 +9,7 @@ Scrapers for various stuff that I need off the web, maybe other people will like
 
 Currently supports downloading photos from the following sites:
 
-% for a in tdefs.types:
+% for a in own.types:
 - ${a}
 % endfor
 

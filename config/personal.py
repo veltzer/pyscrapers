@@ -1,0 +1,1 @@
+/home/mark/.config/pydmt/personal.py

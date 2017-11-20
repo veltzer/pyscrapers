@@ -60,7 +60,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+/docs/.doctrees
 
 # PyBuilder
 target/
@@ -88,10 +88,6 @@ celerybeat-schedule
 
 # packaging
 /debian/
-/setup.py
-
-# sphynx
-/doc/build
 
 /.idea/workspace.xml
 

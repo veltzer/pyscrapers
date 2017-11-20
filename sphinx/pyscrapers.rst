@@ -10,6 +10,18 @@ Subpackages
     pyscrapers.photos
     pyscrapers.scripts
 
+Submodules
+----------
+
+pyscrapers\.version module
+--------------------------
+
+.. automodule:: pyscrapers.version
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 Module contents
 ---------------
 
