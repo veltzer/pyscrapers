@@ -78,7 +78,7 @@ celerybeat-schedule
 .env
 
 # virtualenv
-/venv/
+/.venv/
 
 # Spyder project settings
 .spyderproject
@@ -91,4 +91,4 @@ celerybeat-schedule
 
 /.idea/workspace.xml
 
-/.pydmt
+/.pydmt/
