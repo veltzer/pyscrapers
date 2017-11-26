@@ -1,2 +1,2 @@
-prune definitions
+prune config
 prune tests
