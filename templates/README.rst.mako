@@ -1,5 +1,9 @@
-=======================
-*${config.python.project_name}* project by ${config.personal.personal_fullname}
+<%!
+    import config.project
+    import config.personal
+    import config.pyscrapers
+%>=======================
+*${config.project.project_name}* project by ${config.personal.personal_fullname}
 =======================
 
 What is it?
@@ -9,7 +13,7 @@ Scrapers for various stuff that I need off the web, maybe other people will like
 
 Currently supports downloading photos from the following sites:
 
-% for a in own.types:
+% for a in config.pyscrapers.types:
 - ${a}
 % endfor
 
@@ -28,7 +32,7 @@ You also need pip3 installed.
 
 	$ sudo apt install python3-pip
 
-Now install ${config.python.project_name}:
+Now install ${config.project.project_name}:
 
 .. code-block:: bash
 

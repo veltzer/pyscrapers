@@ -1,10 +1,15 @@
-import setuptools
+<%!
+    import config.python
+    import config.personal
+    import config.project
+    import config.version
+%>import setuptools
 
 # until we make printing pretty
 # noinspection PyPep8
 setuptools.setup(
-    name='${config.python.project_name}',
-    version='${version.version_str}',
+    name='${config.project.project_name}',
+    version='${config.version.version_str}',
     description='${config.project.project_description}',
     long_description='${config.project.project_long_description}',
     author='${config.personal.personal_fullname}',
