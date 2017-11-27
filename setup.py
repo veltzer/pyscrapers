@@ -4,7 +4,7 @@ import setuptools
 # noinspection PyPep8
 setuptools.setup(
     name='pyscrapers',
-    version='0.0.4',
+    version='0.0.5',
     description='A collection of scrapers for the web',
     long_description='project to produce various useful scrapers',
     author='Mark Veltzer',
