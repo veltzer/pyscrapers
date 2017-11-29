@@ -1,9 +1,8 @@
-# production
+# production requirements
 lxml
 requests
-browser_cookie3
+browser-cookie3
 pylogconf
-pydmt
-# development tools
+# dev requirements
 pypitools
 pydmt
