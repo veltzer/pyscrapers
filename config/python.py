@@ -29,4 +29,7 @@ install_requires = [
     'browser-cookie3',
     'pylogconf',
 ]
-requirements3 = install_requires
+dev_requires = [
+    'pypitools',
+    'pydmt',
+]
