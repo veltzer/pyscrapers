@@ -1,4 +1,3 @@
-project_name = "pyscrapers"
 # deb section
 deb_package = True
 deb_section = 'python'
@@ -32,4 +31,5 @@ install_requires = [
 dev_requires = [
     'pypitools',
     'pydmt',
+    'pyclassifiers',
 ]

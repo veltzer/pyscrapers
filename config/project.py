@@ -2,6 +2,8 @@
 project definitions
 """
 
+import pyclassifiers.values
+
 project_github_username = 'veltzer'
 project_name = 'pyscrapers'
 # project_website = 'https://{project_github_username}.github.io/{project_name}'.format(**locals())
@@ -33,12 +35,12 @@ project_platforms = [
     'python3',
 ]
 project_classifiers = [
-    'Development Status :: 4 - Beta',
-    'Environment :: Console',
-    'Operating System :: OS Independent',
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3',
-    'Topic :: Utilities',
+    pyclassifiers.values.DevelopmentStatus__4_Beta,
+    pyclassifiers.values.Environment__Console,
+    pyclassifiers.values.OperatingSystem__OSIndependent,
+    pyclassifiers.values.ProgrammingLanguage__Python,
+    pyclassifiers.values.ProgrammingLanguage__Python__3__Only,
+    pyclassifiers.values.Topic__Utilities,
 ]
 project_data_files = []
 # project_data_files.append(templar.utils.hlp_files_under('/usr/bin', 'src/*'))

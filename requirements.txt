@@ -7,3 +7,4 @@ pylogconf
 # dev requirements
 pypitools
 pydmt
+pyclassifiers

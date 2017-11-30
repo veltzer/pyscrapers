@@ -2,9 +2,6 @@
 __pycache__/
 *$py.class
 
-# C extensions
-*.so
-
 # Distribution / packaging
 /.Python
 /env/
@@ -43,10 +40,6 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
-
-# Translations
-*.mo
-*.pot
 
 # Django stuff:
 *.log
