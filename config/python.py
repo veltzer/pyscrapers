@@ -18,11 +18,9 @@ deb_standards_version = '3.9.8'
 deb_x_python_version = '>= 3.4'
 deb_x_python3_version = '>= 3.4'
 deb_urgency = 'low'
-entry_points = {
-    'console_scripts': [
+console_scripts = [
         'pyscrapers_photos=pyscrapers.scripts.photos:main',
-    ],
-}
+]
 install_requires = [
     'lxml',
     'requests',

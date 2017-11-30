@@ -3,10 +3,9 @@
     import config.personal
     import config.project
     import config.version
+    import config.helpers
 %>import setuptools
 
-# until we make printing pretty
-# noinspection PyPep8
 setuptools.setup(
     name='${config.project.project_name}',
     version='${config.version.version_str}',
@@ -16,14 +15,14 @@ setuptools.setup(
     author_email='${config.personal.personal_email}',
     maintainer='${config.personal.personal_fullname}',
     maintainer_email='${config.personal.personal_email}',
-    keywords=${config.project.project_keywords},
+    keywords=${config.helpers.array_indented(1, config.project.project_keywords)},
     url='${config.project.project_website}',
     download_url='${config.project.project_website_download_src}',
     license='${config.project.project_license}',
-    platforms=${config.project.project_platforms},
+    platforms=${config.helpers.array_indented(1, config.project.project_platforms)},
     packages=setuptools.find_packages(),
-    install_requires=${config.python.install_requires},
-    classifiers=${config.project.project_classifiers},
-    data_files=${config.project.project_data_files},
-    entry_points=${config.python.entry_points},
+    install_requires=${config.helpers.array_indented(1, config.python.install_requires)},
+    classifiers=${config.helpers.array_indented(1, config.project.project_classifiers)},
+    data_files=${config.helpers.array_indented(1, config.project.project_data_files)},
+    entry_points={'console_scripts': ${config.helpers.array_indented(1, config.python.console_scripts)}},
 )
