@@ -21,6 +21,8 @@ deb_urgency = 'low'
 console_scripts = [
         'pyscrapers_photos=pyscrapers.scripts.photos:main',
 ]
+setup_requires = [
+]
 install_requires = [
     'lxml',
     'requests',
