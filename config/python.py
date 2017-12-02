@@ -1,3 +1,29 @@
+import config.project
+
+package_name = config.project.project_name
+
+console_scripts = [
+        'pyscrapers_photos=pyscrapers.scripts.photos:main',
+]
+
+setup_requires = [
+]
+
+install_requires = [
+    'lxml',
+    'requests',
+    'browser-cookie3',
+    'pylogconf',
+]
+
+dev_requires = [
+    'pypitools',
+    'pydmt',
+    'pyclassifiers',
+]
+
+python_requires = ">=3"
+
 # deb section
 deb_package = True
 deb_section = 'python'
@@ -17,19 +43,3 @@ deb_standards_version = '3.9.8'
 deb_x_python_version = '>= 3.4'
 deb_x_python3_version = '>= 3.4'
 deb_urgency = 'low'
-console_scripts = [
-        'pyscrapers_photos=pyscrapers.scripts.photos:main',
-]
-setup_requires = [
-]
-install_requires = [
-    'lxml',
-    'requests',
-    'browser-cookie3',
-    'pylogconf',
-]
-dev_requires = [
-    'pypitools',
-    'pydmt',
-    'pyclassifiers',
-]
