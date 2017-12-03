@@ -31,7 +31,7 @@ setuptools.setup(
         'download',
         'pics',
     ],
-    url='https://github.com/veltzer/pyscrapers',
+    url='https://veltzer.github.io/pyscrapers',
     download_url='https://github.com/veltzer/pyscrapers',
     license='MIT',
     platforms=[
