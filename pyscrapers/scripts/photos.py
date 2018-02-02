@@ -18,11 +18,12 @@ def main():
     parser = argparse.ArgumentParser(
         description='''download photos from various sites'''
     )
+    choices = ["facebook", "instagram", "travelgirls", "vk", "mamba.ru"]
     parser.add_argument(
         '-t',
         '--type',
         help="Which site to download from",
-        choices=["facebook", "instagram", "travelgirls", "vk", "mamba.ru"],
+        choices=choices,
     )
     parser.add_argument(
         '-u',
@@ -67,7 +68,7 @@ def main():
         urls = scrape_travelgirls(args.user_id, cookies)
     if args.type == "vk":
         urls = scrape_vk(args.user_id, cookies)
-    if args.type == "mamba.ur":
+    if args.type == "mamba.ru":
         urls = scrape_mambaru(args.user_id, cookies)
     pyscrapers.core.utils.download_urls(urls, start=args.start)
 
