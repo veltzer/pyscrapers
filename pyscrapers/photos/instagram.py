@@ -46,7 +46,7 @@ def scrape_instagram(user_id: str, cookies) -> List[str]:
     d = json.loads(json_text)
     my_list = d['entry_data']['ProfilePage']
     assert (len(my_list) == 1)
-    c = my_list[0]["user"]
+    c = my_list[0]["graphql"]["user"]
     if 'profile_pic_url_hd' in c:
         urls.append(c['profile_pic_url_hd'])
     elif 'profile_pic_url' in c:
