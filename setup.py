@@ -7,7 +7,7 @@ http://setuptools.readthedocs.io/en/latest/setuptools.html
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name='pyscrapers',
-    version='0.0.8',
+    version='0.0.9',
     packages=[
         'pyscrapers',
         'pyscrapers.core',

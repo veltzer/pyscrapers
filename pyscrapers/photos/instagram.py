@@ -6,7 +6,6 @@ his profile photo and the first 12 images for that user.
 If you want to more photos you have to do a follow-up AJAX request to the server.
 """
 import json
-import logging
 from typing import List
 
 import requests
@@ -16,13 +15,10 @@ import pyscrapers.core.utils
 
 
 def scrape_instagram(user_id: str, cookies) -> List[str]:
-    logger = logging.getLogger(__name__)
-    # constants
     domain = 'www.instagram.com'
     base = 'https://{domain}'.format(domain=domain)
 
     url = '{base}/{user_id}/'.format(base=base, user_id=user_id)
-    logger.debug('url is [%s]', url)
 
     # start a session
     s = requests.Session()
@@ -52,55 +48,27 @@ def scrape_instagram(user_id: str, cookies) -> List[str]:
     elif 'profile_pic_url' in c:
         urls.append(c['profile_pic_url'])
     user_id = c['id']
-    # json.dump(c, sys.stdout, indent=4)
-    # list_node = c['media']['nodes']
-    # for x in list_node:
-    #    urls.append(x['display_src'])
-
-    # now we need to do the follow up query
-    # url2 = '{base}/query/'.format(base=base)
-
-    """ g_user(278094193)+{+media.after(732083027810814056,+12)+{++count,++nodes+{++++caption,++++code,
-    ++++comments+{++++++count++++},++++comments_disabled,++++date,++++dimensions+{++++++height,++++++width++++},
-    ++++display_src,++++id,++++is_video,++++likes+{++++++count++++},++++owner+{++++++id++++},++++thumbnail_src,
-    ++++video_views++},++page_info}+}" """
-    """
-    data = {
-        # the 5000 is the number of images you want (big number to get all)
-        # the 0 in media.after is after what. 0 seems to return everything I think
-        # 'q':'ig_user({0})'.format(user_id)+'{ media.after(0, 5000) { count, nodes { display_src } } }',
-        'q': 'ig_user({0})'.format(user_id)+'{ media.after(0, 5000) { nodes { display_src } } }',
-        # 'q':'ig_user({0})'.format(user_id)+' { media.after(0, 5000) { count, nodes { caption, code, comments
-        # { count }, comments_disabled, date, dimensions { height, width }, display_src, id, is_video, likes { count },
-        # owner { id }, thumbnail_src, video_views }, page_info } }',
-        'ref': 'users::show',
-        # this is constant as far as I can tell
-        'query_id': '17842962958175392',
-    }
-    cookie_to_search = 'csrftoken'
-    cookie_value = r.cookies[cookie_to_search]
-    headers = {
-        # these two are necessary or you wont get response from instagram
-        'X-CSRFToken': r.cookies[cookie_to_search],
-        'Referer': url,
-    }
-    # you must send cookies and headers to get the data...
-    r2 = s.post(url2, data=data, headers=headers)
-    for node in res['media']['nodes']:
-        urls.append(node['display_src'])
-    """
-
     url2 = '{base}/graphql/query/'.format(base=base)
-    params = {
-        'query_id': 17888483320059182,
-        'variables': json.dumps({
-            'id': user_id,
-            'first': 5000,
-        })
-    }
-    r2 = s.get(url2, params=params, cookies=r.cookies)
-    root = pyscrapers.core.utils.get_html_dom_content(r2)
-    res = json.loads(root.text)
-    for node in res['data']['user']['edge_owner_to_timeline_media']['edges']:
-        urls.append(node['node']['display_url'])
+    has_next_page = True
+    end_cursor = None
+    while has_next_page:
+        variables = {
+                'id': user_id,
+                'first': 12,
+        }
+        if end_cursor:
+            variables['after'] = end_cursor
+        params = {
+            # 'query_id': 17888483320059182,
+            'query_hash': 'bd0d6d184eefd4d0ce7036c11ae58ed9',
+            'variables': json.dumps(variables)
+        }
+        r2 = s.get(url2, params=params, cookies=r.cookies)
+        # print(r2.json())
+        # quit()
+        data_user = r2.json()['data']['user']['edge_owner_to_timeline_media']
+        has_next_page = data_user['page_info']['has_next_page']
+        end_cursor = data_user['page_info']['end_cursor']
+        for node in data_user['edges']:
+            urls.append(node['node']['display_url'])
     return urls
