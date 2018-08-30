@@ -1,0 +1,8 @@
+These are the urls in modelclub:
+https://www.modelclub.com/bKylDuvgIE/profile/Tatiana
+https://www.modelclub.com/kd9GeBoXb9/profile/Yulia
+
+what is the real id in modelclub are the 10 digits after the machine name.
+so the url is:
+	https://www.modelclub.com/[id]/profile[nevermind]
+
