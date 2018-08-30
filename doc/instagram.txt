@@ -1,0 +1,3 @@
+my script cannot still download videos from instagram nor can it handle
+a single post which consists of a few images.
+An example of this would be the user seaaa_seaaa
