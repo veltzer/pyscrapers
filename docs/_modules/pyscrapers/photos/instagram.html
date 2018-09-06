@@ -111,6 +111,10 @@
         <span class="n">has_next_page</span> <span class="o">=</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;page_info&#39;</span><span class="p">][</span><span class="s1">&#39;has_next_page&#39;</span><span class="p">]</span>
         <span class="n">end_cursor</span> <span class="o">=</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;page_info&#39;</span><span class="p">][</span><span class="s1">&#39;end_cursor&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;edges&#39;</span><span class="p">]:</span>
+            <span class="c1"># if it is a video, then append the video, too</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;is_video&#39;</span><span class="p">]:</span>
+                <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;video_url&#39;</span><span class="p">])</span>
+                <span class="c1"># print(json.dumps(node[&#39;node&#39;], indent=4, sort_keys=True))</span>
             <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;display_url&#39;</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">urls</span></div>
 </pre></div>
