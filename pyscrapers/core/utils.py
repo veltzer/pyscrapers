@@ -8,6 +8,7 @@ import logging
 import os
 import shutil
 import urllib.parse
+from typing import List
 
 import requests
 from lxml import etree, html
@@ -53,7 +54,7 @@ def get_html_dom_content(response):
     return root
 
 
-def download_urls(urls, start=0):
+def download_urls(urls: List[str], start=0):
     """
     Download a list of urls
     :param urls:
@@ -67,7 +68,12 @@ def download_urls(urls, start=0):
         logger.info('downloading [%s]...', url)
         response = requests.get(url, stream=True)
         assert response.status_code == 200, response.content
-        filename = 'image{0:04}.jpg'.format(counter)
+        filename = None
+        if url.endswith(".jpg"):
+            filename = 'image{0:04}.jpg'.format(counter)
+        if url.endswith(".mp4"):
+            filename = 'video{0:04}.mp4'.format(counter)
+        assert filename is not None, "what type of url is this?"
         assert not os.path.isfile(filename)
         with open(filename, 'wb') as file_handle:
             response.raw.decode_content = True

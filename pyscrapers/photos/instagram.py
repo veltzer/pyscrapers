@@ -70,5 +70,9 @@ def scrape_instagram(user_id: str, cookies) -> List[str]:
         has_next_page = data_user['page_info']['has_next_page']
         end_cursor = data_user['page_info']['end_cursor']
         for node in data_user['edges']:
+            # if it is a video, then append the video, too
+            if node['node']['is_video']:
+                urls.append(node['node']['video_url'])
+                # print(json.dumps(node['node'], indent=4, sort_keys=True))
             urls.append(node['node']['display_url'])
     return urls
