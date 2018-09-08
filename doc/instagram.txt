@@ -1,3 +1,4 @@
-my script cannot still download videos from instagram nor can it handle
-a single post which consists of a few images.
+still to be done in the instagram module:
+- single post which consists of a few images.
+- download stories.
 An example of this would be the user seaaa_seaaa
