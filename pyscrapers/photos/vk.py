@@ -97,9 +97,9 @@ def scrape_vk(user_id: str, _cookies) -> List[str]:
                 if min_len == 1:
                     for k, v in json_obj['temp'].items():
                         if k != 'base':
-                                add_url = v[0]
-                                full_url = base+add_url+'.jpg'
-                                urls.add(full_url)
+                            add_url = v[0]
+                            full_url = base+add_url+'.jpg'
+                            urls.add(full_url)
                     got += 1
         count += got
     return list(urls)
