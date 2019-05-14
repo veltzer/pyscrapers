@@ -1,43 +1,43 @@
-pyscrapers\.photos package
-==========================
+pyscrapers.photos package
+=========================
 
 Submodules
 ----------
 
-pyscrapers\.photos\.facebook module
------------------------------------
+pyscrapers.photos.facebook module
+---------------------------------
 
 .. automodule:: pyscrapers.photos.facebook
     :members:
     :undoc-members:
     :show-inheritance:
 
-pyscrapers\.photos\.instagram module
-------------------------------------
+pyscrapers.photos.instagram module
+----------------------------------
 
 .. automodule:: pyscrapers.photos.instagram
     :members:
     :undoc-members:
     :show-inheritance:
 
-pyscrapers\.photos\.mambaru module
-----------------------------------
+pyscrapers.photos.mambaru module
+--------------------------------
 
 .. automodule:: pyscrapers.photos.mambaru
     :members:
     :undoc-members:
     :show-inheritance:
 
-pyscrapers\.photos\.travelgirls module
---------------------------------------
+pyscrapers.photos.travelgirls module
+------------------------------------
 
 .. automodule:: pyscrapers.photos.travelgirls
     :members:
     :undoc-members:
     :show-inheritance:
 
-pyscrapers\.photos\.vk module
------------------------------
+pyscrapers.photos.vk module
+---------------------------
 
 .. automodule:: pyscrapers.photos.vk
     :members:

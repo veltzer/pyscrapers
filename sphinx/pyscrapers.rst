@@ -13,8 +13,8 @@ Subpackages
 Submodules
 ----------
 
-pyscrapers\.version module
---------------------------
+pyscrapers.version module
+-------------------------
 
 .. automodule:: pyscrapers.version
     :members:

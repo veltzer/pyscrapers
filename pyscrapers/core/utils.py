@@ -73,7 +73,7 @@ def download_urls(urls: List[str], start=0):
             filename = 'image{0:04}.jpg'.format(counter)
         if url.endswith(".mp4"):
             filename = 'video{0:04}.mp4'.format(counter)
-        assert filename is not None, "what type of url is this?"
+        assert filename is not None, "don't know how to handle url {}".format(url)
         assert not os.path.isfile(filename)
         with open(filename, 'wb') as file_handle:
             response.raw.decode_content = True
