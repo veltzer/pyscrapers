@@ -58,6 +58,7 @@ def scrape_instagram(user_id: str, cookies) -> List[str]:
         }
         if end_cursor:
             variables['after'] = end_cursor
+        # noinspection SpellCheckingInspection
         params = {
             # 'query_id': 17888483320059182,
             'query_hash': 'bd0d6d184eefd4d0ce7036c11ae58ed9',
