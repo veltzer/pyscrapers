@@ -10,6 +10,8 @@ import shutil
 import urllib.parse
 from typing import List
 
+from urllib.parse import urlparse
+
 import requests
 from lxml import etree, html
 
@@ -65,16 +67,21 @@ def download_urls(urls: List[str], start=0):
     counter = start
     logger.info('got [%d] real urls', len(urls))
     for url in urls:
+        parse_result = urlparse(url)
+        path = parse_result.path
         logger.info('downloading [%s]...', url)
         response = requests.get(url, stream=True)
         assert response.status_code == 200, response.content
+
         filename = None
-        if url.endswith(".jpg"):
+        if path.endswith(".jpg"):
             filename = 'image{0:04}.jpg'.format(counter)
-        if url.endswith(".mp4"):
+        if path.endswith(".mp4"):
             filename = 'video{0:04}.mp4'.format(counter)
-        assert filename is not None, "don't know how to handle url {}".format(url)
-        assert not os.path.isfile(filename)
+        if filename is None:
+            logger.error('do not know how to handle path [%s]...', path)
+            continue
+        assert not os.path.isfile(filename), "already have filename {}".format(path)
         with open(filename, 'wb') as file_handle:
             response.raw.decode_content = True
             shutil.copyfileobj(response.raw, file_handle)
