@@ -9,7 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/doc/source" />
       <excludeFolder url="file://$MODULE_DIR$/docs" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.6 (pyscrapers)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (pyscrapers)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
