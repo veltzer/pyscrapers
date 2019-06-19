@@ -4,6 +4,14 @@ pyscrapers.scripts package
 Submodules
 ----------
 
+pyscrapers.scripts.data module
+------------------------------
+
+.. automodule:: pyscrapers.scripts.data
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 pyscrapers.scripts.drumeo module
 --------------------------------
 

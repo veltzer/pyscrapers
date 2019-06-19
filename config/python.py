@@ -4,6 +4,7 @@ package_name = config.project.project_name
 
 console_scripts = [
         'pyscrapers_photos=pyscrapers.scripts.photos:main',
+        'pyscrapers_data=pyscrapers.scripts.data:main',
 ]
 
 setup_requires = [
