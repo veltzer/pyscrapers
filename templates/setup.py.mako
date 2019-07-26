@@ -1,6 +1,6 @@
 <%!
     import config.python
-    import config.personal
+    import user.personal
     import config.project
     import config.version
     import config.helpers
@@ -18,10 +18,10 @@ setuptools.setup(
     # from here all is optional
     description='${config.project.project_description}',
     long_description='${config.project.project_long_description}',
-    author='${config.personal.personal_fullname}',
-    author_email='${config.personal.personal_email}',
-    maintainer='${config.personal.personal_fullname}',
-    maintainer_email='${config.personal.personal_email}',
+    author='${user.personal.personal_fullname}',
+    author_email='${user.personal.personal_email}',
+    maintainer='${user.personal.personal_fullname}',
+    maintainer_email='${user.personal.personal_email}',
     keywords=${config.helpers.array_indented(1, config.project.project_keywords)},
     url='${config.project.project_website}',
     download_url='${config.project.project_website_download_src}',
