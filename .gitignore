@@ -79,6 +79,4 @@ celerybeat-schedule
 # packaging
 /debian/
 
-/.idea/workspace.xml
-
 /.pydmt/
