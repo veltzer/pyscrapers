@@ -23,6 +23,9 @@ dev_requires = [
     'pyclassifiers',
 ]
 
+test_requires = [
+]
+
 python_requires = ">=3"
 
 # deb section
