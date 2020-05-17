@@ -11,9 +11,8 @@ setuptools.setup(
     packages=[
         'pyscrapers',
         'pyscrapers.core',
-        'pyscrapers.photos',
         'pyscrapers.endpoints',
-        'pyscrapers.scripts',
+        'pyscrapers.workers',
     ],
     # from here all is optional
     description='A collection of scrapers for the web',
