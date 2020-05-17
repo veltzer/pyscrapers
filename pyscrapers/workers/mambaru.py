@@ -11,7 +11,7 @@ def scrape_mambaru(user_id: str, cookies) -> List[str]:
     # main_url = 'https://www.mamba.ru/{user_id}'.format(user_id=user_id)
     main_url = 'https://www.mamba.ru/mobile/api/v5.17.0.0/?reqType=json'
     request_obj = {"langId": "en", "dateType": "timestamp", "limit": 10000, "sysRequestsContainer": [
-            {"uri": "/users/{}/albums/photos/".format(user_id), "method": "GET", "params":
+            {"uri": "/users/{}/albums/workers/".format(user_id), "method": "GET", "params":
                 {"langId": "en", "dateType": "timestamp", "limit": -1}
              }
         ]
@@ -23,6 +23,6 @@ def scrape_mambaru(user_id: str, cookies) -> List[str]:
     response_obj = json.loads(response_str)
     response_obj = response_obj["sysResponsesContainer"][0]
     for album in response_obj["albums"]:
-        for photo in album["photos"]:
+        for photo in album["workers"]:
             urls.append(photo["hugePhotoUrl"])
     return urls

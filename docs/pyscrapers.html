@@ -53,22 +53,15 @@
 <li class="toctree-l2"><a class="reference internal" href="pyscrapers.endpoints.html#module-pyscrapers.endpoints">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pyscrapers.photos.html">pyscrapers.photos package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.photos.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.photos.html#module-pyscrapers.photos.facebook">pyscrapers.photos.facebook module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.photos.html#module-pyscrapers.photos.instagram">pyscrapers.photos.instagram module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.photos.html#module-pyscrapers.photos.mambaru">pyscrapers.photos.mambaru module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.photos.html#module-pyscrapers.photos.travelgirls">pyscrapers.photos.travelgirls module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.photos.html#module-pyscrapers.photos.vk">pyscrapers.photos.vk module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.photos.html#module-pyscrapers.photos">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pyscrapers.scripts.html">pyscrapers.scripts package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.scripts.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.scripts.html#module-pyscrapers.scripts.data">pyscrapers.scripts.data module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.scripts.html#module-pyscrapers.scripts.drumeo">pyscrapers.scripts.drumeo module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.scripts.html#module-pyscrapers.scripts.photos">pyscrapers.scripts.photos module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyscrapers.scripts.html#module-pyscrapers.scripts">Module contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscrapers.workers.html">pyscrapers.workers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.drumeo">pyscrapers.workers.drumeo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.facebook">pyscrapers.workers.facebook module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.instagram">pyscrapers.workers.instagram module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.mambaru">pyscrapers.workers.mambaru module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.travelgirls">pyscrapers.workers.travelgirls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.vk">pyscrapers.workers.vk module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -76,6 +69,68 @@
 </div>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyscrapers.configs">
+<span id="pyscrapers-configs-module"></span><h2>pyscrapers.configs module<a class="headerlink" href="#module-pyscrapers.configs" title="Permalink to this headline">¶</a></h2>
+<p>All configurations for pymakehelper</p>
+<dl class="py class">
+<dt id="pyscrapers.configs.ConfigCookiesSource">
+<em class="property">class </em><code class="sig-prename descclassname">pyscrapers.configs.</code><code class="sig-name descname">ConfigCookiesSource</code><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigCookiesSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.configs.ConfigCookiesSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<p>Configure where to get cookies from…</p>
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigCookiesSource.browser">
+<code class="sig-name descname">browser</code><em class="property"> = 'firefox'</em><a class="headerlink" href="#pyscrapers.configs.ConfigCookiesSource.browser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pyscrapers.configs.ConfigDebugRequests">
+<em class="property">class </em><code class="sig-prename descclassname">pyscrapers.configs.</code><code class="sig-name descname">ConfigDebugRequests</code><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigDebugRequests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.configs.ConfigDebugRequests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<p>Configure how to user the requests module</p>
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigDebugRequests.debug">
+<code class="sig-name descname">debug</code><em class="property"> = False</em><a class="headerlink" href="#pyscrapers.configs.ConfigDebugRequests.debug" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pyscrapers.configs.ConfigLogging">
+<em class="property">class </em><code class="sig-prename descclassname">pyscrapers.configs.</code><code class="sig-name descname">ConfigLogging</code><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigLogging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.configs.ConfigLogging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<p>Parameters to control logging</p>
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigLogging.loglevel">
+<code class="sig-name descname">loglevel</code><em class="property"> = 'ERROR'</em><a class="headerlink" href="#pyscrapers.configs.ConfigLogging.loglevel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pyscrapers.configs.ConfigSiteId">
+<em class="property">class </em><code class="sig-prename descclassname">pyscrapers.configs.</code><code class="sig-name descname">ConfigSiteId</code><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigSiteId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.configs.ConfigSiteId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<p>Parameters for downloading workers</p>
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigSiteId.site">
+<code class="sig-name descname">site</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pyscrapers.configs.ConfigSiteId.site" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigSiteId.start">
+<code class="sig-name descname">start</code><em class="property"> = 0</em><a class="headerlink" href="#pyscrapers.configs.ConfigSiteId.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigSiteId.user_id">
+<code class="sig-name descname">user_id</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pyscrapers.configs.ConfigSiteId.user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-pyscrapers.version">
 <span id="pyscrapers-version-module"></span><h2>pyscrapers.version module<a class="headerlink" href="#module-pyscrapers.version" title="Permalink to this headline">¶</a></h2>

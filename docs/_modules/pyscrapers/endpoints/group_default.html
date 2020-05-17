@@ -34,10 +34,22 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">The default group of operations that pyscrapers has</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">shelve</span>
 
+<span class="kn">import</span> <span class="nn">browser_cookie3</span>
 <span class="kn">from</span> <span class="nn">pytconf.config</span> <span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_function_group</span>
 
+<span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
 <span class="kn">import</span> <span class="nn">pyscrapers.version</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigDebugRequests</span><span class="p">,</span> <span class="n">ConfigCookiesSource</span><span class="p">,</span> <span class="n">ConfigSiteId</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.drumeo</span> <span class="kn">import</span> <span class="n">get_number_of_pages</span><span class="p">,</span> <span class="n">get_courses</span><span class="p">,</span> <span class="n">get_course_details</span><span class="p">,</span> <span class="n">get_course_urls</span><span class="p">,</span> \
+    <span class="n">download_course</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.facebook</span> <span class="kn">import</span> <span class="n">scrape_facebook</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.instagram</span> <span class="kn">import</span> <span class="n">scrape_instagram</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.mambaru</span> <span class="kn">import</span> <span class="n">scrape_mambaru</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.travelgirls</span> <span class="kn">import</span> <span class="n">scrape_travelgirls</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.vk</span> <span class="kn">import</span> <span class="n">scrape_vk</span>
 
 <span class="n">GROUP_NAME_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
 <span class="n">GROUP_DESCRIPTION_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;all pyscapers commands&quot;</span>
@@ -63,6 +75,87 @@
 <span class="sd">    Print version</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pyscrapers</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">VERSION_STR</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="photos"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.photos">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">ConfigSiteId</span><span class="p">,</span>
+        <span class="n">ConfigDebugRequests</span><span class="p">,</span>
+        <span class="n">ConfigCookiesSource</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">suggest_configs</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">photos</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download photo albums from various sites</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">debug_requests</span><span class="p">()</span>
+    <span class="n">cookies</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">ConfigCookiesSource</span><span class="o">.</span><span class="n">browser</span> <span class="o">==</span> <span class="s2">&quot;firefox&quot;</span><span class="p">:</span>
+        <span class="n">cookies</span> <span class="o">=</span> <span class="n">browser_cookie3</span><span class="o">.</span><span class="n">firefox</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ConfigCookiesSource</span><span class="o">.</span><span class="n">browser</span> <span class="o">==</span> <span class="s2">&quot;chrome&quot;</span><span class="p">:</span>
+        <span class="n">cookies</span> <span class="o">=</span> <span class="n">browser_cookie3</span><span class="o">.</span><span class="n">chrome</span><span class="p">()</span>
+
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;facebook&quot;</span><span class="p">:</span>
+        <span class="n">urls</span> <span class="o">=</span> <span class="n">scrape_facebook</span><span class="p">(</span><span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;instagram&quot;</span><span class="p">:</span>
+        <span class="n">urls</span> <span class="o">=</span> <span class="n">scrape_instagram</span><span class="p">(</span><span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;travelgirls&quot;</span><span class="p">:</span>
+        <span class="n">urls</span> <span class="o">=</span> <span class="n">scrape_travelgirls</span><span class="p">(</span><span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;vk&quot;</span><span class="p">:</span>
+        <span class="n">urls</span> <span class="o">=</span> <span class="n">scrape_vk</span><span class="p">(</span><span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;mamba.ru&quot;</span><span class="p">:</span>
+        <span class="n">urls</span> <span class="o">=</span> <span class="n">scrape_mambaru</span><span class="p">(</span><span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span>
+    <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">download_urls</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">ConfigSiteId</span><span class="o">.</span><span class="n">start</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="drumeo"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.drumeo">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">ConfigDebugRequests</span><span class="p">,</span>
+        <span class="n">ConfigCookiesSource</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">suggest_configs</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">drumeo</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download videos from drumeo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">debug_requests</span><span class="p">()</span>
+    <span class="n">cookies</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">ConfigCookiesSource</span><span class="o">.</span><span class="n">browser</span> <span class="o">==</span> <span class="s2">&quot;firefox&quot;</span><span class="p">:</span>
+        <span class="n">cookies</span> <span class="o">=</span> <span class="n">browser_cookie3</span><span class="o">.</span><span class="n">firefox</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ConfigCookiesSource</span><span class="o">.</span><span class="n">browser</span> <span class="o">==</span> <span class="s2">&quot;chrome&quot;</span><span class="p">:</span>
+        <span class="n">cookies</span> <span class="o">=</span> <span class="n">browser_cookie3</span><span class="o">.</span><span class="n">chrome</span><span class="p">()</span>
+
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">courses</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">reload</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;cache.db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;courses&quot;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+            <span class="n">list_of_courses</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;courses&quot;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;got from cache [</span><span class="si">{}</span><span class="s2">] courses&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_courses</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pages</span> <span class="o">=</span> <span class="n">get_number_of_pages</span><span class="p">(</span><span class="n">courses</span><span class="o">=</span><span class="n">courses</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of pages is [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pages</span><span class="p">))</span>
+            <span class="n">list_of_courses</span> <span class="o">=</span> <span class="n">get_courses</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="n">courses</span><span class="o">=</span><span class="n">courses</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;got [</span><span class="si">{}</span><span class="s2">] courses&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_courses</span><span class="p">)))</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;courses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_of_courses</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">course</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">list_of_courses</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;course number [</span><span class="si">%s</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">course</span><span class="o">.</span><span class="n">number</span> <span class="ow">in</span> <span class="n">d</span> <span class="ow">and</span> <span class="n">course</span><span class="o">.</span><span class="n">number</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reload</span><span class="p">:</span>
+                <span class="n">list_of_courses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">course</span><span class="o">.</span><span class="n">number</span><span class="p">]</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;got from cache [</span><span class="si">%s</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">list_of_courses</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">get_course_details</span><span class="p">(</span><span class="n">course</span><span class="p">,</span> <span class="n">courses</span><span class="o">=</span><span class="n">courses</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
+                <span class="n">get_course_urls</span><span class="p">(</span><span class="n">course</span><span class="p">,</span> <span class="n">courses</span><span class="o">=</span><span class="n">courses</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">course</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">course</span><span class="o">.</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">course</span>
+            <span class="n">download_course</span><span class="p">(</span><span class="n">list_of_courses</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div>
 </pre></div>
 
           </div>

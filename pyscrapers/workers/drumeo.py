@@ -1,18 +1,12 @@
 import json
 import logging
 import os
-import shelve
 from typing import IO
 
-import browser_cookie3
 import lxml.html
-import pylogconf.core
 import requests
 
 from pyscrapers.core.utils import download_url, download_video_if_wider
-
-# load cookies from browser
-cookies = browser_cookie3.firefox()
 
 # this means that we can use regular expression functions like 'match'
 # by specifying 're:match' in our xpath expressions
@@ -20,7 +14,7 @@ ns = lxml.etree.FunctionNamespace("http://exslt.org/regular-expressions")
 ns.prefix = 're'
 
 
-def get_number_of_pages(courses: bool) -> int:
+def get_number_of_pages(courses: bool, cookies) -> int:
     if courses:
         url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=1"
     else:
@@ -54,7 +48,7 @@ class Course:
         self.videos.append((video, quality))
 
 
-def get_courses(pages, courses: bool):
+def get_courses(pages, courses: bool, cookies):
     collected_courses = []
     for i in range(1, pages + 1):
         if courses:
@@ -94,7 +88,7 @@ def get_courses(pages, courses: bool):
     return collected_courses
 
 
-def get_course_details(course: Course, courses: bool):
+def get_course_details(course: Course, courses: bool, cookies):
     if courses:
         url = "https://www.drumeo.com/members/lessons/courses/{}".format(course.number)
     else:
@@ -116,10 +110,10 @@ def get_course_details(course: Course, courses: bool):
         resource = resources[0].get('href')
         course.resources = "http:"+resource
     if not courses:
-        get_videos(root, course)
+        get_videos(root, course, cookies)
 
 
-def get_course_urls(course, courses: bool):
+def get_course_urls(course, courses: bool, cookies):
     if not courses:
         return
     logger = logging.getLogger(__name__)
@@ -134,10 +128,10 @@ def get_course_urls(course, courses: bool):
         content = r.content.decode()
         print(content)
         root = lxml.html.fromstring(content)
-        get_videos(root, course)
+        get_videos(root, course, cookies)
 
 
-def get_videos(root, course):
+def get_videos(root, course, cookies):
     logger = logging.getLogger(__name__)
     videos = root.xpath('//div[@data-video-load-url]')
     for video in videos:
@@ -176,35 +170,3 @@ def download_course(course):
         download_url(course.resources, os.path.join(folder_name, "resources.zip"))
     for i, (video, quality) in enumerate(course.videos):
         download_video_if_wider(video, os.path.join(folder_name, "{}.mp4".format(i)), width=int(quality))
-
-
-def main():
-    pylogconf.core.setup()
-    logger = logging.getLogger(__name__)
-    courses = False
-    reload = {}
-    with shelve.open("cache.db") as d:
-        if "courses" in d:
-            list_of_courses = d["courses"]
-            print("got from cache [{}] courses".format(len(list_of_courses)))
-        else:
-            pages = get_number_of_pages(courses=courses)
-            print("number of pages is [{}]".format(pages))
-            list_of_courses = get_courses(pages, courses=courses)
-            print("got [{}] courses".format(len(list_of_courses)))
-            d["courses"] = list_of_courses
-        for i, course in enumerate(list_of_courses):
-            logger.info("course number [%s]", i)
-            if course.number in d and course.number not in reload:
-                list_of_courses[i] = d[course.number]
-                logger.info("got from cache [%s]", list_of_courses[i])
-            else:
-                get_course_details(course, courses=courses)
-                get_course_urls(course, courses=courses)
-                print(course)
-                d[course.number] = course
-            download_course(list_of_courses[i])
-
-
-if __name__ == '__main__':
-    main()

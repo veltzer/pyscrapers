@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>pyscrapers.photos.facebook &#8212; pyscrapers 0.0.1 documentation</title>
+    <title>pyscrapers.workers.facebook &#8212; pyscrapers 0.0.1 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -30,7 +30,7 @@
 
           <div class="body" role="main">
             
-  <h1>Source code for pyscrapers.photos.facebook</h1><div class="highlight"><pre>
+  <h1>Source code for pyscrapers.workers.facebook</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
@@ -40,12 +40,12 @@
 <span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
 
 
-<div class="viewcode-block" id="scrape_facebook"><a class="viewcode-back" href="../../../pyscrapers.photos.html#pyscrapers.photos.facebook.scrape_facebook">[docs]</a><span class="k">def</span> <span class="nf">scrape_facebook</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="scrape_facebook"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.facebook.scrape_facebook">[docs]</a><span class="k">def</span> <span class="nf">scrape_facebook</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
     <span class="n">s</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">cookies</span>
 
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.facebook.com/</span><span class="si">{user_id}</span><span class="s1">/photos&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.facebook.com/</span><span class="si">{user_id}</span><span class="s1">/workers&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;url is [</span><span class="si">%s</span><span class="s1">]&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>

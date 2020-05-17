@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>pyscrapers.configs &#8212; pyscrapers 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pyscrapers.configs</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">All configurations for pymakehelper</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">pytconf.config</span> <span class="kn">import</span> <span class="n">Config</span><span class="p">,</span> <span class="n">ParamCreator</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+
+
+<div class="viewcode-block" id="ConfigLogging"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigLogging">[docs]</a><span class="k">class</span> <span class="nc">ConfigLogging</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters to control logging</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">loglevel</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_choice</span><span class="p">(</span>
+        <span class="n">choice_list</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">),</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">),</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">),</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">),</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARN</span><span class="p">),</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">),</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">FATAL</span><span class="p">),</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;What log level to use?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">),</span>
+
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ConfigDebugRequests"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigDebugRequests">[docs]</a><span class="k">class</span> <span class="nc">ConfigDebugRequests</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Configure how to user the requests module</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">debug</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Do you want to debug the requests module?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ConfigCookiesSource"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigCookiesSource">[docs]</a><span class="k">class</span> <span class="nc">ConfigCookiesSource</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Configure where to get cookies from...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">browser</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_choice</span><span class="p">(</span>
+        <span class="n">choice_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;firefox&quot;</span><span class="p">,</span> <span class="s2">&quot;chrome&quot;</span><span class="p">],</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Which browser to take cookies from?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;firefox&quot;</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ConfigSiteId"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigSiteId">[docs]</a><span class="k">class</span> <span class="nc">ConfigSiteId</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters for downloading workers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">site</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_choice</span><span class="p">(</span>
+        <span class="n">choice_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;facebook&quot;</span><span class="p">,</span> <span class="s2">&quot;instagram&quot;</span><span class="p">,</span> <span class="s2">&quot;travelgirls&quot;</span><span class="p">,</span> <span class="s2">&quot;vk&quot;</span><span class="p">,</span> <span class="s2">&quot;mamba.ru&quot;</span><span class="p">],</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Which site to download from?&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Which user id to user?</span>
+<span class="s2">            https://www.facebook.com/profile.php?id=[user_id]</span>
+<span class="s2">            https://www.instagram.com/[user_id]</span>
+<span class="s2">            http://www.travelgirls.com/member/[user_id]</span>
+<span class="s2">            https://vk.com/id[user_id]</span>
+<span class="s2">            http://www.mamba.ru/mb[user_id]&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;start number for image names&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Mark Veltzer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
