@@ -41,7 +41,7 @@ class ConfigDebugRequests(Config):
 
 class ConfigCookiesSource(Config):
     """
-    Configure where to get cookies from...
+    Configure where to get cookies from
     """
     browser = ParamCreator.create_choice(
         choice_list=["none", "firefox", "chrome"],
