@@ -55,9 +55,10 @@ def get_html_dom_content(response):
     return root
 
 
-def download_urls(urls: List[str], start=0):
+def download_urls(session, urls: List[str], start=0):
     """
     Download a list of urls
+    :param session:
     :param urls:
     :param start:
     :return:
@@ -69,7 +70,7 @@ def download_urls(urls: List[str], start=0):
         parse_result = urlparse(url)
         path = parse_result.path
         logger.info('downloading [%s]...', url)
-        response = requests.get(url, stream=True)
+        response = session.get(url, stream=True)
         assert response.status_code == 200, response.content
 
         filename = None
@@ -117,7 +118,7 @@ def print_element(element):
     print(etree.tostring(element, pretty_print=True).decode())
 
 
-def download_url(source: str, target: str) -> None:
+def download_url(session, source: str, target: str) -> None:
     """
     Download a single url to a file
     """
@@ -127,7 +128,7 @@ def download_url(source: str, target: str) -> None:
         logger.info('skipping [%s]', target)
         return
     try:
-        response = requests.get(source, stream=True)
+        response = session.get(source, stream=True)
         assert response.status_code == 200, response.content
         with open(target, 'wb') as file_handle:
             response.raw.decode_content = True
@@ -140,12 +141,13 @@ def download_url(source: str, target: str) -> None:
 FAIL = True
 
 
-def download_video_if_wider(source: str, target: str, width: int) -> bool:
+def download_video_if_wider(session, source: str, target: str, width: int) -> bool:
     """
     Download a video if it is wider than a certain width
     :param source:
     :param target:
     :param width:
+    :param session:
     :return:
     """
     logger = logging.getLogger(__name__)
@@ -158,7 +160,7 @@ def download_video_if_wider(source: str, target: str, width: int) -> bool:
         else:
             logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
     try:
-        response = requests.get(source, stream=True)
+        response = session.get(source, stream=True)
         if FAIL:
             assert response.status_code == 200, response.content
         else:
@@ -190,16 +192,17 @@ class Urls:
         self.list = []
         self.download_as_collecting = download_as_collecting
 
-    def add_url(self, source, target):
+    def add_url(self, source, target, session):
         """
         add url to the list
         :param source:
         :param target:
+        :param session:
         :return:
         """
         self.list.append((source, target))
         if self.download_as_collecting:
-            download_url(source=source, target=target)
+            download_url(session, source=source, target=target)
 
     def print(self):
         """
@@ -209,10 +212,10 @@ class Urls:
         for (source, target) in self.list:
             print(source, target, sep="\t")
 
-    def download(self):
+    def download(self, session):
         """
         download the list
         :return:
         """
         for (source, target) in self.list:
-            download_url(source=source, target=target)
+            download_url(session, source=source, target=target)

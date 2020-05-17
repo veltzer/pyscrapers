@@ -4,7 +4,6 @@ import os
 from typing import IO
 
 import lxml.html
-import requests
 
 from pyscrapers.core.utils import download_url, download_video_if_wider
 
@@ -14,12 +13,12 @@ ns = lxml.etree.FunctionNamespace("http://exslt.org/regular-expressions")
 ns.prefix = 're'
 
 
-def get_number_of_pages(courses: bool, cookies) -> int:
+def get_number_of_pages(courses: bool, session) -> int:
     if courses:
         url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=1"
     else:
         url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page=1"
-    r = requests.get(url, cookies=cookies)
+    r = session.get(url)
     assert r.status_code == 200
     content = r.content.decode()
     o = json.loads(content)
@@ -48,14 +47,14 @@ class Course:
         self.videos.append((video, quality))
 
 
-def get_courses(pages, courses: bool, cookies):
+def get_courses(pages, courses: bool, session):
     collected_courses = []
     for i in range(1, pages + 1):
         if courses:
             url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page={}".format(i)
         else:
             url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page={}".format(i)
-        r = requests.get(url, cookies=cookies)
+        r = session.get(url)
         assert r.status_code == 200
         content = r.content.decode()
         o = json.loads(content)
@@ -88,12 +87,12 @@ def get_courses(pages, courses: bool, cookies):
     return collected_courses
 
 
-def get_course_details(course: Course, courses: bool, cookies):
+def get_course_details(course: Course, courses: bool, session):
     if courses:
         url = "https://www.drumeo.com/members/lessons/courses/{}".format(course.number)
     else:
         url = "https://www.drumeo.com/members/lessons/library/{}".format(course.number)
-    r = requests.get(url, cookies=cookies)
+    r = session.get(url)
     assert r.status_code == 200
     content = r.content.decode()
     root = lxml.html.fromstring(content)
@@ -110,10 +109,10 @@ def get_course_details(course: Course, courses: bool, cookies):
         resource = resources[0].get('href')
         course.resources = "http:"+resource
     if not courses:
-        get_videos(root, course, cookies)
+        get_videos(root, course, session)
 
 
-def get_course_urls(course, courses: bool, cookies):
+def get_course_urls(course, courses: bool, session):
     if not courses:
         return
     logger = logging.getLogger(__name__)
@@ -123,21 +122,21 @@ def get_course_urls(course, courses: bool, cookies):
             url = "https://www.drumeo.com/members/lessons/courses/{}".format(lesson)
         else:
             url = "https://www.drumeo.com/members/lessons/library/{}".format(lesson)
-        r = requests.get(url, cookies=cookies)
+        r = session.get(url)
         assert r.status_code == 200
         content = r.content.decode()
         print(content)
         root = lxml.html.fromstring(content)
-        get_videos(root, course, cookies)
+        get_videos(root, course, session)
 
 
-def get_videos(root, course, cookies):
+def get_videos(root, course, session):
     logger = logging.getLogger(__name__)
     videos = root.xpath('//div[@data-video-load-url]')
     for video in videos:
         video_url = video.get('data-video-load-url')
         logger.info("url for video info is [%s]", video_url)
-        r = requests.get(video_url, cookies=cookies)
+        r = session.get(video_url)
         assert r.status_code == 200
         content = r.content.decode()
         data = json.loads(content)
@@ -155,7 +154,7 @@ def get_videos(root, course, cookies):
         course.add_video(best_vid, best_vid_key)
 
 
-def download_course(course):
+def download_course(course, session):
     folder_name = os.path.join("drumeo", course.number)
     if not os.path.isdir(folder_name):
         os.makedirs(folder_name)
@@ -167,6 +166,6 @@ def download_course(course):
             print("course_difficulty: {}".format(course.diff), file=file_handle)
             print("instructor: {}".format(course.instructor), file=file_handle)
     if course.resources is not None:
-        download_url(course.resources, os.path.join(folder_name, "resources.zip"))
+        download_url(course.resources, os.path.join(folder_name, "resources.zip"), session)
     for i, (video, quality) in enumerate(course.videos):
-        download_video_if_wider(video, os.path.join(folder_name, "{}.mp4".format(i)), width=int(quality))
+        download_video_if_wider(session, video, os.path.join(folder_name, "{}.mp4".format(i)), width=int(quality))

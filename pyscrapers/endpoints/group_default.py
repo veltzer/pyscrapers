@@ -78,7 +78,7 @@ def photos():
         urls = scrape_vk(ConfigSiteId.user_id, session)
     if ConfigSiteId.site == "mamba.ru":
         urls = scrape_mambaru(ConfigSiteId.user_id, session)
-    pyscrapers.core.utils.download_urls(urls, start=ConfigSiteId.start)
+    pyscrapers.core.utils.download_urls(session, urls, start=ConfigSiteId.start)
     session.close()
 
 
@@ -102,6 +102,9 @@ def drumeo():
     if ConfigCookiesSource.browser == "chrome":
         cookies = browser_cookie3.chrome()
 
+    session = requests.Session()
+    session.cookies = cookies
+
     logger = logging.getLogger(__name__)
     courses = False
     reload = {}
@@ -110,9 +113,9 @@ def drumeo():
             list_of_courses = d["courses"]
             print("got from cache [{}] courses".format(len(list_of_courses)))
         else:
-            pages = get_number_of_pages(courses=courses, cookies=cookies)
+            pages = get_number_of_pages(courses=courses, session=session)
             print("number of pages is [{}]".format(pages))
-            list_of_courses = get_courses(pages, courses=courses, cookies=cookies)
+            list_of_courses = get_courses(pages, courses=courses, session=session)
             print("got [{}] courses".format(len(list_of_courses)))
             d["courses"] = list_of_courses
         for i, course in enumerate(list_of_courses):
@@ -121,8 +124,8 @@ def drumeo():
                 list_of_courses[i] = d[course.number]
                 logger.info("got from cache [%s]", list_of_courses[i])
             else:
-                get_course_details(course, courses=courses, cookies=cookies)
-                get_course_urls(course, courses=courses, cookies=cookies)
+                get_course_details(course, courses=courses, session=session)
+                get_course_urls(course, courses=courses, session=session)
                 print(course)
                 d[course.number] = course
-            download_course(list_of_courses[i])
+            download_course(list_of_courses[i], session)

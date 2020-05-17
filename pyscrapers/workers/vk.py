@@ -5,7 +5,6 @@ from typing import List
 
 import lxml.etree
 import lxml.html
-import requests
 
 
 def get_my_content(r):
@@ -30,7 +29,7 @@ def get_my_content(r):
     return root
 
 
-def scrape_vk(user_id: str, _cookies) -> List[str]:
+def scrape_vk(user_id: str, session) -> List[str]:
     logger = logging.getLogger(__name__)
     url = 'https://vk.com/al_photos.php'
     data = {
@@ -38,7 +37,7 @@ def scrape_vk(user_id: str, _cookies) -> List[str]:
         'al': '1',
         'owner': user_id,
     }
-    r = requests.post(url, data=data)
+    r = session.post(url, data=data)
     root = get_my_content(r)
 
     e_albums = root.xpath('//div[@class="photos_album_title_wrap"]')
@@ -66,7 +65,7 @@ def scrape_vk(user_id: str, _cookies) -> List[str]:
             'offset': count,
         }
         logger.debug('doing request %d', count)
-        r = requests.post(url, data=data)
+        r = session.post(url, data=data)
         root = get_my_content(r)
         e_a = root.xpath('//a[@onclick]')
         for x in e_a:
