@@ -3,8 +3,7 @@ import config.project
 package_name = config.project.project_name
 
 console_scripts = [
-        'pyscrapers_photos=pyscrapers.scripts.photos:main',
-        'pyscrapers_data=pyscrapers.scripts.data:main',
+        'pyscrapers=pyscrapers.endpoints.main:main',
 ]
 
 setup_requires = [
@@ -27,7 +26,7 @@ dev_requires = [
 test_requires = [
 ]
 
-python_requires = ">=3"
+python_requires = ">=3.5"
 
 # deb section
 deb_package = True

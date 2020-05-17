@@ -56,8 +56,7 @@ setuptools.setup(
     data_files=[
     ],
     entry_points={'console_scripts': [
-        'pyscrapers_photos=pyscrapers.scripts.photos:main',
-        'pyscrapers_data=pyscrapers.scripts.data:main',
+        'pyscrapers=pyscrapers.endpoints.main:main',
     ]},
-    python_requires='>=3',
+    python_requires='>=3.5',
 )

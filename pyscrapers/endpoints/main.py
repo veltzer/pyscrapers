@@ -19,7 +19,7 @@ def register_all_groups():
 @register_main()
 def main():
     """
-    pymakehelper will help you write makefiles
+    pyscapers will help you download stuff from the web
     """
     pylogconf.core.setup()
     register_all_groups()
