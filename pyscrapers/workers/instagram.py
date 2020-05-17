@@ -3,7 +3,7 @@ How does this work?
 When you fetch the page of a user on instagram you get an html with a javascript embedded
 in it with a json object embedded in that. This json object describes the user, his id,
 his profile photo and the first 12 images for that user.
-If you want to more photos you have to do a follow-up AJAX request to the server.
+If you want to more workers you have to do a follow-up AJAX request to the server.
 """
 import json
 from typing import List

@@ -9,11 +9,18 @@ Subpackages
 
    pyscrapers.core
    pyscrapers.endpoints
-   pyscrapers.photos
-   pyscrapers.scripts
+   pyscrapers.workers
 
 Submodules
 ----------
+
+pyscrapers.configs module
+-------------------------
+
+.. automodule:: pyscrapers.configs
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 pyscrapers.version module
 -------------------------
