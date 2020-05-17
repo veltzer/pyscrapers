@@ -1,3 +1,4 @@
+- add scraper for pornhub.
 - add scraper for pinterest.
 - the current instagram downloader does not download videos
 	It does download images for the videos.
@@ -9,10 +10,8 @@
 - add flag to control whether or not we add cookies from firefox
 	or google or not at all.
 	(default should be firefox).
-- add scraper for mamba.ru.
 - do website for this project and publish to github.
 	use sphinx
-- use sessions in all of the scrapers and not just in the instagram one.
 - take some ideas from the google 'photograbber' project here:
 	https://code.google.com/archive/p/photograbber/downloads
 - use the facebook graph API to download from facebook:

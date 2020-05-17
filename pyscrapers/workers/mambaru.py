@@ -1,12 +1,10 @@
 import json
 from typing import List
 
-import requests
-
 from pyscrapers.core.utils import get_http_status_string
 
 
-def scrape_mambaru(user_id: str, cookies) -> List[str]:
+def scrape_mambaru(user_id: str, session) -> List[str]:
     # raise ValueError("mamba still not implemented")
     # main_url = 'https://www.mamba.ru/{user_id}'.format(user_id=user_id)
     main_url = 'https://www.mamba.ru/mobile/api/v5.17.0.0/?reqType=json'
@@ -17,7 +15,7 @@ def scrape_mambaru(user_id: str, cookies) -> List[str]:
         ]
     }
     urls = []
-    response = requests.post(main_url, cookies=cookies, json=request_obj)
+    response = session.post(main_url, json=request_obj)
     assert response.status_code == 200, get_http_status_string(response.status_code)
     response_str = response.content.decode()
     response_obj = json.loads(response_str)
