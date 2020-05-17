@@ -5,6 +5,7 @@ import logging
 import shelve
 
 import browser_cookie3
+import requests
 from pytconf.config import register_endpoint, register_function_group
 
 import pyscrapers.core.utils
@@ -64,19 +65,21 @@ def photos():
         cookies = browser_cookie3.firefox()
     if ConfigCookiesSource.browser == "chrome":
         cookies = browser_cookie3.chrome()
-
+    session = requests.Session()
+    session.cookies = cookies
     urls = []
     if ConfigSiteId.site == "facebook":
-        urls = scrape_facebook(ConfigSiteId.user_id, cookies)
+        urls = scrape_facebook(ConfigSiteId.user_id, session)
     if ConfigSiteId.site == "instagram":
-        urls = scrape_instagram(ConfigSiteId.user_id, cookies)
+        urls = scrape_instagram(ConfigSiteId.user_id, session)
     if ConfigSiteId.site == "travelgirls":
-        urls = scrape_travelgirls(ConfigSiteId.user_id, cookies)
+        urls = scrape_travelgirls(ConfigSiteId.user_id, session)
     if ConfigSiteId.site == "vk":
-        urls = scrape_vk(ConfigSiteId.user_id, cookies)
+        urls = scrape_vk(ConfigSiteId.user_id, session)
     if ConfigSiteId.site == "mamba.ru":
-        urls = scrape_mambaru(ConfigSiteId.user_id, cookies)
+        urls = scrape_mambaru(ConfigSiteId.user_id, session)
     pyscrapers.core.utils.download_urls(urls, start=ConfigSiteId.start)
+    session.close()
 
 
 @register_endpoint(

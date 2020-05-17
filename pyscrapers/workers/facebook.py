@@ -1,20 +1,17 @@
 import logging
 from typing import List
 
-import requests
 from lxml import etree
 
 import pyscrapers.core.utils
 
 
-def scrape_facebook(user_id: str, cookies) -> List[str]:
+def scrape_facebook(user_id: str, session) -> List[str]:
     logger = logging.getLogger(__name__)
-    s = requests.Session()
-    s.cookies = cookies
 
     url = 'https://www.facebook.com/{user_id}/workers'.format(user_id=user_id)
     logger.debug('url is [%s]', url)
-    r = s.get(url)
+    r = session.get(url)
     root = pyscrapers.core.utils.get_html_dom_content(r)
     # print(etree.tostring(root, pretty_print=True))
     # sys.exit(1)

@@ -8,23 +8,18 @@ If you want to more workers you have to do a follow-up AJAX request to the serve
 import json
 from typing import List
 
-import requests
 from lxml import etree
 
 import pyscrapers.core.utils
 
 
-def scrape_instagram(user_id: str, cookies) -> List[str]:
+def scrape_instagram(user_id: str, session) -> List[str]:
     domain = 'www.instagram.com'
     base = 'https://{domain}'.format(domain=domain)
 
     url = '{base}/{user_id}/'.format(base=base, user_id=user_id)
 
-    # start a session
-    s = requests.Session()
-    s.cookies = cookies
-
-    r = s.get(url)
+    r = session.get(url)
     root = pyscrapers.core.utils.get_html_dom_content(r)
     # scrape.utils.print_element(root)
 
@@ -64,7 +59,7 @@ def scrape_instagram(user_id: str, cookies) -> List[str]:
             'query_hash': 'bd0d6d184eefd4d0ce7036c11ae58ed9',
             'variables': json.dumps(variables)
         }
-        r2 = s.get(url2, params=params, cookies=r.cookies)
+        r2 = session.get(url2, params=params)
         # print(r2.json())
         # quit()
         data_user = r2.json()['data']['user']['edge_owner_to_timeline_media']
