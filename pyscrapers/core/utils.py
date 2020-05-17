@@ -10,12 +10,13 @@ import shutil
 import urllib.parse
 from typing import List
 
-from urllib.parse import urlparse
+import urllib.parse
 
 import requests
-from lxml import etree, html
+import lxml
+import lxml.html
 
-from pyscrapers.core import ffprobe
+import pyscrapers.core.ffprobe
 
 
 def print_cookies(cookies, domain):
@@ -51,7 +52,7 @@ def get_html_dom_content(response):
     """
     assert response.status_code == 200, get_http_status_string(response.status_code)
     str_content = response.content.decode()
-    root = html.fromstring(str_content)
+    root = lxml.html.fromstring(str_content)
     return root
 
 
@@ -67,7 +68,7 @@ def download_urls(session, urls: List[str], start=0):
     counter = start
     logger.info('got [%d] real urls', len(urls))
     for url in urls:
-        parse_result = urlparse(url)
+        parse_result = urllib.parse.urlparse(url)
         path = parse_result.path
         logger.info('downloading [%s]...', url)
         response = session.get(url, stream=True)
@@ -115,7 +116,7 @@ def print_element(element):
     :param element:
     :return:
     """
-    print(etree.tostring(element, pretty_print=True).decode())
+    print(lxml.etree.tostring(element, pretty_print=True).decode())
 
 
 def download_url(session, source: str, target: str) -> None:
@@ -153,7 +154,7 @@ def download_video_if_wider(session, source: str, target: str, width: int) -> bo
     logger = logging.getLogger(__name__)
     logger.info('downloading [%s] to [%s]', source, target)
     if os.path.isfile(target):
-        file_width = ffprobe.height(target)
+        file_width = pyscrapers.core.ffprobe.height(target)
         if file_width >= width:
             logger.info('skipping because video with width exists [%s] %s %s', target, file_width, width)
             return True
