@@ -7,11 +7,12 @@ http://setuptools.readthedocs.io/en/latest/setuptools.html
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name='pyscrapers',
-    version='0.0.13',
+    version='0.0.14',
     packages=[
         'pyscrapers',
         'pyscrapers.core',
         'pyscrapers.photos',
+        'pyscrapers.endpoints',
         'pyscrapers.scripts',
     ],
     # from here all is optional
@@ -41,6 +42,7 @@ setuptools.setup(
         'lxml',
         'requests',
         'browser-cookie3',
+        'pytconf',
         'pylogconf',
     ],
     classifiers=[

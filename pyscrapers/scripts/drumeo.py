@@ -66,8 +66,8 @@ def get_courses(pages, courses: bool):
         content = r.content.decode()
         o = json.loads(content)
         d_lessons = o["lessonsHtml"]
-        for l in d_lessons:
-            root = lxml.html.fromstring(l)
+        for lesson_list in d_lessons:
+            root = lxml.html.fromstring(lesson_list)
             # pyscrapers.utils.print_element(root)
             if courses:
                 link_re = r"https://www.drumeo.com/laravel/public/members/lessons/courses/\d+"

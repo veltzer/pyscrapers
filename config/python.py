@@ -14,6 +14,7 @@ install_requires = [
     'lxml',
     'requests',
     'browser-cookie3',
+    'pytconf',
     'pylogconf',
 ]
 
