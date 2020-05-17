@@ -10,7 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/docs" />
       <excludeFolder url="file://$MODULE_DIR$/pyscrapers.egg-info" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7 (pyscrapers)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (pyscrapers)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
@@ -30,7 +30,6 @@
     </option>
   </component>
   <component name="TestRunnerService">
-    <option name="projectConfiguration" value="Nosetests" />
     <option name="PROJECT_TEST_RUNNER" value="Nosetests" />
   </component>
 </module>

@@ -3,6 +3,7 @@
 lxml
 requests
 browser-cookie3
+pytconf
 pylogconf
 # dev requirements
 pypitools
