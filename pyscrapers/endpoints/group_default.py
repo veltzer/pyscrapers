@@ -1,5 +1,5 @@
 """
-The default group of operations that pymakehelper has
+The default group of operations that pyscrapers has
 """
 
 from pytconf.config import register_endpoint, register_function_group
