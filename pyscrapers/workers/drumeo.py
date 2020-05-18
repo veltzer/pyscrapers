@@ -1,3 +1,7 @@
+"""
+Download course material from drumeo
+"""
+
 import json
 import logging
 import os
@@ -14,20 +18,32 @@ ns.prefix = 're'
 
 
 def get_number_of_pages(courses: bool, session) -> int:
+    """
+    Get the number of pages for all courses or pages
+    :param courses:
+    :param session:
+    :return:
+    """
     if courses:
         url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=1"
     else:
         url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page=1"
-    r = session.get(url)
-    assert r.status_code == 200
-    content = r.content.decode()
-    o = json.loads(content)
-    d_page_count = o["pageCount"]
+    result = session.get(url)
+    assert result.status_code == 200
+    content = result.content.decode()
+    obj = json.loads(content)
+    d_page_count = obj["pageCount"]
     return d_page_count
 
 
 class Course:
+    """
+    This is an object representing one course
+    """
     def __init__(self):
+        """
+        constructor
+        """
         self.number = None
         self.instructor = None
         self.name = None
@@ -37,64 +53,100 @@ class Course:
         self.videos = []
 
     def __repr__(self):
-        return ",".join([self.number, self.name, self.instructor, self.diff, str(self.lessons), str(self.resources),
-                        str(self.videos)])
+        """
+        nice representation of this object
+        :return:
+        """
+        return ",".join([
+            self.number, self.name, self.instructor, self.diff,
+            str(self.lessons), str(self.resources),
+            str(self.videos)
+        ])
 
     def add_lesson(self, lesson):
+        """
+        Add a lesson to the course
+        :param lesson:
+        :return:
+        """
         self.lessons.append(lesson)
 
     def add_video(self, video, quality):
+        """
+        Add a video to the course
+        :param video:
+        :param quality:
+        :return:
+        """
         self.videos.append((video, quality))
 
 
+def get_url(courses: bool, page: int) -> str:
+    if courses:
+        url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page={}".format(page)
+    else:
+        url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page={}".format(page)
+    return url
+
+
+def get_members_url(courses: bool, number: int) -> str:
+    if courses:
+        url = "https://www.drumeo.com/members/lessons/courses/{}".format(number)
+    else:
+        url = "https://www.drumeo.com/members/lessons/library/{}".format(number)
+    return url
+
+
+def get_link_re(courses: bool) -> str:
+    if courses:
+        link_re = r"https://www.drumeo.com/laravel/public/members/lessons/courses/\d+"
+    else:
+        link_re = r"https://www.drumeo.com/laravel/public/members/lessons/library/\d+"
+    return link_re
+
+
 def get_courses(pages, courses: bool, session):
+    """
+    Download the list of all the courses
+    :param pages:
+    :param courses:
+    :param session:
+    :return:
+    """
     collected_courses = []
-    for i in range(1, pages + 1):
-        if courses:
-            url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page={}".format(i)
-        else:
-            url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page={}".format(i)
-        r = session.get(url)
-        assert r.status_code == 200
-        content = r.content.decode()
-        o = json.loads(content)
-        d_lessons = o["lessonsHtml"]
-        for lesson_list in d_lessons:
+    for page in range(1, pages + 1):
+        result = session.get(get_url(courses, page))
+        assert result.status_code == 200
+        for lesson_list in json.loads(result.content.decode())["lessonsHtml"]:
+            course = Course()
             root = lxml.html.fromstring(lesson_list)
-            # pyscrapers.utils.print_element(root)
-            if courses:
-                link_re = r"https://www.drumeo.com/laravel/public/members/lessons/courses/\d+"
-            else:
-                link_re = r"https://www.drumeo.com/laravel/public/members/lessons/library/\d+"
-            links = root.xpath('//a[re:match(@href,"{}")]'.format(link_re))
+            links = root.xpath('//a[re:match(@href,"{}")]'.format(get_link_re(courses)))
             assert len(links) == 2, len(links)
-            course_number = links[0].get('href').split("/")[-1]
+            course.number = links[0].get('href').split("/")[-1]
             titles = root.xpath('//h2[@class="card-title"]')
             assert len(titles) == 1
-            title = titles[0].text
+            course.name = titles[0].text
             instructors = root.xpath('//p[@class="card-sub-title card-instructor"]')
             assert len(instructors) == 1
-            instructor = instructors[0].text
+            course.instructor = instructors[0].text
             diffs = root.xpath('//h3[@class="card-difficulty"]')
             assert len(diffs) == 1
-            diff = diffs[0].text.strip()
-            c = Course()
-            c.instructor = instructor
-            c.name = title
-            c.number = course_number
-            c.diff = diff
-            collected_courses.append(c)
+            course.diff = diffs[0].text.strip()
+            collected_courses.append(course)
     return collected_courses
 
 
 def get_course_details(course: Course, courses: bool, session):
-    if courses:
-        url = "https://www.drumeo.com/members/lessons/courses/{}".format(course.number)
-    else:
-        url = "https://www.drumeo.com/members/lessons/library/{}".format(course.number)
-    r = session.get(url)
-    assert r.status_code == 200
-    content = r.content.decode()
+    """
+    Populate the Course type object
+    :param course:
+    :param courses:
+    :param session:
+    :return:
+    """
+    result = session.get(get_members_url(courses, course.number))
+    assert result.status_code == 200
+    content = result.content.decode()
     root = lxml.html.fromstring(content)
     if courses:
         class_text = "course-lesson"
@@ -122,23 +174,30 @@ def get_course_urls(course, courses: bool, session):
             url = "https://www.drumeo.com/members/lessons/courses/{}".format(lesson)
         else:
             url = "https://www.drumeo.com/members/lessons/library/{}".format(lesson)
-        r = session.get(url)
-        assert r.status_code == 200
-        content = r.content.decode()
+        result = session.get(url)
+        assert result.status_code == 200
+        content = result.content.decode()
         print(content)
         root = lxml.html.fromstring(content)
         get_videos(root, course, session)
 
 
 def get_videos(root, course, session):
+    """
+    Get all the videos pertaining to a certain course
+    :param root:
+    :param course:
+    :param session:
+    :return:
+    """
     logger = logging.getLogger(__name__)
     videos = root.xpath('//div[@data-video-load-url]')
     for video in videos:
         video_url = video.get('data-video-load-url')
         logger.info("url for video info is [%s]", video_url)
-        r = session.get(video_url)
-        assert r.status_code == 200
-        content = r.content.decode()
+        result = session.get(video_url)
+        assert result.status_code == 200
+        content = result.content.decode()
         data = json.loads(content)
         if 'error' in data:
             logger.info("error [%s]", data['error'])
@@ -155,6 +214,12 @@ def get_videos(root, course, session):
 
 
 def download_course(course, session):
+    """
+    Download a course
+    :param course:
+    :param session:
+    :return:
+    """
     folder_name = os.path.join("drumeo", course.number)
     if not os.path.isdir(folder_name):
         os.makedirs(folder_name)
