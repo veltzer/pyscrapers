@@ -31,10 +31,13 @@
           <div class="body" role="main">
             
   <h1>Source code for pyscrapers.workers.drumeo</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Download course material from drumeo</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">IO</span>
 
 <span class="kn">import</span> <span class="nn">lxml.html</span>
 
@@ -47,21 +50,33 @@
 
 
 <div class="viewcode-block" id="get_number_of_pages"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_number_of_pages">[docs]</a><span class="k">def</span> <span class="nf">get_number_of_pages</span><span class="p">(</span><span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the number of pages for all courses or pages</span>
+<span class="sd">    :param courses:</span>
+<span class="sd">    :param session:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">courses</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=1&quot;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page=1&quot;</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-    <span class="n">o</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-    <span class="n">d_page_count</span> <span class="o">=</span> <span class="n">o</span><span class="p">[</span><span class="s2">&quot;pageCount&quot;</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">d_page_count</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;pageCount&quot;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">d_page_count</span></div>
 
 
 <div class="viewcode-block" id="Course"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.Course">[docs]</a><span class="k">class</span> <span class="nc">Course</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is an object representing one course</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">instructor</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">diff</span> <span class="o">=</span> <span class="kc">None</span>
@@ -70,64 +85,99 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">videos</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instructor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diff</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lessons</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resources</span><span class="p">),</span>
-                        <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">videos</span><span class="p">)])</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        nice representation of this object</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instructor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diff</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lessons</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resources</span><span class="p">),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">videos</span><span class="p">)])</span>
 
 <div class="viewcode-block" id="Course.add_lesson"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.Course.add_lesson">[docs]</a>    <span class="k">def</span> <span class="nf">add_lesson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lesson</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a lesson to the course</span>
+<span class="sd">        :param lesson:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lessons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lesson</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Course.add_video"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.Course.add_video">[docs]</a>    <span class="k">def</span> <span class="nf">add_video</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">video</span><span class="p">,</span> <span class="n">quality</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a video to the course</span>
+<span class="sd">        :param video:</span>
+<span class="sd">        :param quality:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">videos</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">video</span><span class="p">,</span> <span class="n">quality</span><span class="p">))</span></div></div>
 
 
+<div class="viewcode-block" id="get_url"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_url">[docs]</a><span class="k">def</span> <span class="nf">get_url</span><span class="p">(</span><span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">courses</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">url</span></div>
+
+
+<div class="viewcode-block" id="get_members_url"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_members_url">[docs]</a><span class="k">def</span> <span class="nf">get_members_url</span><span class="p">(</span><span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">courses</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/members/lessons/courses/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/members/lessons/library/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">url</span></div>
+
+
+<div class="viewcode-block" id="get_link_re"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_link_re">[docs]</a><span class="k">def</span> <span class="nf">get_link_re</span><span class="p">(</span><span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">courses</span><span class="p">:</span>
+        <span class="n">link_re</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;https://www.drumeo.com/laravel/public/members/lessons/courses/\d+&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">link_re</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;https://www.drumeo.com/laravel/public/members/lessons/library/\d+&quot;</span>
+    <span class="k">return</span> <span class="n">link_re</span></div>
+
+
 <div class="viewcode-block" id="get_courses"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_courses">[docs]</a><span class="k">def</span> <span class="nf">get_courses</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download the list of all the courses</span>
+<span class="sd">    :param pages:</span>
+<span class="sd">    :param courses:</span>
+<span class="sd">    :param session:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">collected_courses</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pages</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">courses</span><span class="p">:</span>
-            <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-        <span class="n">o</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-        <span class="n">d_lessons</span> <span class="o">=</span> <span class="n">o</span><span class="p">[</span><span class="s2">&quot;lessonsHtml&quot;</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">lesson_list</span> <span class="ow">in</span> <span class="n">d_lessons</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pages</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">get_url</span><span class="p">(</span><span class="n">courses</span><span class="p">,</span> <span class="n">page</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="k">for</span> <span class="n">lesson_list</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">())[</span><span class="s2">&quot;lessonsHtml&quot;</span><span class="p">]:</span>
+            <span class="n">course</span> <span class="o">=</span> <span class="n">Course</span><span class="p">()</span>
             <span class="n">root</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">lesson_list</span><span class="p">)</span>
-            <span class="c1"># pyscrapers.utils.print_element(root)</span>
-            <span class="k">if</span> <span class="n">courses</span><span class="p">:</span>
-                <span class="n">link_re</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;https://www.drumeo.com/laravel/public/members/lessons/courses/\d+&quot;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">link_re</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;https://www.drumeo.com/laravel/public/members/lessons/library/\d+&quot;</span>
-            <span class="n">links</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[re:match(@href,&quot;</span><span class="si">{}</span><span class="s1">&quot;)]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link_re</span><span class="p">))</span>
+            <span class="n">links</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[re:match(@href,&quot;</span><span class="si">{}</span><span class="s1">&quot;)]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">get_link_re</span><span class="p">(</span><span class="n">courses</span><span class="p">)))</span>
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)</span>
-            <span class="n">course_number</span> <span class="o">=</span> <span class="n">links</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">course</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">links</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">titles</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//h2[@class=&quot;card-title&quot;]&#39;</span><span class="p">)</span>
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-            <span class="n">title</span> <span class="o">=</span> <span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+            <span class="n">course</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
             <span class="n">instructors</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//p[@class=&quot;card-sub-title card-instructor&quot;]&#39;</span><span class="p">)</span>
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">instructors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-            <span class="n">instructor</span> <span class="o">=</span> <span class="n">instructors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+            <span class="n">course</span><span class="o">.</span><span class="n">instructor</span> <span class="o">=</span> <span class="n">instructors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
             <span class="n">diffs</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//h3[@class=&quot;card-difficulty&quot;]&#39;</span><span class="p">)</span>
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">diffs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-            <span class="n">diff</span> <span class="o">=</span> <span class="n">diffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">Course</span><span class="p">()</span>
-            <span class="n">c</span><span class="o">.</span><span class="n">instructor</span> <span class="o">=</span> <span class="n">instructor</span>
-            <span class="n">c</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">title</span>
-            <span class="n">c</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">course_number</span>
-            <span class="n">c</span><span class="o">.</span><span class="n">diff</span> <span class="o">=</span> <span class="n">diff</span>
-            <span class="n">collected_courses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="n">course</span><span class="o">.</span><span class="n">diff</span> <span class="o">=</span> <span class="n">diffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">collected_courses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">course</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">collected_courses</span></div>
 
 
 <div class="viewcode-block" id="get_course_details"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_course_details">[docs]</a><span class="k">def</span> <span class="nf">get_course_details</span><span class="p">(</span><span class="n">course</span><span class="p">:</span> <span class="n">Course</span><span class="p">,</span> <span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">courses</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/members/lessons/courses/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">course</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/members/lessons/library/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">course</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Populate the Course type object</span>
+<span class="sd">    :param course:</span>
+<span class="sd">    :param courses:</span>
+<span class="sd">    :param session:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">get_members_url</span><span class="p">(</span><span class="n">courses</span><span class="p">,</span> <span class="n">course</span><span class="o">.</span><span class="n">number</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">courses</span><span class="p">:</span>
         <span class="n">class_text</span> <span class="o">=</span> <span class="s2">&quot;course-lesson&quot;</span>
@@ -155,23 +205,30 @@
             <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/members/lessons/courses/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lesson</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.drumeo.com/members/lessons/library/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lesson</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">get_videos</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">course</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_videos"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_videos">[docs]</a><span class="k">def</span> <span class="nf">get_videos</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">course</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all the videos pertaining to a certain course</span>
+<span class="sd">    :param root:</span>
+<span class="sd">    :param course:</span>
+<span class="sd">    :param session:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">videos</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//div[@data-video-load-url]&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">video</span> <span class="ow">in</span> <span class="n">videos</span><span class="p">:</span>
         <span class="n">video_url</span> <span class="o">=</span> <span class="n">video</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data-video-load-url&#39;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;url for video info is [</span><span class="si">%s</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">video_url</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">video_url</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">video_url</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;error [</span><span class="si">%s</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span>
@@ -188,12 +245,18 @@
 
 
 <div class="viewcode-block" id="download_course"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.download_course">[docs]</a><span class="k">def</span> <span class="nf">download_course</span><span class="p">(</span><span class="n">course</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download a course</span>
+<span class="sd">    :param course:</span>
+<span class="sd">    :param session:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">folder_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;drumeo&quot;</span><span class="p">,</span> <span class="n">course</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">folder_name</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder_name</span><span class="p">)</span>
     <span class="n">details</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_name</span><span class="p">,</span> <span class="s2">&quot;details.txt&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">details</span><span class="p">):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">details</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>  <span class="c1"># type: IO[str]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">details</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;course_number: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">course</span><span class="o">.</span><span class="n">number</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file_handle</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;course_name: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">course</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file_handle</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;course_difficulty: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">course</span><span class="o">.</span><span class="n">diff</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">file_handle</span><span class="p">)</span>

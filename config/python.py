@@ -21,6 +21,7 @@ test_requires = [
     'pylint',  # to check for lint errors
     'pytest',  # for testing
     'pyflakes',  # for testing
+    'pyre-check',  # for type checking
 ]
 
 dev_requires = [

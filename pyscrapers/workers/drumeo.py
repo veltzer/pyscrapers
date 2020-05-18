@@ -5,7 +5,6 @@ Download course material from drumeo
 import json
 import logging
 import os
-from typing import IO
 
 import lxml.html
 
@@ -44,7 +43,7 @@ class Course:
         """
         constructor
         """
-        self.number = None
+        self.number = 0
         self.instructor = None
         self.name = None
         self.diff = None
@@ -60,8 +59,7 @@ class Course:
         return ",".join([
             self.number, self.name, self.instructor, self.diff,
             str(self.lessons), str(self.resources),
-            str(self.videos)
-        ])
+            str(self.videos)])
 
     def add_lesson(self, lesson):
         """
@@ -225,7 +223,7 @@ def download_course(course, session):
         os.makedirs(folder_name)
     details = os.path.join(folder_name, "details.txt")
     if not os.path.isfile(details):
-        with open(details, "wt") as file_handle:  # type: IO[str]
+        with open(details, "wt") as file_handle:
             print("course_number: {}".format(course.number), file=file_handle)
             print("course_name: {}".format(course.name), file=file_handle)
             print("course_difficulty: {}".format(course.diff), file=file_handle)

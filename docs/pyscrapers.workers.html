@@ -38,31 +38,49 @@
 </div>
 <div class="section" id="module-pyscrapers.workers.drumeo">
 <span id="pyscrapers-workers-drumeo-module"></span><h2>pyscrapers.workers.drumeo module<a class="headerlink" href="#module-pyscrapers.workers.drumeo" title="Permalink to this headline">¶</a></h2>
+<p>Download course material from drumeo</p>
 <dl class="py class">
 <dt id="pyscrapers.workers.drumeo.Course">
 <em class="property">class </em><code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">Course</code><a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#Course"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.Course" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is an object representing one course</p>
 <dl class="py method">
 <dt id="pyscrapers.workers.drumeo.Course.add_lesson">
 <code class="sig-name descname">add_lesson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lesson</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#Course.add_lesson"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.Course.add_lesson" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Add a lesson to the course
+:param lesson:
+:return:</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="pyscrapers.workers.drumeo.Course.add_video">
 <code class="sig-name descname">add_video</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">video</span></em>, <em class="sig-param"><span class="n">quality</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#Course.add_video"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.Course.add_video" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Add a video to the course
+:param video:
+:param quality:
+:return:</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt id="pyscrapers.workers.drumeo.download_course">
 <code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">download_course</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">course</span></em>, <em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#download_course"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.download_course" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Download a course
+:param course:
+:param session:
+:return:</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="pyscrapers.workers.drumeo.get_course_details">
 <code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">get_course_details</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">course</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#pyscrapers.workers.drumeo.Course" title="pyscrapers.workers.drumeo.Course">pyscrapers.workers.drumeo.Course</a></span></em>, <em class="sig-param"><span class="n">courses</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#get_course_details"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.get_course_details" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Populate the Course type object
+:param course:
+:param courses:
+:param session:
+:return:</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="pyscrapers.workers.drumeo.get_course_urls">
@@ -72,25 +90,59 @@
 <dl class="py function">
 <dt id="pyscrapers.workers.drumeo.get_courses">
 <code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">get_courses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pages</span></em>, <em class="sig-param"><span class="n">courses</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#get_courses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.get_courses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download the list of all the courses
+:param pages:
+:param courses:
+:param session:
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pyscrapers.workers.drumeo.get_link_re">
+<code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">get_link_re</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">courses</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#get_link_re"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.get_link_re" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="pyscrapers.workers.drumeo.get_members_url">
+<code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">get_members_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">courses</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">number</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#get_members_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.get_members_url" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="pyscrapers.workers.drumeo.get_number_of_pages">
 <code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">get_number_of_pages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">courses</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#get_number_of_pages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.get_number_of_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of pages for all courses or pages
+:param courses:
+:param session:
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pyscrapers.workers.drumeo.get_url">
+<code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">courses</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">page</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#get_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.get_url" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="pyscrapers.workers.drumeo.get_videos">
 <code class="sig-prename descclassname">pyscrapers.workers.drumeo.</code><code class="sig-name descname">get_videos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span></em>, <em class="sig-param"><span class="n">course</span></em>, <em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/drumeo.html#get_videos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.drumeo.get_videos" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get all the videos pertaining to a certain course
+:param root:
+:param course:
+:param session:
+:return:</p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-pyscrapers.workers.facebook">
 <span id="pyscrapers-workers-facebook-module"></span><h2>pyscrapers.workers.facebook module<a class="headerlink" href="#module-pyscrapers.workers.facebook" title="Permalink to this headline">¶</a></h2>
+<p>download photos from facebook</p>
 <dl class="py function">
 <dt id="pyscrapers.workers.facebook.scrape_facebook">
 <code class="sig-prename descclassname">pyscrapers.workers.facebook.</code><code class="sig-name descname">scrape_facebook</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>str<span class="p">]</span><a class="reference internal" href="_modules/pyscrapers/workers/facebook.html#scrape_facebook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.facebook.scrape_facebook" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>download photos from facebook
+:param user_id:
+:param session:
+:return:</p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-pyscrapers.workers.instagram">
