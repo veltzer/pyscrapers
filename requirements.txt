@@ -14,3 +14,4 @@ Sphinx
 pylint
 pytest
 pyflakes
+pyre-check

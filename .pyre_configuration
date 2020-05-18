@@ -1,0 +1,9 @@
+{
+  "binary": "/home/mark/git/pyscrapers/.venv/default/bin/pyre.bin",
+  "source_directories": [
+    "pyscrapers",
+    "tests"
+  ],
+  "taint_models_path": "/home/mark/git/pyscrapers/.venv/default/lib/pyre_check/taint/",
+  "typeshed": "/home/mark/git/pyscrapers/.venv/default/lib/pyre_check/typeshed/"
+}

@@ -10,8 +10,6 @@ import shutil
 import urllib.parse
 from typing import List
 
-import urllib.parse
-
 import requests
 import lxml
 import lxml.html

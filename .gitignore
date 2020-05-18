@@ -80,3 +80,5 @@ celerybeat-schedule
 /debian/
 
 /.pydmt/
+
+/.pyre/
