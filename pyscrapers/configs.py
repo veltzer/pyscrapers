@@ -79,4 +79,3 @@ class ConfigSiteId(Config):
         help_string="start number for image names",
         default=0,
     )
-
