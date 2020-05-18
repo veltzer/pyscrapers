@@ -43,6 +43,7 @@ setuptools.setup(
         'browser-cookie3',
         'pytconf',
         'pylogconf',
+        'pornhub-api',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
