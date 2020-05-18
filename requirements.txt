@@ -15,3 +15,4 @@ pylint
 pytest
 pyflakes
 pyre-check
+flake8

@@ -22,6 +22,8 @@ test_requires = [
     'pytest',  # for testing
     'pyflakes',  # for testing
     'pyre-check',  # for type checking
+    'flake8',  # for quality code
+#   'pychecker',  # for quality checks
 ]
 
 dev_requires = [
