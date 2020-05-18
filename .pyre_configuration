@@ -4,6 +4,9 @@
     "pyscrapers",
     "tests"
   ],
+  "search_path": [
+    ".venv/default/lib/python3.8/site-packages"
+  ],
   "taint_models_path": "/home/mark/git/pyscrapers/.venv/default/lib/pyre_check/taint/",
   "typeshed": "/home/mark/git/pyscrapers/.venv/default/lib/pyre_check/typeshed/"
 }
