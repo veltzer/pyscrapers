@@ -38,7 +38,6 @@
 
 <span class="kn">import</span> <span class="nn">lxml.etree</span>
 <span class="kn">import</span> <span class="nn">lxml.html</span>
-<span class="kn">import</span> <span class="nn">requests</span>
 
 
 <div class="viewcode-block" id="get_my_content"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.vk.get_my_content">[docs]</a><span class="k">def</span> <span class="nf">get_my_content</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
@@ -63,7 +62,7 @@
     <span class="k">return</span> <span class="n">root</span></div>
 
 
-<div class="viewcode-block" id="scrape_vk"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.vk.scrape_vk">[docs]</a><span class="k">def</span> <span class="nf">scrape_vk</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">_cookies</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="scrape_vk"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.vk.scrape_vk">[docs]</a><span class="k">def</span> <span class="nf">scrape_vk</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://vk.com/al_photos.php&#39;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
@@ -71,7 +70,7 @@
         <span class="s1">&#39;al&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
         <span class="s1">&#39;owner&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">get_my_content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
     <span class="n">e_albums</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//div[@class=&quot;photos_album_title_wrap&quot;]&#39;</span><span class="p">)</span>
@@ -99,7 +98,7 @@
             <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="n">count</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;doing request </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">get_my_content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
         <span class="n">e_a</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[@onclick]&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e_a</span><span class="p">:</span>

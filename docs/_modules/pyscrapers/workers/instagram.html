@@ -41,23 +41,18 @@
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
-<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 
 <span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
 
 
-<div class="viewcode-block" id="scrape_instagram"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.scrape_instagram">[docs]</a><span class="k">def</span> <span class="nf">scrape_instagram</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="scrape_instagram"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.scrape_instagram">[docs]</a><span class="k">def</span> <span class="nf">scrape_instagram</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;www.instagram.com&#39;</span>
     <span class="n">base</span> <span class="o">=</span> <span class="s1">&#39;https://</span><span class="si">{domain}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span>
 
     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">/</span><span class="si">{user_id}</span><span class="s1">/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
 
-    <span class="c1"># start a session</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-    <span class="n">s</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">cookies</span>
-
-    <span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
     <span class="c1"># scrape.utils.print_element(root)</span>
 
@@ -97,7 +92,7 @@
             <span class="s1">&#39;query_hash&#39;</span><span class="p">:</span> <span class="s1">&#39;bd0d6d184eefd4d0ce7036c11ae58ed9&#39;</span><span class="p">,</span>
             <span class="s1">&#39;variables&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
         <span class="p">}</span>
-        <span class="n">r2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="c1"># print(r2.json())</span>
         <span class="c1"># quit()</span>
         <span class="n">data_user</span> <span class="o">=</span> <span class="n">r2</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;edge_owner_to_timeline_media&#39;</span><span class="p">]</span>

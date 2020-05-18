@@ -4,7 +4,6 @@ The default group of operations that pyscrapers has
 import logging
 import shelve
 
-import browser_cookie3
 import requests
 from pytconf.config import register_endpoint, register_function_group
 
@@ -60,13 +59,9 @@ def photos():
     """
     if ConfigDebugRequests.debug:
         pyscrapers.core.utils.debug_requests()
-    cookies = None
-    if ConfigCookiesSource.browser == "firefox":
-        cookies = browser_cookie3.firefox()
-    if ConfigCookiesSource.browser == "chrome":
-        cookies = browser_cookie3.chrome()
+    ConfigCookiesSource.config_cookies()
     session = requests.Session()
-    session.cookies = cookies
+    session.cookies = ConfigCookiesSource.cookies
     urls = []
     if ConfigSiteId.site == "facebook":
         urls = scrape_facebook(ConfigSiteId.user_id, session)
@@ -96,14 +91,11 @@ def drumeo():
     """
     if ConfigDebugRequests.debug:
         pyscrapers.core.utils.debug_requests()
-    cookies = None
-    if ConfigCookiesSource.browser == "firefox":
-        cookies = browser_cookie3.firefox()
-    if ConfigCookiesSource.browser == "chrome":
-        cookies = browser_cookie3.chrome()
+
+    ConfigCookiesSource.config_cookies()
 
     session = requests.Session()
-    session.cookies = cookies
+    session.cookies = ConfigCookiesSource.cookies
 
     logger = logging.getLogger(__name__)
     courses = False
@@ -129,3 +121,4 @@ def drumeo():
                 print(course)
                 d[course.number] = course
             download_course(list_of_courses[i], session)
+    session.close()

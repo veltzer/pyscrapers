@@ -34,12 +34,10 @@
 <span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
-<span class="kn">import</span> <span class="nn">requests</span>
-
 <span class="kn">from</span> <span class="nn">pyscrapers.core.utils</span> <span class="kn">import</span> <span class="n">get_http_status_string</span>
 
 
-<div class="viewcode-block" id="scrape_mambaru"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.mambaru.scrape_mambaru">[docs]</a><span class="k">def</span> <span class="nf">scrape_mambaru</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="scrape_mambaru"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.mambaru.scrape_mambaru">[docs]</a><span class="k">def</span> <span class="nf">scrape_mambaru</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="c1"># raise ValueError(&quot;mamba still not implemented&quot;)</span>
     <span class="c1"># main_url = &#39;https://www.mamba.ru/{user_id}&#39;.format(user_id=user_id)</span>
     <span class="n">main_url</span> <span class="o">=</span> <span class="s1">&#39;https://www.mamba.ru/mobile/api/v5.17.0.0/?reqType=json&#39;</span>
@@ -50,7 +48,7 @@
         <span class="p">]</span>
     <span class="p">}</span>
     <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">main_url</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">request_obj</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">main_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">request_obj</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="n">get_http_status_string</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
     <span class="n">response_str</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
     <span class="n">response_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response_str</span><span class="p">)</span>

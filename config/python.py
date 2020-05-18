@@ -17,13 +17,17 @@ install_requires = [
     'pylogconf',
 ]
 
-dev_requires = [
-    'pypitools',
-    'pydmt',
-    'pyclassifiers',
+test_requires = [
+    'pylint',  # to check for lint errors
+    'pytest',  # for testing
+    'pyflakes',  # for testing
 ]
 
-test_requires = [
+dev_requires = [
+    'pyclassifiers',
+    'pypitools',
+    'pydmt',
+    'Sphinx',  # for the sphinx builder
 ]
 
 python_requires = ">=3.5"

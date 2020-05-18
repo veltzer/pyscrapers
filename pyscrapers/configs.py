@@ -1,8 +1,7 @@
 """
 All configurations for pymakehelper
 """
-
-
+import browser_cookie3
 from pytconf.config import Config, ParamCreator
 
 import logging
@@ -41,13 +40,23 @@ class ConfigDebugRequests(Config):
 
 class ConfigCookiesSource(Config):
     """
-    Configure where to get cookies from
+        Configure where to get cookies from
     """
+
     browser = ParamCreator.create_choice(
         choice_list=["none", "firefox", "chrome"],
         help_string="Which browser to take cookies from?",
         default="firefox",
     )
+
+    cookies = None
+
+    @classmethod
+    def config_cookies(cls):
+        if ConfigCookiesSource.browser == "firefox":
+            cls.cookies = browser_cookie3.firefox()
+        if ConfigCookiesSource.browser == "chrome":
+            cls.cookies = browser_cookie3.chrome()
 
 
 class ConfigSiteId(Config):
