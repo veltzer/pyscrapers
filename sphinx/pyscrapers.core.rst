@@ -4,14 +4,6 @@ pyscrapers.core package
 Submodules
 ----------
 
-pyscrapers.core.config module
------------------------------
-
-.. automodule:: pyscrapers.core.config
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 pyscrapers.core.ffprobe module
 ------------------------------
 

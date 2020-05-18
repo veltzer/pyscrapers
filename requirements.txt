@@ -6,6 +6,11 @@ browser-cookie3
 pytconf
 pylogconf
 # dev requirements
+pyclassifiers
 pypitools
 pydmt
-pyclassifiers
+Sphinx
+# test requirements
+pylint
+pytest
+pyflakes
