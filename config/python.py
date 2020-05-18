@@ -15,6 +15,7 @@ install_requires = [
     'browser-cookie3',
     'pytconf',
     'pylogconf',
+    'pornhub-api',
 ]
 
 test_requires = [
@@ -23,8 +24,9 @@ test_requires = [
     'pyflakes',  # for testing
     'pyre-check',  # for type checking
     'flake8',  # for quality code
-#   'pychecker',  # for quality checks
 ]
+# 'pychecker',  # for quality checks
+
 
 dev_requires = [
     'pyclassifiers',

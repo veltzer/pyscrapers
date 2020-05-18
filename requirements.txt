@@ -5,6 +5,7 @@ requests
 browser-cookie3
 pytconf
 pylogconf
+pornhub-api
 # dev requirements
 pyclassifiers
 pypitools
