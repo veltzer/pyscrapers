@@ -5,6 +5,7 @@ import logging
 import shelve
 
 import requests
+from pornhub_api import PornhubApi
 from pytconf.config import register_endpoint, register_function_group
 
 import pyscrapers.core.utils
@@ -16,7 +17,7 @@ from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_cour
 from pyscrapers.workers.facebook import scrape_facebook
 from pyscrapers.workers.instagram import scrape_instagram
 from pyscrapers.workers.mambaru import scrape_mambaru
-from pyscrapers.workers.pornhub import download
+from pyscrapers.workers.pornhub import download, print_stars_all_detailed
 from pyscrapers.workers.travelgirls import scrape_travelgirls
 from pyscrapers.workers.vk import scrape_vk
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
@@ -140,6 +141,19 @@ def pornhub():
     Download movies from pornhub
     """
     download()
+
+
+@register_endpoint(
+    configs=[],
+    suggest_configs=[],
+    group=GROUP_NAME_DEFAULT,
+)
+def pornhub_stars_all_detailed():
+    """
+    print stars all detailed
+    """
+    api = PornhubApi()
+    print_stars_all_detailed(api)
 
 
 @register_endpoint(
