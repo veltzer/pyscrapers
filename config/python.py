@@ -16,6 +16,7 @@ install_requires = [
     'pytconf',
     'pylogconf',
     'pornhub-api',
+    'youtube-dl',
 ]
 
 test_requires = [

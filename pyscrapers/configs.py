@@ -122,3 +122,26 @@ class ConfigPornhubSearch(Config):
         help_string="Limit on search results or None for no limit",
         default=100,
     )
+
+
+class ConfigPornhubDownload(Config):
+    """
+    Configuration for pornhub download
+    """
+    folder = ParamCreator.create_existing_folder(
+        help_string="where to save the data to?",
+        default="/home/mark/links/pornhub_dl",
+    )
+
+
+class ConfigYoutubeDl(Config):
+    """
+    Configuration to download a single url
+    """
+    url = ParamCreator.create_str(
+        help_string="the URL to download",
+    )
+    folder = ParamCreator.create_existing_folder(
+        help_string="where to save the data to?",
+        default="/home/mark/links/youtube_dl",
+    )

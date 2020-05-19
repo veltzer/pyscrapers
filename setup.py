@@ -44,6 +44,7 @@ setuptools.setup(
         'pytconf',
         'pylogconf',
         'pornhub-api',
+        'youtube-dl',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

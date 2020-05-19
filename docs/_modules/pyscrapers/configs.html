@@ -112,6 +112,49 @@
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;start number for image names&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ConfigPornhubSearch"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigPornhubSearch">[docs]</a><span class="k">class</span> <span class="nc">ConfigPornhubSearch</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters for search</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;What is the query string?&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">use_ordering</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;use ordering in the search operation&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ordering</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_choice</span><span class="p">(</span>
+        <span class="n">choice_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;longest&quot;</span><span class="p">,</span> <span class="s2">&quot;featured&quot;</span><span class="p">,</span> <span class="s2">&quot;newest&quot;</span><span class="p">,</span> <span class="s2">&quot;mostviewed&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">],</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;by which ordering to fetch result?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;longest&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">use_period</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;use period in the search operation&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_choice</span><span class="p">(</span>
+        <span class="n">choice_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;weekly&quot;</span><span class="p">,</span> <span class="s2">&quot;monthly&quot;</span><span class="p">,</span> <span class="s2">&quot;alltime&quot;</span><span class="p">],</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;what period to search?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;weekly&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">use_tags</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;should we use tags in search?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_str</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;tags to be used in search&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="p">[],</span>
+    <span class="p">)</span>
+    <span class="n">literal</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;literal for tags (one character)&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;f&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int_or_none</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Limit on search results or None for no limit&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="p">)</span></div>
 </pre></div>
 
           </div>
