@@ -50,6 +50,7 @@ def download() -> None:
     counter = 0
     errors = 0
     exceptions = []
+    except_urls = []
     while True:
         kwargs = dict()
         if ConfigPornhubSearch.use_ordering:
@@ -81,8 +82,11 @@ def download() -> None:
             except Exception as e:
                 errors += 1
                 exceptions.append(e)
+                except_urls.append(url)
             counter += 1
         page += 1
         if counter == limit:
             break
-    logger.info("number of errors [{}]".format(errors))
+    if errors > 0:
+        logger.info("number of errors [{}]".format(errors))
+        logger.info("except_urls [{}]".format(except_urls))
