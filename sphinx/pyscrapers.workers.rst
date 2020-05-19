@@ -60,6 +60,14 @@ pyscrapers.workers.vk module
    :undoc-members:
    :show-inheritance:
 
+pyscrapers.workers.youtube\_dl\_handlers module
+-----------------------------------------------
+
+.. automodule:: pyscrapers.workers.youtube_dl_handlers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------
