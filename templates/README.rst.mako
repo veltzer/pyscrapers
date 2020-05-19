@@ -2,9 +2,12 @@
     import config.project
     import user.personal
     import config.pyscrapers
+    import config.version
 %>=======================
 *${config.project.project_name}* project by ${user.personal.personal_fullname}
 =======================
+
+version: ${config.version.version_str}
 
 What is it?
 -----------

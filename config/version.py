@@ -1,2 +1,2 @@
-version = (0, 0, 15)
+version = (0, 0, 16)
 version_str = ".".join(str(x) for x in version)
