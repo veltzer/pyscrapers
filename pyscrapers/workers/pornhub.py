@@ -4,7 +4,6 @@ Module to handle scraping of pornhub.
 References:
 - https://pypi.org/project/pornhub-api/
 """
-import os
 from itertools import islice
 
 import pornhub_api
@@ -59,13 +58,7 @@ def download() -> None:
             urls = [video.url for video in data.videos]
             if limit is not None:
                 urls = list(islice(urls, 0, limit-counter))
-            youtube_dl_download_urls(
-                urls,
-                os.path.join(
-                    ConfigPornhubDownload.folder,
-                    ConfigPornhubSearch.query,
-                )
-            )
+            youtube_dl_download_urls(urls, ConfigPornhubDownload.folder)
             counter += len(urls)
             page += 1
             if counter == limit:

@@ -10,7 +10,7 @@ from pytconf.config import register_endpoint, register_function_group
 import pyscrapers.core.utils
 import pyscrapers.version
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl
+    ConfigYoutubeDl, ConfigPornhubDownload
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
 from pyscrapers.workers.facebook import scrape_facebook
@@ -130,6 +130,7 @@ def drumeo():
 @register_endpoint(
     configs=[
         ConfigPornhubSearch,
+        ConfigPornhubDownload,
     ],
     suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
