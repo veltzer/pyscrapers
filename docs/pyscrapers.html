@@ -61,6 +61,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.pornhub">pyscrapers.workers.pornhub module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.travelgirls">pyscrapers.workers.travelgirls module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.vk">pyscrapers.workers.vk module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers.youtube_dl_handlers">pyscrapers.workers.youtube_dl_handlers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyscrapers.workers.html#module-pyscrapers.workers">Module contents</a></li>
 </ul>
 </li>
@@ -115,6 +116,18 @@
 <dl class="py attribute">
 <dt id="pyscrapers.configs.ConfigLogging.loglevel">
 <code class="sig-name descname">loglevel</code><em class="property"> = 'ERROR'</em><a class="headerlink" href="#pyscrapers.configs.ConfigLogging.loglevel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pyscrapers.configs.ConfigPornhubDownload">
+<em class="property">class </em><code class="sig-prename descclassname">pyscrapers.configs.</code><code class="sig-name descname">ConfigPornhubDownload</code><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigPornhubDownload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.configs.ConfigPornhubDownload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<p>Configuration for pornhub download</p>
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigPornhubDownload.folder">
+<code class="sig-name descname">folder</code><em class="property"> = '/home/mark/links/pornhub_dl'</em><a class="headerlink" href="#pyscrapers.configs.ConfigPornhubDownload.folder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -189,6 +202,23 @@
 <dl class="py attribute">
 <dt id="pyscrapers.configs.ConfigSiteId.user_id">
 <code class="sig-name descname">user_id</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pyscrapers.configs.ConfigSiteId.user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pyscrapers.configs.ConfigYoutubeDl">
+<em class="property">class </em><code class="sig-prename descclassname">pyscrapers.configs.</code><code class="sig-name descname">ConfigYoutubeDl</code><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigYoutubeDl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.configs.ConfigYoutubeDl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<p>Configuration to download a single url</p>
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigYoutubeDl.folder">
+<code class="sig-name descname">folder</code><em class="property"> = '/home/mark/links/youtube_dl'</em><a class="headerlink" href="#pyscrapers.configs.ConfigYoutubeDl.folder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyscrapers.configs.ConfigYoutubeDl.url">
+<code class="sig-name descname">url</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pyscrapers.configs.ConfigYoutubeDl.url" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

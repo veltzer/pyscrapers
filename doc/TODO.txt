@@ -1,4 +1,5 @@
-- add scraper for pornhub.
+- add ability to do several downloads in parallel.
+	either with multithreading or multiprocessing.
 - add scraper for pinterest.
 - the current instagram downloader does not download videos
 	It does download images for the videos.
