@@ -6,6 +6,7 @@ browser-cookie3
 pytconf
 pylogconf
 pornhub-api
+youtube-dl
 # dev requirements
 pyclassifiers
 pypitools

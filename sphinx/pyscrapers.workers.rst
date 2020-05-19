@@ -36,6 +36,14 @@ pyscrapers.workers.mambaru module
    :undoc-members:
    :show-inheritance:
 
+pyscrapers.workers.pornhub module
+---------------------------------
+
+.. automodule:: pyscrapers.workers.pornhub
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pyscrapers.workers.travelgirls module
 -------------------------------------
 
