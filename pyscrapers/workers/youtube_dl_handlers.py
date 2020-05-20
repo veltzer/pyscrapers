@@ -38,6 +38,7 @@ def youtube_dl_download_urls(urls: List[str], folder: str) -> None:
         'format': 'bestaudio/best',
         # 'logger': MyLogger(),
         'nooverwrites': True,
+        'ignoreerrors': True,
         'outtmpl': os.path.join(folder, '%(title)s-%(id)s.%(ext)s'),
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
