@@ -44,13 +44,13 @@
 <span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
 <span class="kn">import</span> <span class="nn">pyscrapers.version</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigDebugRequests</span><span class="p">,</span> <span class="n">ConfigCookiesSource</span><span class="p">,</span> <span class="n">ConfigSiteId</span><span class="p">,</span> <span class="n">ConfigPornhubSearch</span><span class="p">,</span> \
-    <span class="n">ConfigYoutubeDl</span><span class="p">,</span> <span class="n">ConfigPornhubDownload</span>
+    <span class="n">ConfigYoutubeDl</span><span class="p">,</span> <span class="n">ConfigPornhubDownload</span><span class="p">,</span> <span class="n">ConfigPornhubPornstar</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.drumeo</span> <span class="kn">import</span> <span class="n">get_number_of_pages</span><span class="p">,</span> <span class="n">get_courses</span><span class="p">,</span> <span class="n">get_course_details</span><span class="p">,</span> <span class="n">get_course_urls</span><span class="p">,</span> \
     <span class="n">download_course</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.facebook</span> <span class="kn">import</span> <span class="n">scrape_facebook</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.instagram</span> <span class="kn">import</span> <span class="n">scrape_instagram</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.mambaru</span> <span class="kn">import</span> <span class="n">scrape_mambaru</span>
-<span class="kn">from</span> <span class="nn">pyscrapers.workers.pornhub</span> <span class="kn">import</span> <span class="n">download</span><span class="p">,</span> <span class="n">print_stars_all_detailed</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.pornhub</span> <span class="kn">import</span> <span class="n">download</span><span class="p">,</span> <span class="n">print_stars_all_detailed</span><span class="p">,</span> <span class="n">pornhub_download_pornstar_handler</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.travelgirls</span> <span class="kn">import</span> <span class="n">scrape_travelgirls</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.vk</span> <span class="kn">import</span> <span class="n">scrape_vk</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.youtube_dl_handlers</span> <span class="kn">import</span> <span class="n">youtube_dl_handler</span>
@@ -201,6 +201,23 @@
 <span class="sd">    Download movies from pornhub</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">youtube_dl_handler</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="pornhub_download_pornstar"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.pornhub_download_pornstar">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">ConfigDebugRequests</span><span class="p">,</span>
+        <span class="n">ConfigCookiesSource</span><span class="p">,</span>
+        <span class="n">ConfigPornhubPornstar</span><span class="p">,</span>
+        <span class="n">ConfigPornhubDownload</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">suggest_configs</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">pornhub_download_pornstar</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download movies of a pornstar from pornhub</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pornhub_download_pornstar_handler</span><span class="p">()</span></div>
 </pre></div>
 
           </div>
