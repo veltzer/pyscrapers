@@ -11,13 +11,13 @@ from pytconf.config import register_endpoint, register_function_group
 import pyscrapers.core.utils
 import pyscrapers.version
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigPornhubDownload
+    ConfigYoutubeDl, ConfigPornhubDownload, ConfigPornhubPornstar
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
 from pyscrapers.workers.facebook import scrape_facebook
 from pyscrapers.workers.instagram import scrape_instagram
 from pyscrapers.workers.mambaru import scrape_mambaru
-from pyscrapers.workers.pornhub import download, print_stars_all_detailed
+from pyscrapers.workers.pornhub import download, print_stars_all_detailed, pornhub_download_pornstar_handler
 from pyscrapers.workers.travelgirls import scrape_travelgirls
 from pyscrapers.workers.vk import scrape_vk
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
@@ -168,3 +168,20 @@ def youtube_dl():
     Download movies from pornhub
     """
     youtube_dl_handler()
+
+
+@register_endpoint(
+    configs=[
+        ConfigDebugRequests,
+        ConfigCookiesSource,
+        ConfigPornhubPornstar,
+        ConfigPornhubDownload,
+    ],
+    suggest_configs=[],
+    group=GROUP_NAME_DEFAULT,
+)
+def pornhub_download_pornstar():
+    """
+    Download movies of a pornstar from pornhub
+    """
+    pornhub_download_pornstar_handler()

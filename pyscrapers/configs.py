@@ -145,3 +145,12 @@ class ConfigYoutubeDl(Config):
         help_string="where to save the data to?",
         default="/home/mark/links/youtube_dl",
     )
+
+
+class ConfigPornhubPornstar(Config):
+    """
+    Parameters for what pornstar to download
+    """
+    name = ParamCreator.create_str(
+        help_string="name of the star"
+    )
