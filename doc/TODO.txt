@@ -1,3 +1,5 @@
+- in instagram download tagged images too.
+	(we currently download posts and not tagged images).
 - add ability to do several downloads in parallel.
 	either with multithreading or multiprocessing.
 - add scraper for pinterest.
