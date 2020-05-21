@@ -40,6 +40,7 @@ def youtube_dl_download_urls(urls: List[str], folder: str) -> None:
         'nooverwrites': True,
         'ignoreerrors': True,
         'outtmpl': os.path.join(folder, '%(title)s-%(id)s.%(ext)s'),
+        'download_archive': os.path.expanduser('~/.config/youtube-dl-archive'),
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download(urls)
