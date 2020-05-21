@@ -12,7 +12,7 @@ import pyscrapers.core.utils
 import pyscrapers.version
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
     ConfigYoutubeDl, ConfigPornhubDownload, ConfigPornhubPornstar, ConfigDownload, ConfigLogging
-from pyscrapers.core.urlset import UrlSet
+from pyscrapers.core.url_set import UrlSet
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
 from pyscrapers.workers.facebook import scrape_facebook

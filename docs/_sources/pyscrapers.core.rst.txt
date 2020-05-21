@@ -12,10 +12,10 @@ pyscrapers.core.ffprobe module
    :undoc-members:
    :show-inheritance:
 
-pyscrapers.core.urlset module
------------------------------
+pyscrapers.core.url\_set module
+-------------------------------
 
-.. automodule:: pyscrapers.core.urlset
+.. automodule:: pyscrapers.core.url_set
    :members:
    :undoc-members:
    :show-inheritance:

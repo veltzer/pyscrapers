@@ -6,7 +6,7 @@ download photos from facebook
 import logging
 
 import pyscrapers.core.utils
-from pyscrapers.core.urlset import UrlSet
+from pyscrapers.core.url_set import UrlSet
 
 
 def scrape_facebook(user_id: str, session, url_set: UrlSet) -> None:
