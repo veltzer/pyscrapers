@@ -11,7 +11,7 @@ import logging
 from lxml import etree
 
 import pyscrapers.core.utils
-from pyscrapers.core.urlset import UrlSet
+from pyscrapers.core.url_set import UrlSet
 
 
 def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
@@ -54,7 +54,9 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
         'edge_owner_to_timeline_media',
         'edge_user_to_photos_of_you',
     ]
-    counter = 0
+    stats_video = 0
+    stats_image = 0
+    stats_shortcode_video = 0
     for query_hash, key in zip(query_hashes, keys):
         logger.debug("size of list is [{}]".format(len(url_set.urls_list)))
         has_next_page = True
@@ -76,8 +78,22 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
             end_cursor = data_user['page_info']['end_cursor']
             for outer_node in data_user['edges']:
                 inner_node = outer_node['node']
+                if inner_node['is_video']:
+                    json.dumps(inner_node, indent=4)
                 if inner_node['is_video'] and 'video_url' in inner_node:
                     url_set.append(inner_node['video_url'])
+                    stats_video += 1
+                if inner_node['is_video'] and 'shortcode' in inner_node:
+                    params = {
+                        'query_hash': '03f541f086ce0a9b31f67688ff9c1e09',
+                        'shortcode': inner_node['shortcode'],
+                    }
+                    response_short = session.get(url2, params=params).json()
+                    url_set.append(response_short['data']['shortcode_media']['video_url'])
+                    stats_shortcode_video += 1
                 if 'display_url' in inner_node:
                     url_set.append(inner_node['display_url'])
-            counter += 1
+                    stats_image += 1
+    logger.info("stats_video [{}]".format(stats_video))
+    logger.info("stats_image [{}]".format(stats_image))
+    logger.info("stats_shortcode_video [{}]".format(stats_shortcode_video))

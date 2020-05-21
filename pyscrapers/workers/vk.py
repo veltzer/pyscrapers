@@ -5,7 +5,7 @@ import sys
 import lxml.etree
 import lxml.html
 
-from pyscrapers.core.urlset import UrlSet
+from pyscrapers.core.url_set import UrlSet
 
 
 def get_my_content(r):

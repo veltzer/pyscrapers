@@ -1,6 +1,6 @@
 import json
 
-from pyscrapers.core.urlset import UrlSet
+from pyscrapers.core.url_set import UrlSet
 from pyscrapers.core.utils import get_http_status_string
 
 
