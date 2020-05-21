@@ -1,3 +1,9 @@
+- handle rate limiting errors when getting the inner json
+	for videos (shortcode videos):
+	{
+	    "message": "rate limited",
+	    "status": "fail"
+	}
 - don't download the same content twice in terms of signature.
 - do my own db for downloaded stuff.
 - add a more flexible file save mechanism that will not fail
