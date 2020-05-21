@@ -1,10 +1,10 @@
 import json
-from typing import List
 
+from pyscrapers.core.urlset import UrlSet
 from pyscrapers.core.utils import get_http_status_string
 
 
-def scrape_mambaru(user_id: str, session) -> List[str]:
+def scrape_mambaru(user_id: str, session, url_set: UrlSet) -> None:
     # raise ValueError("mamba still not implemented")
     # main_url = 'https://www.mamba.ru/{user_id}'.format(user_id=user_id)
     main_url = 'https://www.mamba.ru/mobile/api/v5.17.0.0/?reqType=json'
@@ -14,7 +14,6 @@ def scrape_mambaru(user_id: str, session) -> List[str]:
              }
         ]
     }
-    urls = []
     response = session.post(main_url, json=request_obj)
     assert response.status_code == 200, get_http_status_string(response.status_code)
     response_str = response.content.decode()
@@ -22,5 +21,4 @@ def scrape_mambaru(user_id: str, session) -> List[str]:
     response_obj = response_obj["sysResponsesContainer"][0]
     for album in response_obj["albums"]:
         for photo in album["workers"]:
-            urls.append(photo["hugePhotoUrl"])
-    return urls
+            url_set.append(photo["hugePhotoUrl"])

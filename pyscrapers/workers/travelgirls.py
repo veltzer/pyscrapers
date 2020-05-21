@@ -1,14 +1,12 @@
-from typing import List
-
 import pyscrapers.core.utils
+from pyscrapers.core.urlset import UrlSet
 
 
-def scrape_travelgirls(user_id: str, session) -> List[str]:
+def scrape_travelgirls(user_id: str, session, url_set: UrlSet) -> None:
     main_url = 'https://www.travelgirls.com/member/{user_id}'.format(user_id=user_id)
     r = session.get(main_url)
     root = pyscrapers.core.utils.get_html_dom_content(r)
 
-    urls = []
     e_a = root.xpath('//a[contains(@class,\'photo\')]')
     for x in e_a:
         # print(etree.tostring(x, pretty_print=True))
@@ -18,5 +16,4 @@ def scrape_travelgirls(user_id: str, session) -> List[str]:
         url = pyscrapers.core.utils.add_http(img.attrib['src'], main_url)
         url = url.replace('mini', '')
         url = url.replace('thumb', '')
-        urls.append(url)
-    return urls
+        url_set.append(url)

@@ -1,10 +1,11 @@
 import json
 import logging
 import sys
-from typing import List
 
 import lxml.etree
 import lxml.html
+
+from pyscrapers.core.urlset import UrlSet
 
 
 def get_my_content(r):
@@ -29,7 +30,7 @@ def get_my_content(r):
     return root
 
 
-def scrape_vk(user_id: str, session) -> List[str]:
+def scrape_vk(user_id: str, session, url_set: UrlSet) -> None:
     logger = logging.getLogger(__name__)
     url = 'https://vk.com/al_photos.php'
     data = {
@@ -54,7 +55,6 @@ def scrape_vk(user_id: str, session) -> List[str]:
     logger.debug('got [%d] potential images', total_images)
 
     count = 0
-    urls = set()
     got = 1
     while got:
         got = 0
@@ -91,14 +91,13 @@ def scrape_vk(user_id: str, session) -> List[str]:
                                 largest = size
                                 largest_url = v[0]
                     full_url = base+largest_url+'.jpg'
-                    urls.add(full_url)
+                    url_set.append(full_url)
                     got += 1
                 if min_len == 1:
                     for k, v in json_obj['temp'].items():
                         if k != 'base':
                             add_url = v[0]
                             full_url = base+add_url+'.jpg'
-                            urls.add(full_url)
+                            url_set.append(full_url)
                     got += 1
         count += got
-    return list(urls)

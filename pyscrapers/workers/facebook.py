@@ -4,16 +4,17 @@ download photos from facebook
 
 
 import logging
-from typing import List
 
 import pyscrapers.core.utils
+from pyscrapers.core.urlset import UrlSet
 
 
-def scrape_facebook(user_id: str, session) -> List[str]:
+def scrape_facebook(user_id: str, session, url_set: UrlSet) -> None:
     """
     download photos from facebook
     :param user_id:
     :param session:
+    :param url_set:
     :return:
     """
     logger = logging.getLogger(__name__)
@@ -23,7 +24,5 @@ def scrape_facebook(user_id: str, session) -> List[str]:
     result = session.get(url)
     root = pyscrapers.core.utils.get_html_dom_content(result)
 
-    urls = []
     elements_img = root.xpath('//img')
-    urls.append(elements_img)
-    return urls
+    url_set.append(elements_img)

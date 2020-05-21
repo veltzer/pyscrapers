@@ -11,7 +11,8 @@ from pytconf.config import register_endpoint, register_function_group
 import pyscrapers.core.utils
 import pyscrapers.version
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigPornhubDownload, ConfigPornhubPornstar
+    ConfigYoutubeDl, ConfigPornhubDownload, ConfigPornhubPornstar, ConfigDownload
+from pyscrapers.core.urlset import UrlSet
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
 from pyscrapers.workers.facebook import scrape_facebook
@@ -53,6 +54,7 @@ def version() -> None:
         ConfigSiteId,
         ConfigDebugRequests,
         ConfigCookiesSource,
+        ConfigDownload,
     ],
     suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
@@ -66,18 +68,18 @@ def photos():
     ConfigCookiesSource.config_cookies()
     session = requests.Session()
     session.cookies = ConfigCookiesSource.cookies
-    urls = []
+    url_set = UrlSet()
     if ConfigSiteId.site == "facebook":
-        urls = scrape_facebook(ConfigSiteId.user_id, session)
+        scrape_facebook(ConfigSiteId.user_id, session, url_set)
     if ConfigSiteId.site == "instagram":
-        urls = scrape_instagram(ConfigSiteId.user_id, session)
+        scrape_instagram(ConfigSiteId.user_id, session, url_set)
     if ConfigSiteId.site == "travelgirls":
-        urls = scrape_travelgirls(ConfigSiteId.user_id, session)
+        scrape_travelgirls(ConfigSiteId.user_id, session, url_set)
     if ConfigSiteId.site == "vk":
-        urls = scrape_vk(ConfigSiteId.user_id, session)
+        scrape_vk(ConfigSiteId.user_id, session, url_set)
     if ConfigSiteId.site == "mamba.ru":
-        urls = scrape_mambaru(ConfigSiteId.user_id, session)
-    pyscrapers.core.utils.download_urls(session, urls, start=ConfigSiteId.start)
+        scrape_mambaru(ConfigSiteId.user_id, session, url_set)
+    url_set.download(session)
     session.close()
 
 
