@@ -47,10 +47,15 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
     url2 = '{base}/graphql/query/'.format(base=base)
     count = 50
     query_hashes = [
-        # 'bd0d6d184eefd4d0ce7036c11ae58ed9',  # posts
-        '9dcf6e1a98bc7f6e92953d5a61027b98',  # tagged
+        'bd0d6d184eefd4d0ce7036c11ae58ed9',  # posts
+        'ff260833edf142911047af6024eb634a',  # tagged
     ]
-    for query_hash in query_hashes:
+    keys = [
+        'edge_owner_to_timeline_media',
+        'edge_user_to_photos_of_you',
+    ]
+    counter = 0
+    for query_hash, key in zip(query_hashes, keys):
         logger.debug("size of list is [{}]".format(len(url_set.urls_list)))
         has_next_page = True
         end_cursor = None
@@ -65,12 +70,14 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
                 'query_hash': query_hash,
                 'variables': json.dumps(variables)
             }
-            r2 = session.get(url2, params=params)
-            data_user = r2.json()['data']['user']['edge_owner_to_timeline_media']
+            response = session.get(url2, params=params).json()
+            data_user = response['data']['user'][key]
             has_next_page = data_user['page_info']['has_next_page']
             end_cursor = data_user['page_info']['end_cursor']
-            for node in data_user['edges']:
-                # if it is a video, then append the video, too
-                if node['node']['is_video']:
-                    url_set.append(node['node']['video_url'])
-                url_set.append(node['node']['display_url'])
+            for outer_node in data_user['edges']:
+                inner_node = outer_node['node']
+                if inner_node['is_video'] and 'video_url' in inner_node:
+                    url_set.append(inner_node['video_url'])
+                if 'display_url' in inner_node:
+                    url_set.append(inner_node['display_url'])
+            counter += 1
