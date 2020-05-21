@@ -34,10 +34,11 @@
 <span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">lxml.etree</span>
 <span class="kn">import</span> <span class="nn">lxml.html</span>
+
+<span class="kn">from</span> <span class="nn">pyscrapers.core.urlset</span> <span class="kn">import</span> <span class="n">UrlSet</span>
 
 
 <div class="viewcode-block" id="get_my_content"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.vk.get_my_content">[docs]</a><span class="k">def</span> <span class="nf">get_my_content</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
@@ -62,7 +63,7 @@
     <span class="k">return</span> <span class="n">root</span></div>
 
 
-<div class="viewcode-block" id="scrape_vk"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.vk.scrape_vk">[docs]</a><span class="k">def</span> <span class="nf">scrape_vk</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="scrape_vk"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.vk.scrape_vk">[docs]</a><span class="k">def</span> <span class="nf">scrape_vk</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_set</span><span class="p">:</span> <span class="n">UrlSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://vk.com/al_photos.php&#39;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
@@ -87,7 +88,6 @@
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;got [</span><span class="si">%d</span><span class="s1">] potential images&#39;</span><span class="p">,</span> <span class="n">total_images</span><span class="p">)</span>
 
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">urls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">got</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">got</span><span class="p">:</span>
         <span class="n">got</span> <span class="o">=</span> <span class="mi">0</span>
@@ -124,17 +124,16 @@
                                 <span class="n">largest</span> <span class="o">=</span> <span class="n">size</span>
                                 <span class="n">largest_url</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                     <span class="n">full_url</span> <span class="o">=</span> <span class="n">base</span><span class="o">+</span><span class="n">largest_url</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span>
-                    <span class="n">urls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">full_url</span><span class="p">)</span>
+                    <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_url</span><span class="p">)</span>
                     <span class="n">got</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">min_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                         <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;base&#39;</span><span class="p">:</span>
                             <span class="n">add_url</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                             <span class="n">full_url</span> <span class="o">=</span> <span class="n">base</span><span class="o">+</span><span class="n">add_url</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span>
-                            <span class="n">urls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">full_url</span><span class="p">)</span>
+                            <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_url</span><span class="p">)</span>
                     <span class="n">got</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">count</span> <span class="o">+=</span> <span class="n">got</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span></div>
+        <span class="n">count</span> <span class="o">+=</span> <span class="n">got</span></div>
 </pre></div>
 
           </div>

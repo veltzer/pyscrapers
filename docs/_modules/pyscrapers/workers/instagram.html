@@ -39,14 +39,14 @@
 <span class="sd">If you want to more workers you have to do a follow-up AJAX request to the server.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 
 <span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.core.urlset</span> <span class="kn">import</span> <span class="n">UrlSet</span>
 
 
-<div class="viewcode-block" id="scrape_instagram"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.scrape_instagram">[docs]</a><span class="k">def</span> <span class="nf">scrape_instagram</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="scrape_instagram"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.scrape_instagram">[docs]</a><span class="k">def</span> <span class="nf">scrape_instagram</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_set</span><span class="p">:</span> <span class="n">UrlSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;www.instagram.com&#39;</span>
     <span class="n">base</span> <span class="o">=</span> <span class="s1">&#39;https://</span><span class="si">{domain}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span>
 
@@ -56,7 +56,6 @@
     <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
     <span class="c1"># scrape.utils.print_element(root)</span>
 
-    <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># register regular expressions with lxml</span>
     <span class="c1"># this means that we can use regular expression functions like &#39;match&#39;</span>
     <span class="c1"># by specifying &#39;re:match&#39; in our xpath expressions</span>
@@ -72,9 +71,9 @@
     <span class="k">assert</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;graphql&quot;</span><span class="p">][</span><span class="s2">&quot;user&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="s1">&#39;profile_pic_url_hd&#39;</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-        <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;profile_pic_url_hd&#39;</span><span class="p">])</span>
+        <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;profile_pic_url_hd&#39;</span><span class="p">])</span>
     <span class="k">elif</span> <span class="s1">&#39;profile_pic_url&#39;</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-        <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;profile_pic_url&#39;</span><span class="p">])</span>
+        <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;profile_pic_url&#39;</span><span class="p">])</span>
     <span class="n">user_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
     <span class="n">url2</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">/graphql/query/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">)</span>
     <span class="n">has_next_page</span> <span class="o">=</span> <span class="kc">True</span>
@@ -86,25 +85,20 @@
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">end_cursor</span><span class="p">:</span>
             <span class="n">variables</span><span class="p">[</span><span class="s1">&#39;after&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_cursor</span>
-        <span class="c1"># noinspection SpellCheckingInspection</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
             <span class="c1"># &#39;query_id&#39;: 17888483320059182,</span>
             <span class="s1">&#39;query_hash&#39;</span><span class="p">:</span> <span class="s1">&#39;bd0d6d184eefd4d0ce7036c11ae58ed9&#39;</span><span class="p">,</span>
             <span class="s1">&#39;variables&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
         <span class="p">}</span>
         <span class="n">r2</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-        <span class="c1"># print(r2.json())</span>
-        <span class="c1"># quit()</span>
         <span class="n">data_user</span> <span class="o">=</span> <span class="n">r2</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;edge_owner_to_timeline_media&#39;</span><span class="p">]</span>
         <span class="n">has_next_page</span> <span class="o">=</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;page_info&#39;</span><span class="p">][</span><span class="s1">&#39;has_next_page&#39;</span><span class="p">]</span>
         <span class="n">end_cursor</span> <span class="o">=</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;page_info&#39;</span><span class="p">][</span><span class="s1">&#39;end_cursor&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;edges&#39;</span><span class="p">]:</span>
             <span class="c1"># if it is a video, then append the video, too</span>
             <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;is_video&#39;</span><span class="p">]:</span>
-                <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;video_url&#39;</span><span class="p">])</span>
-                <span class="c1"># print(json.dumps(node[&#39;node&#39;], indent=4, sort_keys=True))</span>
-            <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;display_url&#39;</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">urls</span></div>
+                <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;video_url&#39;</span><span class="p">])</span>
+            <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;display_url&#39;</span><span class="p">])</span></div>
 </pre></div>
 
           </div>

@@ -67,9 +67,9 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyscrapers.core.html#pyscrapers.core.utils.Urls.add_url">add_url() (pyscrapers.core.utils.Urls method)</a>
-</li>
       <li><a href="pyscrapers.workers.html#pyscrapers.workers.drumeo.Course.add_video">add_video() (pyscrapers.workers.drumeo.Course method)</a>
+</li>
+      <li><a href="pyscrapers.core.html#pyscrapers.core.urlset.UrlSet.append">append() (pyscrapers.core.urlset.UrlSet method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -90,6 +90,8 @@
       <li><a href="pyscrapers.html#pyscrapers.configs.ConfigCookiesSource">ConfigCookiesSource (class in pyscrapers.configs)</a>
 </li>
       <li><a href="pyscrapers.html#pyscrapers.configs.ConfigDebugRequests">ConfigDebugRequests (class in pyscrapers.configs)</a>
+</li>
+      <li><a href="pyscrapers.html#pyscrapers.configs.ConfigDownload">ConfigDownload (class in pyscrapers.configs)</a>
 </li>
       <li><a href="pyscrapers.html#pyscrapers.configs.ConfigLogging">ConfigLogging (class in pyscrapers.configs)</a>
 </li>
@@ -121,14 +123,18 @@
 </li>
       <li><a href="pyscrapers.core.html#pyscrapers.core.utils.debug_requests">debug_requests() (in module pyscrapers.core.utils)</a>
 </li>
+      <li><a href="pyscrapers.html#pyscrapers.configs.ConfigDownload.download">download (pyscrapers.configs.ConfigDownload attribute)</a>
+</li>
       <li><a href="pyscrapers.workers.html#pyscrapers.workers.pornhub.download">download() (in module pyscrapers.workers.pornhub)</a>
 
       <ul>
-        <li><a href="pyscrapers.core.html#pyscrapers.core.utils.Urls.download">(pyscrapers.core.utils.Urls method)</a>
+        <li><a href="pyscrapers.core.html#pyscrapers.core.urlset.UrlSet.download">(pyscrapers.core.urlset.UrlSet method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyscrapers.html#pyscrapers.configs.ConfigDownload.download_as_collecting">download_as_collecting (pyscrapers.configs.ConfigDownload attribute)</a>
+</li>
       <li><a href="pyscrapers.workers.html#pyscrapers.workers.drumeo.download_course">download_course() (in module pyscrapers.workers.drumeo)</a>
 </li>
       <li><a href="pyscrapers.core.html#pyscrapers.core.utils.download_url">download_url() (in module pyscrapers.core.utils)</a>
@@ -172,6 +178,8 @@
       <li><a href="pyscrapers.workers.html#pyscrapers.workers.drumeo.get_course_urls">get_course_urls() (in module pyscrapers.workers.drumeo)</a>
 </li>
       <li><a href="pyscrapers.workers.html#pyscrapers.workers.drumeo.get_courses">get_courses() (in module pyscrapers.workers.drumeo)</a>
+</li>
+      <li><a href="pyscrapers.core.html#pyscrapers.core.urlset.UrlSet.get_filename">get_filename() (pyscrapers.core.urlset.UrlSet method)</a>
 </li>
       <li><a href="pyscrapers.core.html#pyscrapers.core.utils.get_html_dom_content">get_html_dom_content() (in module pyscrapers.core.utils)</a>
 </li>
@@ -238,6 +246,8 @@
         <li><a href="pyscrapers.core.html#module-pyscrapers.core">pyscrapers.core</a>
 </li>
         <li><a href="pyscrapers.core.html#module-pyscrapers.core.ffprobe">pyscrapers.core.ffprobe</a>
+</li>
+        <li><a href="pyscrapers.core.html#module-pyscrapers.core.urlset">pyscrapers.core.urlset</a>
 </li>
         <li><a href="pyscrapers.core.html#module-pyscrapers.core.utils">pyscrapers.core.utils</a>
 </li>
@@ -306,7 +316,7 @@
 </li>
       <li><a href="pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.pornhub_stars_all_detailed">pornhub_stars_all_detailed() (in module pyscrapers.endpoints.group_default)</a>
 </li>
-      <li><a href="pyscrapers.core.html#pyscrapers.core.utils.Urls.print">print() (pyscrapers.core.utils.Urls method)</a>
+      <li><a href="pyscrapers.core.html#pyscrapers.core.urlset.UrlSet.print">print() (pyscrapers.core.urlset.UrlSet method)</a>
 </li>
       <li><a href="pyscrapers.workers.html#pyscrapers.workers.pornhub.print_categories">print_categories() (in module pyscrapers.workers.pornhub)</a>
 </li>
@@ -351,12 +361,21 @@
 </li>
       </ul></li>
       <li>
+    pyscrapers.core.urlset
+
+      <ul>
+        <li><a href="pyscrapers.core.html#module-pyscrapers.core.urlset">module</a>
+</li>
+      </ul></li>
+      <li>
     pyscrapers.core.utils
 
       <ul>
         <li><a href="pyscrapers.core.html#module-pyscrapers.core.utils">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     pyscrapers.endpoints
 
@@ -364,8 +383,6 @@
         <li><a href="pyscrapers.endpoints.html#module-pyscrapers.endpoints">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     pyscrapers.endpoints.group_default
 
@@ -490,7 +507,7 @@
 </li>
       <li><a href="pyscrapers.html#pyscrapers.configs.ConfigSiteId.site">site (pyscrapers.configs.ConfigSiteId attribute)</a>
 </li>
-      <li><a href="pyscrapers.html#pyscrapers.configs.ConfigSiteId.start">start (pyscrapers.configs.ConfigSiteId attribute)</a>
+      <li><a href="pyscrapers.core.html#pyscrapers.core.urlset.UrlSet.suggest_filename">suggest_filename() (pyscrapers.core.urlset.UrlSet method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -508,7 +525,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyscrapers.html#pyscrapers.configs.ConfigYoutubeDl.url">url (pyscrapers.configs.ConfigYoutubeDl attribute)</a>
 </li>
-      <li><a href="pyscrapers.core.html#pyscrapers.core.utils.Urls">Urls (class in pyscrapers.core.utils)</a>
+      <li><a href="pyscrapers.core.html#pyscrapers.core.urlset.UrlSet">UrlSet (class in pyscrapers.core.urlset)</a>
 </li>
       <li><a href="pyscrapers.html#pyscrapers.configs.ConfigPornhubSearch.use_ordering">use_ordering (pyscrapers.configs.ConfigPornhubSearch attribute)</a>
 </li>

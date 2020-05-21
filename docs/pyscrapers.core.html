@@ -63,40 +63,52 @@
 <dd></dd></dl>
 
 </div>
-<div class="section" id="module-pyscrapers.core.utils">
-<span id="pyscrapers-core-utils-module"></span><h2>pyscrapers.core.utils module<a class="headerlink" href="#module-pyscrapers.core.utils" title="Permalink to this headline">¶</a></h2>
-<p>This module is s set of utilities for this entire project</p>
+<div class="section" id="module-pyscrapers.core.urlset">
+<span id="pyscrapers-core-urlset-module"></span><h2>pyscrapers.core.urlset module<a class="headerlink" href="#module-pyscrapers.core.urlset" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="pyscrapers.core.utils.Urls">
-<em class="property">class </em><code class="sig-prename descclassname">pyscrapers.core.utils.</code><code class="sig-name descname">Urls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">download_as_collecting</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#Urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.Urls" title="Permalink to this definition">¶</a></dt>
+<dt id="pyscrapers.core.urlset.UrlSet">
+<em class="property">class </em><code class="sig-prename descclassname">pyscrapers.core.urlset.</code><code class="sig-name descname">UrlSet</code><a class="reference internal" href="_modules/pyscrapers/core/urlset.html#UrlSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.urlset.UrlSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>list of urls to download and to where</p>
+<p>set of urls, with no duplicates. Can be downloaded</p>
 <dl class="py method">
-<dt id="pyscrapers.core.utils.Urls.add_url">
-<code class="sig-name descname">add_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source</span></em>, <em class="sig-param"><span class="n">target</span></em>, <em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#Urls.add_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.Urls.add_url" title="Permalink to this definition">¶</a></dt>
+<dt id="pyscrapers.core.urlset.UrlSet.append">
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pyscrapers/core/urlset.html#UrlSet.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.urlset.UrlSet.append" title="Permalink to this definition">¶</a></dt>
 <dd><p>add url to the list
-:param source:
-:param target:
+:param url:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyscrapers.core.urlset.UrlSet.download">
+<code class="sig-name descname">download</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/urlset.html#UrlSet.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.urlset.UrlSet.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>download the list
 :param session:
 :return:</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pyscrapers.core.utils.Urls.download">
-<code class="sig-name descname">download</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#Urls.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.Urls.download" title="Permalink to this definition">¶</a></dt>
-<dd><p>download the list
-:return:</p>
-</dd></dl>
+<dt id="pyscrapers.core.urlset.UrlSet.get_filename">
+<code class="sig-name descname">get_filename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">suffix</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pyscrapers/core/urlset.html#UrlSet.get_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.urlset.UrlSet.get_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
-<dt id="pyscrapers.core.utils.Urls.print">
-<code class="sig-name descname">print</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#Urls.print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.Urls.print" title="Permalink to this definition">¶</a></dt>
+<dt id="pyscrapers.core.urlset.UrlSet.print">
+<code class="sig-name descname">print</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pyscrapers/core/urlset.html#UrlSet.print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.urlset.UrlSet.print" title="Permalink to this definition">¶</a></dt>
 <dd><p>print the list
 :return:</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="pyscrapers.core.urlset.UrlSet.suggest_filename">
+<code class="sig-name descname">suggest_filename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">suffix</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>str<span class="p">]</span><a class="reference internal" href="_modules/pyscrapers/core/urlset.html#UrlSet.suggest_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.urlset.UrlSet.suggest_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
+</div>
+<div class="section" id="module-pyscrapers.core.utils">
+<span id="pyscrapers-core-utils-module"></span><h2>pyscrapers.core.utils module<a class="headerlink" href="#module-pyscrapers.core.utils" title="Permalink to this headline">¶</a></h2>
+<p>This module is s set of utilities for this entire project</p>
 <dl class="py function">
 <dt id="pyscrapers.core.utils.add_http">
 <code class="sig-prename descclassname">pyscrapers.core.utils.</code><code class="sig-name descname">add_http</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em>, <em class="sig-param"><span class="n">main_url</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#add_http"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.core.utils.add_http" title="Permalink to this definition">¶</a></dt>

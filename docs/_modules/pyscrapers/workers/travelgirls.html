@@ -31,17 +31,15 @@
           <div class="body" role="main">
             
   <h1>Source code for pyscrapers.workers.travelgirls</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span></span><span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.core.urlset</span> <span class="kn">import</span> <span class="n">UrlSet</span>
 
-<span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
 
-
-<div class="viewcode-block" id="scrape_travelgirls"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.travelgirls.scrape_travelgirls">[docs]</a><span class="k">def</span> <span class="nf">scrape_travelgirls</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="scrape_travelgirls"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.travelgirls.scrape_travelgirls">[docs]</a><span class="k">def</span> <span class="nf">scrape_travelgirls</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_set</span><span class="p">:</span> <span class="n">UrlSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">main_url</span> <span class="o">=</span> <span class="s1">&#39;https://www.travelgirls.com/member/</span><span class="si">{user_id}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">main_url</span><span class="p">)</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
-    <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">e_a</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[contains(@class,</span><span class="se">\&#39;</span><span class="s1">photo</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e_a</span><span class="p">:</span>
         <span class="c1"># print(etree.tostring(x, pretty_print=True))</span>
@@ -51,8 +49,7 @@
         <span class="n">url</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">add_http</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">],</span> <span class="n">main_url</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;mini&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;thumb&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">urls</span></div>
+        <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
