@@ -4,6 +4,8 @@ import shutil
 import urllib.parse
 from typing import Union
 
+from pyscrapers.configs import ConfigDownload
+
 
 class UrlSet:
     """ set of urls, with no duplicates. Can be downloaded """
@@ -22,6 +24,8 @@ class UrlSet:
         :param url:
         :return:
         """
+        # logger = logging.getLogger(__name__)
+        # logger.debug("collecting [{}]".format(url))
         if url not in self.urls_set:
             self.urls_set.add(url)
             self.urls_list.append(url)
@@ -60,19 +64,20 @@ class UrlSet:
         :return:
         """
         logger = logging.getLogger(__name__)
-        logger.info('got [%d] real urls', len(self.urls_list))
-        for url in self.urls_list:
-            parse_result = urllib.parse.urlparse(url)
-            path = parse_result.path
-            logger.info('downloading [%s]...', url)
-            response = session.get(url, stream=True)
-            assert response.status_code == 200, response.content
+        logger.info('got [%d] urls', len(self.urls_list))
+        if ConfigDownload.download:
+            for url in self.urls_list:
+                parse_result = urllib.parse.urlparse(url)
+                path = parse_result.path
+                logger.info('downloading [%s]...', url)
+                response = session.get(url, stream=True)
+                assert response.status_code == 200, response.content
 
-            filename = self.get_filename(os.path.splitext(path)[1])
-            if filename is None:
-                continue
+                filename = self.get_filename(os.path.splitext(path)[1])
+                if filename is None:
+                    continue
 
-            with open(filename, 'wb') as file_handle:
-                response.raw.decode_content = True
-                shutil.copyfileobj(response.raw, file_handle)
-            logger.info('written [%s]...', filename)
+                with open(filename, 'wb') as file_handle:
+                    response.raw.decode_content = True
+                    shutil.copyfileobj(response.raw, file_handle)
+                logger.info('written [%s]...', filename)
