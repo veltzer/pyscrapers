@@ -80,14 +80,16 @@
     <span class="n">url2</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">/graphql/query/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">)</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">50</span>
     <span class="n">query_hashes</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="c1"># &#39;bd0d6d184eefd4d0ce7036c11ae58ed9&#39;,  # posts</span>
+        <span class="s1">&#39;bd0d6d184eefd4d0ce7036c11ae58ed9&#39;</span><span class="p">,</span>  <span class="c1"># posts</span>
         <span class="s1">&#39;ff260833edf142911047af6024eb634a&#39;</span><span class="p">,</span>  <span class="c1"># tagged</span>
     <span class="p">]</span>
     <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="c1"># &#39;edge_owner_to_timeline_media&#39;,</span>
+        <span class="s1">&#39;edge_owner_to_timeline_media&#39;</span><span class="p">,</span>
         <span class="s1">&#39;edge_user_to_photos_of_you&#39;</span><span class="p">,</span>
     <span class="p">]</span>
-    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">stats_video</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">stats_image</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">stats_shortcode_video</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">query_hash</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">query_hashes</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;size of list is [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">url_set</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)))</span>
         <span class="n">has_next_page</span> <span class="o">=</span> <span class="kc">True</span>
@@ -104,8 +106,6 @@
                 <span class="s1">&#39;variables&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
             <span class="p">}</span>
             <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;debug</span><span class="si">{}</span><span class="s2">.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counter</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
             <span class="n">data_user</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
             <span class="n">has_next_page</span> <span class="o">=</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;page_info&#39;</span><span class="p">][</span><span class="s1">&#39;has_next_page&#39;</span><span class="p">]</span>
             <span class="n">end_cursor</span> <span class="o">=</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;page_info&#39;</span><span class="p">][</span><span class="s1">&#39;end_cursor&#39;</span><span class="p">]</span>
@@ -115,15 +115,21 @@
                     <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">inner_node</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">inner_node</span><span class="p">[</span><span class="s1">&#39;is_video&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="s1">&#39;video_url&#39;</span> <span class="ow">in</span> <span class="n">inner_node</span><span class="p">:</span>
                     <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inner_node</span><span class="p">[</span><span class="s1">&#39;video_url&#39;</span><span class="p">])</span>
+                    <span class="n">stats_video</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">inner_node</span><span class="p">[</span><span class="s1">&#39;is_video&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="s1">&#39;shortcode&#39;</span> <span class="ow">in</span> <span class="n">inner_node</span><span class="p">:</span>
                     <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s1">&#39;query_hash&#39;</span><span class="p">:</span> <span class="s1">&#39;03f541f086ce0a9b31f67688ff9c1e09&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;shortcode&#39;</span><span class="p">:</span> <span class="n">inner_node</span><span class="p">[</span><span class="s1">&#39;shortcode&#39;</span><span class="p">],</span>
                     <span class="p">}</span>
                     <span class="n">response_short</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
                     <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response_short</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;shortcode_media&#39;</span><span class="p">][</span><span class="s1">&#39;video_url&#39;</span><span class="p">])</span>
+                    <span class="n">stats_shortcode_video</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="s1">&#39;display_url&#39;</span> <span class="ow">in</span> <span class="n">inner_node</span><span class="p">:</span>
                     <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inner_node</span><span class="p">[</span><span class="s1">&#39;display_url&#39;</span><span class="p">])</span>
-            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span></div>
+                    <span class="n">stats_image</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;stats_video [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stats_video</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;stats_image [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stats_image</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;stats_shortcode_video [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stats_shortcode_video</span><span class="p">))</span></div>
 </pre></div>
 
           </div>
