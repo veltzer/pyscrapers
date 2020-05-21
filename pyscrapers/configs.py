@@ -38,6 +38,20 @@ class ConfigDebugRequests(Config):
     )
 
 
+class ConfigDownload(Config):
+    """
+    Configure details about the download process
+    """
+    download_as_collecting = ParamCreator.create_bool(
+        help_string="Do you want download while collecting the urls?",
+        default=False,
+    )
+    download = ParamCreator.create_bool(
+        help_string="really download or just print the urls?",
+        default=True,
+    )
+
+
 class ConfigCookiesSource(Config):
     """
         Configure where to get cookies from
@@ -74,10 +88,6 @@ class ConfigSiteId(Config):
             http://www.travelgirls.com/member/[user_id]
             https://vk.com/id[user_id]
             http://www.mamba.ru/mb[user_id]""",
-    )
-    start = ParamCreator.create_int(
-        help_string="start number for image names",
-        default=0,
     )
 
 

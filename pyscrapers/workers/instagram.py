@@ -6,14 +6,14 @@ his profile photo and the first 12 images for that user.
 If you want to more workers you have to do a follow-up AJAX request to the server.
 """
 import json
-from typing import List
 
 from lxml import etree
 
 import pyscrapers.core.utils
+from pyscrapers.core.urlset import UrlSet
 
 
-def scrape_instagram(user_id: str, session) -> List[str]:
+def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
     domain = 'www.instagram.com'
     base = 'https://{domain}'.format(domain=domain)
 
@@ -23,7 +23,6 @@ def scrape_instagram(user_id: str, session) -> List[str]:
     root = pyscrapers.core.utils.get_html_dom_content(r)
     # scrape.utils.print_element(root)
 
-    urls = []
     # register regular expressions with lxml
     # this means that we can use regular expression functions like 'match'
     # by specifying 're:match' in our xpath expressions
@@ -39,9 +38,9 @@ def scrape_instagram(user_id: str, session) -> List[str]:
     assert (len(my_list) == 1)
     c = my_list[0]["graphql"]["user"]
     if 'profile_pic_url_hd' in c:
-        urls.append(c['profile_pic_url_hd'])
+        url_set.append(c['profile_pic_url_hd'])
     elif 'profile_pic_url' in c:
-        urls.append(c['profile_pic_url'])
+        url_set.append(c['profile_pic_url'])
     user_id = c['id']
     url2 = '{base}/graphql/query/'.format(base=base)
     has_next_page = True
@@ -53,22 +52,17 @@ def scrape_instagram(user_id: str, session) -> List[str]:
         }
         if end_cursor:
             variables['after'] = end_cursor
-        # noinspection SpellCheckingInspection
         params = {
             # 'query_id': 17888483320059182,
             'query_hash': 'bd0d6d184eefd4d0ce7036c11ae58ed9',
             'variables': json.dumps(variables)
         }
         r2 = session.get(url2, params=params)
-        # print(r2.json())
-        # quit()
         data_user = r2.json()['data']['user']['edge_owner_to_timeline_media']
         has_next_page = data_user['page_info']['has_next_page']
         end_cursor = data_user['page_info']['end_cursor']
         for node in data_user['edges']:
             # if it is a video, then append the video, too
             if node['node']['is_video']:
-                urls.append(node['node']['video_url'])
-                # print(json.dumps(node['node'], indent=4, sort_keys=True))
-            urls.append(node['node']['display_url'])
-    return urls
+                url_set.append(node['node']['video_url'])
+            url_set.append(node['node']['display_url'])
