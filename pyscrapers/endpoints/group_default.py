@@ -11,7 +11,7 @@ from pytconf.config import register_endpoint, register_function_group
 import pyscrapers.core.utils
 import pyscrapers.version
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigPornhubDownload, ConfigPornhubPornstar, ConfigDownload
+    ConfigYoutubeDl, ConfigPornhubDownload, ConfigPornhubPornstar, ConfigDownload, ConfigLogging
 from pyscrapers.core.urlset import UrlSet
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
@@ -55,6 +55,7 @@ def version() -> None:
         ConfigDebugRequests,
         ConfigCookiesSource,
         ConfigDownload,
+        ConfigLogging,
     ],
     suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
@@ -65,6 +66,8 @@ def photos():
     """
     if ConfigDebugRequests.debug:
         pyscrapers.core.utils.debug_requests()
+    logger = logging.getLogger('pyscrapers')
+    logger.setLevel(ConfigLogging.loglevel)
     ConfigCookiesSource.config_cookies()
     session = requests.Session()
     session.cookies = ConfigCookiesSource.cookies
