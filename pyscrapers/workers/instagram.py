@@ -89,7 +89,11 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
                         'shortcode': inner_node['shortcode'],
                     }
                     response_short = session.get(url2, params=params).json()
-                    url_set.append(response_short['data']['shortcode_media']['video_url'])
+                    if 'data' in response_short:
+                        url_set.append(response_short['data']['shortcode_media']['video_url'])
+                    else:
+                        with open("errors", "at+") as f:
+                            json.dump(response_short, f, indent=4)
                     stats_shortcode_video += 1
                 if 'display_url' in inner_node:
                     url_set.append(inner_node['display_url'])
