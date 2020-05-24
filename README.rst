@@ -2,7 +2,7 @@
 *pyscrapers* project by Mark Veltzer
 =======================
 
-version: 0.0.20
+version: 0.0.21
 
 What is it?
 -----------
