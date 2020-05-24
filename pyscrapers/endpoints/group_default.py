@@ -39,7 +39,6 @@ def register_group_default():
 
 @register_endpoint(
     configs=[],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def version() -> None:
@@ -57,7 +56,6 @@ def version() -> None:
         ConfigDownload,
         ConfigLogging,
     ],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def photos():
@@ -91,7 +89,6 @@ def photos():
         ConfigDebugRequests,
         ConfigCookiesSource,
     ],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def drumeo():
@@ -138,7 +135,6 @@ def drumeo():
         ConfigPornhubSearch,
         ConfigPornhubDownload,
     ],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def pornhub():
@@ -150,7 +146,6 @@ def pornhub():
 
 @register_endpoint(
     configs=[],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def pornhub_stars_all_detailed():
@@ -165,7 +160,6 @@ def pornhub_stars_all_detailed():
     configs=[
         ConfigYoutubeDl,
     ],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def youtube_dl():
@@ -182,7 +176,6 @@ def youtube_dl():
         ConfigPornhubPornstar,
         ConfigPornhubDownload,
     ],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def pornhub_download_pornstar():
