@@ -45,6 +45,7 @@ setuptools.setup(
         'pylogconf',
         'pornhub-api',
         'youtube-dl',
+        'pyeventroute',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
