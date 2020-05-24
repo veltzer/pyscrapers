@@ -7,6 +7,7 @@ pytconf
 pylogconf
 pornhub-api
 youtube-dl
+pyeventroute
 # dev requirements
 pyclassifiers
 pypitools

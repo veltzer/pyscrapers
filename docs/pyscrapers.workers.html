@@ -149,10 +149,19 @@
 <div class="section" id="module-pyscrapers.workers.instagram">
 <span id="pyscrapers-workers-instagram-module"></span><h2>pyscrapers.workers.instagram module<a class="headerlink" href="#module-pyscrapers.workers.instagram" title="Permalink to this headline">¶</a></h2>
 <p>How does this work?
-When you fetch the page of a user on instagram you get an html with a javascript embedded
+When you fetch the page of a user on instagram you get an html with javascript embedded
 in it with a json object embedded in that. This json object describes the user, his id,
 his profile photo and the first 12 images for that user.
-If you want to more workers you have to do a follow-up AJAX request to the server.</p>
+If you want more you have to do a follow-up AJAX request to the server.</p>
+<dl class="py function">
+<dt id="pyscrapers.workers.instagram.is_rate_limit">
+<code class="sig-prename descclassname">pyscrapers.workers.instagram.</code><code class="sig-name descname">is_rate_limit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/pyscrapers/workers/instagram.html#is_rate_limit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.instagram.is_rate_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rate limit messages look like this:
+{ “message”: “rate limited”, “status”: “fail” }
+:param response:
+:return:</p>
+</dd></dl>
+
 <dl class="py function">
 <dt id="pyscrapers.workers.instagram.scrape_instagram">
 <code class="sig-prename descclassname">pyscrapers.workers.instagram.</code><code class="sig-name descname">scrape_instagram</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">session</span></em>, <em class="sig-param"><span class="n">url_set</span><span class="p">:</span> <span class="n"><a class="reference internal" href="pyscrapers.core.html#pyscrapers.core.url_set.UrlSet" title="pyscrapers.core.url_set.UrlSet">pyscrapers.core.url_set.UrlSet</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pyscrapers/workers/instagram.html#scrape_instagram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.instagram.scrape_instagram" title="Permalink to this definition">¶</a></dt>

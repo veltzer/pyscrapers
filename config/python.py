@@ -17,6 +17,7 @@ install_requires = [
     'pylogconf',
     'pornhub-api',
     'youtube-dl',
+    'pyeventroute',
 ]
 
 test_requires = [
