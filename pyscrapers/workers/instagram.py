@@ -9,6 +9,7 @@ import json
 import logging
 import time
 
+import pyeventroute.route
 from lxml import etree
 
 import pyscrapers.core.utils
@@ -103,7 +104,7 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
                     if 'data' in response_short:
                         url_set.append(response_short['data']['shortcode_media']['video_url'])
                     else:
-                        pyeventroute.router.collect(response_short)
+                        pyeventroute.route.accept(response_short)
                     stats_shortcode_video += 1
                 if 'display_url' in inner_node:
                     url_set.append(inner_node['display_url'])
