@@ -1,17 +1,28 @@
 """
 How does this work?
-When you fetch the page of a user on instagram you get an html with a javascript embedded
+When you fetch the page of a user on instagram you get an html with javascript embedded
 in it with a json object embedded in that. This json object describes the user, his id,
 his profile photo and the first 12 images for that user.
-If you want to more workers you have to do a follow-up AJAX request to the server.
+If you want more you have to do a follow-up AJAX request to the server.
 """
 import json
 import logging
+import time
 
 from lxml import etree
 
 import pyscrapers.core.utils
 from pyscrapers.core.url_set import UrlSet
+
+
+def is_rate_limit(response) -> bool:
+    """
+    Rate limit messages look like this:
+    { "message": "rate limited", "status": "fail" }
+    :param response:
+    :return:
+    """
+    return response["status"] == "fail" and response["message"] == "rate limited"
 
 
 def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
@@ -21,8 +32,8 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
 
     logger = logging.getLogger(__name__)
 
-    r = session.get(url)
-    root = pyscrapers.core.utils.get_html_dom_content(r)
+    response = session.get(url)
+    root = pyscrapers.core.utils.get_html_dom_content(response)
     # scrape.utils.print_element(root)
 
     # register regular expressions with lxml
@@ -32,8 +43,7 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
     ns.prefix = 're'
     e_a = root.xpath('//script[re:match(text(), "^window._sharedData")]')
     assert len(e_a) == 1
-    e_a = e_a[0]
-    data = e_a.text
+    data = e_a[0].text
     json_text = data[data.find('{'):data.rfind('}') + 1]
     d = json.loads(json_text)
     my_list = d['entry_data']['ProfilePage']
@@ -78,8 +88,6 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
             end_cursor = data_user['page_info']['end_cursor']
             for outer_node in data_user['edges']:
                 inner_node = outer_node['node']
-                if inner_node['is_video']:
-                    json.dumps(inner_node, indent=4)
                 if inner_node['is_video'] and 'video_url' in inner_node:
                     url_set.append(inner_node['video_url'])
                     stats_video += 1
@@ -89,11 +97,13 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
                         'shortcode': inner_node['shortcode'],
                     }
                     response_short = session.get(url2, params=params).json()
+                    while is_rate_limit(response_short):
+                        time.sleep(60)
+                        response_short = session.get(url2, params=params).json()
                     if 'data' in response_short:
                         url_set.append(response_short['data']['shortcode_media']['video_url'])
                     else:
-                        with open("errors", "at+") as f:
-                            json.dump(response_short, f, indent=4)
+                        pyeventroute.collect(response_short)
                     stats_shortcode_video += 1
                 if 'display_url' in inner_node:
                     url_set.append(inner_node['display_url'])
