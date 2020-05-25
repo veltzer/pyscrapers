@@ -140,7 +140,7 @@ class ConfigPornhubDownload(Config):
     """
     folder = ParamCreator.create_existing_folder(
         help_string="where to save the data to?",
-        default="/home/mark/links/pornhub_dl",
+        default=".",
     )
 
 
@@ -153,7 +153,7 @@ class ConfigYoutubeDl(Config):
     )
     folder = ParamCreator.create_existing_folder(
         help_string="where to save the data to?",
-        default="/home/mark/links/youtube_dl",
+        default=".",
     )
 
 
