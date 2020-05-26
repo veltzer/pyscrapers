@@ -50,6 +50,10 @@ class ConfigDownload(Config):
         help_string="really download or just print the urls?",
         default=True,
     )
+    folder = ParamCreator.create_existing_folder(
+        help_string="where to save the data to?",
+        default=".",
+    )
 
 
 class ConfigCookiesSource(Config):
@@ -134,26 +138,12 @@ class ConfigPornhubSearch(Config):
     )
 
 
-class ConfigPornhubDownload(Config):
-    """
-    Configuration for pornhub download
-    """
-    folder = ParamCreator.create_existing_folder(
-        help_string="where to save the data to?",
-        default=".",
-    )
-
-
 class ConfigYoutubeDl(Config):
     """
     Configuration to download a single url
     """
     url = ParamCreator.create_str(
         help_string="the URL to download",
-    )
-    folder = ParamCreator.create_existing_folder(
-        help_string="where to save the data to?",
-        default=".",
     )
 
 

@@ -11,7 +11,7 @@ from pytconf.config import register_endpoint, register_function_group
 import pyscrapers.core.utils
 import pyscrapers.version
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigPornhubDownload, ConfigPornhubPornstar, ConfigDownload, ConfigLogging
+    ConfigYoutubeDl, ConfigPornhubPornstar, ConfigDownload, ConfigLogging
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
@@ -133,7 +133,7 @@ def drumeo():
 @register_endpoint(
     configs=[
         ConfigPornhubSearch,
-        ConfigPornhubDownload,
+        ConfigDownload,
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -174,7 +174,7 @@ def youtube_dl():
         ConfigDebugRequests,
         ConfigCookiesSource,
         ConfigPornhubPornstar,
-        ConfigPornhubDownload,
+        ConfigDownload,
     ],
     group=GROUP_NAME_DEFAULT,
 )
