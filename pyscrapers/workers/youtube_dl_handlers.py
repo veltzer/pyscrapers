@@ -10,7 +10,7 @@ from typing import List
 
 import youtube_dl
 
-from pyscrapers.configs import ConfigYoutubeDl
+from pyscrapers.configs import ConfigYoutubeDl, ConfigDownload
 
 
 class MyLogger(object):
@@ -26,7 +26,7 @@ class MyLogger(object):
 
 
 def youtube_dl_handler() -> None:
-    youtube_dl_download_url(ConfigYoutubeDl.url, ConfigYoutubeDl.folder)
+    youtube_dl_download_url(ConfigYoutubeDl.url, ConfigDownload.folder)
 
 
 def youtube_dl_download_url(url: str, folder: str) -> None:
