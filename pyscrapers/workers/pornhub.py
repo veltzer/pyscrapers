@@ -14,7 +14,7 @@ from pornhub_api import PornhubApi
 
 import pyscrapers.core.utils
 from pyscrapers.configs import ConfigPornhubSearch, ConfigDebugRequests, ConfigCookiesSource, \
-    ConfigPornhubPornstar, ConfigDownload
+    ConfigDownload, ConfigPornhubUrl
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_url, youtube_dl_download_urls
 
 
@@ -42,7 +42,7 @@ def print_tags(api: pornhub_api.api.PornhubApi) -> None:
         print("tag [{}]".format(tag))
 
 
-def download() -> None:
+def download_search() -> None:
     """
     Download movies from pornhub
     """
@@ -129,7 +129,7 @@ def get_urls_from_page(root) -> List[str]:
     return urls
     
 
-def pornhub_download_pornstar_handler() -> None:
+def download_url() -> None:
     if ConfigDebugRequests.debug:
         pyscrapers.core.utils.debug_requests()
     ConfigCookiesSource.config_cookies()
@@ -138,7 +138,7 @@ def pornhub_download_pornstar_handler() -> None:
     logger = logging.getLogger(__name__)
 
     urls = []
-    url = 'https://www.pornhub.com/pornstar/{name}'.format(name=ConfigPornhubPornstar.name)
+    url = 'https://www.pornhub.com/{url}'.format(url=ConfigPornhubUrl.url)
     logger.info("getting [{}]...".format(url))
     page = session.get(url)
     root = pyscrapers.core.utils.get_html_dom_content(page)
@@ -148,8 +148,8 @@ def pornhub_download_pornstar_handler() -> None:
     urls.extend(new_urls)
 
     for page in range(2, number_of_pages+1):
-        url = 'https://www.pornhub.com/pornstar/{name}?page={page}'.format(
-            name=ConfigPornhubPornstar.name,
+        url = 'https://www.pornhub.com/{url}?page={page}'.format(
+            url=ConfigPornhubUrl.url,
             page=page,
         )
         logger.info("getting [{}]...".format(url))
