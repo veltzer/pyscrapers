@@ -147,10 +147,10 @@ class ConfigYoutubeDl(Config):
     )
 
 
-class ConfigPornhubPornstar(Config):
+class ConfigPornhubUrl(Config):
     """
     Parameters for what pornstar to download
     """
-    name = ParamCreator.create_str(
-        help_string="name of the star"
+    url = ParamCreator.create_str(
+        help_string="url to download (e.g. model/lily)"
     )
