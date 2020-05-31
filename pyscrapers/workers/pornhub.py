@@ -120,15 +120,14 @@ def get_urls_from_page(root) -> List[str]:
     # video_sections = root.xpath('//section[@id=\'videosTab\']')
     # assert len(video_sections) == 1, len(video_sections)
     # video_section = video_sections[0]
-    # video_sections = root.xpath('//ul[contains(@class,\'pornstarsVideos\')]')
-    # if len(video_sections) == 0:
-    #   return []
     # video_section = video_sections[0]
     # <ul class="dropdownHottestVideos videos" id="hottestMenuSection">
     # <ul class="videos row-5-thumbs" id="mostRecentVideosSection">
     video_sections = root.xpath('//ul[@id=\'mostRecentVideosSection\']')
     if len(video_sections) == 0:
-        return []
+        video_sections = root.xpath('//ul[contains(@class,\'pornstarsVideos\')]')
+        if len(video_sections) == 0:
+            return []
     assert len(video_sections) == 1, len(video_sections)
     video_section = video_sections[0]
     elements = video_section.xpath('li[contains(@class,\'pcVideoListItem\')]')
