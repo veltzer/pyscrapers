@@ -38,7 +38,6 @@ def register_group_default():
 
 
 @register_endpoint(
-    configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def version() -> None:
@@ -131,7 +130,6 @@ def drumeo():
 
 
 @register_endpoint(
-    configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def pornhub_stars_all_detailed():
