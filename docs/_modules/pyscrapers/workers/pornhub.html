@@ -153,15 +153,14 @@
     <span class="c1"># video_sections = root.xpath(&#39;//section[@id=\&#39;videosTab\&#39;]&#39;)</span>
     <span class="c1"># assert len(video_sections) == 1, len(video_sections)</span>
     <span class="c1"># video_section = video_sections[0]</span>
-    <span class="c1"># video_sections = root.xpath(&#39;//ul[contains(@class,\&#39;pornstarsVideos\&#39;)]&#39;)</span>
-    <span class="c1"># if len(video_sections) == 0:</span>
-    <span class="c1">#   return []</span>
     <span class="c1"># video_section = video_sections[0]</span>
     <span class="c1"># &lt;ul class=&quot;dropdownHottestVideos videos&quot; id=&quot;hottestMenuSection&quot;&gt;</span>
     <span class="c1"># &lt;ul class=&quot;videos row-5-thumbs&quot; id=&quot;mostRecentVideosSection&quot;&gt;</span>
     <span class="n">video_sections</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">mostRecentVideosSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">video_sections</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//ul[contains(@class,</span><span class="se">\&#39;</span><span class="s1">pornstarsVideos</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span>
     <span class="n">video_section</span> <span class="o">=</span> <span class="n">video_sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">elements</span> <span class="o">=</span> <span class="n">video_section</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;li[contains(@class,</span><span class="se">\&#39;</span><span class="s1">pcVideoListItem</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">)</span>
