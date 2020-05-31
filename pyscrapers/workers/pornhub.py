@@ -102,7 +102,7 @@ def get_number_of_pages(root) -> int:
     :param root:
     :return:
     """
-    counters = root.xpath('//div[contains(@class,\'pornstarVideosCounter\')]')
+    counters = root.xpath('//div[contains(@class,\'showingInfo\')]')
     assert len(counters) == 1
     counter = counters[0]
     number = int(counter.text.strip().split()[3])
@@ -117,8 +117,19 @@ def get_urls_from_page(root) -> List[str]:
     :param root:
     :return:
     """
-    video_sections = root.xpath('//ul[@id=\'pornstarsVideoSection\']')
-    assert len(video_sections) == 1
+    # video_sections = root.xpath('//section[@id=\'videosTab\']')
+    # assert len(video_sections) == 1, len(video_sections)
+    # video_section = video_sections[0]
+    # video_sections = root.xpath('//ul[contains(@class,\'pornstarsVideos\')]')
+    # if len(video_sections) == 0:
+    #   return []
+    # video_section = video_sections[0]
+    # <ul class="dropdownHottestVideos videos" id="hottestMenuSection">
+    # <ul class="videos row-5-thumbs" id="mostRecentVideosSection">
+    video_sections = root.xpath('//ul[@id=\'mostRecentVideosSection\']')
+    if len(video_sections) == 0:
+        return []
+    assert len(video_sections) == 1, len(video_sections)
     video_section = video_sections[0]
     elements = video_section.xpath('li[contains(@class,\'pcVideoListItem\')]')
     urls = []
@@ -127,7 +138,15 @@ def get_urls_from_page(root) -> List[str]:
         url = "https://www.pornhub.com/view_video.php?viewkey={key}".format(key=key)
         urls.append(url)
     return urls
-    
+
+
+def url_generator(url: str):
+    yield 'https://www.pornhub.com/{url}'.format(url=url)
+    page = 2
+    while True:
+        yield "https://www.pornhub.com/{url}?page={page}".format(url=url, page=page)
+        page += 1
+
 
 def download_url() -> None:
     if ConfigDebugRequests.debug:
@@ -136,28 +155,18 @@ def download_url() -> None:
     session = requests.Session()
     session.cookies = ConfigCookiesSource.cookies
     logger = logging.getLogger(__name__)
-
     urls = []
-    url = 'https://www.pornhub.com/{url}'.format(url=ConfigPornhubUrl.url)
-    logger.info("getting [{}]...".format(url))
-    page = session.get(url)
-    root = pyscrapers.core.utils.get_html_dom_content(page)
-    number_of_pages = get_number_of_pages(root)
-    new_urls = get_urls_from_page(root)
-    logger.info("got [{}] new urls".format(len(new_urls)))
-    urls.extend(new_urls)
-
-    for page in range(2, number_of_pages+1):
-        url = 'https://www.pornhub.com/{url}?page={page}'.format(
-            url=ConfigPornhubUrl.url,
-            page=page,
-        )
+    for url in url_generator(url=ConfigPornhubUrl.url):
         logger.info("getting [{}]...".format(url))
         page = session.get(url)
+        if page.status_code == 404:
+            break
         root = pyscrapers.core.utils.get_html_dom_content(page)
         new_urls = get_urls_from_page(root)
+        if len(new_urls) == 0:
+            break
         logger.info("got [{}] new urls".format(len(new_urls)))
         urls.extend(new_urls)
-
     session.close()
+    logger.info("got total [{}] urls".format(len(urls)))
     youtube_dl_download_urls(urls, folder=ConfigDownload.folder)
