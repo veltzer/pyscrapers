@@ -158,7 +158,7 @@ def download_url() -> None:
     for url in url_generator(url=ConfigPornhubUrl.url):
         logger.info("getting [{}]...".format(url))
         page = session.get(url)
-        if page.status_code == 404:
+        if page.status_code != 200:
             break
         root = pyscrapers.core.utils.get_html_dom_content(page)
         new_urls = get_urls_from_page(root)
