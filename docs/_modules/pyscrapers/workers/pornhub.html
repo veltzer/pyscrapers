@@ -135,7 +135,7 @@
 <span class="sd">    :param root:</span>
 <span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">counters</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//div[contains(@class,</span><span class="se">\&#39;</span><span class="s1">pornstarVideosCounter</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">)</span>
+    <span class="n">counters</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//div[contains(@class,</span><span class="se">\&#39;</span><span class="s1">showingInfo</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">counters</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="n">counter</span> <span class="o">=</span> <span class="n">counters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">])</span>
@@ -150,8 +150,19 @@
 <span class="sd">    :param root:</span>
 <span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">video_sections</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">pornstarsVideoSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="c1"># video_sections = root.xpath(&#39;//section[@id=\&#39;videosTab\&#39;]&#39;)</span>
+    <span class="c1"># assert len(video_sections) == 1, len(video_sections)</span>
+    <span class="c1"># video_section = video_sections[0]</span>
+    <span class="c1"># video_sections = root.xpath(&#39;//ul[contains(@class,\&#39;pornstarsVideos\&#39;)]&#39;)</span>
+    <span class="c1"># if len(video_sections) == 0:</span>
+    <span class="c1">#   return []</span>
+    <span class="c1"># video_section = video_sections[0]</span>
+    <span class="c1"># &lt;ul class=&quot;dropdownHottestVideos videos&quot; id=&quot;hottestMenuSection&quot;&gt;</span>
+    <span class="c1"># &lt;ul class=&quot;videos row-5-thumbs&quot; id=&quot;mostRecentVideosSection&quot;&gt;</span>
+    <span class="n">video_sections</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">mostRecentVideosSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span>
     <span class="n">video_section</span> <span class="o">=</span> <span class="n">video_sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">elements</span> <span class="o">=</span> <span class="n">video_section</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;li[contains(@class,</span><span class="se">\&#39;</span><span class="s1">pcVideoListItem</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">)</span>
     <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
@@ -160,7 +171,15 @@
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.pornhub.com/view_video.php?viewkey=</span><span class="si">{key}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
         <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">urls</span></div>
-    
+
+
+<div class="viewcode-block" id="url_generator"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.pornhub.url_generator">[docs]</a><span class="k">def</span> <span class="nf">url_generator</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">yield</span> <span class="s1">&#39;https://www.pornhub.com/</span><span class="si">{url}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="s2">&quot;https://www.pornhub.com/</span><span class="si">{url}</span><span class="s2">?page=</span><span class="si">{page}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
 
 <div class="viewcode-block" id="download_url"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.pornhub.download_url">[docs]</a><span class="k">def</span> <span class="nf">download_url</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
@@ -169,30 +188,20 @@
     <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
     <span class="n">session</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">ConfigCookiesSource</span><span class="o">.</span><span class="n">cookies</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
     <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.pornhub.com/</span><span class="si">{url}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ConfigPornhubUrl</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;getting [</span><span class="si">{}</span><span class="s2">]...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
-    <span class="n">page</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
-    <span class="n">number_of_pages</span> <span class="o">=</span> <span class="n">get_number_of_pages</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-    <span class="n">new_urls</span> <span class="o">=</span> <span class="n">get_urls_from_page</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;got [</span><span class="si">{}</span><span class="s2">] new urls&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)))</span>
-    <span class="n">urls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">number_of_pages</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.pornhub.com/</span><span class="si">{url}</span><span class="s1">?page=</span><span class="si">{page}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">url</span><span class="o">=</span><span class="n">ConfigPornhubUrl</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
-            <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span>
-        <span class="p">)</span>
+    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">url_generator</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ConfigPornhubUrl</span><span class="o">.</span><span class="n">url</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;getting [</span><span class="si">{}</span><span class="s2">]...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
         <span class="n">page</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="k">break</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
         <span class="n">new_urls</span> <span class="o">=</span> <span class="n">get_urls_from_page</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;got [</span><span class="si">{}</span><span class="s2">] new urls&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)))</span>
         <span class="n">urls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span>
-
     <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;got total [</span><span class="si">{}</span><span class="s2">] urls&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)))</span>
     <span class="n">youtube_dl_download_urls</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="n">ConfigDownload</span><span class="o">.</span><span class="n">folder</span><span class="p">)</span></div>
 </pre></div>
 
