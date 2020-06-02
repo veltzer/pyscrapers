@@ -75,7 +75,7 @@ def download_search() -> None:
                 break
             else:
                 raise e
-        urls = [video.url for video in data.videos]
+        urls = [video.url_part for video in data.videos]
         if limit is not None:
             urls = list(islice(urls, 0, limit - counter))
         for url in urls:
@@ -155,7 +155,7 @@ def download_url() -> None:
     session.cookies = ConfigCookiesSource.cookies
     logger = logging.getLogger(__name__)
     urls = []
-    for url in url_generator(url=ConfigPornhubUrl.url):
+    for url in url_generator(url=ConfigPornhubUrl.url_part):
         logger.info("getting [{}]...".format(url))
         page = session.get(url)
         if page.status_code != 200:

@@ -151,6 +151,6 @@ class ConfigPornhubUrl(Config):
     """
     Parameters for what pornstar to download
     """
-    url = ParamCreator.create_str(
+    url_part = ParamCreator.create_str(
         help_string="url to download (e.g. model/lily)"
     )
