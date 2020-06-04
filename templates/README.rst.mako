@@ -12,6 +12,8 @@ ${line}
 
 ![build](https://github.com/veltzer/${config.project.github_repo_name}/workflows/build/badge.svg)
 
+project website: ${config.project.project_website}
+
 author: ${user.personal.personal_fullname}
 
 version: ${config.version.version_str}

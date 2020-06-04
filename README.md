@@ -9,3 +9,5 @@
 
 project to produce various useful scrapers
 
+project website: https://veltzer.github.io/pyscrapers
+

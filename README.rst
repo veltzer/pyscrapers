@@ -6,6 +6,8 @@
 
 ![build](https://github.com/veltzer/pyscrapers/workflows/build/badge.svg)
 
+project website: https://veltzer.github.io/pyscrapers
+
 author: Mark Veltzer
 
 version: 0.0.28
