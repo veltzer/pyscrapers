@@ -39,6 +39,10 @@ dev_requires = [
 
 python_requires = ">=3.5"
 
+extras_require={
+#    ':python_version == "2.7"': ['futures'],  # for python2.7 backport of concurrent.futures
+}
+
 # deb section
 deb_package = True
 deb_section = 'python'
