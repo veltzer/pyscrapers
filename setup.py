@@ -1,9 +1,5 @@
 import setuptools
 
-"""
-The documentation can be found at:
-http://setuptools.readthedocs.io/en/latest/setuptools.html
-"""
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name='pyscrapers',
@@ -47,6 +43,8 @@ setuptools.setup(
         'youtube-dl',
         'pyeventroute',
     ],
+    extras_require={
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
