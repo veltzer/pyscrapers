@@ -1,15 +1,3 @@
-============
-*pyscrapers*
-============
-
-.. image:: https://img.shields.io/github/license/veltzer/pydmt   :alt: GitHub
-
-![build](https://github.com/veltzer/pyscrapers/workflows/build/badge.svg)
-
-author: Mark Veltzer
-
-version: 0.0.28
-
 What is it?
 -----------
 
@@ -17,12 +5,12 @@ Scrapers for various stuff that I need off the web, maybe other people will like
 
 Currently supports downloading photos from the following sites:
 
-
-- facebook
-- instagram
-- travelgirls
-- vk
-- mamba.ru
+<%!
+    import config.pyscrapers
+%>
+% for a in config.pyscrapers.types:
+- ${a}
+% endfor
 
 Installing
 ----------
@@ -39,7 +27,7 @@ You also need pip3 installed.
 
 	$ sudo apt install python3-pip
 
-Now install pyscrapers:
+Now install ${config.project.project_name}:
 
 .. code-block:: bash
 
@@ -51,4 +39,3 @@ Running
 .. code-block:: bash
 
 	$ pyscrapers_photos --u [user_id] -t [type_of_site]
-
