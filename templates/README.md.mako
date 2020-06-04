@@ -14,6 +14,8 @@
 
 ${config.project.project_short_description}
 
+project website: ${config.project.project_website}
+
 % if os.path.isfile("snipplets/main.md.mako"):
 <%include file="../snipplets/main.md.mako" />
 % endif
