@@ -11,6 +11,10 @@
 ![GitHub](https://img.shields.io/github/license/veltzer/${config.project.github_repo_name})
 ![PyPI](https://img.shields.io/pypi/v/${config.python.package_name})
 ![PyPI - Format](https://img.shields.io/pypi/format/${config.python.package_name})
+[![Downloads](https://pepy.tech/badge/pytsv)](https://pepy.tech/project/${config.python.package_name})
+[![Downloads](https://pepy.tech/badge/pytsv/month)](https://pepy.tech/project/${config.python.package_name}/month)
+[![Downloads](https://pepy.tech/badge/pytsv/week)](https://pepy.tech/project/${config.python.package_name}/week)
+
 
 ${config.project.project_short_description}
 
