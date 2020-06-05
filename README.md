@@ -6,6 +6,10 @@
 ![GitHub](https://img.shields.io/github/license/veltzer/pyscrapers)
 ![PyPI](https://img.shields.io/pypi/v/pyscrapers)
 ![PyPI - Format](https://img.shields.io/pypi/format/pyscrapers)
+[![Downloads](https://pepy.tech/badge/pytsv)](https://pepy.tech/project/pyscrapers)
+[![Downloads](https://pepy.tech/badge/pytsv/month)](https://pepy.tech/project/pyscrapers/month)
+[![Downloads](https://pepy.tech/badge/pytsv/week)](https://pepy.tech/project/pyscrapers/week)
+
 
 project to produce various useful scrapers
 
