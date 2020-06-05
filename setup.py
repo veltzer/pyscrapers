@@ -2,8 +2,8 @@ import setuptools
 
 setuptools.setup(
     # the first three fields are a must according to the documentation
-    name='pyscrapers',
-    version='0.0.28',
+    name="pyscrapers",
+    version="0.0.28",
     packages=[
         'pyscrapers',
         'pyscrapers.core',
@@ -11,12 +11,13 @@ setuptools.setup(
         'pyscrapers.workers',
     ],
     # from here all is optional
-    description='A collection of scrapers for the web',
-    long_description='project to produce various useful scrapers',
-    author='Mark Veltzer',
-    author_email='mark.veltzer@gmail.com',
-    maintainer='Mark Veltzer',
-    maintainer_email='mark.veltzer@gmail.com',
+    description="A collection of scrapers for the web",
+    long_description="project to produce various useful scrapers",
+    long_description_content_type="text/x-rst",
+    author="Mark Veltzer",
+    author_email="mark.veltzer@gmail.com",
+    maintainer="Mark Veltzer",
+    maintainer_email="mark.veltzer@gmail.com",
     keywords=[
         'scrape',
         'images',
@@ -27,9 +28,9 @@ setuptools.setup(
         'download',
         'pics',
     ],
-    url='https://veltzer.github.io/pyscrapers',
-    download_url='https://github.com/veltzer/pyscrapers',
-    license='MIT',
+    url="https://veltzer.github.io/pyscrapers",
+    download_url="https://github.com/veltzer/pyscrapers",
+    license="MIT",
     platforms=[
         'python3',
     ],
@@ -55,8 +56,8 @@ setuptools.setup(
     ],
     data_files=[
     ],
-    entry_points={'console_scripts': [
+    entry_points={"console_scripts": [
         'pyscrapers=pyscrapers.endpoints.main:main',
     ]},
-    python_requires='>=3.5',
+    python_requires=">=3.5",
 )
