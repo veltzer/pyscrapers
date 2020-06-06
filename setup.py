@@ -3,7 +3,7 @@ import setuptools
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="pyscrapers",
-    version="0.0.29",
+    version="0.0.30",
     packages=[
         'pyscrapers',
         'pyscrapers.core',
