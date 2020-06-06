@@ -144,6 +144,7 @@ def pornhub_stars_all_detailed():
     configs=[
         ConfigPornhubSearch,
         ConfigDownload,
+        ConfigYoutubeDl,
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -160,6 +161,7 @@ def pornhub_download_search():
         ConfigCookiesSource,
         ConfigPornhubUrl,
         ConfigDownload,
+        ConfigYoutubeDl,
     ],
     group=GROUP_NAME_DEFAULT,
 )

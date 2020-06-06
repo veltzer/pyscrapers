@@ -1,6 +1,8 @@
 """
 All configurations for pymakehelper
 """
+import os
+
 import browser_cookie3
 from pytconf.config import Config, ParamCreator
 
@@ -144,6 +146,14 @@ class ConfigYoutubeDl(Config):
     """
     url = ParamCreator.create_str(
         help_string="the URL to download",
+    )
+    use_archive = ParamCreator.create_bool(
+        help_string="Should we use an archive?",
+        default=True,
+    )
+    archive_file = ParamCreator.create_existing_file(
+        help_string="What file to use as archive?",
+        default=os.path.expanduser('~/.config/youtube-dl-archive'),
     )
 
 

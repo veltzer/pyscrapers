@@ -34,6 +34,8 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">All configurations for pymakehelper</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
 <span class="kn">import</span> <span class="nn">browser_cookie3</span>
 <span class="kn">from</span> <span class="nn">pytconf.config</span> <span class="kn">import</span> <span class="n">Config</span><span class="p">,</span> <span class="n">ParamCreator</span>
 
@@ -177,6 +179,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;the URL to download&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">use_archive</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Should we use an archive?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">archive_file</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_existing_file</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;What file to use as archive?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.config/youtube-dl-archive&#39;</span><span class="p">),</span>
     <span class="p">)</span></div>
 
 
