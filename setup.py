@@ -53,6 +53,7 @@ setuptools.setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3 :: Only',
         'Topic :: Utilities',
+        'License :: OSI Approved :: MIT License',
     ],
     data_files=[
     ],
