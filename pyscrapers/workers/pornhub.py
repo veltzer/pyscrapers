@@ -14,7 +14,7 @@ from pornhub_api import PornhubApi
 
 import pyscrapers.core.utils
 from pyscrapers.configs import ConfigPornhubSearch, ConfigDebugRequests, ConfigCookiesSource, \
-    ConfigDownload, ConfigPornhubUrl
+    ConfigPornhubUrl
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_url, youtube_dl_download_urls
 
 
@@ -82,7 +82,7 @@ def download_search() -> None:
             logger.info("doing item [{}]".format(counter))
             # noinspection PyBroadException
             try:
-                youtube_dl_download_url(url, ConfigDownload.folder)
+                youtube_dl_download_url(url)
             except Exception as e:
                 errors += 1
                 exceptions.append(e)
@@ -168,4 +168,4 @@ def download_url() -> None:
         urls.extend(new_urls)
     session.close()
     logger.info("got total [{}] urls".format(len(urls)))
-    youtube_dl_download_urls(urls, folder=ConfigDownload.folder)
+    youtube_dl_download_urls(urls)
