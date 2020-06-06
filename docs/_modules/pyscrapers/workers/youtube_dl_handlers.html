@@ -42,7 +42,7 @@
 
 <span class="kn">import</span> <span class="nn">youtube_dl</span>
 
-<span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigYoutubeDl</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigYoutubeDl</span><span class="p">,</span> <span class="n">ConfigYoutubeUrl</span>
 
 
 <div class="viewcode-block" id="MyLogger"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.youtube_dl_handlers.MyLogger">[docs]</a><span class="k">class</span> <span class="nc">MyLogger</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -58,7 +58,7 @@
 
 
 <div class="viewcode-block" id="youtube_dl_handler"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.youtube_dl_handlers.youtube_dl_handler">[docs]</a><span class="k">def</span> <span class="nf">youtube_dl_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">youtube_dl_download_url</span><span class="p">(</span><span class="n">ConfigYoutubeDl</span><span class="o">.</span><span class="n">url</span><span class="p">)</span></div>
+    <span class="n">youtube_dl_download_url</span><span class="p">(</span><span class="n">ConfigYoutubeUrl</span><span class="o">.</span><span class="n">url</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="youtube_dl_download_url"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.youtube_dl_handlers.youtube_dl_download_url">[docs]</a><span class="k">def</span> <span class="nf">youtube_dl_download_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

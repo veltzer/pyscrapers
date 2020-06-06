@@ -173,13 +173,19 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ConfigYoutubeDl"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigYoutubeDl">[docs]</a><span class="k">class</span> <span class="nc">ConfigYoutubeDl</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigYoutubeUrl"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigYoutubeUrl">[docs]</a><span class="k">class</span> <span class="nc">ConfigYoutubeUrl</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration to download a single url</span>
+<span class="sd">    Configuration for single url download</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;the URL to download&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ConfigYoutubeDl"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigYoutubeDl">[docs]</a><span class="k">class</span> <span class="nc">ConfigYoutubeDl</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Configuration for youtube downloads</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">use_archive</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Should we use an archive?&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>

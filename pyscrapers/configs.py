@@ -140,13 +140,19 @@ class ConfigPornhubSearch(Config):
     )
 
 
-class ConfigYoutubeDl(Config):
+class ConfigYoutubeUrl(Config):
     """
-    Configuration to download a single url
+    Configuration for single url download
     """
     url = ParamCreator.create_str(
         help_string="the URL to download",
     )
+
+
+class ConfigYoutubeDl(Config):
+    """
+    Configuration for youtube downloads
+    """
     use_archive = ParamCreator.create_bool(
         help_string="Should we use an archive?",
         default=True,
