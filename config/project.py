@@ -41,6 +41,7 @@ project_classifiers = [
     pyclassifiers.values.ProgrammingLanguage__Python,
     pyclassifiers.values.ProgrammingLanguage__Python__3__Only,
     pyclassifiers.values.Topic__Utilities,
+    pyclassifiers.values.License__OSIApproved__MITLicense,
 ]
 project_data_files = []
 # project_data_files.append(templar.utils.hlp_files_under('/usr/bin', 'src/*'))
