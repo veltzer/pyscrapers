@@ -34,7 +34,7 @@ setuptools.setup(
     keywords=${pydmt.helpers.python.array_indented(1, config.project.project_keywords)},
     url="${config.project.project_website}",
     download_url="${config.project.project_website_download_src}",
-    # license="${config.project.project_license}",
+    license="${config.project.project_license}",
     platforms=${pydmt.helpers.python.array_indented(1, config.project.project_platforms)},
     install_requires=${pydmt.helpers.python.array_indented(1, config.python.install_requires)},
     extras_require=${pydmt.helpers.python.dict_indented(1, config.python.extras_require)},
