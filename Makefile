@@ -10,10 +10,13 @@ all:
 	@flake8 $(ALL_PACKAGES)
 	@python -m unittest discover -s .
 
+.PHONY: pytest_quiet
+pytest_quiet:
+	@pytest tests -qq > /dev/null
+
 .PHONY: pytest
 pytest:
 	@pytest tests
-#@pytest tests -qq > /dev/null
 
 .PHONY: pyflakes
 pyflakes:
