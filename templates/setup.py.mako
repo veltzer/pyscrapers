@@ -7,6 +7,12 @@
     import os
 %>import setuptools
 
+
+def get_readme():
+    with open('README.rst') as f:
+        return f.read()
+
+
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="${config.project.project_name}",
@@ -19,7 +25,7 @@ setuptools.setup(
 % endif
     # from here all is optional
     description="${config.project.project_description}",
-    long_description="${config.project.project_long_description}",
+    long_description=get_readme(),
     long_description_content_type="text/x-rst",
     author="${user.personal.personal_fullname}",
     author_email="${user.personal.personal_email}",
