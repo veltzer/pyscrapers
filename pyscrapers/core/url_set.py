@@ -15,6 +15,7 @@ class UrlSet:
         """
         self.urls_set = set()
         self.urls_list = []
+        self.appended_twice = 0
         self.counter_jpg = 0
         self.counter_mp4 = 0
 
@@ -24,9 +25,11 @@ class UrlSet:
         :param url:
         :return:
         """
-        # logger = logging.getLogger(__name__)
-        # logger.debug("collecting [{}]".format(url))
-        if url not in self.urls_set:
+        logger = logging.getLogger(__name__)
+        logger.debug("collecting [{}]".format(url))
+        if url in self.urls_set:
+            self.appended_twice += 1
+        else:
             self.urls_set.add(url)
             self.urls_list.append(url)
 
