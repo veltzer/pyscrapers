@@ -9,7 +9,7 @@ def get_readme():
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="pyscrapers",
-    version="0.0.30",
+    version="0.0.31",
     packages=[
         'pyscrapers',
         'pyscrapers.core',
@@ -70,5 +70,5 @@ setuptools.setup(
     entry_points={"console_scripts": [
         'pyscrapers=pyscrapers.endpoints.main:main',
     ]},
-    python_requires=">=3.5",
+    python_requires=">=3.6",
 )

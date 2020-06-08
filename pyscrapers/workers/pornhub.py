@@ -75,7 +75,7 @@ def download_search() -> None:
                 break
             else:
                 raise e
-        urls = [video.url_part for video in data.videos]
+        urls = [video.url for video in data.videos]
         if limit is not None:
             urls = list(islice(urls, 0, limit - counter))
         for url in urls:
