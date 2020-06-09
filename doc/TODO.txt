@@ -1,3 +1,7 @@
+- run
+	$ pyscrapers version
+	see how long it takes?
+	Profile and reduce time.
 - pytconf use:
     stop registering main
     stop registering the config
