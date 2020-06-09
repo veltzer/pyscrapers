@@ -123,11 +123,17 @@ def get_urls_from_page(root) -> List[str]:
     # video_section = video_sections[0]
     # <ul class="dropdownHottestVideos videos" id="hottestMenuSection">
     # <ul class="videos row-5-thumbs" id="mostRecentVideosSection">
-    video_sections = root.xpath('//ul[@id=\'mostRecentVideosSection\']')
-    if len(video_sections) == 0:
-        video_sections = root.xpath('//ul[contains(@class,\'pornstarsVideos\')]')
-        if len(video_sections) == 0:
-            return []
+    xpath_attempts = [
+        '//ul[@id=\'moreData\']',
+        '//ul[@id=\'mostRecentVideosSection\']',
+        '//ul[contains(@class,\'pornstarsVideos\')]',
+    ]
+    for xpath_attempt in xpath_attempts:
+        video_sections = root.xpath(xpath_attempt)
+        if len(video_sections) == 1:
+            break
+    else:
+        return []
     assert len(video_sections) == 1, len(video_sections)
     video_section = video_sections[0]
     elements = video_section.xpath('li[contains(@class,\'pcVideoListItem\')]')
