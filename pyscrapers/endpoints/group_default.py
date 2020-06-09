@@ -11,7 +11,7 @@ from pytconf.config import register_endpoint, register_function_group
 import pyscrapers.core.utils
 import pyscrapers.version
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigPornhubUrl
+    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
@@ -159,7 +159,7 @@ def pornhub_download_search():
     configs=[
         ConfigDebugRequests,
         ConfigCookiesSource,
-        ConfigPornhubUrl,
+        ConfigUrl,
         ConfigDownload,
         ConfigYoutubeDl,
     ],

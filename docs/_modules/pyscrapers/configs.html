@@ -4,6 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pyscrapers.configs &#8212; pyscrapers 0.0.1 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -173,15 +174,6 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ConfigYoutubeUrl"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigYoutubeUrl">[docs]</a><span class="k">class</span> <span class="nc">ConfigYoutubeUrl</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration for single url download</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
-        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;the URL to download&quot;</span><span class="p">,</span>
-    <span class="p">)</span></div>
-
-
 <div class="viewcode-block" id="ConfigYoutubeDl"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigYoutubeDl">[docs]</a><span class="k">class</span> <span class="nc">ConfigYoutubeDl</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configuration for youtube downloads</span>
@@ -196,12 +188,12 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ConfigPornhubUrl"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigPornhubUrl">[docs]</a><span class="k">class</span> <span class="nc">ConfigPornhubUrl</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigUrl"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigUrl">[docs]</a><span class="k">class</span> <span class="nc">ConfigUrl</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameters for what pornstar to download</span>
+<span class="sd">    Parameters for what url to download</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">url_part</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
-        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;url to download (e.g. model/lily)&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;url to download (e.g. https://www.pornhub.com/model/lily)&quot;</span>
     <span class="p">)</span></div>
 </pre></div>
 
@@ -237,7 +229,7 @@
       &copy;2017, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

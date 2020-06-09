@@ -140,15 +140,6 @@ class ConfigPornhubSearch(Config):
     )
 
 
-class ConfigYoutubeUrl(Config):
-    """
-    Configuration for single url download
-    """
-    url = ParamCreator.create_str(
-        help_string="the URL to download",
-    )
-
-
 class ConfigYoutubeDl(Config):
     """
     Configuration for youtube downloads
@@ -163,10 +154,10 @@ class ConfigYoutubeDl(Config):
     )
 
 
-class ConfigPornhubUrl(Config):
+class ConfigUrl(Config):
     """
-    Parameters for what pornstar to download
+    Parameters for what url to download
     """
-    url_part = ParamCreator.create_str(
-        help_string="url to download (e.g. model/lily)"
+    url = ParamCreator.create_str(
+        help_string="url to download (e.g. https://www.pornhub.com/model/lily)"
     )
