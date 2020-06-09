@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import urllib.parse
-from typing import Union
+from typing import Union, List
 
 from pyscrapers.configs import ConfigDownload
 
@@ -32,6 +32,10 @@ class UrlSet:
         else:
             self.urls_set.add(url)
             self.urls_list.append(url)
+
+    def extend(self, urls: List[str]) -> None:
+        for url in urls:
+            self.append(url)
 
     def print(self) -> None:
         """

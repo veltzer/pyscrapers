@@ -14,6 +14,7 @@ from pornhub_api import PornhubApi
 
 import pyscrapers.core.utils
 from pyscrapers.configs import ConfigPornhubSearch, ConfigDebugRequests, ConfigCookiesSource, ConfigUrl
+from pyscrapers.core.url_set import UrlSet
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_url, youtube_dl_download_urls
 
 
@@ -153,7 +154,7 @@ def download_url() -> None:
     session = requests.Session()
     session.cookies = ConfigCookiesSource.cookies
     logger = logging.getLogger(__name__)
-    urls = []
+    urls = UrlSet()
     for url in url_generator(url=ConfigUrl.url):
         logger.info("getting [{}]...".format(url))
         page = session.get(url)
@@ -168,5 +169,6 @@ def download_url() -> None:
             logger.info("url {} is [{}]".format(i, new_url))
         urls.extend(new_urls)
     session.close()
-    logger.info("got total [{}] urls".format(len(urls)))
-    youtube_dl_download_urls(urls)
+    logger.info("got total [{}] urls".format(len(urls.urls_list)))
+    logger.info("got [{}] appended twice urls".format(urls.appended_twice))
+    youtube_dl_download_urls(urls.urls_list)
