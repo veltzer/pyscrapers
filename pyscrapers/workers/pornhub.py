@@ -128,21 +128,22 @@ def get_urls_from_page(root) -> List[str]:
         '//ul[@id=\'mostRecentVideosSection\']',
         '//ul[contains(@class,\'pornstarsVideos\')]',
     ]
+    video_sections = []
     for xpath_attempt in xpath_attempts:
         video_sections = root.xpath(xpath_attempt)
         if len(video_sections) == 1:
             break
+    if len(video_sections) == 1:
+        video_section = video_sections[0]
+        elements = video_section.xpath('li[contains(@class,\'pcVideoListItem\')]')
+        urls = []
+        for element in elements:
+            key = element.attrib['_vkey']
+            url = "https://www.pornhub.com/view_video.php?viewkey={key}".format(key=key)
+            urls.append(url)
+        return urls
     else:
         return []
-    assert len(video_sections) == 1, len(video_sections)
-    video_section = video_sections[0]
-    elements = video_section.xpath('li[contains(@class,\'pcVideoListItem\')]')
-    urls = []
-    for element in elements:
-        key = element.attrib['_vkey']
-        url = "https://www.pornhub.com/view_video.php?viewkey={key}".format(key=key)
-        urls.append(url)
-    return urls
 
 
 def url_generator(url: str):
