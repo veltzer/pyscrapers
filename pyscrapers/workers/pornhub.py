@@ -13,8 +13,7 @@ import requests
 from pornhub_api import PornhubApi
 
 import pyscrapers.core.utils
-from pyscrapers.configs import ConfigPornhubSearch, ConfigDebugRequests, ConfigCookiesSource, \
-    ConfigPornhubUrl
+from pyscrapers.configs import ConfigPornhubSearch, ConfigDebugRequests, ConfigCookiesSource, ConfigUrl
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_url, youtube_dl_download_urls
 
 
@@ -140,10 +139,10 @@ def get_urls_from_page(root) -> List[str]:
 
 
 def url_generator(url: str):
-    yield 'https://www.pornhub.com/{url}'.format(url=url)
+    yield url
     page = 2
     while True:
-        yield "https://www.pornhub.com/{url}?page={page}".format(url=url, page=page)
+        yield "{url}?page={page}".format(url=url, page=page)
         page += 1
 
 
@@ -155,7 +154,7 @@ def download_url() -> None:
     session.cookies = ConfigCookiesSource.cookies
     logger = logging.getLogger(__name__)
     urls = []
-    for url in url_generator(url=ConfigPornhubUrl.url_part):
+    for url in url_generator(url=ConfigUrl.url):
         logger.info("getting [{}]...".format(url))
         page = session.get(url)
         if page.status_code != 200:
@@ -165,6 +164,8 @@ def download_url() -> None:
         if len(new_urls) == 0:
             break
         logger.info("got [{}] new urls".format(len(new_urls)))
+        for i, new_url in enumerate(new_urls):
+            logger.info("url {} is [{}]".format(i, new_url))
         urls.extend(new_urls)
     session.close()
     logger.info("got total [{}] urls".format(len(urls)))
