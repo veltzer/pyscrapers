@@ -12,7 +12,7 @@ project website: https://veltzer.github.io/pyscrapers
 
 author: Mark Veltzer
 
-version: 0.0.33
+version: 0.0.34
 
 What is it?
 -----------

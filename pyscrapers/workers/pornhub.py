@@ -124,9 +124,9 @@ def get_urls_from_page(root) -> List[str]:
     # <ul class="dropdownHottestVideos videos" id="hottestMenuSection">
     # <ul class="videos row-5-thumbs" id="mostRecentVideosSection">
     xpath_attempts = [
+        '//ul[contains(@class,\'pornstarsVideos\')]',
         '//ul[@id=\'moreData\']',
         '//ul[@id=\'mostRecentVideosSection\']',
-        '//ul[contains(@class,\'pornstarsVideos\')]',
     ]
     video_sections = []
     for xpath_attempt in xpath_attempts:
