@@ -6,7 +6,7 @@ all:
 	@pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 	@pytest tests -qq > /dev/null
 	@pyflakes $(ALL_PACKAGES)
-	@pylint --rcfile=.pylint.rc --reports=n --score=n $(ALL_PACKAGES) 
+	@pylint --reports=n --score=n $(ALL_PACKAGES) 
 	@flake8 $(ALL_PACKAGES)
 	@python -m unittest discover -s .
 
@@ -24,7 +24,7 @@ pyflakes:
 
 .PHONY: pylint
 pylint:
-	@pylint --rcfile=.pylint.rc --reports=n --score=n $(ALL_PACKAGES)
+	@pylint --reports=n --score=n $(ALL_PACKAGES)
 
 .PHONY: flake8
 flake8:
