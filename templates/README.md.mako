@@ -4,7 +4,6 @@
     import user.personal
     import os
 %>
-
 # *${config.project.project_name}* project by ${user.personal.personal_fullname}
 
 ![PyPI - Status](https://img.shields.io/pypi/status/${config.python.package_name})
@@ -22,10 +21,11 @@
 ![Downloads](https://pepy.tech/badge/${config.python.package_name}/month)
 ![Downloads](https://pepy.tech/badge/${config.python.package_name}/week)
 
+![linter](https://github.com/veltzer/${config.project.project_name}/workflows/linter/badge.svg)
+
 ${config.project.project_short_description}
 
-project website: ${config.project.project_website}
-
+project website: <${config.project.project_website}>
 % if os.path.isfile("snipplets/main.md.mako"):
 <%include file="../snipplets/main.md.mako" />
 % endif
