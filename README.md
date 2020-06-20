@@ -1,5 +1,4 @@
 
-
 # *pyscrapers* project by Mark Veltzer
 
 ![PyPI - Status](https://img.shields.io/pypi/status/pyscrapers)
@@ -17,7 +16,7 @@
 ![Downloads](https://pepy.tech/badge/pyscrapers/month)
 ![Downloads](https://pepy.tech/badge/pyscrapers/week)
 
+
 project to produce various useful scrapers
 
-project website: https://veltzer.github.io/pyscrapers
-
+project website: <https://veltzer.github.io/pyscrapers>
