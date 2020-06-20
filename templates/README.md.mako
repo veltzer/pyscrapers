@@ -3,6 +3,8 @@
     import config.python
     import user.personal
     import os
+    import glob
+    import yaml
 %>
 # *${config.project.project_name}* project by ${user.personal.personal_fullname}
 
@@ -20,8 +22,20 @@
 ![Downloads](https://pepy.tech/badge/${config.python.package_name})
 ![Downloads](https://pepy.tech/badge/${config.python.package_name}/month)
 ![Downloads](https://pepy.tech/badge/${config.python.package_name}/week)
+<%
+	actions = glob.glob('.github/workflows/*.yml')
+	names = []
+	for action in actions:
+		with open(action, 'r') as stream:
+			names.append(yaml.safe_load(stream)["name"])
+%>
+% if names:
+Actions
 
-![linter](https://github.com/veltzer/${config.project.project_name}/workflows/linter/badge.svg)
+	% for name in names:
+![${name}](https://github.com/veltzer/${config.project.project_name}/workflows/${name}/badge.svg)
+	% endfor
+% endif
 
 ${config.project.project_short_description}
 

@@ -60,7 +60,8 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
-disable=print-statement,
+disable=\
+	print-statement,
         parameter-unpacking,
         unpacking-in-except,
         old-raise-syntax,
@@ -138,7 +139,13 @@ disable=print-statement,
         xreadlines-attribute,
         deprecated-sys-function,
         exception-escape,
-        comprehension-escape
+        comprehension-escape,
+	C0114,
+	C0103,
+	C0116,
+	C0115,
+	R1702,
+	C0330
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
