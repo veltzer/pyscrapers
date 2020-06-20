@@ -1,5 +1,5 @@
 """
-All configurations for pymakehelper
+All configurations for pyscrapers
 """
 import os
 
