@@ -84,3 +84,4 @@ celerybeat-schedule
 /.pydmt/
 
 /.pyre/
+/node_modules/
