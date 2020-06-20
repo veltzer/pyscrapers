@@ -1,5 +1,15 @@
-PACKAGE_NAME:=$(shell python -c "import config.python; print(config.python.package_name);")
-ALL_PACKAGES:=$(PACKAGE_NAME) tests config
+check-have-folder = $(shell if test -d $1; then echo 1; else echo 0; fi)
+
+ifeq ($(call check-have-folder,config),1)
+	PACKAGE_NAME:=$(shell python -c "import config.python; print(config.python.package_name);")
+else
+	PACKAGE_NAME:=$(notdir $(PWD))
+	ifeq ($(call check-have-folder,$(PACKAGE_NAME)),0)
+		$(error cannot deduce package name)
+	endif
+endif
+
+ALL_PACKAGES:=$(dir $(wildcard */__init__.py))
 
 .PHONY: all
 all:
