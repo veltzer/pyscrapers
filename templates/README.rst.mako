@@ -21,6 +21,4 @@ author: ${user.personal.personal_fullname}
 
 version: ${config.version.version_str}
 
-% if os.path.isfile("snipplets/main.rst.mako"):
 <%include file="../snipplets/main.rst.mako" />
-% endif
