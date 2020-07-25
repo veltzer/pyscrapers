@@ -4,7 +4,7 @@ All configurations for pyscrapers
 import os
 
 import browser_cookie3
-from pytconf.config import Config, ParamCreator
+from pytconf import Config, ParamCreator
 
 import logging
 

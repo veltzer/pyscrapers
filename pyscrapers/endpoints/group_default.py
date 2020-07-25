@@ -6,7 +6,7 @@ import shelve
 
 import requests
 from pornhub_api import PornhubApi
-from pytconf.config import register_endpoint, register_function_group
+from pytconf import register_endpoint, register_function_group
 
 import pyscrapers.core.utils
 import pyscrapers.version
