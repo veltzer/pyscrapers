@@ -1,6 +1,6 @@
 import os
-import config.project
 import subprocess
+import config.project
 
 deb_package = True
 deb_section = 'python'
