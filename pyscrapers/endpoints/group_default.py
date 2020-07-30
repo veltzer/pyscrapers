@@ -174,12 +174,13 @@ def pornhub_download_url():
 
 @register_endpoint(
     configs=[
+        ConfigUrl,
         ConfigYoutubeDl,
     ],
     group=GROUP_NAME_DEFAULT,
 )
 def youtube_dl():
     """
-    Download movies from pornhub
+    Download movies using youtuble_dl
     """
     youtube_dl_handler()
