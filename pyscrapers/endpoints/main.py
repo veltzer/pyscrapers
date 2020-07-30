@@ -23,7 +23,7 @@ def main():
     """
     pylogconf.core.setup()
     register_all_groups()
-    config_arg_parse_and_launch()
+    config_arg_parse_and_launch(app_name="pyscrapers")
 
 
 if __name__ == '__main__':
