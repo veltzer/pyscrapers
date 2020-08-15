@@ -17,8 +17,11 @@
 ![Downloads](https://pepy.tech/badge/pyscrapers/week)
 
 
+
 project to produce various useful scrapers
 
 project website: <https://veltzer.github.io/pyscrapers>
+
+chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
 
