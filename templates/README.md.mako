@@ -22,6 +22,7 @@
 ![Downloads](https://pepy.tech/badge/${config.python.package_name})
 ![Downloads](https://pepy.tech/badge/${config.python.package_name}/month)
 ![Downloads](https://pepy.tech/badge/${config.python.package_name}/week)
+
 <%
 	actions = glob.glob('.github/workflows/*.yml')
 	names = []
@@ -40,5 +41,7 @@ Actions
 ${config.project.project_short_description}
 
 project website: <${config.project.project_website}>
+
+chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
 <%include file="../snipplets/main.md.mako" />
