@@ -22,10 +22,10 @@ pyscrapers.configs module
    :undoc-members:
    :show-inheritance:
 
-pyscrapers.version module
--------------------------
+pyscrapers.static module
+------------------------
 
-.. automodule:: pyscrapers.version
+.. automodule:: pyscrapers.static
    :members:
    :undoc-members:
    :show-inheritance:
