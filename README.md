@@ -16,6 +16,8 @@
 ![Downloads](https://pepy.tech/badge/pyscrapers/month)
 ![Downloads](https://pepy.tech/badge/pyscrapers/week)
 
+[![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pyscrapers/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pyscrapers?targetFile=requirements.txt)
+
 
 
 project to produce various useful scrapers

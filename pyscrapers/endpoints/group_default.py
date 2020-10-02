@@ -9,7 +9,7 @@ from pornhub_api import PornhubApi
 from pytconf import register_endpoint, register_function_group
 
 import pyscrapers.core.utils
-import pyscrapers.version
+import pyscrapers.static
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
     ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl
 from pyscrapers.core.url_set import UrlSet
@@ -35,16 +35,6 @@ def register_group_default():
         function_group_name=GROUP_NAME_DEFAULT,
         function_group_description=GROUP_DESCRIPTION_DEFAULT,
     )
-
-
-@register_endpoint(
-    group=GROUP_NAME_DEFAULT,
-)
-def version() -> None:
-    """
-    Print version
-    """
-    print(pyscrapers.version.VERSION_STR)
 
 
 @register_endpoint(
