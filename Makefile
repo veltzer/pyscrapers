@@ -12,8 +12,8 @@
 
 PYTHON=python3
 ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
-# We do it this way because we cannot rely on the current path (in CICD it could be anything, and we
-# dont want to run pyton as above
+# We do it this way because we cannot rely on the current path (in CI/CD it could be anything, and we
+# dont want to run python as above
 PACKAGE_NAME:=$(filter-out tests config,$(ALL_PACKAGES))
 
 .PHONY: all
