@@ -11,27 +11,9 @@
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/docs" />
       <excludeFolder url="file://$MODULE_DIR$/pyscrapers.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/htmlcov" />
+      <excludeFolder url="file://$MODULE_DIR$/wheel" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (pyscrapers)" jdkType="Python SDK" />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
-  <component name="TemplatesService">
-    <option name="templateFileTypes">
-      <list>
-        <option value="HTML" />
-        <option value="XHTML" />
-        <option value="XML" />
-        <option value="Markdown" />
-      </list>
-    </option>
-    <option name="TEMPLATE_CONFIGURATION" value="Mako" />
-    <option name="TEMPLATE_FOLDERS">
-      <list>
-        <option value="$MODULE_DIR$/templartmpl" />
-      </list>
-    </option>
-  </component>
-  <component name="TestRunnerService">
-    <option name="PROJECT_TEST_RUNNER" value="Nosetests" />
   </component>
 </module>
