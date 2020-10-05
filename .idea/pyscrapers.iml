@@ -16,4 +16,20 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (pyscrapers)" jdkType="Python SDK" />
   </component>
+  <component name="TemplatesService">
+    <option name="templateFileTypes">
+      <list>
+        <option value="XML" />
+        <option value="HTML" />
+        <option value="XHTML" />
+        <option value="Markdown" />
+      </list>
+    </option>
+    <option name="TEMPLATE_CONFIGURATION" value="Mako" />
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/templates" />
+      </list>
+    </option>
+  </component>
 </module>
