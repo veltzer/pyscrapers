@@ -42,7 +42,7 @@ Actions
 
 ${config.project.project_short_description}
 
-project website: <${config.project.project_website}>
+project website: ${config.project.project_website}
 
 chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
