@@ -19,10 +19,13 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pyscrapers/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pyscrapers?targetFile=requirements.txt)
 
 
+Actions
+
+![build](https://github.com/veltzer/pyscrapers/workflows/build/badge.svg)
 
 project to produce various useful scrapers
 
-project website: <https://veltzer.github.io/pyscrapers>
+project website: https://veltzer.github.io/pyscrapers
 
 chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
