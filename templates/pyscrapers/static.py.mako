@@ -5,3 +5,4 @@
 VERSION_STR = "${config.version.version_str}"
 DESCRIPTION = "${config.project.project_short_description}"
 APP_NAME = "${config.project.project_name}"
+LOGGER_NAME = "${config.project.project_name}"

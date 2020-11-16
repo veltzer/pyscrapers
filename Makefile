@@ -14,15 +14,15 @@ PYTHON=python3
 ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
 # We do it this way because we cannot rely on the current path (in CI/CD it could be anything, and we
 # dont want to run python as above
-PACKAGE_NAME:=$(filter-out tests config,$(ALL_PACKAGES))
+PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 
 .PHONY: all
 all:
-	@pymakehelper only_print_on_error --print_command True $(PYTHON) -m pytest tests
-	@pymakehelper only_print_on_error --print_command True $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
-	@pymakehelper only_print_on_error --print_command True $(PYTHON) -m flake8 $(ALL_PACKAGES)
-	@pymakehelper only_print_on_error --print_command True $(PYTHON) -m unittest discover -s .
-	@pymakehelper only_print_on_error --print_command True $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
+	@pymakehelper only_print_on_error $(PYTHON) -m pytest tests
+	@pymakehelper only_print_on_error $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
+	@pymakehelper only_print_on_error $(PYTHON) -m flake8 $(ALL_PACKAGES)
+	@pymakehelper only_print_on_error $(PYTHON) -m unittest discover -s .
+	@pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 
 .PHONY: pytest
 pytest:
