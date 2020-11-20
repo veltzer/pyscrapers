@@ -21,26 +21,24 @@ install_requires = [
 ]
 
 test_requires = [
-    'pylint',  # to check for lint errors
-    'pytest',  # for testing
-    'pyflakes',  # for testing
-    'pyre-check',  # for type checking
-    'flake8',  # for quality code
+    'pylint',
+    'pytest',
+    'pyflakes',
+    'pyre-check',
+    'flake8',
 ]
-# 'pychecker',  # for quality checks
 
 
 dev_requires = [
     'pyclassifiers',
     'pypitools',
     'pydmt',
-    'Sphinx',  # for the sphinx builder
+    'Sphinx',
 ]
 
 python_requires = ">=3.6"
 
 extras_require = {
-    # ':python_version == "2.7"': ['futures'],  # for python2.7 backport of concurrent.futures
 }
 
 # deb section
