@@ -17,12 +17,7 @@ setuptools.setup(
     # the first three fields are a must according to the documentation
     name="${config.project.project_name}",
     version="${config.version.version_str}",
-% if os.path.isdir(config.python.package_name):
     packages=${pydmt.helpers.python.array_indented(1, pydmt.helpers.python.find_packages(config.python.package_name))},
-% endif
-% if os.path.isfile(config.python.package_name+".py"):
-    py_modules=["${config.python.package_name}"],
-% endif
     # from here all is optional
     description="${config.project.project_description}",
     long_description=get_readme(),
