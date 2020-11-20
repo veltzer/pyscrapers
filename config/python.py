@@ -60,3 +60,6 @@ deb_standards_version = '3.9.8'
 deb_x_python_version = '>= 3.4'
 deb_x_python3_version = '>= 3.4'
 deb_urgency = 'low'
+test_os = "[ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]"
+test_python = "[3.6, 3.7, 3.8]"
+test_container = "[ 'ubuntu:18.04', 'ubuntu:20.04' ]"

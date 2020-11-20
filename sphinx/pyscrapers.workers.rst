@@ -68,7 +68,6 @@ pyscrapers.workers.youtube\_dl\_handlers module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

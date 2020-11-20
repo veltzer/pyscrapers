@@ -48,7 +48,7 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
     json_text = data[data.find('{'):data.rfind('}') + 1]
     d = json.loads(json_text)
     my_list = d['entry_data']['ProfilePage']
-    assert (len(my_list) == 1)
+    assert len(my_list) == 1
     c = my_list[0]["graphql"]["user"]
     if 'profile_pic_url_hd' in c:
         url_set.append(c['profile_pic_url_hd'])
