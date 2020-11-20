@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscrapers.workers.vk &#8212; pyscrapers 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pyscrapers.workers.vk</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">lxml.etree</span>
+<span class="kn">import</span> <span class="nn">lxml.html</span>
+
+<span class="kn">from</span> <span class="nn">pyscrapers.core.url_set</span> <span class="kn">import</span> <span class="n">UrlSet</span>
+
+
+<div class="viewcode-block" id="get_my_content"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.vk.get_my_content">[docs]</a><span class="k">def</span> <span class="nf">get_my_content</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    the return from the server in vk is not a standard HTML.</span>
+<span class="sd">    this is why we must cut it up and cant use the regular</span>
+<span class="sd">    &#39;get_real_content&#39; helper.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="c1"># str_content=r.content.decode(errors=&#39;ignore&#39;)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span>  <span class="c1"># type: bytes</span>
+        <span class="n">str_content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;could not decode&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">str_content</span> <span class="o">=</span> <span class="n">str_content</span><span class="p">[</span><span class="n">str_content</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&lt;input&#39;</span><span class="p">):]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;&lt;html&gt;&lt;body&gt;&#39;</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">str_content</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">root</span></div>
+
+
+<div class="viewcode-block" id="scrape_vk"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.vk.scrape_vk">[docs]</a><span class="k">def</span> <span class="nf">scrape_vk</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_set</span><span class="p">:</span> <span class="n">UrlSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://vk.com/al_photos.php&#39;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;act&#39;</span><span class="p">:</span> <span class="s1">&#39;show_albums&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;al&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;owner&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">get_my_content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="n">e_albums</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//div[@class=&quot;photos_album_title_wrap&quot;]&#39;</span><span class="p">)</span>
+    <span class="n">albums</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e_albums</span><span class="p">:</span>
+        <span class="n">name_of_album</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">e_len</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//div[@class=&quot;photos_album_counter fl_r&quot;]/text()&#39;</span><span class="p">)</span>
+        <span class="n">albums</span><span class="p">[</span><span class="n">name_of_album</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">e_len</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">albums</span><span class="p">)</span>
+    <span class="n">total_images</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">albums</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;got [</span><span class="si">%d</span><span class="s1">] partial images&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="n">total_images</span> <span class="o">+=</span> <span class="n">v</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;got [</span><span class="si">%d</span><span class="s1">] potential images&#39;</span><span class="p">,</span> <span class="n">total_images</span><span class="p">)</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">got</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">got</span><span class="p">:</span>
+        <span class="n">got</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;act&#39;</span><span class="p">:</span> <span class="s1">&#39;show_albums&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;al&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;owner&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+            <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="n">count</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;doing request </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">get_my_content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">e_a</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[@onclick]&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e_a</span><span class="p">:</span>
+            <span class="n">onclick</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;onclick&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">onclick</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;return showPhoto&#39;</span><span class="p">):</span>
+                <span class="n">json_str</span> <span class="o">=</span> <span class="n">onclick</span><span class="p">[</span><span class="n">onclick</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">):</span><span class="n">onclick</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+                <span class="c1"># bas string, need fix lots of things...</span>
+                <span class="n">json_str</span> <span class="o">=</span> <span class="n">json_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+                <span class="n">json_str</span> <span class="o">=</span> <span class="n">json_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jumpTo&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;jumpTo&quot;&#39;</span><span class="p">)</span>
+                <span class="n">json_str</span> <span class="o">=</span> <span class="n">json_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;z:&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;z&quot;:&#39;</span><span class="p">)</span>
+                <span class="n">json_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span>
+                <span class="n">base</span> <span class="o">=</span> <span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">][</span><span class="s1">&#39;base&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">base</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">largest</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">largest_url</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">min_len</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">min_len</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;base&#39;</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="n">largest</span><span class="p">:</span>
+                                <span class="n">largest</span> <span class="o">=</span> <span class="n">size</span>
+                                <span class="n">largest_url</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">full_url</span> <span class="o">=</span> <span class="n">base</span><span class="o">+</span><span class="n">largest_url</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span>
+                    <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_url</span><span class="p">)</span>
+                    <span class="n">got</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">min_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;base&#39;</span><span class="p">:</span>
+                            <span class="n">add_url</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="n">full_url</span> <span class="o">=</span> <span class="n">base</span><span class="o">+</span><span class="n">add_url</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span>
+                            <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_url</span><span class="p">)</span>
+                    <span class="n">got</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="n">got</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Mark Veltzer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
