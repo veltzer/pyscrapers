@@ -69,14 +69,13 @@ class ConfigCookiesSource(Config):
         default="firefox",
     )
 
-    cookies = None
 
-    @classmethod
-    def config_cookies(cls):
-        if ConfigCookiesSource.browser == "firefox":
-            cls.cookies = browser_cookie3.firefox()
-        if ConfigCookiesSource.browser == "chrome":
-            cls.cookies = browser_cookie3.chrome()
+def get_cookies():
+    if ConfigCookiesSource.browser == "firefox":
+        return browser_cookie3.firefox()
+    if ConfigCookiesSource.browser == "chrome":
+        return browser_cookie3.chrome()
+    raise ValueError(f"unsupported browser [{ConfigCookiesSource.browser}")
 
 
 class ConfigSiteId(Config):

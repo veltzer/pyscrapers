@@ -13,7 +13,7 @@ import requests
 from pornhub_api import PornhubApi
 
 import pyscrapers.core.utils
-from pyscrapers.configs import ConfigPornhubSearch, ConfigDebugRequests, ConfigCookiesSource, ConfigUrl
+from pyscrapers.configs import ConfigPornhubSearch, ConfigDebugRequests, ConfigUrl, get_cookies
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_url, youtube_dl_download_urls
 
@@ -157,9 +157,8 @@ def url_generator(url: str):
 def download_url() -> None:
     if ConfigDebugRequests.debug:
         pyscrapers.core.utils.debug_requests()
-    ConfigCookiesSource.config_cookies()
     session = requests.Session()
-    session.cookies = ConfigCookiesSource.cookies
+    session.cookies = get_cookies()
     logger = logging.getLogger(__name__)
     urls = UrlSet()
     for url in url_generator(url=ConfigUrl.url):

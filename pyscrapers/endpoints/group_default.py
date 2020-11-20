@@ -11,7 +11,7 @@ from pytconf import register_endpoint, register_function_group
 import pyscrapers.core.utils
 import pyscrapers.static
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl
+    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
@@ -55,9 +55,8 @@ def photos():
         pyscrapers.core.utils.debug_requests()
     logger = logging.getLogger('pyscrapers')
     logger.setLevel(ConfigLogging.loglevel)
-    ConfigCookiesSource.config_cookies()
     session = requests.Session()
-    session.cookies = ConfigCookiesSource.cookies
+    session.cookies = get_cookies()
     url_set = UrlSet()
     if ConfigSiteId.site == "facebook":
         scrape_facebook(ConfigSiteId.user_id, session, url_set)
@@ -87,10 +86,8 @@ def drumeo():
     if ConfigDebugRequests.debug:
         pyscrapers.core.utils.debug_requests()
 
-    ConfigCookiesSource.config_cookies()
-
     session = requests.Session()
-    session.cookies = ConfigCookiesSource.cookies
+    session.cookies = get_cookies()
 
     logger = logging.getLogger(__name__)
     courses = False
