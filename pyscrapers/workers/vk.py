@@ -17,7 +17,7 @@ def get_my_content(r):
     assert r.status_code == 200
     # str_content=r.content.decode(errors='ignore')
     try:
-        content = r.content  # type: bytes
+        content: bytes= r.content
         str_content = content.decode(errors='ignore')
     except Exception as e:
         print(e)
