@@ -51,7 +51,7 @@
     <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
     <span class="c1"># str_content=r.content.decode(errors=&#39;ignore&#39;)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span>  <span class="c1"># type: bytes</span>
+        <span class="n">content</span><span class="p">:</span> <span class="nb">bytes</span><span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span>
         <span class="n">str_content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
