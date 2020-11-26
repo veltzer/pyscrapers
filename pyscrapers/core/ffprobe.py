@@ -1,6 +1,3 @@
-import json
-import subprocess
-
 """
 This is a module that returns information about video streams based on running ffprobe
 as a subprocess.
@@ -9,13 +6,16 @@ References:
 - http://stackoverflow.com/questions/3844430/how-to-get-the-duration-of-a-video-in-python/3844467
 """
 
+import json
+import subprocess
+
 
 def probe(vid_file_path):
     """ Give a json from ffprobe command line
 
     @vid_file_path : The absolute (full) path of the video file, string.
     """
-    if type(vid_file_path) != str:
+    if isinstance(vid_file_path, str):
         raise Exception('Give ffprobe a full file path of the video')
 
     args = [

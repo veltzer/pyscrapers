@@ -73,8 +73,7 @@ def download_search() -> None:
             code = e.args[0]["code"]
             if code == "2001":  # no videos found (end of results)
                 break
-            else:
-                raise e
+            raise e
         urls = [video.url for video in data.videos]
         if limit is not None:
             urls = list(islice(urls, 0, limit - counter))
@@ -142,8 +141,7 @@ def get_urls_from_page(root) -> List[str]:
             url = "https://www.pornhub.com/view_video.php?viewkey={key}".format(key=key)
             urls.append(url)
         return urls
-    else:
-        return []
+    return []
 
 
 def url_generator(url: str):

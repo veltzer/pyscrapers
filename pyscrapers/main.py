@@ -4,15 +4,16 @@ The default group of operations that pyscrapers has
 import logging
 import shelve
 
+import pylogconf.core
 import requests
 from pornhub_api import PornhubApi
-from pytconf import register_endpoint, register_function_group
+from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
 import pyscrapers.core.utils
-import pyscrapers.static
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
     ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies
 from pyscrapers.core.url_set import UrlSet
+from pyscrapers.static import APP_NAME, VERSION_STR
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
 from pyscrapers.workers.facebook import scrape_facebook
@@ -23,21 +24,9 @@ from pyscrapers.workers.travelgirls import scrape_travelgirls
 from pyscrapers.workers.vk import scrape_vk
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
 
-GROUP_NAME_DEFAULT = "default"
-GROUP_DESCRIPTION_DEFAULT = "all pyscapers commands"
-
-
-def register_group_default():
-    """
-    register the name and description of this group
-    """
-    register_function_group(
-        function_group_name=GROUP_NAME_DEFAULT,
-        function_group_description=GROUP_DESCRIPTION_DEFAULT,
-    )
-
 
 @register_endpoint(
+    description="Download photo albums from various sites",
     configs=[
         ConfigSiteId,
         ConfigDebugRequests,
@@ -45,12 +34,8 @@ def register_group_default():
         ConfigDownload,
         ConfigLogging,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def photos():
-    """
-    Download photo albums from various sites
-    """
     if ConfigDebugRequests.debug:
         pyscrapers.core.utils.debug_requests()
     logger = logging.getLogger('pyscrapers')
@@ -73,16 +58,13 @@ def photos():
 
 
 @register_endpoint(
+    description="Download videos from drumeo",
     configs=[
         ConfigDebugRequests,
         ConfigCookiesSource,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def drumeo():
-    """
-    Download videos from drumeo
-    """
     if ConfigDebugRequests.debug:
         pyscrapers.core.utils.debug_requests()
 
@@ -117,32 +99,27 @@ def drumeo():
 
 
 @register_endpoint(
-    group=GROUP_NAME_DEFAULT,
+    description="print stars all detailed",
 )
 def pornhub_stars_all_detailed():
-    """
-    print stars all detailed
-    """
     api = PornhubApi()
     print_stars_all_detailed(api)
 
 
 @register_endpoint(
+    description="Download search results from pornhub",
     configs=[
         ConfigPornhubSearch,
         ConfigDownload,
         ConfigYoutubeDl,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def pornhub_download_search():
-    """
-    Download search results from pornhub
-    """
     download_search()
 
 
 @register_endpoint(
+    description="Download url videos from pornhub",
     configs=[
         ConfigDebugRequests,
         ConfigCookiesSource,
@@ -150,24 +127,31 @@ def pornhub_download_search():
         ConfigDownload,
         ConfigYoutubeDl,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def pornhub_download_url():
-    """
-    Download url videos from pornhub
-    """
     download_url()
 
 
 @register_endpoint(
+    description="Download movies using youtuble_dl",
     configs=[
         ConfigUrl,
         ConfigYoutubeDl,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def youtube_dl():
-    """
-    Download movies using youtuble_dl
-    """
     youtube_dl_handler()
+
+
+@register_main(
+    main_description="pyscapers will help you download stuff from the web",
+    app_name=APP_NAME,
+    version=VERSION_STR,
+)
+def main():
+    pylogconf.core.setup()
+    config_arg_parse_and_launch()
+
+
+if __name__ == '__main__':
+    main()

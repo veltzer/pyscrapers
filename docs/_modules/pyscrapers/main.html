@@ -5,18 +5,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyscrapers.endpoints.group_default &#8212; pyscrapers 0.0.1 documentation</title>
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
+    <title>pyscrapers.main &#8212; pyscrapers 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
    
-  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
@@ -31,22 +31,23 @@
 
           <div class="body" role="main">
             
-  <h1>Source code for pyscrapers.endpoints.group_default</h1><div class="highlight"><pre>
+  <h1>Source code for pyscrapers.main</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">The default group of operations that pyscrapers has</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">shelve</span>
 
+<span class="kn">import</span> <span class="nn">pylogconf.core</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">pornhub_api</span> <span class="kn">import</span> <span class="n">PornhubApi</span>
-<span class="kn">from</span> <span class="nn">pytconf</span> <span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_function_group</span>
+<span class="kn">from</span> <span class="nn">pytconf</span> <span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_main</span><span class="p">,</span> <span class="n">config_arg_parse_and_launch</span>
 
 <span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
-<span class="kn">import</span> <span class="nn">pyscrapers.static</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigDebugRequests</span><span class="p">,</span> <span class="n">ConfigCookiesSource</span><span class="p">,</span> <span class="n">ConfigSiteId</span><span class="p">,</span> <span class="n">ConfigPornhubSearch</span><span class="p">,</span> \
     <span class="n">ConfigYoutubeDl</span><span class="p">,</span> <span class="n">ConfigDownload</span><span class="p">,</span> <span class="n">ConfigLogging</span><span class="p">,</span> <span class="n">ConfigUrl</span><span class="p">,</span> <span class="n">get_cookies</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.core.url_set</span> <span class="kn">import</span> <span class="n">UrlSet</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.static</span> <span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.drumeo</span> <span class="kn">import</span> <span class="n">get_number_of_pages</span><span class="p">,</span> <span class="n">get_courses</span><span class="p">,</span> <span class="n">get_course_details</span><span class="p">,</span> <span class="n">get_course_urls</span><span class="p">,</span> \
     <span class="n">download_course</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.facebook</span> <span class="kn">import</span> <span class="n">scrape_facebook</span>
@@ -57,21 +58,9 @@
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.vk</span> <span class="kn">import</span> <span class="n">scrape_vk</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.youtube_dl_handlers</span> <span class="kn">import</span> <span class="n">youtube_dl_handler</span>
 
-<span class="n">GROUP_NAME_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
-<span class="n">GROUP_DESCRIPTION_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;all pyscapers commands&quot;</span>
 
-
-<div class="viewcode-block" id="register_group_default"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.register_group_default">[docs]</a><span class="k">def</span> <span class="nf">register_group_default</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    register the name and description of this group</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">register_function_group</span><span class="p">(</span>
-        <span class="n">function_group_name</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
-        <span class="n">function_group_description</span><span class="o">=</span><span class="n">GROUP_DESCRIPTION_DEFAULT</span><span class="p">,</span>
-    <span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="photos"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.photos">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+<div class="viewcode-block" id="photos"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.photos">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download photo albums from various sites&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigSiteId</span><span class="p">,</span>
         <span class="n">ConfigDebugRequests</span><span class="p">,</span>
@@ -79,12 +68,8 @@
         <span class="n">ConfigDownload</span><span class="p">,</span>
         <span class="n">ConfigLogging</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">photos</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Download photo albums from various sites</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
         <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">debug_requests</span><span class="p">()</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;pyscrapers&#39;</span><span class="p">)</span>
@@ -106,17 +91,14 @@
     <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="drumeo"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.drumeo">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+<div class="viewcode-block" id="drumeo"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.drumeo">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download videos from drumeo&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigDebugRequests</span><span class="p">,</span>
         <span class="n">ConfigCookiesSource</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">drumeo</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Download videos from drumeo</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
         <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">debug_requests</span><span class="p">()</span>
 
@@ -150,33 +132,28 @@
     <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="pornhub_stars_all_detailed"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.pornhub_stars_all_detailed">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
+<div class="viewcode-block" id="pornhub_stars_all_detailed"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.pornhub_stars_all_detailed">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;print stars all detailed&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">pornhub_stars_all_detailed</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    print stars all detailed</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">api</span> <span class="o">=</span> <span class="n">PornhubApi</span><span class="p">()</span>
     <span class="n">print_stars_all_detailed</span><span class="p">(</span><span class="n">api</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="pornhub_download_search"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.pornhub_download_search">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+<div class="viewcode-block" id="pornhub_download_search"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.pornhub_download_search">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download search results from pornhub&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigPornhubSearch</span><span class="p">,</span>
         <span class="n">ConfigDownload</span><span class="p">,</span>
         <span class="n">ConfigYoutubeDl</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">pornhub_download_search</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Download search results from pornhub</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">download_search</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="pornhub_download_url"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.pornhub_download_url">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+<div class="viewcode-block" id="pornhub_download_url"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.pornhub_download_url">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download url videos from pornhub&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigDebugRequests</span><span class="p">,</span>
         <span class="n">ConfigCookiesSource</span><span class="p">,</span>
@@ -184,27 +161,34 @@
         <span class="n">ConfigDownload</span><span class="p">,</span>
         <span class="n">ConfigYoutubeDl</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">pornhub_download_url</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Download url videos from pornhub</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">download_url</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="youtube_dl"><a class="viewcode-back" href="../../../pyscrapers.endpoints.html#pyscrapers.endpoints.group_default.youtube_dl">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+<div class="viewcode-block" id="youtube_dl"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.youtube_dl">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download movies using youtuble_dl&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigUrl</span><span class="p">,</span>
         <span class="n">ConfigYoutubeDl</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">youtube_dl</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Download movies using youtuble_dl</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">youtube_dl_handler</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.main">[docs]</a><span class="nd">@register_main</span><span class="p">(</span>
+    <span class="n">main_description</span><span class="o">=</span><span class="s2">&quot;pyscapers will help you download stuff from the web&quot;</span><span class="p">,</span>
+    <span class="n">app_name</span><span class="o">=</span><span class="n">APP_NAME</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="n">VERSION_STR</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">pylogconf</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">config_arg_parse_and_launch</span><span class="p">()</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
           </div>
@@ -215,8 +199,8 @@
         <div class="sphinxsidebarwrapper"><div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
-  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
   </ul></li>
   </ul></li>
 </ul>
@@ -224,7 +208,7 @@
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
+    <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
