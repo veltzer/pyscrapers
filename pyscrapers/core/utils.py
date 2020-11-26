@@ -156,8 +156,7 @@ def download_video_if_wider(session, source: str, target: str, width: int) -> bo
         if file_width >= width:
             logger.info('skipping because video with width exists [%s] %s %s', target, file_width, width)
             return True
-        else:
-            logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
+        logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
     try:
         response = session.get(source, stream=True)
         if FAIL:
@@ -169,15 +168,12 @@ def download_video_if_wider(session, source: str, target: str, width: int) -> bo
         with open(target, 'wb') as file_handle:
             response.raw.decode_content = True
             shutil.copyfileobj(response.raw, file_handle)
-    except IOError:
+    except IOError as e:
         if os.path.isfile(target):
             os.unlink(target)
         if FAIL:
-            raise ValueError("count not download")
-        else:
-            logger.info("failed to download file")
-            return False
+            raise ValueError("count not download") from e
+        logger.info("failed to download file")
+        return False
     logger.info('written [%s]...', target)
     return True
-
-

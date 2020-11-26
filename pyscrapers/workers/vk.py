@@ -17,7 +17,7 @@ def get_my_content(r):
     assert r.status_code == 200
     # str_content=r.content.decode(errors='ignore')
     try:
-        content: bytes= r.content
+        content: bytes = r.content
         str_content = content.decode(errors='ignore')
     except Exception as e:
         print(e)
@@ -25,7 +25,7 @@ def get_my_content(r):
         print(r.content)
         sys.exit(1)
     str_content = str_content[str_content.find('<input'):]
-    c = str.encode('<html><body>')+str.encode(str_content)+str.encode('</body></html>')
+    c = str.encode('<html><body>') + str.encode(str_content) + str.encode('</body></html>')
     root = lxml.html.fromstring(c)
     return root
 
@@ -71,7 +71,7 @@ def scrape_vk(user_id: str, session, url_set: UrlSet) -> None:
         for x in e_a:
             onclick = x.attrib['onclick']
             if onclick.startswith('return showPhoto'):
-                json_str = onclick[onclick.find('{'):onclick.rfind('}')+1]
+                json_str = onclick[onclick.find('{'):onclick.rfind('}') + 1]
                 # bas string, need fix lots of things...
                 json_str = json_str.replace('\'', '"')
                 json_str = json_str.replace('jumpTo', '"jumpTo"')
@@ -86,18 +86,18 @@ def scrape_vk(user_id: str, session, url_set: UrlSet) -> None:
                 if min_len == 3:
                     for k, v in json_obj['temp'].items():
                         if k != 'base':
-                            size = v[1]*v[2]
+                            size = v[1] * v[2]
                             if size > largest:
                                 largest = size
                                 largest_url = v[0]
-                    full_url = base+largest_url+'.jpg'
+                    full_url = base + largest_url + '.jpg'
                     url_set.append(full_url)
                     got += 1
                 if min_len == 1:
                     for k, v in json_obj['temp'].items():
                         if k != 'base':
                             add_url = v[0]
-                            full_url = base+add_url+'.jpg'
+                            full_url = base + add_url + '.jpg'
                             url_set.append(full_url)
                     got += 1
         count += got

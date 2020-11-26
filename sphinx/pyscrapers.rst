@@ -8,7 +8,6 @@ Subpackages
    :maxdepth: 4
 
    pyscrapers.core
-   pyscrapers.endpoints
    pyscrapers.workers
 
 Submodules
@@ -18,6 +17,14 @@ pyscrapers.configs module
 -------------------------
 
 .. automodule:: pyscrapers.configs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pyscrapers.main module
+----------------------
+
+.. automodule:: pyscrapers.main
    :members:
    :undoc-members:
    :show-inheritance:

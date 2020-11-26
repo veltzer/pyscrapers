@@ -2,11 +2,10 @@
 All configurations for pyscrapers
 """
 import os
+import logging
 
 import browser_cookie3
 from pytconf import Config, ParamCreator
-
-import logging
 
 
 class ConfigLogging(Config):

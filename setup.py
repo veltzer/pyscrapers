@@ -13,7 +13,6 @@ setuptools.setup(
     packages=[
         'pyscrapers',
         'pyscrapers.core',
-        'pyscrapers.endpoints',
         'pyscrapers.workers',
     ],
     # from here all is optional
@@ -68,7 +67,7 @@ setuptools.setup(
     data_files=[
     ],
     entry_points={"console_scripts": [
-        'pyscrapers=pyscrapers.endpoints.main:main',
+        'pyscrapers=pyscrapers.main:main',
     ]},
     python_requires=">=3.6",
 )

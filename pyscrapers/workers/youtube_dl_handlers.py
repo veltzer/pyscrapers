@@ -12,7 +12,7 @@ import youtube_dl
 from pyscrapers.configs import ConfigYoutubeDl, ConfigUrl
 
 
-class MyLogger(object):
+class MyLogger:
     def debug(self, msg):
         pass
 
