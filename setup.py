@@ -9,7 +9,7 @@ def get_readme():
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="pyscrapers",
-    version="0.0.36",
+    version="0.0.37",
     packages=[
         'pyscrapers',
         'pyscrapers.core',
