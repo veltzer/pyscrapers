@@ -122,6 +122,9 @@ def get_urls_from_page(root) -> List[str]:
     # video_section = video_sections[0]
     # <ul class="dropdownHottestVideos videos" id="hottestMenuSection">
     # <ul class="videos row-5-thumbs" id="mostRecentVideosSection">
+    # pyscrapers.core.utils.print_element(root)
+    # import sys
+    # sys.exit(1)
     xpath_attempts = [
         '//ul[contains(@class,\'pornstarsVideos\')]',
         '//ul[@id=\'moreData\']',
@@ -137,7 +140,9 @@ def get_urls_from_page(root) -> List[str]:
         elements = video_section.xpath('li[contains(@class,\'pcVideoListItem\')]')
         urls = []
         for element in elements:
-            key = element.attrib['_vkey']
+            # pyscrapers.core.utils.print_element(element)
+            # key = element.attrib['_vkey']
+            key = element.attrib['data-video-vkey']
             url = "https://www.pornhub.com/view_video.php?viewkey={key}".format(key=key)
             urls.append(url)
         return urls

@@ -156,6 +156,9 @@
     <span class="c1"># video_section = video_sections[0]</span>
     <span class="c1"># &lt;ul class=&quot;dropdownHottestVideos videos&quot; id=&quot;hottestMenuSection&quot;&gt;</span>
     <span class="c1"># &lt;ul class=&quot;videos row-5-thumbs&quot; id=&quot;mostRecentVideosSection&quot;&gt;</span>
+    <span class="c1"># pyscrapers.core.utils.print_element(root)</span>
+    <span class="c1"># import sys</span>
+    <span class="c1"># sys.exit(1)</span>
     <span class="n">xpath_attempts</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;//ul[contains(@class,</span><span class="se">\&#39;</span><span class="s1">pornstarsVideos</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">,</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">moreData</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
@@ -171,7 +174,9 @@
         <span class="n">elements</span> <span class="o">=</span> <span class="n">video_section</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;li[contains(@class,</span><span class="se">\&#39;</span><span class="s1">pcVideoListItem</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">)</span>
         <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;_vkey&#39;</span><span class="p">]</span>
+            <span class="c1"># pyscrapers.core.utils.print_element(element)</span>
+            <span class="c1"># key = element.attrib[&#39;_vkey&#39;]</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;data-video-vkey&#39;</span><span class="p">]</span>
             <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.pornhub.com/view_video.php?viewkey=</span><span class="si">{key}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
             <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">urls</span>
