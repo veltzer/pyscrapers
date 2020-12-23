@@ -125,28 +125,32 @@ def get_urls_from_page(root) -> List[str]:
     # pyscrapers.core.utils.print_element(root)
     # import sys
     # sys.exit(1)
-    xpath_attempts = [
+    xpath_picks = [
         '//ul[contains(@class,\'pornstarsVideos\')]',
         '//ul[@id=\'moreData\']',
         '//ul[@id=\'mostRecentVideosSection\']',
+        #'//ul[@id=\'hottestMenuSection\']',
+        #'//ul[@id=\'recommMenuSection\']',
+        '//ul[@id=\'showAllChanelVideos\']',
     ]
     video_sections = []
-    for xpath_attempt in xpath_attempts:
-        video_sections = root.xpath(xpath_attempt)
-        if len(video_sections) == 1:
-            break
-    if len(video_sections) == 1:
-        video_section = video_sections[0]
+    for xpath_pick in xpath_picks:
+        candidates = root.xpath(xpath_pick)
+        if len(candidates) != 1:
+            continue
+        candidate = candidates[0]
+        video_sections.append(candidate)
+    urls = []
+    print(video_sections)
+    for video_section in video_sections:
         elements = video_section.xpath('li[contains(@class,\'pcVideoListItem\')]')
-        urls = []
         for element in elements:
             # pyscrapers.core.utils.print_element(element)
             # key = element.attrib['_vkey']
             key = element.attrib['data-video-vkey']
             url = "https://www.pornhub.com/view_video.php?viewkey={key}".format(key=key)
             urls.append(url)
-        return urls
-    return []
+    return urls
 
 
 def url_generator(url: str):
