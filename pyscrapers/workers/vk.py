@@ -13,7 +13,7 @@ def get_my_content(r):
     this is why we must cut it up and cant use the regular
     'get_real_content' helper.
     """
-    assert r.status_code == 200
+    r.raise_for_status()
     str_content = r.content.decode(errors='ignore')
     str_content = str_content[str_content.find('<input'):]
     c = str.encode('<html><body>') + str.encode(str_content) + str.encode('</body></html>')

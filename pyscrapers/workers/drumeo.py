@@ -28,7 +28,7 @@ def get_number_of_pages(courses: bool, session) -> int:
     else:
         url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page=1"
     result = session.get(url)
-    assert result.status_code == 200
+    result.raise_for_status()
     content = result.content.decode()
     obj = json.loads(content)
     d_page_count = obj["pageCount"]
@@ -114,7 +114,7 @@ def get_courses(pages, courses: bool, session):
     collected_courses = []
     for page in range(1, pages + 1):
         result = session.get(get_url(courses, page))
-        assert result.status_code == 200
+        result.raise_for_status()
         for lesson_list in json.loads(result.content.decode())["lessonsHtml"]:
             course = Course()
             root = lxml.html.fromstring(lesson_list)
@@ -143,7 +143,7 @@ def get_course_details(course: Course, courses: bool, session):
     :return:
     """
     result = session.get(get_members_url(courses, course.number))
-    assert result.status_code == 200
+    result.raise_for_status()
     content = result.content.decode()
     root = lxml.html.fromstring(content)
     if courses:
@@ -173,7 +173,7 @@ def get_course_urls(course, courses: bool, session):
         else:
             url = "https://www.drumeo.com/members/lessons/library/{}".format(lesson)
         result = session.get(url)
-        assert result.status_code == 200
+        result.raise_for_status()
         content = result.content.decode()
         print(content)
         root = lxml.html.fromstring(content)
@@ -194,7 +194,7 @@ def get_videos(root, course, session):
         video_url = video.get('data-video-load-url')
         logger.info("url for video info is [%s]", video_url)
         result = session.get(video_url)
-        assert result.status_code == 200
+        result.raise_for_status()
         content = result.content.decode()
         data = json.loads(content)
         if 'error' in data:
