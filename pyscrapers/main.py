@@ -18,7 +18,7 @@ from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_cour
     download_course
 from pyscrapers.workers.facebook import scrape_facebook
 from pyscrapers.workers.instagram import scrape_instagram
-from pyscrapers.workers.mambaru import scrape_mambaru
+from pyscrapers.workers.mamba_ru import scrape_mambaru
 from pyscrapers.workers.pornhub import download_search, print_stars_all_detailed, download_url
 from pyscrapers.workers.travelgirls import scrape_travelgirls
 from pyscrapers.workers.vk import scrape_vk
