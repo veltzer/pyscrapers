@@ -1,11 +1,8 @@
+- add scraper for getpocket to download a users list of saved urls.
 - run
 	$ pyscrapers version
 	see how long it takes?
 	Profile and reduce time.
-- pytconf use:
-    stop registering main
-    stop registering the config
-    stop registering the group.
 - don't download the same content twice in terms of signature.
 - do my own db for downloaded stuff.
 - add a more flexible file save mechanism that will not fail
