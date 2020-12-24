@@ -20,3 +20,4 @@ pytest-cov
 pyflakes
 pyre-check
 flake8
+pymakehelper

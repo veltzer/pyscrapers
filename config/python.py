@@ -27,6 +27,7 @@ test_requires = [
     'pyflakes',
     'pyre-check',
     'flake8',
+    'pymakehelper',
 ]
 
 

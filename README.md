@@ -19,9 +19,6 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pyscrapers/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pyscrapers?targetFile=requirements.txt)
 
 
-Actions
-
-![build](https://github.com/veltzer/pyscrapers/workflows/build/badge.svg)
 
 project to produce various useful scrapers
 
