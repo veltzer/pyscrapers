@@ -72,7 +72,9 @@
 <span class="sd">    :param code:</span>
 <span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;http code [</span><span class="si">{}</span><span class="s2">], [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">requests</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">codes</span><span class="p">[</span><span class="n">code</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></div>
+    <span class="c1"># noinspection PyProtectedMember,PyUnresolvedReferences</span>
+    <span class="k">return</span> <span class="s2">&quot;http code [</span><span class="si">{}</span><span class="s2">], [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">requests</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">_codes</span><span class="p">[</span><span class="n">code</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></div>
+    <span class="c1"># return &quot;http code [{}], [{}]&quot;.format(code, http.client.responses[code])</span>
 
 
 <div class="viewcode-block" id="get_html_dom_content"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.get_html_dom_content">[docs]</a><span class="k">def</span> <span class="nf">get_html_dom_content</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>

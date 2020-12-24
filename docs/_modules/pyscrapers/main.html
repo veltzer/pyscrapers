@@ -43,14 +43,15 @@
 <span class="kn">from</span> <span class="nn">pornhub_api</span> <span class="kn">import</span> <span class="n">PornhubApi</span>
 <span class="kn">from</span> <span class="nn">pytconf</span> <span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_main</span><span class="p">,</span> <span class="n">config_arg_parse_and_launch</span>
 
-<span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigDebugRequests</span><span class="p">,</span> <span class="n">ConfigCookiesSource</span><span class="p">,</span> <span class="n">ConfigSiteId</span><span class="p">,</span> <span class="n">ConfigPornhubSearch</span><span class="p">,</span> \
     <span class="n">ConfigYoutubeDl</span><span class="p">,</span> <span class="n">ConfigDownload</span><span class="p">,</span> <span class="n">ConfigLogging</span><span class="p">,</span> <span class="n">ConfigUrl</span><span class="p">,</span> <span class="n">get_cookies</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.core.url_set</span> <span class="kn">import</span> <span class="n">UrlSet</span>
-<span class="kn">from</span> <span class="nn">pyscrapers.static</span> <span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.core.utils</span> <span class="kn">import</span> <span class="n">debug_requests</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.static</span> <span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span><span class="p">,</span> <span class="n">LOGGER_NAME</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.drumeo</span> <span class="kn">import</span> <span class="n">get_number_of_pages</span><span class="p">,</span> <span class="n">get_courses</span><span class="p">,</span> <span class="n">get_course_details</span><span class="p">,</span> <span class="n">get_course_urls</span><span class="p">,</span> \
     <span class="n">download_course</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.facebook</span> <span class="kn">import</span> <span class="n">scrape_facebook</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.getpocket</span> <span class="kn">import</span> <span class="n">getpocket_download</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.instagram</span> <span class="kn">import</span> <span class="n">scrape_instagram</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.mamba_ru</span> <span class="kn">import</span> <span class="n">scrape_mambaru</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.pornhub</span> <span class="kn">import</span> <span class="n">download_search</span><span class="p">,</span> <span class="n">print_stars_all_detailed</span><span class="p">,</span> <span class="n">download_url</span>
@@ -71,8 +72,8 @@
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">photos</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
-        <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">debug_requests</span><span class="p">()</span>
-    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;pyscrapers&#39;</span><span class="p">)</span>
+        <span class="n">debug_requests</span><span class="p">()</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">LOGGER_NAME</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">ConfigLogging</span><span class="o">.</span><span class="n">loglevel</span><span class="p">)</span>
     <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
     <span class="n">session</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">get_cookies</span><span class="p">()</span>
@@ -177,8 +178,27 @@
     <span class="n">youtube_dl_handler</span><span class="p">()</span></div>
 
 
+<div class="viewcode-block" id="getpocket"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.getpocket">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download list from getpocket&quot;</span><span class="p">,</span>
+    <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">ConfigDebugRequests</span><span class="p">,</span>
+        <span class="n">ConfigCookiesSource</span><span class="p">,</span>
+        <span class="n">ConfigDownload</span><span class="p">,</span>
+        <span class="n">ConfigLogging</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">getpocket</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">debug_requests</span><span class="p">()</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">LOGGER_NAME</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">ConfigLogging</span><span class="o">.</span><span class="n">loglevel</span><span class="p">)</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">get_cookies</span><span class="p">()</span>
+    <span class="n">getpocket_download</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.main">[docs]</a><span class="nd">@register_main</span><span class="p">(</span>
-    <span class="n">main_description</span><span class="o">=</span><span class="s2">&quot;pyscapers will help you download stuff from the web&quot;</span><span class="p">,</span>
+    <span class="n">main_description</span><span class="o">=</span><span class="s2">&quot;pyscrapers will help you download stuff from the web&quot;</span><span class="p">,</span>
     <span class="n">app_name</span><span class="o">=</span><span class="n">APP_NAME</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="n">VERSION_STR</span><span class="p">,</span>
 <span class="p">)</span>

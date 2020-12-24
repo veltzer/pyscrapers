@@ -38,7 +38,10 @@ def get_http_status_string(code: int):
     :param code:
     :return:
     """
-    return "http code [{}], [{}]".format(code, requests.status_codes.codes[code][0])
+    # noinspection PyProtectedMember,PyUnresolvedReferences
+    # pylint: disable=protected-access
+    return "http code [{}], [{}]".format(code, requests.status_codes._codes[code][0])
+    # return "http code [{}], [{}]".format(code, http.client.responses[code])
 
 
 def get_html_dom_content(response):

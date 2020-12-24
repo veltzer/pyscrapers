@@ -9,14 +9,15 @@ import requests
 from pornhub_api import PornhubApi
 from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
-import pyscrapers.core.utils
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
     ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies
 from pyscrapers.core.url_set import UrlSet
-from pyscrapers.static import APP_NAME, VERSION_STR
+from pyscrapers.core.utils import debug_requests
+from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
 from pyscrapers.workers.facebook import scrape_facebook
+from pyscrapers.workers.getpocket import getpocket_download
 from pyscrapers.workers.instagram import scrape_instagram
 from pyscrapers.workers.mamba_ru import scrape_mambaru
 from pyscrapers.workers.pornhub import download_search, print_stars_all_detailed, download_url
@@ -37,8 +38,8 @@ from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
 )
 def photos():
     if ConfigDebugRequests.debug:
-        pyscrapers.core.utils.debug_requests()
-    logger = logging.getLogger('pyscrapers')
+        debug_requests()
+    logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     session = requests.Session()
     session.cookies = get_cookies()
@@ -66,7 +67,7 @@ def photos():
 )
 def drumeo():
     if ConfigDebugRequests.debug:
-        pyscrapers.core.utils.debug_requests()
+        debug_requests()
 
     session = requests.Session()
     session.cookies = get_cookies()
@@ -143,8 +144,27 @@ def youtube_dl():
     youtube_dl_handler()
 
 
+@register_endpoint(
+    description="Download list from getpocket",
+    configs=[
+        ConfigDebugRequests,
+        ConfigCookiesSource,
+        ConfigDownload,
+        ConfigLogging,
+    ],
+)
+def getpocket():
+    if ConfigDebugRequests.debug:
+        debug_requests()
+    logger = logging.getLogger(LOGGER_NAME)
+    logger.setLevel(ConfigLogging.loglevel)
+    session = requests.Session()
+    session.cookies = get_cookies()
+    getpocket_download(session, logger)
+
+
 @register_main(
-    main_description="pyscapers will help you download stuff from the web",
+    main_description="pyscrapers will help you download stuff from the web",
     app_name=APP_NAME,
     version=VERSION_STR,
 )

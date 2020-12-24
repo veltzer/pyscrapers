@@ -3,7 +3,7 @@ from pyscrapers.core.url_set import UrlSet
 
 
 def scrape_travelgirls(user_id: str, session, url_set: UrlSet) -> None:
-    main_url = 'https://www.travelgirls.com/member/{user_id}'.format(user_id=user_id)
+    main_url = f'https://www.travelgirls.com/member/{user_id}'
     r = session.get(main_url)
     root = pyscrapers.core.utils.get_html_dom_content(r)
 
