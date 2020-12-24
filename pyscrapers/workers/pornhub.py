@@ -131,6 +131,7 @@ def get_urls_from_page(root) -> List[str]:
         '//ul[@id=\'moreData\']',
         '//ul[@id=\'mostRecentVideosSection\']',
         '//ul[@id=\'showAllChanelVideos\']',
+        '//ul[@id=\'pornstarsVideoSection\']',
         # '//ul[contains(@class,\'pornstarsVideos\')]', # this gave 12 urls for pornstars
         # '//ul[@id=\'claimedUploadedVideoSection\']', # this gave 4 urls for pornstars
         # '//ul[@id=\'claimedRecentVideoSection\']', # this gives the same recent videos for each page
