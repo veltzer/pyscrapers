@@ -20,6 +20,14 @@ pyscrapers.workers.facebook module
    :undoc-members:
    :show-inheritance:
 
+pyscrapers.workers.getpocket module
+-----------------------------------
+
+.. automodule:: pyscrapers.workers.getpocket
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pyscrapers.workers.instagram module
 -----------------------------------
 

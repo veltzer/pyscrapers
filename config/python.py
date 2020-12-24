@@ -12,6 +12,7 @@ setup_requires = [
 install_requires = [
     'lxml',
     'requests',
+    # 'hyper',
     'browser-cookie3',
     'pytconf',
     'pylogconf',
