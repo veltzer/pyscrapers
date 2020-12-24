@@ -33,13 +33,13 @@ def print_stars_all_detailed(api: pornhub_api.api.PornhubApi) -> None:
 def print_categories(api: pornhub_api.api.PornhubApi) -> None:
     categories = api.video.categories()
     for category in categories.categories:
-        print("id [{}], name [{}]".format(category.id, category.category))
+        print(f"id [{category.id}], name [{category.category}]")
 
 
 def print_tags(api: pornhub_api.api.PornhubApi) -> None:
     tags = api.video.tags(ConfigPornhubSearch.literal)
     for tag in tags:
-        print("tag [{}]".format(tag))
+        print(f"tag [{tag}]")
 
 
 def download_search() -> None:
@@ -78,7 +78,7 @@ def download_search() -> None:
         if limit is not None:
             urls = list(islice(urls, 0, limit - counter))
         for url in urls:
-            logger.info("doing item [{}]".format(counter))
+            logger.info(f"doing item [{counter}]")
             # noinspection PyBroadException
             try:
                 youtube_dl_download_url(url)
@@ -91,8 +91,8 @@ def download_search() -> None:
         if counter == limit:
             break
     if errors > 0:
-        logger.info("number of errors [{}]".format(errors))
-        logger.info("except_urls [{}]".format(except_urls))
+        logger.info(f"number of errors [{errors}]")
+        logger.info(f"except_urls [{except_urls}]")
 
 
 def get_number_of_pages(root) -> int:
@@ -157,7 +157,7 @@ def url_generator(url: str):
     yield url
     page = 2
     while True:
-        yield "{url}?page={page}".format(url=url, page=page)
+        yield f"{url}?page={page}"
         page += 1
 
 
@@ -169,7 +169,7 @@ def download_url() -> None:
     logger = logging.getLogger(__name__)
     urls = UrlSet()
     for url in url_generator(url=ConfigUrl.url):
-        logger.info("getting [{}]...".format(url))
+        logger.info(f"getting [{url}]...")
         page = session.get(url)
         if page.status_code != 200:
             break
@@ -177,11 +177,11 @@ def download_url() -> None:
         new_urls = get_urls_from_page(root)
         if len(new_urls) == 0:
             break
-        logger.info("got [{}] new urls".format(len(new_urls)))
+        logger.info(f"got [{len(new_urls)}] new urls")
         for i, new_url in enumerate(new_urls):
-            logger.info("url {} is [{}]".format(i, new_url))
+            logger.info(f"url {i} is [{new_url}]")
         urls.extend(new_urls)
     session.close()
-    logger.info("got total [{}] urls".format(len(urls.urls_list)))
-    logger.info("got [{}] appended twice urls".format(urls.appended_twice))
+    logger.info(f"got total [{len(urls.urls_list)}] urls")
+    logger.info(f"got [{urls.appended_twice}] appended twice urls")
     youtube_dl_download_urls(urls.urls_list)
