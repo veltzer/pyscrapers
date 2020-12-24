@@ -41,7 +41,6 @@ project_classifiers = [
     pyclassifiers.values.ProgrammingLanguage__Python,
     pyclassifiers.values.ProgrammingLanguage__Python__3,
     pyclassifiers.values.ProgrammingLanguage__Python__3__Only,
-    pyclassifiers.values.ProgrammingLanguage__Python__36,
     pyclassifiers.values.ProgrammingLanguage__Python__37,
     pyclassifiers.values.ProgrammingLanguage__Python__38,
     pyclassifiers.values.Topic__Utilities,
