@@ -44,5 +44,5 @@ extras_require = {
 }
 
 test_os = "[ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]"
-test_python = "[3.7, 3.8, 3.9]"
+test_python = "[3.7, 3.8]"
 test_container = "[ 'ubuntu:18.04', 'ubuntu:20.04' ]"
