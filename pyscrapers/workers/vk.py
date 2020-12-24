@@ -1,6 +1,5 @@
 import json
 import logging
-import sys
 
 import lxml.etree
 import lxml.html
@@ -15,15 +14,7 @@ def get_my_content(r):
     'get_real_content' helper.
     """
     assert r.status_code == 200
-    # str_content=r.content.decode(errors='ignore')
-    try:
-        content: bytes = r.content
-        str_content = content.decode(errors='ignore')
-    except Exception as e:
-        print(e)
-        print('could not decode')
-        print(r.content)
-        sys.exit(1)
+    str_content = r.content.decode(errors='ignore')
     str_content = str_content[str_content.find('<input'):]
     c = str.encode('<html><body>') + str.encode(str_content) + str.encode('</body></html>')
     root = lxml.html.fromstring(c)
