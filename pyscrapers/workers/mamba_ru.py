@@ -1,7 +1,6 @@
 import json
 
 from pyscrapers.core.url_set import UrlSet
-from pyscrapers.core.utils import get_http_status_string
 
 
 def scrape_mambaru(user_id: str, session, url_set: UrlSet) -> None:
@@ -26,7 +25,7 @@ def scrape_mambaru(user_id: str, session, url_set: UrlSet) -> None:
         "sysRequestsContainer": sys_requests_container,
     }
     response = session.post(main_url, json=request_obj)
-    assert response.status_code == 200, get_http_status_string(response.status_code)
+    response.raise_for_status()
     response_str = response.content.decode()
     response_obj = json.loads(response_str)
     response_obj = response_obj["sysResponsesContainer"][0]

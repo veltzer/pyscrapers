@@ -50,7 +50,7 @@ def get_html_dom_content(response):
     :param response:
     :return:
     """
-    assert response.status_code == 200, get_http_status_string(response.status_code)
+    response.raise_for_status()
     str_content = response.content.decode()
     root = lxml.html.fromstring(str_content)
     return root
@@ -96,7 +96,7 @@ def download_url(session, source: str, target: str) -> None:
         return
     try:
         response = session.get(source, stream=True)
-        assert response.status_code == 200, response.content
+        response.raise_for_status()
         with open(target, 'wb') as file_handle:
             response.raw.decode_content = True
             shutil.copyfileobj(response.raw, file_handle)
@@ -128,7 +128,7 @@ def download_video_if_wider(session, source: str, target: str, width: int) -> bo
     try:
         response = session.get(source, stream=True)
         if FAIL:
-            assert response.status_code == 200, response.content
+            response.raise_for_status()
         else:
             if response.status_code != 200:
                 logger.info("got bad error code [%s] and failed to download", response.status_code)

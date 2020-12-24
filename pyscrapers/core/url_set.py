@@ -78,7 +78,7 @@ class UrlSet:
                 path = parse_result.path
                 logger.info('downloading [%s]...', url)
                 response = session.get(url, stream=True)
-                assert response.status_code == 200, response.content
+                response.raise_for_status()
 
                 filename = self.get_filename(os.path.splitext(path)[1])
                 if filename is None:
