@@ -67,13 +67,13 @@
 <div class="viewcode-block" id="print_categories"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.pornhub.print_categories">[docs]</a><span class="k">def</span> <span class="nf">print_categories</span><span class="p">(</span><span class="n">api</span><span class="p">:</span> <span class="n">pornhub_api</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">PornhubApi</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">categories</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">video</span><span class="o">.</span><span class="n">categories</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">categories</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;id [</span><span class="si">{}</span><span class="s2">], name [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">category</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">category</span><span class="o">.</span><span class="n">category</span><span class="p">))</span></div>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;id [</span><span class="si">{</span><span class="n">category</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">], name [</span><span class="si">{</span><span class="n">category</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="print_tags"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.pornhub.print_tags">[docs]</a><span class="k">def</span> <span class="nf">print_tags</span><span class="p">(</span><span class="n">api</span><span class="p">:</span> <span class="n">pornhub_api</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">PornhubApi</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">tags</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">video</span><span class="o">.</span><span class="n">tags</span><span class="p">(</span><span class="n">ConfigPornhubSearch</span><span class="o">.</span><span class="n">literal</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tag [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag</span><span class="p">))</span></div>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tag [</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="download_search"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.pornhub.download_search">[docs]</a><span class="k">def</span> <span class="nf">download_search</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -112,7 +112,7 @@
         <span class="k">if</span> <span class="n">limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">urls</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span> <span class="o">-</span> <span class="n">counter</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;doing item [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;doing item [</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
             <span class="c1"># noinspection PyBroadException</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">youtube_dl_download_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -125,8 +125,8 @@
         <span class="k">if</span> <span class="n">counter</span> <span class="o">==</span> <span class="n">limit</span><span class="p">:</span>
             <span class="k">break</span>
     <span class="k">if</span> <span class="n">errors</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;number of errors [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;except_urls [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">except_urls</span><span class="p">))</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;number of errors [</span><span class="si">{</span><span class="n">errors</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;except_urls [</span><span class="si">{</span><span class="n">except_urls</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_number_of_pages"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.pornhub.get_number_of_pages">[docs]</a><span class="k">def</span> <span class="nf">get_number_of_pages</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -156,33 +156,33 @@
     <span class="c1"># video_section = video_sections[0]</span>
     <span class="c1"># &lt;ul class=&quot;dropdownHottestVideos videos&quot; id=&quot;hottestMenuSection&quot;&gt;</span>
     <span class="c1"># &lt;ul class=&quot;videos row-5-thumbs&quot; id=&quot;mostRecentVideosSection&quot;&gt;</span>
-    <span class="c1"># pyscrapers.core.utils.print_element(root)</span>
-    <span class="c1"># import sys</span>
-    <span class="c1"># sys.exit(1)</span>
+    <span class="c1">#pyscrapers.core.utils.print_element(root)</span>
+    <span class="c1">#import sys</span>
+    <span class="c1">#sys.exit(1)</span>
     <span class="n">xpath_picks</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;//ul[contains(@class,</span><span class="se">\&#39;</span><span class="s1">pornstarsVideos</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">uploadedVideosSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">moreData</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">mostRecentVideosSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
-        <span class="c1">#&#39;//ul[@id=\&#39;hottestMenuSection\&#39;]&#39;,</span>
-        <span class="c1">#&#39;//ul[@id=\&#39;recommMenuSection\&#39;]&#39;,</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">showAllChanelVideos</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
+        <span class="c1">#&#39;//ul[contains(@class,\&#39;pornstarsVideos\&#39;)]&#39;, # this gave 12 urls for pornstars</span>
+        <span class="c1">#&#39;//ul[@id=\&#39;claimedUploadedVideoSection\&#39;]&#39;, # this gave 4 urls for pornstars</span>
+        <span class="c1">#&#39;//ul[@id=\&#39;claimedRecentVideoSection\&#39;]&#39;, # this gives the same recent videos for each page</span>
+        <span class="c1">#&#39;//ul[@id=\&#39;videosUploadedSection\&#39;]&#39;, # this gave 9 urls for pornstars</span>
+        <span class="c1">#&#39;//ul[@id=\&#39;modelPaidClips\&#39;]&#39;, # this is for paid clips</span>
+        <span class="c1">#&#39;//ul[@id=\&#39;hottestMenuSection\&#39;]&#39;, # this gave add urls</span>
+        <span class="c1">#&#39;//ul[@id=\&#39;recommMenuSection\&#39;]&#39;, # this gave add urls</span>
     <span class="p">]</span>
     <span class="n">video_sections</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">xpath_pick</span> <span class="ow">in</span> <span class="n">xpath_picks</span><span class="p">:</span>
-        <span class="n">candidates</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="n">xpath_pick</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidates</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="n">candidate</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">video_sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+        <span class="n">video_sections</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="n">xpath_pick</span><span class="p">))</span>
     <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">video_sections</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">video_section</span> <span class="ow">in</span> <span class="n">video_sections</span><span class="p">:</span>
         <span class="n">elements</span> <span class="o">=</span> <span class="n">video_section</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;li[contains(@class,</span><span class="se">\&#39;</span><span class="s1">pcVideoListItem</span><span class="se">\&#39;</span><span class="s1">)]&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
             <span class="c1"># pyscrapers.core.utils.print_element(element)</span>
             <span class="c1"># key = element.attrib[&#39;_vkey&#39;]</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;data-video-vkey&#39;</span><span class="p">]</span>
-            <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.pornhub.com/view_video.php?viewkey=</span><span class="si">{key}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://www.pornhub.com/view_video.php?viewkey=</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">urls</span></div>
 
@@ -191,7 +191,7 @@
     <span class="k">yield</span> <span class="n">url</span>
     <span class="n">page</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">yield</span> <span class="s2">&quot;</span><span class="si">{url}</span><span class="s2">?page=</span><span class="si">{page}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">?page=</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span></div>
 
 
@@ -203,7 +203,7 @@
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">urls</span> <span class="o">=</span> <span class="n">UrlSet</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">url_generator</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ConfigUrl</span><span class="o">.</span><span class="n">url</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;getting [</span><span class="si">{}</span><span class="s2">]...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;getting [</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
         <span class="n">page</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
             <span class="k">break</span>
@@ -211,13 +211,13 @@
         <span class="n">new_urls</span> <span class="o">=</span> <span class="n">get_urls_from_page</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">break</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;got [</span><span class="si">{}</span><span class="s2">] new urls&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got [</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span><span class="si">}</span><span class="s2">] new urls&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">new_url</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_urls</span><span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;url </span><span class="si">{}</span><span class="s2"> is [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">new_url</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;url </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> is [</span><span class="si">{</span><span class="n">new_url</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
         <span class="n">urls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span>
     <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;got total [</span><span class="si">{}</span><span class="s2">] urls&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)))</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;got [</span><span class="si">{}</span><span class="s2">] appended twice urls&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">urls</span><span class="o">.</span><span class="n">appended_twice</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got total [</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)</span><span class="si">}</span><span class="s2">] urls&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got [</span><span class="si">{</span><span class="n">urls</span><span class="o">.</span><span class="n">appended_twice</span><span class="si">}</span><span class="s2">] appended twice urls&quot;</span><span class="p">)</span>
     <span class="n">youtube_dl_download_urls</span><span class="p">(</span><span class="n">urls</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)</span></div>
 </pre></div>
 
