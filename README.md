@@ -12,11 +12,6 @@
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pyscrapers)
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-![Downloads](https://pepy.tech/badge/pyscrapers)
-![Downloads](https://pepy.tech/badge/pyscrapers/month)
-![Downloads](https://pepy.tech/badge/pyscrapers/week)
-
-[![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pyscrapers/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pyscrapers?targetFile=requirements.txt)
 
 
 Actions

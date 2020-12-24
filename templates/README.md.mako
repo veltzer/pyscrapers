@@ -18,12 +18,11 @@
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/${config.python.package_name})
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
+<%doc>
 ![Downloads](https://pepy.tech/badge/${config.python.package_name})
 ![Downloads](https://pepy.tech/badge/${config.python.package_name}/month)
 ![Downloads](https://pepy.tech/badge/${config.python.package_name}/week)
-
-[![Known Vulnerabilities](https://snyk.io/test/github/${config.project.project_github_username}/${config.project.github_repo_name}/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/${config.project.project_github_username}/${config.project.github_repo_name}?targetFile=requirements.txt)
-
+[![Known Vulnerabilities](https://snyk.io/test/github/${config.project.project_github_username}/${config.project.github_repo_name}/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/${config.project.project_github_username}/${config.project.github_repo_name}?targetFile=requirements.txt)</%doc>
 <%
 	actions = glob.glob('.github/workflows/*.yml')
 	names = []
