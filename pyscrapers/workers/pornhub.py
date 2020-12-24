@@ -42,6 +42,10 @@ def print_tags(api: pornhub_api.api.PornhubApi) -> None:
         print(f"tag [{tag}]")
 
 
+def get_code(e: ValueError) -> int:
+    return int(e.args[0]["code"])
+
+
 def download_search() -> None:
     """
     Download movies from pornhub
@@ -70,8 +74,8 @@ def download_search() -> None:
                 **kwargs,
             )
         except ValueError as e:
-            code = e.args[0]["code"]
-            if code == "2001":  # no videos found (end of results)
+            code: int = get_code(e)
+            if code == 2001:  # no videos found (end of results)
                 break
             raise e
         urls = [video.url for video in data.videos]
@@ -79,6 +83,7 @@ def download_search() -> None:
             urls = list(islice(urls, 0, limit - counter))
         for url in urls:
             logger.info(f"doing item [{counter}]")
+            # pylint: disable=broad-except
             # noinspection PyBroadException
             try:
                 youtube_dl_download_url(url)

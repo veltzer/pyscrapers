@@ -8,7 +8,6 @@ import logging
 import os
 import shutil
 import urllib.parse
-from typing import List
 
 import requests
 import lxml
@@ -52,40 +51,6 @@ def get_html_dom_content(response):
     str_content = response.content.decode()
     root = lxml.html.fromstring(str_content)
     return root
-
-
-def download_urls(session, urls: List[str], start=0):
-    """
-    Download a list of urls
-    :param session:
-    :param urls:
-    :param start:
-    :return:
-    """
-    logger = logging.getLogger(__name__)
-    counter = start
-    logger.info('got [%d] real urls', len(urls))
-    for url in urls:
-        parse_result = urllib.parse.urlparse(url)
-        path = parse_result.path
-        logger.info('downloading [%s]...', url)
-        response = session.get(url, stream=True)
-        assert response.status_code == 200, response.content
-
-        filename = None
-        if path.endswith(".jpg"):
-            filename = 'image{0:04}.jpg'.format(counter)
-        if path.endswith(".mp4"):
-            filename = 'video{0:04}.mp4'.format(counter)
-        if filename is None:
-            logger.error('do not know how to handle path [%s]...', path)
-            continue
-        assert not os.path.isfile(filename), "already have filename {}".format(path)
-        with open(filename, 'wb') as file_handle:
-            response.raw.decode_content = True
-            shutil.copyfileobj(response.raw, file_handle)
-        logger.info('written [%s]...', filename)
-        counter += 1
 
 
 def debug_requests():

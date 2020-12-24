@@ -157,7 +157,7 @@ def get_course_details(course: Course, courses: bool, session):
     resources = root.xpath('//a[re:match(text(), "All Course Resources")]')
     if len(resources) == 1:
         resource = resources[0].get('href')
-        course.resources = "http:"+resource
+        course.resources = "http:" + resource
     if not courses:
         get_videos(root, course, session)
 

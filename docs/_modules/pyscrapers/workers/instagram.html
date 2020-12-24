@@ -46,7 +46,7 @@
 <span class="kn">import</span> <span class="nn">pyeventroute.route</span>
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 
-<span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.core.utils</span> <span class="kn">import</span> <span class="n">get_html_dom_content</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.core.url_set</span> <span class="kn">import</span> <span class="n">UrlSet</span>
 
 
@@ -62,13 +62,13 @@
 
 <div class="viewcode-block" id="scrape_instagram"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.scrape_instagram">[docs]</a><span class="k">def</span> <span class="nf">scrape_instagram</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_set</span><span class="p">:</span> <span class="n">UrlSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;www.instagram.com&#39;</span>
-    <span class="n">base</span> <span class="o">=</span> <span class="s1">&#39;https://</span><span class="si">{domain}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">/</span><span class="si">{user_id}</span><span class="s1">/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">/&#39;</span>
 
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
     <span class="c1"># scrape.utils.print_element(root)</span>
 
     <span class="c1"># register regular expressions with lxml</span>
@@ -79,8 +79,7 @@
     <span class="n">e_a</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//script[re:match(text(), &quot;^window._sharedData&quot;)]&#39;</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">e_a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">e_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">json_text</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">):</span><span class="n">data</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_text</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">):</span><span class="n">data</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">my_list</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;entry_data&#39;</span><span class="p">][</span><span class="s1">&#39;ProfilePage&#39;</span><span class="p">]</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;graphql&quot;</span><span class="p">][</span><span class="s2">&quot;user&quot;</span><span class="p">]</span>
@@ -89,7 +88,11 @@
     <span class="k">elif</span> <span class="s1">&#39;profile_pic_url&#39;</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
         <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;profile_pic_url&#39;</span><span class="p">])</span>
     <span class="n">user_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-    <span class="n">url2</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">/graphql/query/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">)</span>
+    <span class="n">get_urls</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">url_set</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_urls"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.get_urls">[docs]</a><span class="k">def</span> <span class="nf">get_urls</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">url_set</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s1">/graphql/query/&#39;</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">50</span>
     <span class="n">query_hashes</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;bd0d6d184eefd4d0ce7036c11ae58ed9&#39;</span><span class="p">,</span>  <span class="c1"># posts</span>
@@ -103,13 +106,13 @@
     <span class="n">stats_image</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">stats_shortcode_video</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">query_hash</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">query_hashes</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;size of list is [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">url_set</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;size of list is [</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">url_set</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
         <span class="n">has_next_page</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">end_cursor</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">while</span> <span class="n">has_next_page</span><span class="p">:</span>
             <span class="n">variables</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
-                    <span class="s1">&#39;first&#39;</span><span class="p">:</span> <span class="n">count</span><span class="p">,</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+                <span class="s1">&#39;first&#39;</span><span class="p">:</span> <span class="n">count</span><span class="p">,</span>
             <span class="p">}</span>
             <span class="k">if</span> <span class="n">end_cursor</span><span class="p">:</span>
                 <span class="n">variables</span><span class="p">[</span><span class="s1">&#39;after&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_cursor</span>
@@ -117,7 +120,7 @@
                 <span class="s1">&#39;query_hash&#39;</span><span class="p">:</span> <span class="n">query_hash</span><span class="p">,</span>
                 <span class="s1">&#39;variables&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
             <span class="p">}</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
             <span class="n">data_user</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
             <span class="n">has_next_page</span> <span class="o">=</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;page_info&#39;</span><span class="p">][</span><span class="s1">&#39;has_next_page&#39;</span><span class="p">]</span>
             <span class="n">end_cursor</span> <span class="o">=</span> <span class="n">data_user</span><span class="p">[</span><span class="s1">&#39;page_info&#39;</span><span class="p">][</span><span class="s1">&#39;end_cursor&#39;</span><span class="p">]</span>
@@ -131,10 +134,10 @@
                         <span class="s1">&#39;query_hash&#39;</span><span class="p">:</span> <span class="s1">&#39;03f541f086ce0a9b31f67688ff9c1e09&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;shortcode&#39;</span><span class="p">:</span> <span class="n">inner_node</span><span class="p">[</span><span class="s1">&#39;shortcode&#39;</span><span class="p">],</span>
                     <span class="p">}</span>
-                    <span class="n">response_short</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+                    <span class="n">response_short</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
                     <span class="k">while</span> <span class="n">is_rate_limit</span><span class="p">(</span><span class="n">response_short</span><span class="p">):</span>
                         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
-                        <span class="n">response_short</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+                        <span class="n">response_short</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
                     <span class="k">if</span> <span class="s1">&#39;data&#39;</span> <span class="ow">in</span> <span class="n">response_short</span><span class="p">:</span>
                         <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response_short</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;shortcode_media&#39;</span><span class="p">][</span><span class="s1">&#39;video_url&#39;</span><span class="p">])</span>
                     <span class="k">else</span><span class="p">:</span>
@@ -143,9 +146,9 @@
                 <span class="k">if</span> <span class="s1">&#39;display_url&#39;</span> <span class="ow">in</span> <span class="n">inner_node</span><span class="p">:</span>
                     <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inner_node</span><span class="p">[</span><span class="s1">&#39;display_url&#39;</span><span class="p">])</span>
                     <span class="n">stats_image</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;stats_video [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stats_video</span><span class="p">))</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;stats_image [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stats_image</span><span class="p">))</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;stats_shortcode_video [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stats_shortcode_video</span><span class="p">))</span></div>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stats_video [</span><span class="si">{</span><span class="n">stats_video</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stats_image [</span><span class="si">{</span><span class="n">stats_image</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stats_shortcode_video [</span><span class="si">{</span><span class="n">stats_shortcode_video</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span></div>
 </pre></div>
 
           </div>

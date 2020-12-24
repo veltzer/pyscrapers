@@ -23,6 +23,7 @@ install_requires = [
 test_requires = [
     'pylint',
     'pytest',
+    'pytest-cov',
     'pyflakes',
     'pyre-check',
     'flake8',

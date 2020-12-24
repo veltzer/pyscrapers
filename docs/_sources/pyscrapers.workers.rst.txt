@@ -28,10 +28,10 @@ pyscrapers.workers.instagram module
    :undoc-members:
    :show-inheritance:
 
-pyscrapers.workers.mambaru module
----------------------------------
+pyscrapers.workers.mamba\_ru module
+-----------------------------------
 
-.. automodule:: pyscrapers.workers.mambaru
+.. automodule:: pyscrapers.workers.mamba_ru
    :members:
    :undoc-members:
    :show-inheritance:

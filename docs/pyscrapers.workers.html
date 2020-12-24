@@ -155,6 +155,11 @@ in it with a json object embedded in that. This json object describes the user, 
 his profile photo and the first 12 images for that user.
 If you want more you have to do a follow-up AJAX request to the server.</p>
 <dl class="py function">
+<dt id="pyscrapers.workers.instagram.get_urls">
+<code class="sig-prename descclassname">pyscrapers.workers.instagram.</code><code class="sig-name descname">get_urls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">logger</span></em>, <em class="sig-param"><span class="n">session</span></em>, <em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">url_set</span></em>, <em class="sig-param"><span class="n">user_id</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/instagram.html#get_urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.instagram.get_urls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="pyscrapers.workers.instagram.is_rate_limit">
 <code class="sig-prename descclassname">pyscrapers.workers.instagram.</code><code class="sig-name descname">is_rate_limit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/pyscrapers/workers/instagram.html#is_rate_limit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.instagram.is_rate_limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rate limit messages look like this:
@@ -169,11 +174,11 @@ If you want more you have to do a follow-up AJAX request to the server.</p>
 <dd></dd></dl>
 
 </div>
-<div class="section" id="module-pyscrapers.workers.mambaru">
-<span id="pyscrapers-workers-mambaru-module"></span><h2>pyscrapers.workers.mambaru module<a class="headerlink" href="#module-pyscrapers.workers.mambaru" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pyscrapers.workers.mamba_ru">
+<span id="pyscrapers-workers-mamba-ru-module"></span><h2>pyscrapers.workers.mamba_ru module<a class="headerlink" href="#module-pyscrapers.workers.mamba_ru" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="pyscrapers.workers.mambaru.scrape_mambaru">
-<code class="sig-prename descclassname">pyscrapers.workers.mambaru.</code><code class="sig-name descname">scrape_mambaru</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">session</span></em>, <em class="sig-param"><span class="n">url_set</span><span class="p">:</span> <span class="n"><a class="reference internal" href="pyscrapers.core.html#pyscrapers.core.url_set.UrlSet" title="pyscrapers.core.url_set.UrlSet">pyscrapers.core.url_set.UrlSet</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pyscrapers/workers/mambaru.html#scrape_mambaru"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.mambaru.scrape_mambaru" title="Permalink to this definition">¶</a></dt>
+<dt id="pyscrapers.workers.mamba_ru.scrape_mambaru">
+<code class="sig-prename descclassname">pyscrapers.workers.mamba_ru.</code><code class="sig-name descname">scrape_mambaru</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">session</span></em>, <em class="sig-param"><span class="n">url_set</span><span class="p">:</span> <span class="n"><a class="reference internal" href="pyscrapers.core.html#pyscrapers.core.url_set.UrlSet" title="pyscrapers.core.url_set.UrlSet">pyscrapers.core.url_set.UrlSet</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pyscrapers/workers/mamba_ru.html#scrape_mambaru"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.mamba_ru.scrape_mambaru" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -191,6 +196,11 @@ If you want more you have to do a follow-up AJAX request to the server.</p>
 <dl class="py function">
 <dt id="pyscrapers.workers.pornhub.download_url">
 <code class="sig-prename descclassname">pyscrapers.workers.pornhub.</code><code class="sig-name descname">download_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#download_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.download_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="pyscrapers.workers.pornhub.get_code">
+<code class="sig-prename descclassname">pyscrapers.workers.pornhub.</code><code class="sig-name descname">get_code</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span><span class="p">:</span> <span class="n">ValueError</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#get_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.get_code" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -254,8 +264,23 @@ this is why we must cut it up and cant use the regular
 </dd></dl>
 
 <dl class="py function">
+<dt id="pyscrapers.workers.vk.get_total_images">
+<code class="sig-prename descclassname">pyscrapers.workers.vk.</code><code class="sig-name descname">get_total_images</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">logger</span></em>, <em class="sig-param"><span class="n">session</span></em>, <em class="sig-param"><span class="n">url</span></em>, <em class="sig-param"><span class="n">user_id</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/vk.html#get_total_images"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.vk.get_total_images" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="pyscrapers.workers.vk.get_urls">
+<code class="sig-prename descclassname">pyscrapers.workers.vk.</code><code class="sig-name descname">get_urls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">got</span></em>, <em class="sig-param"><span class="n">json_obj</span></em>, <em class="sig-param"><span class="n">url_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/vk.html#get_urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.vk.get_urls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="pyscrapers.workers.vk.scrape_vk">
 <code class="sig-prename descclassname">pyscrapers.workers.vk.</code><code class="sig-name descname">scrape_vk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">session</span></em>, <em class="sig-param"><span class="n">url_set</span><span class="p">:</span> <span class="n"><a class="reference internal" href="pyscrapers.core.html#pyscrapers.core.url_set.UrlSet" title="pyscrapers.core.url_set.UrlSet">pyscrapers.core.url_set.UrlSet</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pyscrapers/workers/vk.html#scrape_vk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.vk.scrape_vk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="pyscrapers.workers.vk.yield_json_objs_and_base">
+<code class="sig-prename descclassname">pyscrapers.workers.vk.</code><code class="sig-name descname">yield_json_objs_and_base</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/vk.html#yield_json_objs_and_base"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyscrapers.workers.vk.yield_json_objs_and_base" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>

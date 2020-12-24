@@ -191,7 +191,7 @@
     <span class="n">resources</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[re:match(text(), &quot;All Course Resources&quot;)]&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resources</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">resource</span> <span class="o">=</span> <span class="n">resources</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
-        <span class="n">course</span><span class="o">.</span><span class="n">resources</span> <span class="o">=</span> <span class="s2">&quot;http:&quot;</span><span class="o">+</span><span class="n">resource</span>
+        <span class="n">course</span><span class="o">.</span><span class="n">resources</span> <span class="o">=</span> <span class="s2">&quot;http:&quot;</span> <span class="o">+</span> <span class="n">resource</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">courses</span><span class="p">:</span>
         <span class="n">get_videos</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">course</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span></div>
 

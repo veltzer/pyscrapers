@@ -16,6 +16,7 @@ Sphinx
 # test requirements
 pylint
 pytest
+pytest-cov
 pyflakes
 pyre-check
 flake8
