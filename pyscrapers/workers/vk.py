@@ -21,9 +21,63 @@ def get_my_content(r):
     return root
 
 
+def yield_json_objs_and_base(r):
+    for x in get_my_content(r).xpath('//a[@onclick]'):
+        onclick = x.attrib['onclick']
+        if onclick.startswith('return showPhoto'):
+            json_str = onclick[onclick.find('{'):onclick.rfind('}') + 1]
+            # bas string, need fix lots of things...
+            json_str = json_str.replace('\'', '"').replace('jumpTo', '"jumpTo"').replace('z:', '"z":')
+            json_obj = json.loads(json_str)
+            base = json_obj['temp']['base']
+            if base == '':
+                continue
+            yield json_obj, base
+
+
 def scrape_vk(user_id: str, session, url_set: UrlSet) -> None:
     logger = logging.getLogger(__name__)
     url = 'https://vk.com/al_photos.php'
+
+    count = 0
+    got = 1
+    while got:
+        got = 0
+        data = {
+            'act': 'show_albums',
+            'al': '2',
+            'owner': user_id,
+            'offset': count,
+        }
+        logger.debug('doing request %d', count)
+        r = session.post(url, data=data)
+        for base, json_obj in yield_json_objs_and_base(r):
+            got = get_urls(base, got, json_obj, url_set)
+        count += got
+
+
+def get_urls(base, got, json_obj, url_set):
+    largest = 0
+    largest_url = None
+    min_len = min(len(v) for k, v in json_obj['temp'].items() if k.endswith('_'))
+    if min_len == 3:
+        for k, v in json_obj['temp'].items():
+            if k != 'base':
+                size = v[1] * v[2]
+                if size > largest:
+                    largest = size
+                    largest_url = v[0]
+        url_set.append(base + largest_url + '.jpg')
+        got += 1
+    if min_len == 1:
+        for k, v in json_obj['temp'].items():
+            if k != 'base':
+                url_set.append(base + v[0] + '.jpg')
+        got += 1
+    return got
+
+
+def get_total_images(logger, session, url, user_id):
     data = {
         'act': 'show_albums',
         'al': '1',
@@ -44,51 +98,3 @@ def scrape_vk(user_id: str, session, url_set: UrlSet) -> None:
         logger.debug('got [%d] partial images', v)
         total_images += v
     logger.debug('got [%d] potential images', total_images)
-
-    count = 0
-    got = 1
-    while got:
-        got = 0
-        data = {
-            'act': 'show_albums',
-            'al': '2',
-            'owner': user_id,
-            'offset': count,
-        }
-        logger.debug('doing request %d', count)
-        r = session.post(url, data=data)
-        root = get_my_content(r)
-        e_a = root.xpath('//a[@onclick]')
-        for x in e_a:
-            onclick = x.attrib['onclick']
-            if onclick.startswith('return showPhoto'):
-                json_str = onclick[onclick.find('{'):onclick.rfind('}') + 1]
-                # bas string, need fix lots of things...
-                json_str = json_str.replace('\'', '"')
-                json_str = json_str.replace('jumpTo', '"jumpTo"')
-                json_str = json_str.replace('z:', '"z":')
-                json_obj = json.loads(json_str)
-                base = json_obj['temp']['base']
-                if base == '':
-                    continue
-                largest = 0
-                largest_url = None
-                min_len = min(len(v) for k, v in json_obj['temp'].items() if k.endswith('_'))
-                if min_len == 3:
-                    for k, v in json_obj['temp'].items():
-                        if k != 'base':
-                            size = v[1] * v[2]
-                            if size > largest:
-                                largest = size
-                                largest_url = v[0]
-                    full_url = base + largest_url + '.jpg'
-                    url_set.append(full_url)
-                    got += 1
-                if min_len == 1:
-                    for k, v in json_obj['temp'].items():
-                        if k != 'base':
-                            add_url = v[0]
-                            full_url = base + add_url + '.jpg'
-                            url_set.append(full_url)
-                    got += 1
-        count += got
