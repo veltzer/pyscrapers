@@ -22,6 +22,7 @@ project to produce various useful scrapers
 
 project website: https://veltzer.github.io/pyscrapers
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8c18cc036f26442ca66cb02b0bbf8530)](https://app.codacy.com/gh/veltzer/pyscrapers?utm_source=github.com&utm_medium=referral&utm_content=veltzer/pyscrapers&utm_campaign=Badge_Grade_Settings)
 chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
 
