@@ -15,6 +15,8 @@ ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
 # We do it this way because we cannot rely on the current path (in CI/CD it could be anything, and we
 # dont want to run python as above
 PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
+MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
+MAIN_MODULE:=$(PACKAGE_NAME).main
 
 .PHONY: all
 all:
@@ -70,3 +72,13 @@ inspect:
 debug:
 	$(info PACKAGE_NAME is $(PACKAGE_NAME))
 	$(info ALL_PACKAGES is $(ALL_PACKAGES))
+	$(info MAIN_SCRIPT is $(MAIN_SCRIPT))
+	$(info MAIN_MODULE is $(MAIN_MODULE))
+
+.PHONY: py-spy
+py-spy:
+	sudo env "PATH=$$PATH" python3 -m $(MAIN_MODULE)
+
+.PHONY: pyinstrument
+pyinstrument:
+	@pyinstrument --renderer=html -m $(MAIN_MODULE)

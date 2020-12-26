@@ -1,8 +1,14 @@
-- add scraper for getpocket to download a users list of saved urls.
-- run
-	$ pyscrapers version
-	see how long it takes?
-	Profile and reduce time.
+- getpocket work
+	finish the scraper version of getpocket
+	do a version of getpocket which is built on the official getpocket API.
+		https://getpocket.com/developer/apps/new
+		https://getpocket.com/developer/docs/authentication
+- profiling work
+	The result so far is that some modules take long to process
+	examples are youtube_dl
+	solution:
+	Move this whole project to a plugin based system.
+	Only load a plugin if you need it.
 - don't download the same content twice in terms of signature.
 - do my own db for downloaded stuff.
 - add a more flexible file save mechanism that will not fail
