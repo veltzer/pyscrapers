@@ -48,3 +48,5 @@ project_classifiers = [
 ]
 project_data_files = []
 # project_data_files.append(templar.utils.hlp_files_under('/usr/bin', 'src/*'))
+
+codacy_id = "aa1f67f04ff24bb080b7f8c8a9b7b8b1"
