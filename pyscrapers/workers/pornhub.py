@@ -134,12 +134,14 @@ def get_urls_from_page(root) -> List[str]:
         '//ul[@id=\'showAllChanelVideos\']',
         '//ul[@id=\'pornstarsVideoSection\']',
 
-        '//ul[@id=\'hottestMenuSection\']',
-        '//ul[@id=\'recommMenuSection\']',
-        '//ul[@id=\'claimedUploadedVideoSection\']',
-        '//ul[@id=\'claimedRecentVideoSection\']',
-        '//ul[@id=\'"videosUploadedSection\']',
-        '//ul[@id=\'"modelPaidClips\']',
+        # there are extras which we don't need (they provide extra
+        # movies which have nothing to do with the page involved)
+        # '//ul[@id=\'hottestMenuSection\']',
+        # '//ul[@id=\'recommMenuSection\']',
+        # '//ul[@id=\'claimedUploadedVideoSection\']',
+        # '//ul[@id=\'claimedRecentVideoSection\']',
+        # '//ul[@id=\'"videosUploadedSection\']',
+        # '//ul[@id=\'"modelPaidClips\']',
     ]
     video_sections = []
     for xpath_pick in xpath_picks:
