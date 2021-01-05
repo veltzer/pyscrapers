@@ -39,6 +39,7 @@
 <span class="sd">- https://pypi.org/project/pornhub-api/</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
@@ -46,9 +47,9 @@
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">pornhub_api</span> <span class="kn">import</span> <span class="n">PornhubApi</span>
 
-<span class="kn">import</span> <span class="nn">pyscrapers.core.utils</span>
-<span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigPornhubSearch</span><span class="p">,</span> <span class="n">ConfigDebugRequests</span><span class="p">,</span> <span class="n">ConfigUrl</span><span class="p">,</span> <span class="n">get_cookies</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigPornhubSearch</span><span class="p">,</span> <span class="n">ConfigUrl</span><span class="p">,</span> <span class="n">get_cookies</span><span class="p">,</span> <span class="n">ConfigDebugUrls</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.core.url_set</span> <span class="kn">import</span> <span class="n">UrlSet</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.core.utils</span> <span class="kn">import</span> <span class="n">get_html_dom_content</span><span class="p">,</span> <span class="n">get_element_as_bytes</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.youtube_dl_handlers</span> <span class="kn">import</span> <span class="n">youtube_dl_download_url</span><span class="p">,</span> <span class="n">youtube_dl_download_urls</span>
 
 
@@ -155,29 +156,24 @@
 <span class="sd">    :param root:</span>
 <span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># video_sections = root.xpath(&#39;//section[@id=\&#39;videosTab\&#39;]&#39;)</span>
-    <span class="c1"># assert len(video_sections) == 1, len(video_sections)</span>
-    <span class="c1"># video_section = video_sections[0]</span>
-    <span class="c1"># video_section = video_sections[0]</span>
-    <span class="c1"># &lt;ul class=&quot;dropdownHottestVideos videos&quot; id=&quot;hottestMenuSection&quot;&gt;</span>
-    <span class="c1"># &lt;ul class=&quot;videos row-5-thumbs&quot; id=&quot;mostRecentVideosSection&quot;&gt;</span>
-    <span class="c1"># pyscrapers.core.utils.print_element(root)</span>
-    <span class="c1"># import sys</span>
-    <span class="c1"># sys.exit(1)</span>
-    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ConfigDebugUrls</span><span class="o">.</span><span class="n">save</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;writing file [</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">get_element_as_bytes</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
     <span class="n">xpath_picks</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">uploadedVideosSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">moreData</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">mostRecentVideosSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">showAllChanelVideos</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
         <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">pornstarsVideoSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
-        <span class="c1"># &#39;//ul[contains(@class,\&#39;pornstarsVideos\&#39;)]&#39;, # this gave 12 urls for pornstars</span>
-        <span class="c1"># &#39;//ul[@id=\&#39;claimedUploadedVideoSection\&#39;]&#39;, # this gave 4 urls for pornstars</span>
-        <span class="c1"># &#39;//ul[@id=\&#39;claimedRecentVideoSection\&#39;]&#39;, # this gives the same recent videos for each page</span>
-        <span class="c1"># &#39;//ul[@id=\&#39;videosUploadedSection\&#39;]&#39;, # this gave 9 urls for pornstars</span>
-        <span class="c1"># &#39;//ul[@id=\&#39;modelPaidClips\&#39;]&#39;, # this is for paid clips</span>
-        <span class="c1"># &#39;//ul[@id=\&#39;hottestMenuSection\&#39;]&#39;, # this gave add urls</span>
-        <span class="c1"># &#39;//ul[@id=\&#39;recommMenuSection\&#39;]&#39;, # this gave add urls</span>
+
+        <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">hottestMenuSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">recommMenuSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">claimedUploadedVideoSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">claimedRecentVideoSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">&quot;videosUploadedSection</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;//ul[@id=</span><span class="se">\&#39;</span><span class="s1">&quot;modelPaidClips</span><span class="se">\&#39;</span><span class="s1">]&#39;</span><span class="p">,</span>
     <span class="p">]</span>
     <span class="n">video_sections</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">xpath_pick</span> <span class="ow">in</span> <span class="n">xpath_picks</span><span class="p">:</span>
@@ -203,8 +199,6 @@
 
 
 <div class="viewcode-block" id="download_url"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.pornhub.download_url">[docs]</a><span class="k">def</span> <span class="nf">download_url</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
-        <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">debug_requests</span><span class="p">()</span>
     <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
     <span class="n">session</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">get_cookies</span><span class="p">()</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -215,7 +209,7 @@
         <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got code [</span><span class="si">{</span><span class="n">page</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
             <span class="k">break</span>
-        <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
         <span class="n">new_urls</span> <span class="o">=</span> <span class="n">get_urls_from_page</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">break</span>

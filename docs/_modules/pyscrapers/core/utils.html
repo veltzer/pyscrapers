@@ -110,13 +110,31 @@
     <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urljoin</span><span class="p">(</span><span class="n">main_url</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="print_element"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.print_element">[docs]</a><span class="k">def</span> <span class="nf">print_element</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+<div class="viewcode-block" id="get_element_as_bytes"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.get_element_as_bytes">[docs]</a><span class="k">def</span> <span class="nf">get_element_as_bytes</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    from xml elements from etree</span>
+<span class="sd">    turn xml element from etree to bytes</span>
 <span class="sd">    :param element:</span>
 <span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">lxml</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span></div>
+    <span class="k">return</span> <span class="n">lxml</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_element_as_string"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.get_element_as_string">[docs]</a><span class="k">def</span> <span class="nf">get_element_as_string</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    turn xml element from etree to string</span>
+<span class="sd">    :param element:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">lxml</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="print_element"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.print_element">[docs]</a><span class="k">def</span> <span class="nf">print_element</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    print xml elements from etree</span>
+<span class="sd">    :param element:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">get_element_as_string</span><span class="p">(</span><span class="n">element</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="download_url"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.download_url">[docs]</a><span class="k">def</span> <span class="nf">download_url</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

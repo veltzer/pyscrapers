@@ -44,7 +44,7 @@
 <span class="kn">from</span> <span class="nn">pytconf</span> <span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_main</span><span class="p">,</span> <span class="n">config_arg_parse_and_launch</span>
 
 <span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigDebugRequests</span><span class="p">,</span> <span class="n">ConfigCookiesSource</span><span class="p">,</span> <span class="n">ConfigSiteId</span><span class="p">,</span> <span class="n">ConfigPornhubSearch</span><span class="p">,</span> \
-    <span class="n">ConfigYoutubeDl</span><span class="p">,</span> <span class="n">ConfigDownload</span><span class="p">,</span> <span class="n">ConfigLogging</span><span class="p">,</span> <span class="n">ConfigUrl</span><span class="p">,</span> <span class="n">get_cookies</span>
+    <span class="n">ConfigYoutubeDl</span><span class="p">,</span> <span class="n">ConfigDownload</span><span class="p">,</span> <span class="n">ConfigLogging</span><span class="p">,</span> <span class="n">ConfigUrl</span><span class="p">,</span> <span class="n">get_cookies</span><span class="p">,</span> <span class="n">ConfigDebugUrls</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.core.url_set</span> <span class="kn">import</span> <span class="n">UrlSet</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.core.utils</span> <span class="kn">import</span> <span class="n">debug_requests</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.static</span> <span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span><span class="p">,</span> <span class="n">LOGGER_NAME</span>
@@ -157,6 +157,7 @@
     <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download url videos from pornhub&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigDebugRequests</span><span class="p">,</span>
+        <span class="n">ConfigDebugUrls</span><span class="p">,</span>
         <span class="n">ConfigCookiesSource</span><span class="p">,</span>
         <span class="n">ConfigUrl</span><span class="p">,</span>
         <span class="n">ConfigDownload</span><span class="p">,</span>
@@ -164,6 +165,8 @@
     <span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">pornhub_download_url</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">debug_requests</span><span class="p">()</span>
     <span class="n">download_url</span><span class="p">()</span></div>
 
 
