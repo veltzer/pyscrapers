@@ -39,6 +39,16 @@ class ConfigDebugRequests(Config):
     )
 
 
+class ConfigDebugUrls(Config):
+    """
+    Configure how to debug urls
+    """
+    save = ParamCreator.create_bool(
+        help_string="Do you want to save urls?",
+        default=False,
+    )
+
+
 class ConfigDownload(Config):
     """
     Configure details about the download process

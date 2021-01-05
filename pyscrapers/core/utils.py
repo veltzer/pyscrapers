@@ -76,13 +76,31 @@ def add_http(url, main_url):
     return urllib.parse.urljoin(main_url, url)
 
 
-def print_element(element):
+def get_element_as_bytes(element):
     """
-    from xml elements from etree
+    turn xml element from etree to bytes
     :param element:
     :return:
     """
-    print(lxml.etree.tostring(element, pretty_print=True).decode())
+    return lxml.etree.tostring(element, pretty_print=True)
+
+
+def get_element_as_string(element):
+    """
+    turn xml element from etree to string
+    :param element:
+    :return:
+    """
+    return lxml.etree.tostring(element, pretty_print=True).decode()
+
+
+def print_element(element):
+    """
+    print xml elements from etree
+    :param element:
+    :return:
+    """
+    print(get_element_as_string(element))
 
 
 def download_url(session, source: str, target: str) -> None:
