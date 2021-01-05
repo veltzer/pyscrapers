@@ -10,7 +10,7 @@ from pornhub_api import PornhubApi
 from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
 from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies
+    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies, ConfigDebugUrls
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.core.utils import debug_requests
 from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME
@@ -123,6 +123,7 @@ def pornhub_download_search():
     description="Download url videos from pornhub",
     configs=[
         ConfigDebugRequests,
+        ConfigDebugUrls,
         ConfigCookiesSource,
         ConfigUrl,
         ConfigDownload,
@@ -130,6 +131,8 @@ def pornhub_download_search():
     ],
 )
 def pornhub_download_url():
+    if ConfigDebugRequests.debug:
+        debug_requests()
     download_url()
 
 

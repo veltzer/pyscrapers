@@ -5,6 +5,7 @@ References:
 - https://pypi.org/project/pornhub-api/
 """
 import logging
+import tempfile
 from itertools import islice
 from typing import List
 
@@ -12,9 +13,9 @@ import pornhub_api
 import requests
 from pornhub_api import PornhubApi
 
-import pyscrapers.core.utils
-from pyscrapers.configs import ConfigPornhubSearch, ConfigDebugRequests, ConfigUrl, get_cookies
+from pyscrapers.configs import ConfigPornhubSearch, ConfigUrl, get_cookies, ConfigDebugUrls
 from pyscrapers.core.url_set import UrlSet
+from pyscrapers.core.utils import get_html_dom_content, get_element_as_bytes
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_url, youtube_dl_download_urls
 
 
@@ -121,29 +122,24 @@ def get_urls_from_page(root) -> List[str]:
     :param root:
     :return:
     """
-    # video_sections = root.xpath('//section[@id=\'videosTab\']')
-    # assert len(video_sections) == 1, len(video_sections)
-    # video_section = video_sections[0]
-    # video_section = video_sections[0]
-    # <ul class="dropdownHottestVideos videos" id="hottestMenuSection">
-    # <ul class="videos row-5-thumbs" id="mostRecentVideosSection">
-    # pyscrapers.core.utils.print_element(root)
-    # import sys
-    # sys.exit(1)
-    # noinspection SpellCheckingInspection
+    logger = logging.getLogger(__name__)
+    if ConfigDebugUrls.save:
+        with tempfile.NamedTemporaryFile(delete=False) as f:
+            logger.info(f"writing file [{f.name}]")
+            f.write(get_element_as_bytes(root))
     xpath_picks = [
         '//ul[@id=\'uploadedVideosSection\']',
         '//ul[@id=\'moreData\']',
         '//ul[@id=\'mostRecentVideosSection\']',
         '//ul[@id=\'showAllChanelVideos\']',
         '//ul[@id=\'pornstarsVideoSection\']',
-        # '//ul[contains(@class,\'pornstarsVideos\')]', # this gave 12 urls for pornstars
-        # '//ul[@id=\'claimedUploadedVideoSection\']', # this gave 4 urls for pornstars
-        # '//ul[@id=\'claimedRecentVideoSection\']', # this gives the same recent videos for each page
-        # '//ul[@id=\'videosUploadedSection\']', # this gave 9 urls for pornstars
-        # '//ul[@id=\'modelPaidClips\']', # this is for paid clips
-        # '//ul[@id=\'hottestMenuSection\']', # this gave add urls
-        # '//ul[@id=\'recommMenuSection\']', # this gave add urls
+
+        '//ul[@id=\'hottestMenuSection\']',
+        '//ul[@id=\'recommMenuSection\']',
+        '//ul[@id=\'claimedUploadedVideoSection\']',
+        '//ul[@id=\'claimedRecentVideoSection\']',
+        '//ul[@id=\'"videosUploadedSection\']',
+        '//ul[@id=\'"modelPaidClips\']',
     ]
     video_sections = []
     for xpath_pick in xpath_picks:
@@ -169,8 +165,6 @@ def url_generator(url: str):
 
 
 def download_url() -> None:
-    if ConfigDebugRequests.debug:
-        pyscrapers.core.utils.debug_requests()
     session = requests.Session()
     session.cookies = get_cookies()
     logger = logging.getLogger(__name__)
@@ -181,7 +175,7 @@ def download_url() -> None:
         if page.status_code != 200:
             logger.info(f"got code [{page.status_code}]...")
             break
-        root = pyscrapers.core.utils.get_html_dom_content(page)
+        root = get_html_dom_content(page)
         new_urls = get_urls_from_page(root)
         if len(new_urls) == 0:
             break

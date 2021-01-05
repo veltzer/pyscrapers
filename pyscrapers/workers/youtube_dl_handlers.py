@@ -9,7 +9,7 @@ from typing import List
 
 import youtube_dl
 
-from pyscrapers.configs import ConfigYoutubeDl, ConfigUrl
+from pyscrapers.configs import ConfigYoutubeDl, ConfigUrl, ConfigDownload
 
 
 class MyLogger:
@@ -33,6 +33,8 @@ def youtube_dl_download_url(url: str) -> None:
 
 
 def youtube_dl_download_urls(urls: List[str]) -> None:
+    if not ConfigDownload.download:
+        return
     ydl_opts = {
         'format': 'bestaudio/best',
         # 'logger': MyLogger(),
