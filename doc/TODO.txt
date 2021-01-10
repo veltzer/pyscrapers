@@ -1,3 +1,5 @@
+- show progress clearly so I will know how many urls there are to download.
+	Shut the rest of the loggers off.
 - getpocket work
 	finish the scraper version of getpocket
 	do a version of getpocket which is built on the official getpocket API.
