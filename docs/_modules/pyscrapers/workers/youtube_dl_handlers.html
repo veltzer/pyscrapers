@@ -39,11 +39,13 @@
 <span class="sd">- https://github.com/ytdl-org/youtube-dl/blob/master/README.md#embedding-youtube-dl</span>
 <span class="sd">- https://github.com/ytdl-org/youtube-dl/blob/3e4cedf9e8cd3157df2457df7274d0c842421945/youtube_dl/YoutubeDL.py#L137-L312</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">youtube_dl</span>
 
 <span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigYoutubeDl</span><span class="p">,</span> <span class="n">ConfigUrl</span><span class="p">,</span> <span class="n">ConfigDownload</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.static</span> <span class="kn">import</span> <span class="n">LOGGER_NAME</span>
 
 
 <div class="viewcode-block" id="MyLogger"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.youtube_dl_handlers.MyLogger">[docs]</a><span class="k">class</span> <span class="nc">MyLogger</span><span class="p">:</span>
@@ -69,13 +71,17 @@
 <div class="viewcode-block" id="youtube_dl_download_urls"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.youtube_dl_handlers.youtube_dl_download_urls">[docs]</a><span class="k">def</span> <span class="nf">youtube_dl_download_urls</span><span class="p">(</span><span class="n">urls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">ConfigDownload</span><span class="o">.</span><span class="n">download</span><span class="p">:</span>
         <span class="k">return</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">LOGGER_NAME</span><span class="p">)</span>
     <span class="n">ydl_opts</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;bestaudio/best&#39;</span><span class="p">,</span>
-        <span class="c1"># &#39;logger&#39;: MyLogger(),</span>
+        <span class="c1"># this shuts everything down</span>
+        <span class="c1"># &#39;logger&#39;: logger,</span>
         <span class="s1">&#39;nooverwrites&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="s1">&#39;ignoreerrors&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;hls_prefer_native&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="c1"># &#39;hls_prefer_native&#39;: True,</span>
+        <span class="s1">&#39;fixup&#39;</span><span class="p">:</span> <span class="s1">&#39;never&#39;</span><span class="p">,</span>
     <span class="p">}</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;passing options $</span><span class="si">{</span><span class="n">ydl_opts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ConfigYoutubeDl</span><span class="o">.</span><span class="n">use_archive</span><span class="p">:</span>
         <span class="n">ydl_opts</span><span class="p">[</span><span class="s1">&#39;download_archive&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ConfigYoutubeDl</span><span class="o">.</span><span class="n">archive_file</span>
     <span class="k">with</span> <span class="n">youtube_dl</span><span class="o">.</span><span class="n">YoutubeDL</span><span class="p">(</span><span class="n">ydl_opts</span><span class="p">)</span> <span class="k">as</span> <span class="n">ydl</span><span class="p">:</span>
