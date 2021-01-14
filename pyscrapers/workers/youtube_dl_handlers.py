@@ -38,8 +38,9 @@ def youtube_dl_download_urls(urls: List[str]) -> None:
     ydl_opts = {
         'format': 'bestaudio/best',
         # 'logger': MyLogger(),
-        'nooverwrites': True,
-        'ignoreerrors': True,
+        'no-overwrites': True,
+        'ignore-errors': True,
+        'hls-prefer-native': True,
     }
     if ConfigYoutubeDl.use_archive:
         ydl_opts['download_archive'] = ConfigYoutubeDl.archive_file
