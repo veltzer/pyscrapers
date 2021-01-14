@@ -37,14 +37,16 @@ def youtube_dl_download_url(url: str) -> None:
 def youtube_dl_download_urls(urls: List[str]) -> None:
     if not ConfigDownload.download:
         return
+    logger = logging.getLogger(LOGGER_NAME)
     ydl_opts = {
         'format': 'bestaudio/best',
-        # 'logger': MyLogger(),
+        # this shuts everything down
+        # 'logger': logger,
         'nooverwrites': True,
         'ignoreerrors': True,
-        'hls_prefer_native': True,
+        # 'hls_prefer_native': True,
+        'fixup': 'never',
     }
-    logger = logging.getLogger(LOGGER_NAME)
     logger.debug(f"passing options ${ydl_opts}")
     if ConfigYoutubeDl.use_archive:
         ydl_opts['download_archive'] = ConfigYoutubeDl.archive_file
