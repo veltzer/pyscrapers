@@ -5,11 +5,13 @@ References:
 - https://github.com/ytdl-org/youtube-dl/blob/master/README.md#embedding-youtube-dl
 - https://github.com/ytdl-org/youtube-dl/blob/3e4cedf9e8cd3157df2457df7274d0c842421945/youtube_dl/YoutubeDL.py#L137-L312
 """
+import logging
 from typing import List
 
 import youtube_dl
 
 from pyscrapers.configs import ConfigYoutubeDl, ConfigUrl, ConfigDownload
+from pyscrapers.static import LOGGER_NAME
 
 
 class MyLogger:
@@ -42,6 +44,8 @@ def youtube_dl_download_urls(urls: List[str]) -> None:
         'ignoreerrors': True,
         'hls_prefer_native': True,
     }
+    logger = logging.getLogger(LOGGER_NAME)
+    logger.debug(f"passing options ${ydl_opts}")
     if ConfigYoutubeDl.use_archive:
         ydl_opts['download_archive'] = ConfigYoutubeDl.archive_file
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
