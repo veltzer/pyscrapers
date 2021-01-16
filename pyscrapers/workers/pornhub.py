@@ -133,6 +133,7 @@ def get_urls_from_page(root) -> List[str]:
         '//ul[@id=\'mostRecentVideosSection\']',
         '//ul[@id=\'showAllChanelVideos\']',
         '//ul[@id=\'pornstarsVideoSection\']',
+        '//ul[@id=\'modelMostRecentVideosSection\']',
 
         # there are extras which we don't need (they provide extra
         # movies which have nothing to do with the page involved)
