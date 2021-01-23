@@ -208,11 +208,11 @@
     <span class="n">urls</span> <span class="o">=</span> <span class="n">UrlSet</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">url_generator</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ConfigUrl</span><span class="o">.</span><span class="n">url</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;getting [</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
-        <span class="n">page</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got code [</span><span class="si">{</span><span class="n">page</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got code [</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
             <span class="k">break</span>
-        <span class="n">root</span> <span class="o">=</span> <span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
         <span class="n">new_urls</span> <span class="o">=</span> <span class="n">get_urls_from_page</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_urls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">break</span>

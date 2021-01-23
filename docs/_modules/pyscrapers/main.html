@@ -55,6 +55,7 @@
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.instagram</span> <span class="kn">import</span> <span class="n">scrape_instagram</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.mamba_ru</span> <span class="kn">import</span> <span class="n">scrape_mambaru</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.pornhub</span> <span class="kn">import</span> <span class="n">download_search</span><span class="p">,</span> <span class="n">print_stars_all_detailed</span><span class="p">,</span> <span class="n">download_url</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.workers.sxyprn</span> <span class="kn">import</span> <span class="n">sxyprn_download</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.travelgirls</span> <span class="kn">import</span> <span class="n">scrape_travelgirls</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.vk</span> <span class="kn">import</span> <span class="n">scrape_vk</span>
 <span class="kn">from</span> <span class="nn">pyscrapers.workers.youtube_dl_handlers</span> <span class="kn">import</span> <span class="n">youtube_dl_handler</span>
@@ -198,6 +199,25 @@
     <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
     <span class="n">session</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">get_cookies</span><span class="p">()</span>
     <span class="n">getpocket_download</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="sxyprn"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.sxyprn">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Download movies from sxyprn.com&quot;</span><span class="p">,</span>
+    <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">ConfigDebugRequests</span><span class="p">,</span>
+        <span class="n">ConfigUrl</span><span class="p">,</span>
+        <span class="n">ConfigLogging</span><span class="p">,</span>
+        <span class="n">ConfigDebugUrls</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">sxyprn</span><span class="p">():</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">LOGGER_NAME</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">ConfigLogging</span><span class="o">.</span><span class="n">loglevel</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ConfigDebugRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">debug_requests</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">get_cookies</span><span class="p">()</span>
+    <span class="n">sxyprn_download</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.main.main">[docs]</a><span class="nd">@register_main</span><span class="p">(</span>
