@@ -52,6 +52,14 @@ pyscrapers.workers.pornhub module
    :undoc-members:
    :show-inheritance:
 
+pyscrapers.workers.sxyprn module
+--------------------------------
+
+.. automodule:: pyscrapers.workers.sxyprn
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pyscrapers.workers.travelgirls module
 -------------------------------------
 

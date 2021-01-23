@@ -174,11 +174,11 @@ def download_url() -> None:
     urls = UrlSet()
     for url in url_generator(url=ConfigUrl.url):
         logger.info(f"getting [{url}]...")
-        page = session.get(url)
-        if page.status_code != 200:
-            logger.info(f"got code [{page.status_code}]...")
+        response = session.get(url)
+        if response.status_code != 200:
+            logger.info(f"got code [{response.status_code}]...")
             break
-        root = get_html_dom_content(page)
+        root = get_html_dom_content(response)
         new_urls = get_urls_from_page(root)
         if len(new_urls) == 0:
             break
