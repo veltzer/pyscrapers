@@ -36,7 +36,7 @@ def sxyprn_download(session: Session, logger: Logger):
             logger.info(f"got code [{response.status_code}]...")
             break
         if response.text == "":
-            logger.info(f"got empty response")
+            logger.info("got empty response")
             break
         root = get_html_dom_content(response)
         if ConfigDebugUrls.save:
