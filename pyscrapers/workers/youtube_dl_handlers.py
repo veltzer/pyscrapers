@@ -46,6 +46,7 @@ def youtube_dl_download_urls(urls: List[str]) -> None:
         'ignoreerrors': True,
         # 'hls_prefer_native': True,
         'fixup': 'never',
+        "output": "%(title).100s-%(id)s.%(ext)s",
     }
     logger.debug(f"passing options ${ydl_opts}")
     if ConfigYoutubeDl.use_archive:
