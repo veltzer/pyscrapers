@@ -38,6 +38,8 @@ def youtube_dl_download_urls(urls: List[str]) -> None:
     if not ConfigDownload.download:
         return
     logger = logging.getLogger(LOGGER_NAME)
+    # all options are here:
+    # https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/YoutubeDL.py#L128-L278
     ydl_opts = {
         'format': 'bestaudio/best',
         # this shuts everything down
