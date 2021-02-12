@@ -31,7 +31,7 @@ class ConfigLogging(Config):
 
 class ConfigDebugRequests(Config):
     """
-    Configure how to user the requests module
+    Configure how to use the requests module
     """
     debug = ParamCreator.create_bool(
         help_string="Do you want to debug the requests module?",

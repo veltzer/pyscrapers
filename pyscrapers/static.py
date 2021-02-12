@@ -1,5 +1,5 @@
 """ version which can be consumed from within the module """
-VERSION_STR = "0.0.53"
+VERSION_STR = "0.0.54"
 DESCRIPTION = "project to produce various useful scrapers"
 APP_NAME = "pyscrapers"
 LOGGER_NAME = "pyscrapers"
