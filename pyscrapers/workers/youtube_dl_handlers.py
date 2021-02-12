@@ -44,11 +44,12 @@ def youtube_dl_download_urls(urls: List[str]) -> None:
         # 'logger': logger,
         'nooverwrites': True,
         'ignoreerrors': True,
+        'restrict'
         # 'hls_prefer_native': True,
         'fixup': 'never',
-        "output": "%(title).100s-%(id)s.%(ext)s",
+        "outtmpl": "%(title).100s-%(id)s.%(ext)s",
     }
-    logger.debug(f"passing options ${ydl_opts}")
+    logger.debug(f"passing options {ydl_opts}")
     if ConfigYoutubeDl.use_archive:
         ydl_opts['download_archive'] = ConfigYoutubeDl.archive_file
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
