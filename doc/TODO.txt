@@ -1,3 +1,5 @@
+- make more saving standards (site-id-name-ext)
+	This will enable people to handle files easily.
 - show progress clearly so I will know how many urls there are to download.
 	Shut the rest of the loggers off.
 - getpocket work
