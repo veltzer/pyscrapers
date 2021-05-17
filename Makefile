@@ -9,7 +9,16 @@
 # 	endif
 # endif
 
+##############
+# parameters #
+##############
+# do you want to show the commands executed ?
+DO_MKDBG:=0
 
+
+########
+# code #
+########
 PYTHON=python3
 ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
 # We do it this way because we cannot rely on the current path (in CI/CD it could be anything, and we
@@ -18,55 +27,76 @@ PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
 
+# silent stuff
+ifeq ($(DO_MKDBG),1)
+Q:=
+# we are not silent in this branch
+else # DO_MKDBG
+Q:=@
+#.SILENT:
+endif # DO_MKDBG
+
+#########
+# rules #
+#########
+
 .PHONY: all
 all:
-	@pymakehelper only_print_on_error $(PYTHON) -m pytest tests
-	@pymakehelper only_print_on_error $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
-	@pymakehelper only_print_on_error $(PYTHON) -m flake8 $(ALL_PACKAGES)
-	@pymakehelper only_print_on_error $(PYTHON) -m unittest discover -s .
-	@pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
+	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest tests
+	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
+	$(Q)pymakehelper only_print_on_error $(PYTHON) -m flake8 $(ALL_PACKAGES)
+	$(Q)pymakehelper only_print_on_error $(PYTHON) -m unittest discover -s .
+	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 
 .PHONY: pytest
 pytest:
-	@pytest tests
+	$(Q)pytest tests
 
 .PHONY: pyflakes
 pyflakes:
-	@pyflakes $(ALL_PACKAGES)
+	$(Q)pyflakes $(ALL_PACKAGES)
 
 .PHONY: pylint
 pylint:
-	@pylint --reports=n --score=n $(ALL_PACKAGES)
+	$(Q)pylint --reports=n --score=n $(ALL_PACKAGES)
 
 .PHONY: flake8
 flake8:
-	@flake8 $(ALL_PACKAGES)
+	$(Q)flake8 $(ALL_PACKAGES)
 
 .PHONY: unittest
 unittest:
-	@$(PYTHON) -m unittest discover -s .
+	$(Q)$(PYTHON) -m unittest discover -s .
 
 .PHONY: cov
 cov:
-	@pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
+	$(Q)pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 
 .PHONY: pyre
 pyre:
-	@pyre check
+	$(Q)pyre check
 
 # turn all code to black style
 .PHONY: black
 black:
-	@black --target-version py36 $(ALL_PACKAGES)
+	$(Q)black --target-version py36 $(ALL_PACKAGES)
 
 .PHONY: clean
 clean:
-	@find . -name "*.pyc" -or -name "*.pyo" -delete
-	@find . -name "__pycache__" -exec rm -rf {} \;
+	$(Q)find . -name "*.pyc" -or -name "*.pyo" -delete
+	$(Q)find . -name "__pycache__" -exec rm -rf {} \;
 
 .PHONY: inspect
 inspect:
-	$(PYCHARM_HOME)/bin/inspect.sh $(PWD) .idea/inspectionProfiles/profiles_settings.xml inspections
+	$(Q)$(PYCHARM_HOME)/bin/inspect.sh $(PWD) .idea/inspectionProfiles/profiles_settings.xml inspections
+
+.PHONY: py-spy
+py-spy:
+	$(Q)sudo env "PATH=$$PATH" python3 -m $(MAIN_MODULE)
+
+.PHONY: pyinstrument
+pyinstrument:
+	$(Q)pyinstrument --renderer=html -m $(MAIN_MODULE)
 
 .PHONY: debug
 debug:
@@ -74,11 +104,3 @@ debug:
 	$(info ALL_PACKAGES is $(ALL_PACKAGES))
 	$(info MAIN_SCRIPT is $(MAIN_SCRIPT))
 	$(info MAIN_MODULE is $(MAIN_MODULE))
-
-.PHONY: py-spy
-py-spy:
-	sudo env "PATH=$$PATH" python3 -m $(MAIN_MODULE)
-
-.PHONY: pyinstrument
-pyinstrument:
-	@pyinstrument --renderer=html -m $(MAIN_MODULE)

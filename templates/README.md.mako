@@ -33,7 +33,6 @@
 			action_name=yaml.safe_load(stream)["name"]
 			context.write(f"![{action_name}](https://github.com/{config.project.project_github_username}/{config.project.project_name}/workflows/{action_name}/badge.svg)")
 %>
-
 ${config.project.project_short_description}
 
 project website: ${config.project.project_website}
