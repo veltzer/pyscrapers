@@ -13,7 +13,7 @@ from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigS
     ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies, ConfigDebugUrls
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.core.utils import debug_requests
-from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME
+from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME, DESCRIPTION
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
 from pyscrapers.workers.facebook import scrape_facebook
@@ -187,7 +187,7 @@ def sxyprn():
 
 
 @register_main(
-    main_description="pyscrapers will help you download stuff from the web",
+    main_description=DESCRIPTION,
     app_name=APP_NAME,
     version=VERSION_STR,
 )
