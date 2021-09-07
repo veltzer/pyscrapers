@@ -15,7 +15,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aa1f67f04ff24bb080b7f8c8a9b7b8b1)](https://www.codacy.com/app/jarrekk/imgkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=veltzer/pyscrapers&amp;utm_campaign=Badge_Grade)
 
 ![build](https://github.com/veltzer/pyscrapers/workflows/build/badge.svg)
-
 project to produce various useful scrapers
 
 project website: https://veltzer.github.io/pyscrapers
