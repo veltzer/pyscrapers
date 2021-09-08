@@ -87,7 +87,7 @@ def get_total_images(logger, session, url, user_id):
     root = get_my_content(r)
 
     e_albums = root.xpath('//div[@class="photos_album_title_wrap"]')
-    albums = dict()
+    albums = {}
     for x in e_albums:
         name_of_album = x.getparent().getparent().getparent().getparent().attrib['id'].split('?')[0]
         e_len = x.xpath('.//div[@class="photos_album_counter fl_r"]/text()')
