@@ -61,7 +61,7 @@ def download_search() -> None:
     exceptions = []
     except_urls = []
     while True:
-        kwargs = dict()
+        kwargs = {}
         if ConfigPornhubSearch.use_ordering:
             kwargs["ordering"] = ConfigPornhubSearch.ordering
         if ConfigPornhubSearch.use_period:
