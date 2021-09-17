@@ -1,8 +1,5 @@
-"""
-project definitions
-"""
-
 import pyclassifiers.values
+import config.helpers
 
 project_github_username = "veltzer"
 project_name = "pyscrapers"
@@ -49,3 +46,10 @@ project_classifiers = [
 project_data_files = []
 
 codacy_id = "aa1f67f04ff24bb080b7f8c8a9b7b8b1"
+
+project_google_analytics_tracking_id = None
+project_paypal_donate_button_id = None
+
+project_copyright_years = config.helpers.get_copyright_years(project_year_started)
+project_google_analytics_snipplet = config.helpers.get_google_analytics(project_google_analytics_tracking_id)
+project_paypal_donate_button_snipplet = config.helpers.get_paypal(project_paypal_donate_button_id)

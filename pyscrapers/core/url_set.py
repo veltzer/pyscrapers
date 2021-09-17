@@ -26,7 +26,7 @@ class UrlSet:
         :return:
         """
         logger = logging.getLogger(__name__)
-        logger.debug("collecting [{}]".format(url))
+        logger.debug(f"collecting [{url}]")
         if url in self.urls_set:
             self.appended_twice += 1
         else:
@@ -47,15 +47,15 @@ class UrlSet:
 
     def suggest_filename(self, suffix: str) -> Union[str, None]:
         if suffix == ".jpg":
-            filename = 'image{0:04}.jpg'.format(self.counter_jpg)
+            filename = f"image{self.counter_jpg:0:04}.jpg"
             self.counter_jpg += 1
             return filename
         if suffix == ".mp4":
-            filename = 'video{0:04}.mp4'.format(self.counter_mp4)
+            filename = f"video{self.counter_mp4:0:04}.mp4"
             self.counter_mp4 += 1
             return filename
         logger = logging.getLogger(__name__)
-        logger.error('do not know how to handle suffix [%s]...', suffix)
+        logger.error(f"do not know how to handle suffix [{suffix}]...")
         return None
 
     def get_filename(self, suffix: str) -> str:

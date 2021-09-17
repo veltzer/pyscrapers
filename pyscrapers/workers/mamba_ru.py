@@ -9,7 +9,7 @@ def scrape_mambaru(user_id: str, session, url_set: UrlSet) -> None:
     main_url = 'https://www.mamba.ru/mobile/api/v5.17.0.0/?reqType=json'
     sys_requests_container = [
         {
-            "uri": "/users/{}/albums/workers/".format(user_id),
+            "uri": f"/users/{user_id}/albums/workers/",
             "method": "GET",
             "params": {
                 "langId": "en",
