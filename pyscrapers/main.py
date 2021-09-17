@@ -79,18 +79,18 @@ def drumeo():
     with shelve.open("cache.db") as d:
         if "courses" in d:
             list_of_courses = d["courses"]
-            print("got from cache [{}] courses".format(len(list_of_courses)))
+            print(f"got from cache [{len(list_of_courses)}] courses")
         else:
             pages = get_number_of_pages(courses=courses, session=session)
-            print("number of pages is [{}]".format(pages))
+            print(f"number of pages is [{pages}]")
             list_of_courses = get_courses(pages, courses=courses, session=session)
-            print("got [{}] courses".format(len(list_of_courses)))
+            print(f"got [{len(list_of_courses)}] courses")
             d["courses"] = list_of_courses
         for i, course in enumerate(list_of_courses):
-            logger.info("course number [%s]", i)
+            logger.info(f"course number [{i}]")
             if course.number in d and course.number not in reload:
                 list_of_courses[i] = d[course.number]
-                logger.info("got from cache [%s]", list_of_courses[i])
+                logger.info(f"got from cache [{list_of_courses[i]}]")
             else:
                 get_course_details(course, courses=courses, session=session)
                 get_course_urls(course, courses=courses, session=session)
