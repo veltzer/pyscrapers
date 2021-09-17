@@ -81,17 +81,17 @@ class Course:
 
 def get_url(courses: bool, page: int) -> str:
     if courses:
-        url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page={}".format(page)
+        url = f"https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page={page}"
     else:
-        url = "https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page={}".format(page)
+        url = f"https://www.drumeo.com/laravel/public/members-area/json/lesson-group/library?page={page}"
     return url
 
 
 def get_members_url(courses: bool, number: int) -> str:
     if courses:
-        url = "https://www.drumeo.com/members/lessons/courses/{}".format(number)
+        url = f"https://www.drumeo.com/members/lessons/courses/{number}"
     else:
-        url = "https://www.drumeo.com/members/lessons/library/{}".format(number)
+        url = f"https://www.drumeo.com/members/lessons/library/{number}"
     return url
 
 
@@ -118,7 +118,7 @@ def get_courses(pages, courses: bool, session):
         for lesson_list in json.loads(result.content.decode())["lessonsHtml"]:
             course = Course()
             root = lxml.html.fromstring(lesson_list)
-            links = root.xpath('//a[re:match(@href,"{}")]'.format(get_link_re(courses)))
+            links = root.xpath(f"//a[re:match(@href,\"{get_link_re(courses)}\")]")
             assert len(links) == 2, len(links)
             course.number = links[0].get('href').split("/")[-1]
             titles = root.xpath('//h2[@class="card-title"]')
@@ -150,7 +150,7 @@ def get_course_details(course: Course, courses: bool, session):
         class_text = "course-lesson"
     else:
         class_text = "event-toggle download-lesson"
-    lessons = root.xpath('//a[@class="{}"]'.format(class_text))
+    lessons = root.xpath(f"//a[@class=\"{class_text}\"]")
     for lesson in lessons:
         lesson_num = lesson.get('href').split('/')[-1]
         course.add_lesson(lesson_num)
@@ -169,9 +169,9 @@ def get_course_urls(course, courses: bool, session):
     logger.info("doing course [%s]", course)
     for lesson in course.lessons:
         if courses:
-            url = "https://www.drumeo.com/members/lessons/courses/{}".format(lesson)
+            url = f"https://www.drumeo.com/members/lessons/courses/{lesson}"
         else:
-            url = "https://www.drumeo.com/members/lessons/library/{}".format(lesson)
+            url = f"https://www.drumeo.com/members/lessons/library/{lesson}"
         result = session.get(url)
         result.raise_for_status()
         content = result.content.decode()
@@ -224,11 +224,11 @@ def download_course(course, session):
     details = os.path.join(folder_name, "details.txt")
     if not os.path.isfile(details):
         with open(details, "wt") as file_handle:
-            print("course_number: {}".format(course.number), file=file_handle)
-            print("course_name: {}".format(course.name), file=file_handle)
-            print("course_difficulty: {}".format(course.diff), file=file_handle)
-            print("instructor: {}".format(course.instructor), file=file_handle)
+            print(f"course_number: {course.number}", file=file_handle)
+            print(f"course_name: {course.name}", file=file_handle)
+            print(f"course_difficulty: {course.diff}", file=file_handle)
+            print(f"instructor: {course.instructor}", file=file_handle)
     if course.resources is not None:
         download_url(course.resources, os.path.join(folder_name, "resources.zip"), session)
     for i, (video, quality) in enumerate(course.videos):
-        download_video_if_wider(session, video, os.path.join(folder_name, "{}.mp4".format(i)), width=int(quality))
+        download_video_if_wider(session, video, os.path.join(folder_name, f"{i}.mp4"), width=int(quality))
