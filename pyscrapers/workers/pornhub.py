@@ -10,10 +10,9 @@ from itertools import islice
 from typing import List
 
 import pornhub_api
-import requests
 from pornhub_api import PornhubApi
 
-from pyscrapers.configs import ConfigPornhubSearch, ConfigUrl, get_cookies, ConfigDebugUrls
+from pyscrapers.configs import ConfigPornhubSearch, ConfigUrl, ConfigDebugUrls
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.core.utils import get_html_dom_content, get_element_as_bytes
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_url, youtube_dl_download_urls
@@ -167,9 +166,7 @@ def url_generator(url: str):
         page += 1
 
 
-def download_url() -> None:
-    session = requests.Session()
-    session.cookies = get_cookies()
+def download_url(session) -> None:
     logger = logging.getLogger(__name__)
     urls = UrlSet()
     for url in url_generator(url=ConfigUrl.url):

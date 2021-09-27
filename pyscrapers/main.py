@@ -5,14 +5,13 @@ import logging
 import shelve
 
 import pylogconf.core
-import requests
 from pornhub_api import PornhubApi
 from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
 from pyscrapers.configs import ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies, ConfigDebugUrls, ConfigRequests
+    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, ConfigDebugUrls, ConfigRequests
 from pyscrapers.core.url_set import UrlSet
-from pyscrapers.core.requests import config_requests
+from pyscrapers.core.requests import get_session
 from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME, DESCRIPTION
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
@@ -38,11 +37,9 @@ from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
     ],
 )
 def photos():
-    config_requests()
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
-    session = requests.Session()
-    session.cookies = get_cookies()
+    session = get_session()
     url_set = UrlSet()
     if ConfigSiteId.site == "facebook":
         scrape_facebook(ConfigSiteId.user_id, session, url_set)
@@ -66,11 +63,7 @@ def photos():
     ],
 )
 def drumeo():
-    config_requests()
-
-    session = requests.Session()
-    session.cookies = get_cookies()
-
+    session = get_session()
     logger = logging.getLogger(__name__)
     courses = False
     reload = {}
@@ -130,8 +123,8 @@ def pornhub_download_search():
     ],
 )
 def pornhub_download_url():
-    config_requests()
-    download_url()
+    session = get_session()
+    download_url(session)
 
 
 @register_endpoint(
@@ -155,11 +148,9 @@ def youtube_dl():
     ],
 )
 def getpocket():
-    config_requests()
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
-    session = requests.Session()
-    session.cookies = get_cookies()
+    session = get_session()
     getpocket_download(session, logger)
 
 
@@ -175,9 +166,7 @@ def getpocket():
 def sxyprn():
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
-    config_requests()
-    session = requests.Session()
-    session.cookies = get_cookies()
+    session = get_session()
     sxyprn_download(session, logger)
 
 
