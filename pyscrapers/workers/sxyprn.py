@@ -29,17 +29,20 @@ def sxyprn_download(session: Session, logger: Logger):
     # noinspection PyProtectedMember
     base_url = url_parsed._replace(path="", params="", query="", fragment="").geturl()
 
+    num_pages = None
+    counter = 0
     urls = UrlSet()
     for url in url_generator(url=ConfigUrl.url):
         logger.info(f"loading [{url}]")
         response = session_get(session=session, url=url)
-        if response.status_code != 200:
-            logger.info(f"got code [{response.status_code}]...")
-            break
-        if response.text == "":
-            logger.info("got empty response")
-            break
+        response.raise_for_status()
         root = get_html_dom_content(response)
+        counter += 1
+        if num_pages is None:
+            num_pages = len(root.xpath("//div[contains(@class,'ctrl_el')]"))
+        else:
+            if counter >= num_pages:
+                break
         if ConfigDebugUrls.save:
             with tempfile.NamedTemporaryFile(delete=False) as f:
                 logger.info(f"writing file [{f.name}]")
