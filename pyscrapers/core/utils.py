@@ -3,7 +3,6 @@ This module is s set of utilities for this entire project
 """
 
 
-import http.client
 import logging
 import os
 import shutil
@@ -54,16 +53,6 @@ def get_html_dom_content(response):
     str_content = response.content.decode()
     root = lxml.html.fromstring(str_content)
     return root
-
-
-def debug_requests():
-    """
-    Activate the debugging features of the requests module
-    :return:
-    """
-    http.client.HTTPConnection.debuglevel = 1
-    requests_log = logging.getLogger("requests.packages.urllib3")
-    requests_log.propagate = True
 
 
 def add_http(url, main_url):

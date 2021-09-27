@@ -169,3 +169,17 @@ class ConfigUrl(Config):
     url = ParamCreator.create_str(
         help_string="url to download (e.g. https://www.pornhub.com/model/lily)"
     )
+
+
+class ConfigRequests(Config):
+    """
+    Parameters to config the requests module
+    """
+    connect_timeout = ParamCreator.create_int_or_none(
+        help_string="Timeout for connections in seconds (none means endless)",
+        default=5,
+    )
+    read_timeout = ParamCreator.create_int_or_none(
+        help_string="Timeout for reading in seconds (none means endless)",
+        default=5,
+    )
