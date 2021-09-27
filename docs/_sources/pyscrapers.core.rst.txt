@@ -12,6 +12,14 @@ pyscrapers.core.ffprobe module
    :undoc-members:
    :show-inheritance:
 
+pyscrapers.core.requests module
+-------------------------------
+
+.. automodule:: pyscrapers.core.requests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pyscrapers.core.url\_set module
 -------------------------------
 

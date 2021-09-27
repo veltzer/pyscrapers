@@ -36,7 +36,6 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<span class="kn">import</span> <span class="nn">http.client</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
@@ -73,8 +72,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># noinspection PyProtectedMember,PyUnresolvedReferences</span>
     <span class="c1"># pylint: disable=protected-access</span>
-    <span class="k">return</span> <span class="s2">&quot;http code [</span><span class="si">{}</span><span class="s2">], [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">requests</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">_codes</span><span class="p">[</span><span class="n">code</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></div>
-    <span class="c1"># return &quot;http code [{}], [{}]&quot;.format(code, http.client.responses[code])</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;http code [</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">], [</span><span class="si">{</span><span class="n">requests</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">_codes</span><span class="p">[</span><span class="n">code</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span></div>
+    <span class="c1"># return f&quot;http code [{code}], [{http.client.responses[code]}]&quot;</span>
 
 
 <div class="viewcode-block" id="get_html_dom_content"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.get_html_dom_content">[docs]</a><span class="k">def</span> <span class="nf">get_html_dom_content</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
@@ -87,16 +86,6 @@
     <span class="n">str_content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">str_content</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">root</span></div>
-
-
-<div class="viewcode-block" id="debug_requests"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.debug_requests">[docs]</a><span class="k">def</span> <span class="nf">debug_requests</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Activate the debugging features of the requests module</span>
-<span class="sd">    :return:</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="o">.</span><span class="n">debuglevel</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">requests_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;requests.packages.urllib3&quot;</span><span class="p">)</span>
-    <span class="n">requests_log</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 
 <div class="viewcode-block" id="add_http"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.utils.add_http">[docs]</a><span class="k">def</span> <span class="nf">add_http</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">main_url</span><span class="p">):</span>

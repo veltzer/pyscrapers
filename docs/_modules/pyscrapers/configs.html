@@ -202,6 +202,20 @@
     <span class="n">url</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;url to download (e.g. https://www.pornhub.com/model/lily)&quot;</span>
     <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ConfigRequests"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigRequests">[docs]</a><span class="k">class</span> <span class="nc">ConfigRequests</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters to config the requests module</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">connect_timeout</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int_or_none</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Timeout for connections in seconds (none means endless)&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">read_timeout</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int_or_none</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Timeout for reading in seconds (none means endless)&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="p">)</span></div>
 </pre></div>
 
           </div>

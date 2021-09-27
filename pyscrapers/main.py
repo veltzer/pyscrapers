@@ -9,10 +9,10 @@ import requests
 from pornhub_api import PornhubApi
 from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
-from pyscrapers.configs import ConfigDebugRequests, ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies, ConfigDebugUrls
+from pyscrapers.configs import ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
+    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies, ConfigDebugUrls, ConfigDebugRequests
 from pyscrapers.core.url_set import UrlSet
-from pyscrapers.core.utils import debug_requests
+from pyscrapers.core.requests import config_requests
 from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME, DESCRIPTION
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
@@ -38,8 +38,7 @@ from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
     ],
 )
 def photos():
-    if ConfigDebugRequests.debug:
-        debug_requests()
+    config_requests()
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     session = requests.Session()
@@ -67,8 +66,7 @@ def photos():
     ],
 )
 def drumeo():
-    if ConfigDebugRequests.debug:
-        debug_requests()
+    config_requests()
 
     session = requests.Session()
     session.cookies = get_cookies()
@@ -132,8 +130,7 @@ def pornhub_download_search():
     ],
 )
 def pornhub_download_url():
-    if ConfigDebugRequests.debug:
-        debug_requests()
+    config_requests()
     download_url()
 
 
@@ -158,8 +155,7 @@ def youtube_dl():
     ],
 )
 def getpocket():
-    if ConfigDebugRequests.debug:
-        debug_requests()
+    config_requests()
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     session = requests.Session()
@@ -179,8 +175,7 @@ def getpocket():
 def sxyprn():
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
-    if ConfigDebugRequests.debug:
-        debug_requests()
+    config_requests()
     session = requests.Session()
     session.cookies = get_cookies()
     sxyprn_download(session, logger)
