@@ -18,13 +18,19 @@ class MyTimeout(TimeoutSauce):
 
 
 def get_session():
+    # doesnt work
     # requests.adapters.TimeoutSauce = MyTimeout
     if ConfigRequests.debug:
         debug_requests()
     session = requests.Session()
-    session.adapters.TimeoutSauce = MyTimeout
+    # doesnt work
+    # session.adapters.TimeoutSauce = MyTimeout
     session.cookies = get_cookies()
     return session
+
+
+def session_get(session, url):
+    return session.get(url, timeout=(ConfigRequests.connect_timeout, ConfigRequests.read_timeout))
 
 
 def debug_requests():
