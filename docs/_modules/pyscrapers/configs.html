@@ -62,16 +62,6 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ConfigDebugRequests"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigDebugRequests">[docs]</a><span class="k">class</span> <span class="nc">ConfigDebugRequests</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configure how to use the requests module</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">debug</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
-        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Do you want to debug the requests module?&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span></div>
-
-
 <div class="viewcode-block" id="ConfigDebugUrls"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigDebugUrls">[docs]</a><span class="k">class</span> <span class="nc">ConfigDebugUrls</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configure how to debug urls</span>
@@ -215,6 +205,10 @@
     <span class="n">read_timeout</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int_or_none</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Timeout for reading in seconds (none means endless)&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">debug</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Do you want to debug the requests module?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span></div>
 </pre></div>
 
