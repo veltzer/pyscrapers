@@ -10,7 +10,7 @@ from pornhub_api import PornhubApi
 from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
 from pyscrapers.configs import ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies, ConfigDebugUrls, ConfigDebugRequests
+    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, get_cookies, ConfigDebugUrls, ConfigRequests
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.core.requests import config_requests
 from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME, DESCRIPTION
@@ -31,7 +31,7 @@ from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
     description="Download photo albums from various sites",
     configs=[
         ConfigSiteId,
-        ConfigDebugRequests,
+        ConfigRequests,
         ConfigCookiesSource,
         ConfigDownload,
         ConfigLogging,
@@ -61,7 +61,7 @@ def photos():
 @register_endpoint(
     description="Download videos from drumeo",
     configs=[
-        ConfigDebugRequests,
+        ConfigRequests,
         ConfigCookiesSource,
     ],
 )
@@ -121,7 +121,7 @@ def pornhub_download_search():
 @register_endpoint(
     description="Download url videos from pornhub",
     configs=[
-        ConfigDebugRequests,
+        ConfigRequests,
         ConfigDebugUrls,
         ConfigCookiesSource,
         ConfigUrl,
@@ -148,7 +148,7 @@ def youtube_dl():
 @register_endpoint(
     description="Download list from getpocket",
     configs=[
-        ConfigDebugRequests,
+        ConfigRequests,
         ConfigCookiesSource,
         ConfigDownload,
         ConfigLogging,
@@ -166,7 +166,7 @@ def getpocket():
 @register_endpoint(
     description="Download movies from sxyprn.com",
     configs=[
-        ConfigDebugRequests,
+        ConfigRequests,
         ConfigUrl,
         ConfigLogging,
         ConfigDebugUrls,

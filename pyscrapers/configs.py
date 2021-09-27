@@ -29,16 +29,6 @@ class ConfigLogging(Config):
     )
 
 
-class ConfigDebugRequests(Config):
-    """
-    Configure how to use the requests module
-    """
-    debug = ParamCreator.create_bool(
-        help_string="Do you want to debug the requests module?",
-        default=False,
-    )
-
-
 class ConfigDebugUrls(Config):
     """
     Configure how to debug urls
@@ -182,4 +172,8 @@ class ConfigRequests(Config):
     read_timeout = ParamCreator.create_int_or_none(
         help_string="Timeout for reading in seconds (none means endless)",
         default=5,
+    )
+    debug = ParamCreator.create_bool(
+        help_string="Do you want to debug the requests module?",
+        default=False,
     )

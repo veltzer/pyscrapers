@@ -5,7 +5,7 @@ import logging
 import requests
 from requests.adapters import TimeoutSauce
 
-from pyscrapers.configs import ConfigRequests, ConfigDebugRequests
+from pyscrapers.configs import ConfigRequests
 
 
 class MyTimeout(TimeoutSauce):
@@ -19,7 +19,7 @@ class MyTimeout(TimeoutSauce):
 
 def config_requests():
     requests.adapters.TimeoutSauce = MyTimeout
-    if ConfigDebugRequests.debug:
+    if ConfigRequests.debug:
         debug_requests()
 
 
