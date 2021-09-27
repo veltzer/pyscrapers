@@ -5,7 +5,7 @@ import logging
 import requests
 from requests.adapters import TimeoutSauce
 
-from pyscrapers.configs import ConfigRequests
+from pyscrapers.configs import ConfigRequests, get_cookies
 
 
 class MyTimeout(TimeoutSauce):
@@ -17,10 +17,14 @@ class MyTimeout(TimeoutSauce):
         super().__init__(*args, **kwargs)
 
 
-def config_requests():
-    requests.adapters.TimeoutSauce = MyTimeout
+def get_session():
+    # requests.adapters.TimeoutSauce = MyTimeout
     if ConfigRequests.debug:
         debug_requests()
+    session = requests.Session()
+    session.adapters.TimeoutSauce = MyTimeout
+    session.cookies = get_cookies()
+    return session
 
 
 def debug_requests():

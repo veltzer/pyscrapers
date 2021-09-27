@@ -38,7 +38,7 @@
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">requests.adapters</span> <span class="kn">import</span> <span class="n">TimeoutSauce</span>
 
-<span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigRequests</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigRequests</span><span class="p">,</span> <span class="n">get_cookies</span>
 
 
 <div class="viewcode-block" id="MyTimeout"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.requests.MyTimeout">[docs]</a><span class="k">class</span> <span class="nc">MyTimeout</span><span class="p">(</span><span class="n">TimeoutSauce</span><span class="p">):</span>
@@ -50,10 +50,14 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="config_requests"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.requests.config_requests">[docs]</a><span class="k">def</span> <span class="nf">config_requests</span><span class="p">():</span>
-    <span class="n">requests</span><span class="o">.</span><span class="n">adapters</span><span class="o">.</span><span class="n">TimeoutSauce</span> <span class="o">=</span> <span class="n">MyTimeout</span>
+<div class="viewcode-block" id="get_session"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.requests.get_session">[docs]</a><span class="k">def</span> <span class="nf">get_session</span><span class="p">():</span>
+    <span class="c1"># requests.adapters.TimeoutSauce = MyTimeout</span>
     <span class="k">if</span> <span class="n">ConfigRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
-        <span class="n">debug_requests</span><span class="p">()</span></div>
+        <span class="n">debug_requests</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">adapters</span><span class="o">.</span><span class="n">TimeoutSauce</span> <span class="o">=</span> <span class="n">MyTimeout</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">get_cookies</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">session</span></div>
 
 
 <div class="viewcode-block" id="debug_requests"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.requests.debug_requests">[docs]</a><span class="k">def</span> <span class="nf">debug_requests</span><span class="p">():</span>
