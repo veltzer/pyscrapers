@@ -40,9 +40,8 @@ def sxyprn_download(session: Session, logger: Logger):
         counter += 1
         if num_pages is None:
             num_pages = len(root.xpath("//div[contains(@class,'ctrl_el')]"))
-        else:
-            if counter >= num_pages:
-                break
+        if counter >= num_pages:
+            break
         if ConfigDebugUrls.save:
             with tempfile.NamedTemporaryFile(delete=False) as f:
                 logger.info(f"writing file [{f.name}]")

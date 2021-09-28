@@ -73,9 +73,8 @@
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">num_pages</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">num_pages</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;//div[contains(@class,&#39;ctrl_el&#39;)]&quot;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;=</span> <span class="n">num_pages</span><span class="p">:</span>
-                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;=</span> <span class="n">num_pages</span><span class="p">:</span>
+            <span class="k">break</span>
         <span class="k">if</span> <span class="n">ConfigDebugUrls</span><span class="o">.</span><span class="n">save</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;writing file [</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
