@@ -24,8 +24,7 @@ class ConfigLogging(Config):
             logging.getLevelName(logging.CRITICAL),
         ],
         help_string="What log level to use?",
-        default=logging.getLevelName(logging.ERROR),
-
+        default=logging.getLevelName(logging.INFO),
     )
 
 
