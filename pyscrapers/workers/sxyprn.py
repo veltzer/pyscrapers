@@ -37,11 +37,10 @@ def sxyprn_download(session: Session, logger: Logger):
         response = session_get(session=session, url=url)
         response.raise_for_status()
         root = get_html_dom_content(response)
-        counter += 1
         if num_pages is None:
             num_pages = len(root.xpath("//div[contains(@class,'ctrl_el')]"))
-        if counter >= num_pages:
-            break
+            if num_pages == 0:
+                num_pages = 1
         if ConfigDebugUrls.save:
             with tempfile.NamedTemporaryFile(delete=False) as f:
                 logger.info(f"writing file [{f.name}]")
@@ -52,6 +51,9 @@ def sxyprn_download(session: Session, logger: Logger):
             url = urllib.parse.urljoin(base_url, href)
             no_fluff = urllib.parse.urlparse(url)._replace(params="", query="", fragment="").geturl()
             urls.append(no_fluff)
+        counter += 1
+        if counter == num_pages:
+            break
     session.close()
     logger.info(f"got total [{len(urls.urls_list)}] urls")
     logger.info(f"got [{urls.appended_twice}] appended twice urls")
