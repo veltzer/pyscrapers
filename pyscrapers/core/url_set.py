@@ -47,11 +47,11 @@ class UrlSet:
 
     def suggest_filename(self, suffix: str) -> Union[str, None]:
         if suffix == ".jpg":
-            filename = f"image{self.counter_jpg:0:04}.jpg"
+            filename = f"image{self.counter_jpg:04d}.jpg"
             self.counter_jpg += 1
             return filename
         if suffix == ".mp4":
-            filename = f"video{self.counter_mp4:0:04}.mp4"
+            filename = f"video{self.counter_mp4:04d}.mp4"
             self.counter_mp4 += 1
             return filename
         logger = logging.getLogger(__name__)
