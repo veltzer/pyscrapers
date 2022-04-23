@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.stamp
+/inspections
+/wheel
 
 /.myenv.pip.errors
 
