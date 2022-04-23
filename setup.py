@@ -9,7 +9,7 @@ def get_readme():
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="pyscrapers",
-    version="0.0.63",
+    version="0.0.64",
     packages=[
         'pyscrapers',
         'pyscrapers.core',
@@ -50,7 +50,7 @@ setuptools.setup(
         'pyeventroute',
     ],
     extras_require={
-    },
+    }},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
