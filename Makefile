@@ -98,6 +98,11 @@ clean:
 	$(Q)find . -name "*.pyc" -or -name "*.pyo" -delete
 	$(Q)find . -name "__pycache__" -exec rm -rf {} \;
 
+.PHONY: clean_hard
+clean_hard:
+	$(info doing [$@])
+	$(Q)git clean -qffxd
+
 .PHONY: inspect
 inspect:
 	$(Q)$(PYCHARM_HOME)/bin/inspect.sh $(PWD) .idea/inspectionProfiles/profiles_settings.xml inspections
