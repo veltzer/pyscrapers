@@ -14,18 +14,21 @@
 ##############
 # do you want to show the commands executed ?
 DO_MKDBG:=0
-
+# do you want dependency on the Makefile itself ?
+DO_ALLDEP:=1
 
 ########
 # code #
 ########
 PYTHON=python3
 ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
+ALL_PYTHON:=$(shell find $(ALL_PACKAGES) -type f -and -name "*.py")
 # We do it this way because we cannot rely on the current path (in CI/CD it could be anything, and we
-# dont want to run python as above
+# don't want to run python as above
 PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
+ALL:=all_tests.stamp
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -36,17 +39,26 @@ Q:=@
 #.SILENT:
 endif # DO_MKDBG
 
+# dependency on the makefile itself
+ifeq ($(DO_ALLDEP),1)
+.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
+endif
+
 #########
 # rules #
 #########
 
 .PHONY: all
-all:
+all: $(ALL)
+	@true
+
+all_tests.stamp: $(ALL_PYTHON)
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest tests
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m flake8 $(ALL_PACKAGES)
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m unittest discover -s .
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
+	$(Q)touch $@
 
 .PHONY: pytest
 pytest:
@@ -102,5 +114,6 @@ pyinstrument:
 debug:
 	$(info PACKAGE_NAME is $(PACKAGE_NAME))
 	$(info ALL_PACKAGES is $(ALL_PACKAGES))
+	$(info ALL_PYTHON is $(ALL_PYTHON))
 	$(info MAIN_SCRIPT is $(MAIN_SCRIPT))
 	$(info MAIN_MODULE is $(MAIN_MODULE))
