@@ -6,8 +6,8 @@
 # 	PACKAGE_NAME:=$(notdir $(PWD))
 # 	ifeq ($(call check-have-folder,$(PACKAGE_NAME)),0)
 # 		$(error cannot deduce package name)
-# 	endif
-# endif
+# 	endif # do check
+# endif # do check
 
 ##############
 # parameters #
@@ -42,7 +42,7 @@ endif # DO_MKDBG
 # dependency on the makefile itself
 ifeq ($(DO_ALLDEP),1)
 .EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
-endif
+endif # DO_ALLDEP
 
 #########
 # rules #
