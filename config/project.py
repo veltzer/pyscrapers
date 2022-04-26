@@ -26,7 +26,7 @@ project_keywords = [
     "pics",
 ]
 project_license = "MIT"
-project_year_started = "2016"
+project_year_started = 2016
 project_description = "A collection of scrapers for the web"
 project_platforms = [
     "python3",
