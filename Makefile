@@ -33,7 +33,7 @@ PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
 ALL:=all_tests.stamp
-ALL_SH:=$(shell find bin -name "*.sh")
+ALL_SH:=$(shell find bin -name "*.sh" 2> /dev/null)
 ALL_SH_STAMP:=$(addprefix out/, $(addsuffix .stamp, $(ALL_SH)))
 TOOLS:=tools.stamp
 
