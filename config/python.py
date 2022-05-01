@@ -39,11 +39,10 @@ dev_requires = [
     'Sphinx',
 ]
 
-python_requires = ">=3.7"
-
 extras_require = {
 }
 
+python_requires = ">=3.9"
 test_os = "[ubuntu-20.04]"
-test_python = "[3.7, 3.8, 3.9]"
+test_python = "[3.9]"
 test_container = "[ubuntu:20.04]"
