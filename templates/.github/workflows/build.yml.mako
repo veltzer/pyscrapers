@@ -18,5 +18,7 @@ jobs:
         python-version: ${"${{ matrix.python-version }}"}
     - name: Install python dependencies
       run: python -m pip install -r requirements.txt
+    - name: pydmt build
+      run: pydmt build
     - name: Build
       run: pymakehelper run_make
