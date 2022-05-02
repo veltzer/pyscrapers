@@ -18,8 +18,6 @@ DO_MKDBG:=0
 DO_ALLDEP:=1
 # do you want to check bash syntax?
 DO_CHECK_SYNTAX:=1
-# do you want to do tools?
-DO_TOOLS:=1
 
 ########
 # code #
@@ -35,7 +33,6 @@ MAIN_MODULE:=$(PACKAGE_NAME).main
 ALL:=all_tests.stamp
 ALL_SH:=$(shell find bin -name "*.sh" 2> /dev/null)
 ALL_SH_STAMP:=$(addprefix out/, $(addsuffix .stamp, $(ALL_SH)))
-TOOLS:=tools.stamp
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -50,11 +47,6 @@ endif # DO_MKDBG
 ifeq ($(DO_ALLDEP),1)
 .EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
 endif # DO_ALLDEP
-
-ifeq ($(DO_TOOLS),1)
-.EXTRA_PREREQS+=$(TOOLS)
-ALL+=$(TOOLS)
-endif # DO_TOOLS
 
 ifeq ($(DO_CHECK_SYNTAX),1)
 ALL+=$(ALL_SH_STAMP)
@@ -145,11 +137,6 @@ debug:
 install:
 	$(info doing [$@])
 	$(Q)pymakehelper symlink_install --source_folder bin --target_folder ~/install/bin
-
-$(TOOLS): packages.txt config/deps.py
-	$(info doing [$@])
-	$(Q)xargs -a packages.txt sudo apt-get -y install > /dev/null
-	$(Q)pymakehelper touch_mkdir $@
 
 ############
 # patterns #
