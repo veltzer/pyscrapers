@@ -8,14 +8,15 @@ jobs:
         os: [ubuntu-20.04]
         python-version: [3.9]
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: checkout
+      uses: actions/checkout@v3
+    - name: python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install python dependencies
+    - name: requirements
       run: python -m pip install -r requirements.txt
-    - name: pydmt build_tools
+    - name: pydmt
       run: pydmt build_tools
-    - name: Build
+    - name: make
       run: pymakehelper run_make
