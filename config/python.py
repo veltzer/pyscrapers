@@ -6,6 +6,9 @@ console_scripts = [
     'pyscrapers=pyscrapers.main:main',
 ]
 
+run_requires = [
+]
+
 setup_requires = [
 ]
 
