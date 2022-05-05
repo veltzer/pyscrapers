@@ -4,8 +4,7 @@
     import user.personal
     import glob
     import yaml
-%>
-# *${config.project.project_name}* project by ${user.personal.personal_fullname}
+%># *${config.project.project_name}* project by ${user.personal.personal_fullname}
 
 ![PyPI - Status](https://img.shields.io/pypi/status/${config.python.package_name})
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/${config.python.package_name})
