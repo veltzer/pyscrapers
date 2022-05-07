@@ -31,10 +31,18 @@ setuptools.setup(
     download_url="${config.project.project_website_download_src}",
     license="${config.project.project_license}",
     platforms=${pydmt.helpers.python.array_indented(1, config.project.project_platforms)},
+% if hasattr(config.python, "install_requires"):
     install_requires=${pydmt.helpers.python.array_indented(1, config.python.install_requires)},
+% endif
+% if hasattr(config.python, "extras_requires"):
     extras_require=${pydmt.helpers.python.dict_indented(1, config.python.extras_require)},
+% endif
     classifiers=${pydmt.helpers.python.array_indented(1, config.project.project_classifiers)},
     data_files=${pydmt.helpers.python.array_indented(1, config.project.project_data_files)},
+% if hasattr(config.python, "console_scripts"):
     entry_points={"console_scripts": ${pydmt.helpers.python.array_indented(1, config.python.console_scripts)}},
+% endif
+% if hasattr(config.python, "python_requires"):
     python_requires="${config.python.python_requires}",
+% endif
 )

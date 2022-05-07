@@ -39,18 +39,6 @@ setuptools.setup(
     platforms=[
         'python3',
     ],
-    install_requires=[
-        'lxml',
-        'requests',
-        'browser-cookie3',
-        'pytconf',
-        'pylogconf',
-        'pornhub-api',
-        'youtube-dl',
-        'pyeventroute',
-    ],
-    extras_require={
-    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
