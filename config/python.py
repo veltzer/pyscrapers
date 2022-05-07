@@ -5,7 +5,12 @@ package_name = config.project.project_name
 console_scripts = [
     "pyscrapers=pyscrapers.main:main",
 ]
-
+dev_requires = [
+    "pyclassifiers",
+    "pypitools",
+    "pydmt",
+    "Sphinx",
+]
 install_requires = [
     "lxml",
     "requests",
@@ -17,7 +22,6 @@ install_requires = [
     "youtube-dl",
     "pyeventroute",
 ]
-
 test_requires = [
     "pylint",
     "pytest",
@@ -28,14 +32,7 @@ test_requires = [
     "pymakehelper",
 ]
 
+python_requires = ">=3.10"
 
-dev_requires = [
-    "pyclassifiers",
-    "pypitools",
-    "pydmt",
-    "Sphinx",
-]
-
-python_requires = ">=3.9"
-test_os = ["ubuntu-20.04"]
-test_python = ["3.9"]
+test_os = ["ubuntu-22.04"]
+test_python = ["3.10"]
