@@ -6,7 +6,7 @@ console_scripts = [
     "pyscrapers=pyscrapers.main:main",
 ]
 
-run_requires = [
+install_requires = [
     "lxml",
     "requests",
     # "hyper",
