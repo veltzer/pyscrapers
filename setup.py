@@ -39,6 +39,16 @@ setuptools.setup(
     platforms=[
         'python3',
     ],
+    install_requires=[
+        'lxml',
+        'requests',
+        'browser-cookie3',
+        'pytconf',
+        'pylogconf',
+        'pornhub-api',
+        'youtube-dl',
+        'pyeventroute',
+    ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -55,5 +65,5 @@ setuptools.setup(
     entry_points={"console_scripts": [
         'pyscrapers=pyscrapers.main:main',
     ]},
-    python_requires=">=3.9",
+    python_requires=">=3.10",
 )

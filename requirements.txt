@@ -1,4 +1,13 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
+# production requirements
+lxml
+requests
+browser-cookie3
+pytconf
+pylogconf
+pornhub-api
+youtube-dl
+pyeventroute
 # dev requirements
 pyclassifiers
 pypitools
