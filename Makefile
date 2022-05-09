@@ -23,6 +23,7 @@ DO_CHECK_SYNTAX:=1
 # code #
 ########
 PYTHON=python3
+ALL_TESTS:=out/tests.stamp
 ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
 ALL_PYTHON:=$(shell find $(ALL_PACKAGES) -type f -and -name "*.py")
 # We do it this way because we cannot rely on the current path (in CI/CD it could be anything, and we
@@ -30,7 +31,7 @@ ALL_PYTHON:=$(shell find $(ALL_PACKAGES) -type f -and -name "*.py")
 PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
-ALL:=all_tests.stamp
+ALL:=$(ALL_TESTS)
 ALL_SH:=$(shell find bin -name "*.sh" 2> /dev/null)
 ALL_SH_STAMP:=$(addprefix out/, $(addsuffix .stamp, $(ALL_SH)))
 
@@ -60,13 +61,13 @@ endif # DO_CHECK_SYNTAX
 all: $(ALL)
 	@true
 
-all_tests.stamp: $(ALL_PYTHON)
+$(ALL_TESTS): $(ALL_PYTHON)
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest tests
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m flake8 $(ALL_PACKAGES)
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m unittest discover -s .
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
-	$(Q)touch $@
+	$(Q)pymakehelper touch_mkdir $@
 
 .PHONY: pytest
 pytest:
