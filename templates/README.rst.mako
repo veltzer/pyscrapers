@@ -1,24 +1,32 @@
 <%!
+    import pydmt.helpers.misc
+    import pydmt.helpers.signature
+    import pydmt.helpers.project
+    import pydmt.helpers.python
+    import pydmt.helpers.urls
     import config.project
     import config.python
     import user.personal
     import config.version
     import os
-    line = '=' * (len(config.project.project_name)+2)
+    line = '=' * (len(pydmt.helpers.project.get_name())+2)
 %>${line}
-*${config.project.project_name}*
+*${pydmt.helpers.project.get_name()}*
 ${line}
 
-.. image:: https://img.shields.io/pypi/v/${config.python.package_name}
+.. image:: https://img.shields.io/pypi/v/${pydmt.helpers.python.get_package_name()}
 
-.. image:: https://img.shields.io/github/license/veltzer/${config.project.project_name}
+.. image:: https://img.shields.io/github/license/veltzer/${pydmt.helpers.project.get_name()}
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
 
-project website: ${config.project.project_website}
+project website: ${pydmt.helpers.urls.get_website()}
 
-author: ${user.personal.personal_fullname}
+author: ${user.personal.fullname}
 
-version: ${config.version.version_str}
+version: ${pydmt.helpers.misc.get_version_str()}
 
+% if os.path.isfile("../snipplets/main.md.mako"):
 <%include file="../snipplets/main.rst.mako" />
+% endif
+	${user.personal.origin}, Copyright © ${pydmt.helpers.signature.get_copyright_years_long()}
