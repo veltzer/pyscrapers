@@ -1,4 +1,2 @@
 packages = [
-    "shellcheck",
-    "hub",
 ]
