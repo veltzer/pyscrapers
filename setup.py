@@ -16,7 +16,7 @@ setuptools.setup(
         'pyscrapers.workers',
     ],
     # from here all is optional
-    description="A collection of scrapers for the web",
+    description="project to produce various useful scrapers",
     long_description=get_readme(),
     long_description_content_type="text/x-rst",
     author="Mark Veltzer",
@@ -56,14 +56,15 @@ setuptools.setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Topic :: Utilities',
         'License :: OSI Approved :: MIT License',
-    ],
-    data_files=[
     ],
     entry_points={"console_scripts": [
         'pyscrapers=pyscrapers.main:main',
     ]},
-    python_requires=">=3.10",
 )
