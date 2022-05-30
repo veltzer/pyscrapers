@@ -126,6 +126,7 @@ pyinstrument:
 
 .PHONY: debug
 debug:
+	$(info ALL is $(ALL))
 	$(info PACKAGE_NAME is $(PACKAGE_NAME))
 	$(info ALL_PACKAGES is $(ALL_PACKAGES))
 	$(info ALL_PYTHON is $(ALL_PYTHON))
@@ -144,6 +145,5 @@ install:
 ############
 $(ALL_SH_STAMP): out/%.stamp: % .shellcheckrc
 	$(info doing [$@])
-	$(Q)mkdir -p $(dir $@)
 	$(Q)shellcheck --shell=bash $<
-	$(Q)touch $@
+	$(Q)pymakehelper touch_mkdir $@
