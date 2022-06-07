@@ -32,7 +32,7 @@ PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
 ALL:=$(ALL_TESTS)
-ALL_SH:=$(shell find bin -name "*.sh" 2> /dev/null)
+ALL_SH:=$(shell find src -name "*.sh" 2> /dev/null)
 ALL_SH_STAMP:=$(addprefix out/, $(addsuffix .stamp, $(ALL_SH)))
 
 # silent stuff
@@ -138,7 +138,7 @@ debug:
 .PHONY: install
 install:
 	$(info doing [$@])
-	$(Q)pymakehelper symlink_install --source_folder bin --target_folder ~/install/bin
+	$(Q)pymakehelper symlink_install --source_folder src --target_folder ~/install/bin
 
 ############
 # patterns #
