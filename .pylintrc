@@ -151,7 +151,7 @@ disable=raw-checker-failed,
         useless-suppression,
         deprecated-pragma,
         use-symbolic-message-instead,
-	missing-function-docstring, # here I started adding
+	missing-function-docstring, # MV
 	invalid-name,
 	too-few-public-methods,
 	missing-class-docstring,
@@ -160,7 +160,8 @@ disable=raw-checker-failed,
 	too-many-locals,
 	too-many-arguments,
 	too-many-instance-attributes,
-	logging-fstring-interpolation
+	logging-fstring-interpolation,
+	duplicate-code
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -456,8 +457,8 @@ spelling-store-unknown-words=no
 
 # List of note tags to take in consideration, separated by a comma.
 notes=FIXME,
-      XXX,
-      TODO
+      XXX
+# TODO # MV
 
 # Regular expression of note tags to take in consideration.
 notes-rgx=
@@ -569,7 +570,7 @@ min-similarity-lines=4
 [REFACTORING]
 
 # Maximum number of nested blocks for function / method body
-max-nested-blocks=5
+max-nested-blocks=8 # MV
 
 # Complete name of functions that never returns. When checking for
 # inconsistent-return-statements if a never returning function is called then
@@ -598,7 +599,7 @@ max-attributes=7
 max-bool-expr=5
 
 # Maximum number of branch for function / method body.
-max-branches=12
+max-branches=14 # MV
 
 # Maximum number of locals for function / method body.
 max-locals=15
@@ -607,7 +608,7 @@ max-locals=15
 max-parents=7
 
 # Maximum number of public methods for a class (see R0904).
-max-public-methods=20
+max-public-methods=24 # MV
 
 # Maximum number of return / yield for function / method body.
 max-returns=6
