@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>pyscrapers package &#8212; pyscrapers 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,9 +35,9 @@
           <div class="body" role="main">
             
   <section id="pyscrapers-package">
-<h1>pyscrapers package<a class="headerlink" href="#pyscrapers-package" title="Permalink to this headline">¶</a></h1>
+<h1>pyscrapers package<a class="headerlink" href="#pyscrapers-package" title="Permalink to this heading">¶</a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pyscrapers.core.html">pyscrapers.core package</a><ul>
@@ -67,15 +68,15 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-pyscrapers.configs">
-<span id="pyscrapers-configs-module"></span><h2>pyscrapers.configs module<a class="headerlink" href="#module-pyscrapers.configs" title="Permalink to this headline">¶</a></h2>
+<span id="pyscrapers-configs-module"></span><h2>pyscrapers.configs module<a class="headerlink" href="#module-pyscrapers.configs" title="Permalink to this heading">¶</a></h2>
 <p>All configurations for pyscrapers</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigCookiesSource">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigCookiesSource</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigCookiesSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigCookiesSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Configure where to get cookies from</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigCookiesSource.browser">
@@ -87,7 +88,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigDebugUrls">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigDebugUrls</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigDebugUrls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigDebugUrls" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Configure how to debug urls</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigDebugUrls.save">
@@ -99,7 +100,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigDownload">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigDownload</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigDownload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigDownload" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Configure details about the download process</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigDownload.download">
@@ -121,7 +122,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigLogging">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigLogging</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigLogging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigLogging" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Parameters to control logging</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigLogging.loglevel">
@@ -133,7 +134,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigPornhubSearch">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigPornhubSearch</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigPornhubSearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigPornhubSearch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Parameters for search</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigPornhubSearch.limit">
@@ -185,7 +186,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigRequests">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigRequests</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigRequests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigRequests" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Parameters to config the requests module</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigRequests.connect_timeout">
@@ -207,7 +208,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigSiteId">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigSiteId</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigSiteId"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigSiteId" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Parameters for downloading workers</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigSiteId.site">
@@ -224,7 +225,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigUrl">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigUrl</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigUrl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigUrl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Parameters for what url to download</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigUrl.url">
@@ -236,7 +237,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigYoutubeDl">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigYoutubeDl</span></span><a class="reference internal" href="_modules/pyscrapers/configs.html#ConfigYoutubeDl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.configs.ConfigYoutubeDl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
 <p>Configuration for youtube downloads</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pyscrapers.configs.ConfigYoutubeDl.archive_file">
@@ -257,7 +258,7 @@
 
 </section>
 <section id="module-pyscrapers.main">
-<span id="pyscrapers-main-module"></span><h2>pyscrapers.main module<a class="headerlink" href="#module-pyscrapers.main" title="Permalink to this headline">¶</a></h2>
+<span id="pyscrapers-main-module"></span><h2>pyscrapers.main module<a class="headerlink" href="#module-pyscrapers.main" title="Permalink to this heading">¶</a></h2>
 <p>The default group of operations that pyscrapers has</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyscrapers.main.drumeo">
@@ -306,11 +307,11 @@
 
 </section>
 <section id="module-pyscrapers.static">
-<span id="pyscrapers-static-module"></span><h2>pyscrapers.static module<a class="headerlink" href="#module-pyscrapers.static" title="Permalink to this headline">¶</a></h2>
+<span id="pyscrapers-static-module"></span><h2>pyscrapers.static module<a class="headerlink" href="#module-pyscrapers.static" title="Permalink to this heading">¶</a></h2>
 <p>version which can be consumed from within the module</p>
 </section>
 <section id="module-pyscrapers">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscrapers" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscrapers" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -340,7 +341,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -349,7 +350,7 @@
       &copy;2017, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
