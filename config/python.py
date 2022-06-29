@@ -26,4 +26,5 @@ test_requires = [
     "pyre-check",
     "flake8",
     "pymakehelper",
+    "mypy",
 ]
