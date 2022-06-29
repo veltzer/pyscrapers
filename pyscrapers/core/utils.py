@@ -7,8 +7,8 @@ import logging
 import os
 import shutil
 import urllib.parse
+import http.client
 
-import requests
 import lxml
 import lxml.html
 
@@ -39,8 +39,8 @@ def get_http_status_string(code: int):
     """
     # noinspection PyProtectedMember,PyUnresolvedReferences
     # pylint: disable=protected-access
-    return f"http code [{code}], [{requests.status_codes._codes[code][0]}]"
-    # return f"http code [{code}], [{http.client.responses[code]}]"
+    # return f"http code [{code}], [{requests.status_codes._codes[code][0]}]"
+    return f"http code [{code}], [{http.client.responses[code]}]"
 
 
 def get_html_dom_content(response):
