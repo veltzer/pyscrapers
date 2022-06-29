@@ -3,18 +3,8 @@ import http.client
 import logging
 
 import requests
-from requests.adapters import TimeoutSauce
 
 from pyscrapers.configs import ConfigRequests, get_cookies
-
-
-class MyTimeout(TimeoutSauce):
-    def __init__(self, *args, **kwargs):
-        if kwargs['connect'] is None:
-            kwargs['connect'] = ConfigRequests.connect_timeout
-        if kwargs['read'] is None:
-            kwargs['read'] = ConfigRequests.read_timeout
-        super().__init__(*args, **kwargs)
 
 
 def get_session():

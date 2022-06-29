@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import urllib.parse
-from typing import Union, List
+from typing import List
 
 from pyscrapers.configs import ConfigDownload
 
@@ -45,7 +45,7 @@ class UrlSet:
         for url in self.urls_list:
             print(url)
 
-    def suggest_filename(self, suffix: str) -> Union[str, None]:
+    def suggest_filename(self, suffix: str) -> str:
         if suffix == ".jpg":
             filename = f"image{self.counter_jpg:04d}.jpg"
             self.counter_jpg += 1
@@ -54,9 +54,7 @@ class UrlSet:
             filename = f"video{self.counter_mp4:04d}.mp4"
             self.counter_mp4 += 1
             return filename
-        logger = logging.getLogger(__name__)
-        logger.error(f"do not know how to handle suffix [{suffix}]...")
-        return None
+        raise ValueError(f"don't know how to handle suffix [{suffix}]")
 
     def get_filename(self, suffix: str) -> str:
         filename = self.suggest_filename(suffix)
