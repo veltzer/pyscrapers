@@ -27,4 +27,5 @@ test_requires = [
     "flake8",
     "pymakehelper",
     "mypy",
+    "types-requests",
 ]
