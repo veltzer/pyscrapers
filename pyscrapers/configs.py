@@ -4,7 +4,6 @@ All configurations for pyscrapers
 import os
 import logging
 
-import browser_cookie3
 from pytconf import Config, ParamCreator
 
 
@@ -64,16 +63,8 @@ class ConfigCookiesSource(Config):
     browser = ParamCreator.create_choice(
         choice_list=["none", "firefox", "chrome"],
         help_string="Which browser to take cookies from?",
-        default="firefox",
+        default="chrome",
     )
-
-
-def get_cookies():
-    if ConfigCookiesSource.browser == "firefox":
-        return browser_cookie3.firefox()
-    if ConfigCookiesSource.browser == "chrome":
-        return browser_cookie3.chrome()
-    raise ValueError(f"unsupported browser [{ConfigCookiesSource.browser}")
 
 
 class ConfigSiteId(Config):

@@ -11,6 +11,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -37,7 +38,6 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">import</span> <span class="nn">browser_cookie3</span>
 <span class="kn">from</span> <span class="nn">pytconf</span> <span class="kn">import</span> <span class="n">Config</span><span class="p">,</span> <span class="n">ParamCreator</span>
 
 
@@ -97,16 +97,8 @@
     <span class="n">browser</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_choice</span><span class="p">(</span>
         <span class="n">choice_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;firefox&quot;</span><span class="p">,</span> <span class="s2">&quot;chrome&quot;</span><span class="p">],</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Which browser to take cookies from?&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;firefox&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;chrome&quot;</span><span class="p">,</span>
     <span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="get_cookies"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.get_cookies">[docs]</a><span class="k">def</span> <span class="nf">get_cookies</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">ConfigCookiesSource</span><span class="o">.</span><span class="n">browser</span> <span class="o">==</span> <span class="s2">&quot;firefox&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">browser_cookie3</span><span class="o">.</span><span class="n">firefox</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">ConfigCookiesSource</span><span class="o">.</span><span class="n">browser</span> <span class="o">==</span> <span class="s2">&quot;chrome&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">browser_cookie3</span><span class="o">.</span><span class="n">chrome</span><span class="p">()</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unsupported browser [</span><span class="si">{</span><span class="n">ConfigCookiesSource</span><span class="o">.</span><span class="n">browser</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ConfigSiteId"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigSiteId">[docs]</a><span class="k">class</span> <span class="nc">ConfigSiteId</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
@@ -234,7 +226,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -243,7 +235,7 @@
       &copy;2017, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
