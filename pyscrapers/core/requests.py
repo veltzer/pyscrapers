@@ -4,7 +4,8 @@ import logging
 
 import requests
 
-from pyscrapers.configs import ConfigRequests, get_cookies
+from pyscrapers.configs import ConfigRequests
+from pyscrapers.utils import get_cookies
 
 
 def get_session():
@@ -15,7 +16,9 @@ def get_session():
     session = requests.Session()
     # doesnt work
     # session.adapters.TimeoutSauce = MyTimeout
-    session.cookies = get_cookies()
+    cookies = get_cookies()
+    if cookies is not None:
+        session.cookies = cookies
     return session
 
 

@@ -37,6 +37,14 @@ pyscrapers.static module
    :undoc-members:
    :show-inheritance:
 
+pyscrapers.utils module
+-----------------------
+
+.. automodule:: pyscrapers.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

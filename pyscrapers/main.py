@@ -21,6 +21,7 @@ from pyscrapers.workers.instagram import scrape_instagram
 from pyscrapers.workers.mamba_ru import scrape_mambaru
 from pyscrapers.workers.pornhub import download_search, print_stars_all_detailed, download_url
 from pyscrapers.workers.sxyprn import sxyprn_download
+from pyscrapers.workers.netflix import netflix_download
 from pyscrapers.workers.travelgirls import scrape_travelgirls
 from pyscrapers.workers.vk import scrape_vk
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
@@ -168,6 +169,21 @@ def sxyprn():
     logger.setLevel(ConfigLogging.loglevel)
     session = get_session()
     sxyprn_download(session, logger)
+
+
+@register_endpoint(
+    description="Download your list from netflix",
+    configs=[
+        ConfigRequests,
+        ConfigLogging,
+        ConfigDebugUrls,
+    ],
+)
+def netflix_list():
+    logger = logging.getLogger(LOGGER_NAME)
+    logger.setLevel(ConfigLogging.loglevel)
+    session = get_session()
+    netflix_download(session, logger)
 
 
 @register_main(
