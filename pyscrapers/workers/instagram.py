@@ -10,9 +10,8 @@ import logging
 import time
 
 import pyeventroute.route
-from lxml import etree
 
-from pyscrapers.core.utils import get_html_dom_content
+from pyscrapers.core.ext_lxml import get_html_dom_content
 from pyscrapers.core.url_set import UrlSet
 
 
@@ -37,11 +36,6 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
     root = get_html_dom_content(response)
     # scrape.utils.print_element(root)
 
-    # register regular expressions with lxml
-    # this means that we can use regular expression functions like 'match'
-    # by specifying 're:match' in our xpath expressions
-    ns = etree.FunctionNamespace("http://exslt.org/regular-expressions")
-    ns.prefix = 're'
     e_a = root.xpath('//script[re:match(text(), "^window._sharedData")]')
     assert len(e_a) == 1
     data = e_a[0].text

@@ -85,6 +85,15 @@ class ConfigSiteId(Config):
     )
 
 
+class ConfigUser(Config):
+    """
+    Parameters for a user
+    """
+    user = ParamCreator.create_str(
+        help_string="Which user id to user?",
+    )
+
+
 class ConfigPornhubSearch(Config):
     """
     Parameters for search

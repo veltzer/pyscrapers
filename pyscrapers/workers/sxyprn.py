@@ -5,8 +5,7 @@ from requests.sessions import Session
 
 from pyscrapers.configs import ConfigUrl, ConfigDebugUrls
 from pyscrapers.core.url_set import UrlSet
-from pyscrapers.core.utils import get_html_dom_content, get_element_as_bytes
-from pyscrapers.core.requests import session_get
+from pyscrapers.core.ext_lxml import get_html_dom_content, get_element_as_bytes
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_urls
 
 
@@ -34,7 +33,7 @@ def sxyprn_download(session: Session, logger: Logger):
     urls = UrlSet()
     for url in url_generator(url=ConfigUrl.url):
         logger.info(f"loading [{url}]")
-        response = session_get(session=session, url=url)
+        response = session.get(url)
         response.raise_for_status()
         root = get_html_dom_content(response)
         if num_pages is None:

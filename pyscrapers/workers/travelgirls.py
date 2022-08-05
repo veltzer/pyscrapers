@@ -5,7 +5,7 @@ from pyscrapers.core.url_set import UrlSet
 def scrape_travelgirls(user_id: str, session, url_set: UrlSet) -> None:
     main_url = f'https://www.travelgirls.com/member/{user_id}'
     r = session.get(main_url)
-    root = pyscrapers.core.utils.get_html_dom_content(r)
+    root = pyscrapers.core.ext_lxml.get_html_dom_content(r)
 
     e_a = root.xpath('//a[contains(@class,\'photo\')]')
     for x in e_a:
