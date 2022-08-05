@@ -1,5 +1,6 @@
 import os
 import shutil
+import urllib
 
 import http.client
 import logging
@@ -15,18 +16,49 @@ import pyscrapers.core.ffprobe
 FAIL = True
 
 
+class ExtResponse:
+
+    def __init__(self, res: requests.Response):
+        self.res = res
+
+    def raise_for_status(self):
+        return self.res.raise_for_status()
+
+    def save_text(self, filename: str = "/tmp/temp"):
+        try:
+            with open(filename, "wt") as handle:
+                handle.write(self.res.content.decode())
+        except IOError:
+            os.unlink(filename)
+
+    def save_binary(self, filename: str = "/tmp/temp") -> None:
+        try:
+            with open(filename, 'wb') as handle:
+                self.res.raw.decode_content = True
+                shutil.copyfileobj(self.res.raw, handle)
+        except IOError:
+            os.unlink(filename)
+
+
 class ExtSession(requests.Session):
     """
     Inherit from requests.Session and add capabilities
     """
-    def __init__(self):
+    def __init__(self, base: str = ""):
         super().__init__()
         cookies = get_cookies()
         if cookies is not None:
             self.cookies = cookies
+        self.base = base
 
     def my_get(self, url: str):
         return self.get(url, timeout=(ConfigRequests.connect_timeout, ConfigRequests.read_timeout))
+
+    def ext_get(self, url: str, *args, **kwargs):
+        abs_url = urllib.parse.urljoin(self.base, url)
+        ret = super().get(abs_url, *args, **kwargs)
+        ret.raise_for_status()
+        return ExtResponse(ret)
 
     def download_url(self, source: str, target: str) -> None:
         """
@@ -37,14 +69,8 @@ class ExtSession(requests.Session):
         if os.path.isfile(target):
             logger.info('skipping [%s]', target)
             return
-        try:
-            response = self.get(source, stream=True)
-            response.raise_for_status()
-            with open(target, 'wb') as file_handle:
-                response.raw.decode_content = True
-                shutil.copyfileobj(response.raw, file_handle)
-        except IOError:
-            os.unlink(target)
+        response = self.ext_get(source, stream=True)
+        response.save_text(target)
         logger.info('written [%s]...', target)
 
     def download_video_if_wider(self, source: str, target: str, width: int) -> bool:
@@ -64,24 +90,8 @@ class ExtSession(requests.Session):
                 logger.info('skipping because video with width exists [%s] %s %s', target, file_width, width)
                 return True
             logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
-        try:
-            response = self.get(source, stream=True)
-            if FAIL:
-                response.raise_for_status()
-            else:
-                if response.status_code != 200:
-                    logger.info("got bad error code [%s] and failed to download", response.status_code)
-                    return False
-            with open(target, 'wb') as file_handle:
-                response.raw.decode_content = True
-                shutil.copyfileobj(response.raw, file_handle)
-        except IOError as e:
-            if os.path.isfile(target):
-                os.unlink(target)
-            if FAIL:
-                raise ValueError("count not download") from e
-            logger.info("failed to download file")
-            return False
+        response = self.ext_get(source, stream=True)
+        response.save_binary(target)
         logger.info('written [%s]...', target)
         return True
 

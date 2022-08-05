@@ -10,6 +10,6 @@ def instagram_stories_download(_session: ExtSession, _logger: Logger):
     :param logger:
     :return:
     """
-    url = f"https://www.instagram.com/{ConfigUser.user}"
-    session = ExtSession()
-    session.get(url)
+    session = ExtSession(base="https://www.instagram.com")
+    response = session.ext_get(ConfigUser.user)
+    response.save_text()
