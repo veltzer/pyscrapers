@@ -14,7 +14,7 @@ from pornhub_api import PornhubApi
 
 from pyscrapers.configs import ConfigPornhubSearch, ConfigUrl, ConfigDebugUrls
 from pyscrapers.core.url_set import UrlSet
-from pyscrapers.core.utils import get_html_dom_content, get_element_as_bytes
+from pyscrapers.core.ext_lxml import get_html_dom_content, get_element_as_bytes
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_url, youtube_dl_download_urls
 
 

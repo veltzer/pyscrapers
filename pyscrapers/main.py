@@ -9,9 +9,10 @@ from pornhub_api import PornhubApi
 from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
 from pyscrapers.configs import ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
-    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, ConfigDebugUrls, ConfigRequests
+    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, ConfigDebugUrls, ConfigRequests, \
+    ConfigUser
 from pyscrapers.core.url_set import UrlSet
-from pyscrapers.core.requests import get_session
+from pyscrapers.core.ext_requests import ExtSession
 from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME, DESCRIPTION
 from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
     download_course
@@ -22,6 +23,7 @@ from pyscrapers.workers.mamba_ru import scrape_mambaru
 from pyscrapers.workers.pornhub import download_search, print_stars_all_detailed, download_url
 from pyscrapers.workers.sxyprn import sxyprn_download
 from pyscrapers.workers.netflix import netflix_download
+from pyscrapers.workers.instagram_stories import instagram_stories_download
 from pyscrapers.workers.travelgirls import scrape_travelgirls
 from pyscrapers.workers.vk import scrape_vk
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
@@ -40,7 +42,7 @@ from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
 def photos():
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
-    session = get_session()
+    session = ExtSession()
     url_set = UrlSet()
     if ConfigSiteId.site == "facebook":
         scrape_facebook(ConfigSiteId.user_id, session, url_set)
@@ -64,7 +66,7 @@ def photos():
     ],
 )
 def drumeo():
-    session = get_session()
+    session = ExtSession()
     logger = logging.getLogger(__name__)
     courses = False
     reload = {}
@@ -124,7 +126,7 @@ def pornhub_download_search():
     ],
 )
 def pornhub_download_url():
-    session = get_session()
+    session = ExtSession()
     download_url(session)
 
 
@@ -151,7 +153,7 @@ def youtube_dl():
 def getpocket():
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
-    session = get_session()
+    session = ExtSession()
     getpocket_download(session, logger)
 
 
@@ -167,7 +169,7 @@ def getpocket():
 def sxyprn():
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
-    session = get_session()
+    session = ExtSession()
     sxyprn_download(session, logger)
 
 
@@ -182,8 +184,25 @@ def sxyprn():
 def netflix_list():
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
-    session = get_session()
+    session = ExtSession()
     netflix_download(session, logger)
+
+
+@register_endpoint(
+    description="Download instagram stroies for a particular user",
+    configs=[
+        ConfigRequests,
+        ConfigLogging,
+        ConfigDebugUrls,
+        ConfigUser,
+        ConfigCookiesSource,
+    ],
+)
+def instagram_stories():
+    logger = logging.getLogger(LOGGER_NAME)
+    logger.setLevel(ConfigLogging.loglevel)
+    session = ExtSession()
+    instagram_stories_download(session, logger)
 
 
 @register_main(

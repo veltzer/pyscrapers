@@ -22,7 +22,7 @@ def scrape_facebook(user_id: str, session, url_set: UrlSet) -> None:
     url = f"https://www.facebook.com/{user_id}/workers"
     logger.debug(f"url is [{url}]")
     result = session.get(url)
-    root = pyscrapers.core.utils.get_html_dom_content(result)
+    root = pyscrapers.core.ext_lxml.get_html_dom_content(result)
 
     elements_img = root.xpath('//img')
     url_set.append(elements_img)

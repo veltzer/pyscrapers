@@ -7,16 +7,13 @@ import logging
 import os
 
 import lxml.html
+from pyscrapers.core.ext_lxml import setup_prefix
+from pyscrapers.core.ext_requests import ExtSession
 
-from pyscrapers.core.utils import download_url, download_video_if_wider
-
-# this means that we can use regular expression functions like 'match'
-# by specifying 're:match' in our xpath expressions
-ns = lxml.etree.FunctionNamespace("http://exslt.org/regular-expressions")
-ns.prefix = 're'
+setup_prefix()
 
 
-def get_number_of_pages(courses: bool, session) -> int:
+def get_number_of_pages(courses: bool, session: ExtSession) -> int:
     """
     Get the number of pages for all courses or pages
     :param courses:
@@ -229,6 +226,6 @@ def download_course(course, session):
             print(f"course_difficulty: {course.diff}", file=file_handle)
             print(f"instructor: {course.instructor}", file=file_handle)
     if course.resources is not None:
-        download_url(course.resources, os.path.join(folder_name, "resources.zip"), session)
+        session.download_url(course.resources, os.path.join(folder_name, "resources.zip"), session)
     for i, (video, quality) in enumerate(course.videos):
-        download_video_if_wider(session, video, os.path.join(folder_name, f"{i}.mp4"), width=int(quality))
+        session.download_video_if_wider(session, video, os.path.join(folder_name, f"{i}.mp4"), width=int(quality))
