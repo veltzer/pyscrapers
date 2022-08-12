@@ -3,6 +3,9 @@
 	Add caching so that if I run over someone I already downloaded I will get a quick with
 		no downloading.
 	Add the ability to run the tool over many people on many sites.
+- try to stop using my own json module and use something like pyjq
+	or others.
+	https://stackoverflow.com/questions/15306448/structured-query-language-for-json-in-python
 - show progress clearly so I will know how many urls there are to download.
 	Shut the rest of the loggers off.
 - getpocket work
