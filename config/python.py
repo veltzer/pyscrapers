@@ -17,6 +17,7 @@ install_requires = [
     "pornhub-api",
     "youtube-dl",
     "pyeventroute",
+    "fake-useragent",
 ]
 test_requires = [
     "pylint",

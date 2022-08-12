@@ -7,6 +7,8 @@ import logging
 
 import requests
 
+from fake_useragent import UserAgent
+
 from pyscrapers.configs import ConfigRequests
 from pyscrapers.utils import get_cookies
 
@@ -50,6 +52,8 @@ class ExtSession(requests.Session):
         if cookies is not None:
             self.cookies = cookies
         self.base = base
+        ua = UserAgent()
+        self.headers["User-Agent"] = ua.chrome
 
     def my_get(self, url: str):
         return self.get(url, timeout=(ConfigRequests.connect_timeout, ConfigRequests.read_timeout))

@@ -11,7 +11,6 @@ import time
 
 import pyeventroute.route
 
-from pyscrapers.core.ext_lxml import get_html_dom_content
 from pyscrapers.core.url_set import UrlSet
 
 
@@ -27,28 +26,29 @@ def is_rate_limit(response) -> bool:
 
 def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
     domain = 'www.instagram.com'
+    # cookie_domain = '.instagram.com'
     base = f'https://{domain}'
-    url = f'{base}/{user_id}/'
+    user_url = f'{base}/{user_id}/'
+    # url = f'{base}'
+    url = "https://i.instagram.com/api/v1/users/web_profile_info"
 
     logger = logging.getLogger(__name__)
 
-    response = session.get(url)
-    root = get_html_dom_content(response)
-    # scrape.utils.print_element(root)
-
-    e_a = root.xpath('//script[re:match(text(), "^window._sharedData")]')
-    assert len(e_a) == 1
-    data = e_a[0].text
-    d = json.loads(data[data.find('{'):data.rfind('}') + 1])
-    my_list = d['entry_data']['ProfilePage']
-    assert len(my_list) == 1
-    c = my_list[0]["graphql"]["user"]
-    if 'profile_pic_url_hd' in c:
-        url_set.append(c['profile_pic_url_hd'])
-    elif 'profile_pic_url' in c:
-        url_set.append(c['profile_pic_url'])
-    user_id = c['id']
-    get_urls(logger, session, base, url_set, user_id)
+    response = session.get(user_url)
+    response.raise_for_status()
+    params = {
+        "username": user_id,
+    }
+    headers = {
+        "x-ig-app-id": "936619743392459",
+    }
+    response = session.get(url, params=params, headers=headers)
+    response.raise_for_status()
+    obj = response.json()
+    user_id_json = obj["data"]["user"]["id"]
+    profile_pic_url_hd = obj["data"]["user"]["profile_pic_url_hd"]
+    url_set.append(profile_pic_url_hd)
+    get_urls(logger, session, base, url_set, user_id_json)
 
 
 def get_urls(logger, session, base, url_set, user_id):
