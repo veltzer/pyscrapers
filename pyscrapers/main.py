@@ -28,6 +28,8 @@ from pyscrapers.workers.travelgirls import scrape_travelgirls
 from pyscrapers.workers.vk import scrape_vk
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
 
+import pyscrapers.core.ext_requests
+
 
 @register_endpoint(
     description="Download photo albums from various sites",
@@ -40,6 +42,7 @@ from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
     ],
 )
 def photos():
+    pyscrapers.core.ext_requests.setup()
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     session = ExtSession()
