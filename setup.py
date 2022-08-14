@@ -9,7 +9,7 @@ def get_readme():
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="pyscrapers",
-    version="0.0.65",
+    version="0.0.66",
     packages=[
         'pyscrapers',
         'pyscrapers.core',
@@ -48,6 +48,8 @@ setuptools.setup(
         'pornhub-api',
         'youtube-dl',
         'pyeventroute',
+        'fake-useragent',
+        'tqdm',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
