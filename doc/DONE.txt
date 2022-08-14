@@ -1,2 +1,3 @@
 added feature to not overwrite already downloaded stuff with youtube-dl.
 fixed up sxyprn to count number of pages right
+added download progress report to downloading urls.

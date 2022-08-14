@@ -6,6 +6,7 @@ import http.client
 import logging
 
 import requests
+from tqdm import tqdm
 
 from fake_useragent import UserAgent
 
@@ -109,3 +110,25 @@ def setup():
         http.client.HTTPConnection.debuglevel = 1
         requests_log = logging.getLogger("requests.packages.urllib3")
         requests_log.propagate = True
+
+
+CONTENT_LENGTH_HEADER = 'content-length'
+BLOCK_SIZE = 1024 * 1024
+
+
+def download(response, filename: str) -> None:
+    if CONTENT_LENGTH_HEADER in response.headers:
+        total_size_in_bytes = int(response.headers.get('content-length', 0))
+        assert total_size_in_bytes != 0
+        progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True, disable=not ConfigRequests.progress)
+        have_total = True
+    else:
+        progress_bar = tqdm(unit='iB', unit_scale=True, disable=not ConfigRequests.progress)
+        have_total = False
+    with open(filename, "wb") as file_handle:
+        for data in response.iter_content(BLOCK_SIZE):
+            progress_bar.update(len(data))
+            file_handle.write(data)
+    progress_bar.close()
+    if have_total:
+        assert progress_bar.n == total_size_in_bytes, "something wrong"

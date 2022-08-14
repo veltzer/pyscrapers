@@ -176,3 +176,7 @@ class ConfigRequests(Config):
         help_string="Do you want to debug the requests module?",
         default=False,
     )
+    progress = ParamCreator.create_bool(
+        help_string="Do you want to display progress?",
+        default=True,
+    )

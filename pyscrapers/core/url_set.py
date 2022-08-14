@@ -1,11 +1,11 @@
 import logging
 import os
-import shutil
 import urllib.parse
 from collections import Counter
 from typing import List
 
 from pyscrapers.configs import ConfigDownload
+from pyscrapers.core.ext_requests import download
 
 
 class UrlSet:
@@ -88,11 +88,7 @@ class UrlSet:
                 response = session.get(url, stream=True)
                 response.raise_for_status()
                 downloads_per_suffix[suffix] += 1
-
-                with open(filename, "wb") as file_handle:
-                    # why do we need this line?
-                    # response.raw.decode_content = True
-                    shutil.copyfileobj(response.raw, file_handle)
+                download(response, filename)
                 logger.info(f"written [{filename}]...")
         logger.info(f"skipped [{skipped}]...")
         logger.info(downloads_per_suffix)

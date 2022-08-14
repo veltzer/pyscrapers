@@ -1,4 +1,3 @@
-- add download progress report to downloading urls.
 - try to download w.vasabi and see an exception
 	ConnectionError
 	is being throw on url_set.py at urllib.parse.urlparse
