@@ -131,7 +131,7 @@ def download(response, filename: str) -> None:
             for data in response.iter_content(BLOCK_SIZE):
                 progress_bar.update(len(data))
                 file_handle.write(data)
-    except Exception as e:
+    except (Exception, KeyboardInterrupt, SystemError) as e:
         os.unlink(filename)
         raise e
     progress_bar.close()
