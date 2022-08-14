@@ -8,6 +8,8 @@ pylogconf
 pornhub-api
 youtube-dl
 pyeventroute
+fake-useragent
+tqdm
 # dev requirements
 pyclassifiers
 pypitools

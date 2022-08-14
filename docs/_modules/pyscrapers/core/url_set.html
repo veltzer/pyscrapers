@@ -34,11 +34,12 @@
   <h1>Source code for pyscrapers.core.url_set</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">pyscrapers.configs</span> <span class="kn">import</span> <span class="n">ConfigDownload</span>
+<span class="kn">from</span> <span class="nn">pyscrapers.core.ext_requests</span> <span class="kn">import</span> <span class="n">download</span>
 
 
 <div class="viewcode-block" id="UrlSet"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.url_set.UrlSet">[docs]</a><span class="k">class</span> <span class="nc">UrlSet</span><span class="p">:</span>
@@ -51,7 +52,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">urls_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">appended_twice</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">counter_jpg</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">counter_mp4</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter_video</span> <span class="o">=</span> <span class="mi">0</span>
 
 <div class="viewcode-block" id="UrlSet.append"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.url_set.UrlSet.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -84,11 +85,11 @@
             <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;image</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">counter_jpg</span><span class="si">:</span><span class="s2">04d</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">counter_jpg</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">return</span> <span class="n">filename</span>
-        <span class="k">if</span> <span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.mp4&quot;</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;video</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">counter_mp4</span><span class="si">:</span><span class="s2">04d</span><span class="si">}</span><span class="s2">.mp4&quot;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">counter_mp4</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;.mp4&quot;</span><span class="p">,</span> <span class="s2">&quot;.webp&quot;</span><span class="p">):</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;video</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">counter_video</span><span class="si">:</span><span class="s2">04d</span><span class="si">}{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">counter_video</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">return</span> <span class="n">filename</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;don&#39;t know how to handle suffix [</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dont know how to handle suffix [</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="UrlSet.get_filename"><a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.url_set.UrlSet.get_filename">[docs]</a>    <span class="k">def</span> <span class="nf">get_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">suggest_filename</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
@@ -102,24 +103,29 @@
 <span class="sd">        :param session:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">skipped</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">downloads_per_suffix</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
         <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;got [</span><span class="si">%d</span><span class="s1">] urls&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urls_list</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got [</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)</span><span class="si">}</span><span class="s2">] urls&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ConfigDownload</span><span class="o">.</span><span class="n">download</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">urls_list</span><span class="p">:</span>
                 <span class="n">parse_result</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
                 <span class="n">path</span> <span class="o">=</span> <span class="n">parse_result</span><span class="o">.</span><span class="n">path</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;downloading [</span><span class="si">%s</span><span class="s1">]...&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
-                <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-
-                <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_filename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">suffix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_filename</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">skipped</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;skipping [</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
                     <span class="k">continue</span>
 
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
-                    <span class="n">response</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">decode_content</span> <span class="o">=</span> <span class="kc">True</span>
-                    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">file_handle</span><span class="p">)</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;written [</span><span class="si">%s</span><span class="s1">]...&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div></div>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;downloading [</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">] to [</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+                <span class="n">downloads_per_suffix</span><span class="p">[</span><span class="n">suffix</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">download</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;written [</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;skipped [</span><span class="si">{</span><span class="n">skipped</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">downloads_per_suffix</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>

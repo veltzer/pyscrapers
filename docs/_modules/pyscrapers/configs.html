@@ -119,6 +119,15 @@
     <span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="ConfigUser"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigUser">[docs]</a><span class="k">class</span> <span class="nc">ConfigUser</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters for a user</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Which user id to user?&quot;</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="ConfigPornhubSearch"><a class="viewcode-back" href="../../pyscrapers.html#pyscrapers.configs.ConfigPornhubSearch">[docs]</a><span class="k">class</span> <span class="nc">ConfigPornhubSearch</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters for search</span>
@@ -199,6 +208,10 @@
     <span class="p">)</span>
     <span class="n">debug</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Do you want to debug the requests module?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">progress</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;Do you want to display progress?&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span></div>
 </pre></div>

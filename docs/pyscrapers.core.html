@@ -69,24 +69,74 @@ as a subprocess.</p>
 <dd></dd></dl>
 
 </section>
-<section id="module-pyscrapers.core.requests">
-<span id="pyscrapers-core-requests-module"></span><h2>pyscrapers.core.requests module<a class="headerlink" href="#module-pyscrapers.core.requests" title="Permalink to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.requests.debug_requests">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.requests.</span></span><span class="sig-name descname"><span class="pre">debug_requests</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/requests.html#debug_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.requests.debug_requests" title="Permalink to this definition">¶</a></dt>
-<dd><p>Activate the debugging features of the requests module
+<section id="module-pyscrapers.core.ext_requests">
+<span id="pyscrapers-core-ext-requests-module"></span><h2>pyscrapers.core.ext_requests module<a class="headerlink" href="#module-pyscrapers.core.ext_requests" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_requests.</span></span><span class="sig-name descname"><span class="pre">ExtResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtResponse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtResponse.raise_for_status">
+<span class="sig-name descname"><span class="pre">raise_for_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtResponse.raise_for_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtResponse.raise_for_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtResponse.save_binary">
+<span class="sig-name descname"><span class="pre">save_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/tmp/temp'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtResponse.save_binary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtResponse.save_binary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtResponse.save_text">
+<span class="sig-name descname"><span class="pre">save_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/tmp/temp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtResponse.save_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtResponse.save_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtSession">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_requests.</span></span><span class="sig-name descname"><span class="pre">ExtSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code></p>
+<p>Inherit from requests.Session and add capabilities</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtSession.download_url">
+<span class="sig-name descname"><span class="pre">download_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtSession.download_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtSession.download_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a single url to a file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtSession.download_video_if_wider">
+<span class="sig-name descname"><span class="pre">download_video_if_wider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtSession.download_video_if_wider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtSession.download_video_if_wider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a video if it is wider than a certain width
+:param source:
+:param target:
+:param width:
+:param self:
 :return:</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtSession.ext_get">
+<span class="sig-name descname"><span class="pre">ext_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtSession.ext_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtSession.ext_get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.ExtSession.my_get">
+<span class="sig-name descname"><span class="pre">my_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#ExtSession.my_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.ExtSession.my_get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.requests.get_session">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.requests.</span></span><span class="sig-name descname"><span class="pre">get_session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/requests.html#get_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.requests.get_session" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.download">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_requests.</span></span><span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.download" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.requests.session_get">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.requests.</span></span><span class="sig-name descname"><span class="pre">session_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/requests.html#session_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.requests.session_get" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="pyscrapers.core.ext_requests.setup">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_requests.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_requests.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_requests.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activate the debugging features of the requests module
+:return:</p>
+</dd></dl>
 
 </section>
 <section id="module-pyscrapers.core.url_set">
@@ -150,47 +200,6 @@ as a subprocess.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.utils.download_url">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.utils.</span></span><span class="sig-name descname"><span class="pre">download_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#download_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.utils.download_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>Download a single url to a file</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.utils.download_video_if_wider">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.utils.</span></span><span class="sig-name descname"><span class="pre">download_video_if_wider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#download_video_if_wider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.utils.download_video_if_wider" title="Permalink to this definition">¶</a></dt>
-<dd><p>Download a video if it is wider than a certain width
-:param source:
-:param target:
-:param width:
-:param session:
-:return:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.utils.get_element_as_bytes">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.utils.</span></span><span class="sig-name descname"><span class="pre">get_element_as_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#get_element_as_bytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.utils.get_element_as_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><p>turn xml element from etree to bytes
-:param element:
-:return:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.utils.get_element_as_string">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.utils.</span></span><span class="sig-name descname"><span class="pre">get_element_as_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#get_element_as_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.utils.get_element_as_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>turn xml element from etree to string
-:param element:
-:return:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.utils.get_html_dom_content">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.utils.</span></span><span class="sig-name descname"><span class="pre">get_html_dom_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#get_html_dom_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.utils.get_html_dom_content" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the content from a request
-:param response:
-:return:</p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="pyscrapers.core.utils.get_http_status_string">
 <span class="sig-prename descclassname"><span class="pre">pyscrapers.core.utils.</span></span><span class="sig-name descname"><span class="pre">get_http_status_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#get_http_status_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.utils.get_http_status_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function returns a description of an HTTP status code (404 - not found etc).
@@ -199,23 +208,6 @@ we must access a protected member (underscore member) of ‘requests.status_code
 See:
 <a class="reference external" href="https://stackoverflow.com/questions/24718557/get-the-description-of-a-status-code-in-python-requests">https://stackoverflow.com/questions/24718557/get-the-description-of-a-status-code-in-python-requests</a>
 :param code:
-:return:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.utils.print_cookies">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.utils.</span></span><span class="sig-name descname"><span class="pre">print_cookies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cookies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#print_cookies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.utils.print_cookies" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the cookies from a specific domain
-:param cookies:
-:param domain:
-:return:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.utils.print_element">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.utils.</span></span><span class="sig-name descname"><span class="pre">print_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/utils.html#print_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.utils.print_element" title="Permalink to this definition">¶</a></dt>
-<dd><p>print xml elements from etree
-:param element:
 :return:</p>
 </dd></dl>
 
