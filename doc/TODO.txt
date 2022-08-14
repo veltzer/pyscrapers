@@ -2,6 +2,9 @@
 	ConnectionError
 	is being throw on url_set.py at urllib.parse.urlparse
 	What is going on?
+- handle rate limit better.
+	Why don't I feel it over the web?
+	Is it because of the way I am scraping?
 - make more saving standards (site-id-name-ext)
 	This will enable people to handle files easily.
 	Add caching so that if I run over someone I already downloaded I will get a quick with
