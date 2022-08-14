@@ -18,6 +18,7 @@ install_requires = [
     "youtube-dl",
     "pyeventroute",
     "fake-useragent",
+    "tqdm",
 ]
 test_requires = [
     "pylint",
