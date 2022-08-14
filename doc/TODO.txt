@@ -1,3 +1,8 @@
+- add download progress report to downloading urls.
+- try to download w.vasabi and see an exception
+	ConnectionError
+	is being throw on url_set.py at urllib.parse.urlparse
+	What is going on?
 - make more saving standards (site-id-name-ext)
 	This will enable people to handle files easily.
 	Add caching so that if I run over someone I already downloaded I will get a quick with

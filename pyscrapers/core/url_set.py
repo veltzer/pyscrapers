@@ -2,6 +2,7 @@ import logging
 import os
 import shutil
 import urllib.parse
+from collections import Counter
 from typing import List
 
 from pyscrapers.configs import ConfigDownload
@@ -54,7 +55,7 @@ class UrlSet:
             filename = f"video{self.counter_mp4:04d}.mp4"
             self.counter_mp4 += 1
             return filename
-        raise ValueError(f"don't know how to handle suffix [{suffix}]")
+        raise ValueError(f"dont know how to handle suffix [{suffix}]")
 
     def get_filename(self, suffix: str) -> str:
         filename = self.suggest_filename(suffix)
@@ -68,21 +69,30 @@ class UrlSet:
         :param session:
         :return:
         """
+        skipped = 0
+        downloads_per_suffix = Counter()
         logger = logging.getLogger(__name__)
-        logger.info('got [%d] urls', len(self.urls_list))
+        logger.info(f"got [{len(self.urls_list)}] urls")
         if ConfigDownload.download:
             for url in self.urls_list:
                 parse_result = urllib.parse.urlparse(url)
                 path = parse_result.path
-                logger.info('downloading [%s]...', url)
-                response = session.get(url, stream=True)
-                response.raise_for_status()
-
-                filename = self.get_filename(os.path.splitext(path)[1])
+                suffix = os.path.splitext(path)[1]
+                filename = self.get_filename(suffix)
                 if filename is None:
+                    skipped += 1
+                    logger.info(f"skipping [{path}]...")
                     continue
 
-                with open(filename, 'wb') as file_handle:
-                    response.raw.decode_content = True
+                logger.info(f"downloading [{path}] to [{filename}]...")
+                response = session.get(url, stream=True)
+                response.raise_for_status()
+                downloads_per_suffix[suffix] += 1
+
+                with open(filename, "wb") as file_handle:
+                    # why do we need this line?
+                    # response.raw.decode_content = True
                     shutil.copyfileobj(response.raw, file_handle)
-                logger.info('written [%s]...', filename)
+                logger.info(f"written [{filename}]...")
+        logger.info(f"skipped [{skipped}]...")
+        logger.info(downloads_per_suffix)
