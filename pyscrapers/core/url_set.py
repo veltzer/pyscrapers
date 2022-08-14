@@ -18,7 +18,7 @@ class UrlSet:
         self.urls_list = []
         self.appended_twice = 0
         self.counter_jpg = 0
-        self.counter_mp4 = 0
+        self.counter_video = 0
 
     def append(self, url: str) -> None:
         """
@@ -51,9 +51,9 @@ class UrlSet:
             filename = f"image{self.counter_jpg:04d}.jpg"
             self.counter_jpg += 1
             return filename
-        if suffix == ".mp4":
-            filename = f"video{self.counter_mp4:04d}.mp4"
-            self.counter_mp4 += 1
+        if suffix in (".mp4", ".webp"):
+            filename = f"video{self.counter_video:04d}{suffix}"
+            self.counter_video += 1
             return filename
         raise ValueError(f"dont know how to handle suffix [{suffix}]")
 
