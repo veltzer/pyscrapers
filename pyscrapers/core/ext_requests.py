@@ -130,5 +130,5 @@ def download(response, filename: str) -> None:
             progress_bar.update(len(data))
             file_handle.write(data)
     progress_bar.close()
-    if have_total:
-        assert progress_bar.n == total_size_in_bytes, "something wrong"
+    if have_total and ConfigRequests.progress:
+        assert progress_bar.n == total_size_in_bytes, f"something wrong {progress_bar.n} =! {total_size_in_bytes}"
