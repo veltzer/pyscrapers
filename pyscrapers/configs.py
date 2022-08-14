@@ -178,5 +178,5 @@ class ConfigRequests(Config):
     )
     progress = ParamCreator.create_bool(
         help_string="Do you want to display progress?",
-        default=True,
+        default=False,
     )
