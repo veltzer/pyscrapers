@@ -66,7 +66,7 @@ def get_urls(logger, session, base, url_set, user_id):
     stats_image = 0
     stats_shortcode_video = 0
     for query_hash, key in zip(query_hashes, keys):
-        logger.debug(f"size of list is [{len(url_set.urls_list)}]")
+        logger.info(f"size of list is [{len(url_set.urls_list)}]")
         has_next_page = True
         end_cursor = None
         while has_next_page:
@@ -96,6 +96,7 @@ def get_urls(logger, session, base, url_set, user_id):
                     }
                     response_short = session.get(url, params=params).json()
                     while is_rate_limit(response_short):
+                        logger.info("ratelimit, sleeping...")
                         time.sleep(60)
                         response_short = session.get(url, params=params).json()
                     if 'data' in response_short:
