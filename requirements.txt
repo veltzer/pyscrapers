@@ -11,10 +11,7 @@ pyeventroute
 fake-useragent
 tqdm
 # dev requirements
-pyclassifiers
 pypitools
-pydmt
-Sphinx
 # test requirements
 pylint
 pytest
@@ -22,6 +19,5 @@ pytest-cov
 pyflakes
 pyre-check
 flake8
-pymakehelper
 mypy
 types-requests
