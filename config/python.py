@@ -2,8 +2,11 @@ console_scripts = [
     "pyscrapers=pyscrapers.main:main",
 ]
 dev_requires = [
-    "pyclassifiers",
     "pypitools",
+]
+make_requires = [
+    "pyclassifiers",
+    "pymakehelper",
     "pydmt",
     "Sphinx",
 ]
@@ -27,7 +30,6 @@ test_requires = [
     "pyflakes",
     "pyre-check",
     "flake8",
-    "pymakehelper",
     "mypy",
     "types-requests",
 ]
