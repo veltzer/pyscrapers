@@ -13,15 +13,3 @@ ${a}
 ${a}
 % endfor
 % endif
-% if hasattr(config.python, "dev_requires"):
-# dev requirements
-% for a in config.python.dev_requires:
-${a}
-% endfor
-% endif
-% if hasattr(config.python, "test_requires"):
-# test requirements
-% for a in config.python.test_requires:
-${a}
-% endfor
-% endif
