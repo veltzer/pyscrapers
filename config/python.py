@@ -8,7 +8,7 @@ make_requires = [
     "pyclassifiers",
     "pymakehelper",
     "pydmt",
-    "Sphinx",
+    "sphinx",
 ]
 install_requires = [
     "lxml",
