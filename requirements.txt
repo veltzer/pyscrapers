@@ -10,14 +10,3 @@ youtube-dl
 pyeventroute
 fake-useragent
 tqdm
-# dev requirements
-pypitools
-# test requirements
-pylint
-pytest
-pytest-cov
-pyflakes
-pyre-check
-flake8
-mypy
-types-requests
