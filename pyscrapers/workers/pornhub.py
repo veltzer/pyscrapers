@@ -68,7 +68,7 @@ def download_search() -> None:
         if ConfigPornhubSearch.use_tags:
             kwargs["tags"] = ConfigPornhubSearch.tags
         try:
-            data = api.search.search(
+            data = api.search.search_videos(
                 ConfigPornhubSearch.query,
                 page=page,
                 **kwargs,
