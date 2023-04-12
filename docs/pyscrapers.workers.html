@@ -4,12 +4,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pyscrapers.workers package &#8212; pyscrapers 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,12 +33,12 @@
 
           <div class="body" role="main">
             
-  <section id="pyscrapers-workers-package">
+  <div class="section" id="pyscrapers-workers-package">
 <h1>pyscrapers.workers package<a class="headerlink" href="#pyscrapers-workers-package" title="Permalink to this heading">¶</a></h1>
-<section id="submodules">
+<div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
-</section>
-<section id="module-pyscrapers.workers.drumeo">
+</div>
+<div class="section" id="module-pyscrapers.workers.drumeo">
 <span id="pyscrapers-workers-drumeo-module"></span><h2>pyscrapers.workers.drumeo module<a class="headerlink" href="#module-pyscrapers.workers.drumeo" title="Permalink to this heading">¶</a></h2>
 <p>Download course material from drumeo</p>
 <dl class="py class">
@@ -131,8 +133,8 @@
 :return:</p>
 </dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.facebook">
+</div>
+<div class="section" id="module-pyscrapers.workers.facebook">
 <span id="pyscrapers-workers-facebook-module"></span><h2>pyscrapers.workers.facebook module<a class="headerlink" href="#module-pyscrapers.workers.facebook" title="Permalink to this heading">¶</a></h2>
 <p>download photos from facebook</p>
 <dl class="py function">
@@ -145,8 +147,8 @@
 :return:</p>
 </dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.getpocket">
+</div>
+<div class="section" id="module-pyscrapers.workers.getpocket">
 <span id="pyscrapers-workers-getpocket-module"></span><h2>pyscrapers.workers.getpocket module<a class="headerlink" href="#module-pyscrapers.workers.getpocket" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyscrapers.workers.getpocket.getpocket_download">
@@ -157,8 +159,8 @@
 :return:</p>
 </dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.instagram">
+</div>
+<div class="section" id="module-pyscrapers.workers.instagram">
 <span id="pyscrapers-workers-instagram-module"></span><h2>pyscrapers.workers.instagram module<a class="headerlink" href="#module-pyscrapers.workers.instagram" title="Permalink to this heading">¶</a></h2>
 <p>How does this work?
 When you fetch the page of a user on instagram you get an html with javascript embedded
@@ -184,16 +186,16 @@ If you want more you have to do a follow-up AJAX request to the server.</p>
 <span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.instagram.</span></span><span class="sig-name descname"><span class="pre">scrape_instagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyscrapers.core.html#pyscrapers.core.url_set.UrlSet" title="pyscrapers.core.url_set.UrlSet"><span class="pre">UrlSet</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/instagram.html#scrape_instagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.instagram.scrape_instagram" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.mamba_ru">
+</div>
+<div class="section" id="module-pyscrapers.workers.mamba_ru">
 <span id="pyscrapers-workers-mamba-ru-module"></span><h2>pyscrapers.workers.mamba_ru module<a class="headerlink" href="#module-pyscrapers.workers.mamba_ru" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyscrapers.workers.mamba_ru.scrape_mambaru">
 <span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.mamba_ru.</span></span><span class="sig-name descname"><span class="pre">scrape_mambaru</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyscrapers.core.html#pyscrapers.core.url_set.UrlSet" title="pyscrapers.core.url_set.UrlSet"><span class="pre">UrlSet</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/mamba_ru.html#scrape_mambaru"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.mamba_ru.scrape_mambaru" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.pornhub">
+</div>
+<div class="section" id="module-pyscrapers.workers.pornhub">
 <span id="pyscrapers-workers-pornhub-module"></span><h2>pyscrapers.workers.pornhub module<a class="headerlink" href="#module-pyscrapers.workers.pornhub" title="Permalink to this heading">¶</a></h2>
 <p>Module to handle scraping of pornhub.</p>
 <p>References:
@@ -255,8 +257,8 @@ If you want more you have to do a follow-up AJAX request to the server.</p>
 <span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">url_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#url_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.url_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.sxyprn">
+</div>
+<div class="section" id="module-pyscrapers.workers.sxyprn">
 <span id="pyscrapers-workers-sxyprn-module"></span><h2>pyscrapers.workers.sxyprn module<a class="headerlink" href="#module-pyscrapers.workers.sxyprn" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyscrapers.workers.sxyprn.sxyprn_download">
@@ -272,16 +274,16 @@ If you want more you have to do a follow-up AJAX request to the server.</p>
 <span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.sxyprn.</span></span><span class="sig-name descname"><span class="pre">url_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/sxyprn.html#url_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.sxyprn.url_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.travelgirls">
+</div>
+<div class="section" id="module-pyscrapers.workers.travelgirls">
 <span id="pyscrapers-workers-travelgirls-module"></span><h2>pyscrapers.workers.travelgirls module<a class="headerlink" href="#module-pyscrapers.workers.travelgirls" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyscrapers.workers.travelgirls.scrape_travelgirls">
 <span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.travelgirls.</span></span><span class="sig-name descname"><span class="pre">scrape_travelgirls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyscrapers.core.html#pyscrapers.core.url_set.UrlSet" title="pyscrapers.core.url_set.UrlSet"><span class="pre">UrlSet</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/travelgirls.html#scrape_travelgirls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.travelgirls.scrape_travelgirls" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.vk">
+</div>
+<div class="section" id="module-pyscrapers.workers.vk">
 <span id="pyscrapers-workers-vk-module"></span><h2>pyscrapers.workers.vk module<a class="headerlink" href="#module-pyscrapers.workers.vk" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyscrapers.workers.vk.get_my_content">
@@ -311,8 +313,8 @@ this is why we must cut it up and cant use the regular
 <span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.vk.</span></span><span class="sig-name descname"><span class="pre">yield_json_objs_and_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/vk.html#yield_json_objs_and_base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.vk.yield_json_objs_and_base" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers.youtube_dl_handlers">
+</div>
+<div class="section" id="module-pyscrapers.workers.youtube_dl_handlers">
 <span id="pyscrapers-workers-youtube-dl-handlers-module"></span><h2>pyscrapers.workers.youtube_dl_handlers module<a class="headerlink" href="#module-pyscrapers.workers.youtube_dl_handlers" title="Permalink to this heading">¶</a></h2>
 <p>Module that handles the interaction with the youtube_dl library</p>
 <p>References:
@@ -354,11 +356,11 @@ this is why we must cut it up and cant use the regular
 <span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.youtube_dl_handlers.</span></span><span class="sig-name descname"><span class="pre">youtube_dl_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/youtube_dl_handlers.html#youtube_dl_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.youtube_dl_handlers.youtube_dl_handler" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pyscrapers.workers">
+</div>
+<div class="section" id="module-pyscrapers.workers">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscrapers.workers" title="Permalink to this heading">¶</a></h2>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -396,8 +398,8 @@ this is why we must cut it up and cant use the regular
       &copy;2017, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/pyscrapers.workers.rst.txt"
