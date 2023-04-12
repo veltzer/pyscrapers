@@ -103,6 +103,7 @@
         <span class="k">if</span> <span class="n">ConfigPornhubSearch</span><span class="o">.</span><span class="n">use_tags</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ConfigPornhubSearch</span><span class="o">.</span><span class="n">tags</span>
         <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># pylint: disable=no-member</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">search_videos</span><span class="p">(</span>
                 <span class="n">ConfigPornhubSearch</span><span class="o">.</span><span class="n">query</span><span class="p">,</span>
                 <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span>
