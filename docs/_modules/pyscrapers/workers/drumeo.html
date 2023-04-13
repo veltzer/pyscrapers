@@ -13,7 +13,6 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
    
@@ -49,7 +48,7 @@
 
 
 <div class="viewcode-block" id="get_number_of_pages"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_number_of_pages">[docs]</a><span class="k">def</span> <span class="nf">get_number_of_pages</span><span class="p">(</span><span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">ExtSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the number of pages for all courses or pages</span>
 <span class="sd">    :param courses:</span>
 <span class="sd">    :param session:</span>
@@ -68,11 +67,11 @@
 
 
 <div class="viewcode-block" id="Course"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.Course">[docs]</a><span class="k">class</span> <span class="nc">Course</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is an object representing one course</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
@@ -84,7 +83,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">videos</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        nice representation of this object</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -94,7 +93,7 @@
             <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">videos</span><span class="p">)])</span>
 
 <div class="viewcode-block" id="Course.add_lesson"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.Course.add_lesson">[docs]</a>    <span class="k">def</span> <span class="nf">add_lesson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lesson</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a lesson to the course</span>
 <span class="sd">        :param lesson:</span>
 <span class="sd">        :return:</span>
@@ -102,7 +101,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">lessons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lesson</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Course.add_video"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.Course.add_video">[docs]</a>    <span class="k">def</span> <span class="nf">add_video</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">video</span><span class="p">,</span> <span class="n">quality</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a video to the course</span>
 <span class="sd">        :param video:</span>
 <span class="sd">        :param quality:</span>
@@ -136,7 +135,7 @@
 
 
 <div class="viewcode-block" id="get_courses"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_courses">[docs]</a><span class="k">def</span> <span class="nf">get_courses</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Download the list of all the courses</span>
 <span class="sd">    :param pages:</span>
 <span class="sd">    :param courses:</span>
@@ -167,7 +166,7 @@
 
 
 <div class="viewcode-block" id="get_course_details"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_course_details">[docs]</a><span class="k">def</span> <span class="nf">get_course_details</span><span class="p">(</span><span class="n">course</span><span class="p">:</span> <span class="n">Course</span><span class="p">,</span> <span class="n">courses</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Populate the Course type object</span>
 <span class="sd">    :param course:</span>
 <span class="sd">    :param courses:</span>
@@ -213,7 +212,7 @@
 
 
 <div class="viewcode-block" id="get_videos"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.get_videos">[docs]</a><span class="k">def</span> <span class="nf">get_videos</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">course</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get all the videos pertaining to a certain course</span>
 <span class="sd">    :param root:</span>
 <span class="sd">    :param course:</span>
@@ -244,7 +243,7 @@
 
 
 <div class="viewcode-block" id="download_course"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.drumeo.download_course">[docs]</a><span class="k">def</span> <span class="nf">download_course</span><span class="p">(</span><span class="n">course</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Download a course</span>
 <span class="sd">    :param course:</span>
 <span class="sd">    :param session:</span>
@@ -298,7 +297,7 @@
       &copy;2017, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
