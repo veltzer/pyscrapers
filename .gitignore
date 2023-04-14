@@ -4,6 +4,10 @@
 /target/
 /out/
 *.out
+/.mypy_cache
+
+# general ignore stuff
+/*.gi
 
 # hive
 /derby.log
@@ -37,6 +41,7 @@ lib*.so.*
 .*.o.cmd
 .*.ko.cmd
 .*.o.tmp
+.*.o.d
 .tmp_versions
 Module.symvers
 modules.order
