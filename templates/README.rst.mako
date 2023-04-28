@@ -6,7 +6,7 @@
     import pydmt.helpers.urls
     import config.project
     import config.python
-    import user.personal
+    import config.personal
     import config.version
     import os
     line = '=' * (len(pydmt.helpers.project.get_name())+2)
@@ -22,11 +22,11 @@ ${line}
 
 project website: ${pydmt.helpers.urls.get_website()}
 
-author: ${user.personal.fullname}
+author: ${config.personal.fullname}
 
 version: ${pydmt.helpers.misc.get_version_str()}
 
 % if os.path.isfile("../snipplets/main.md.mako"):
 <%include file="../snipplets/main.rst.mako" />
 % endif
-	${user.personal.origin}, Copyright © ${pydmt.helpers.signature.get_copyright_years_long()}
+	${config.personal.origin}, Copyright © ${pydmt.helpers.signature.get_copyright_years_long()}

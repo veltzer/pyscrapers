@@ -1,9 +1,9 @@
 <%!
     import pydmt.helpers.signature
-    import user.personal
+    import config.personal
 %>MIT License
 
-Copyright (c) ${pydmt.helpers.signature.get_project_year_started()} ${user.personal.fullname}
+Copyright (c) ${pydmt.helpers.signature.get_project_year_started()} ${config.personal.fullname}
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
