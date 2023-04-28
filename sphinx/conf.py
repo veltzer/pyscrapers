@@ -1,6 +1,9 @@
-extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.coverage',
-              'sphinx.ext.viewcode']
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.coverage",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.githubpages",
+]
 
 import config.project
 project = config.project.name
@@ -15,6 +18,6 @@ release = ".".join(str(x) for x in config.version.tup)
 html_theme_options = {
         "show_powered_by": "false",
 }
-rst_epilog = f'''
+rst_epilog = f"""
 .. |project| replace:: {project}
-'''
+"""
