@@ -2,8 +2,8 @@
 Download books from audible
 """
 from logging import Logger
-from pyscrapers.core.ext_requests import ExtSession
 from bs4 import BeautifulSoup
+from pyscrapers.core.ext_requests import ExtSession
 
 
 def audible(_logger: Logger):
@@ -16,8 +16,8 @@ def audible(_logger: Logger):
     session = ExtSession(base="https://www.audible.com")
     response = session.get_timeout("https://www.audible.com/library/titles")
     soup = BeautifulSoup(
-            markup=response.res.text,
-            features="lxml",
+        markup=response.res.text,
+        features="lxml",
     )
     pretty = soup.prettify()
     with open("/tmp/temp", "wt") as handle:
