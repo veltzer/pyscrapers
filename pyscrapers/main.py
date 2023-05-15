@@ -19,6 +19,7 @@ from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_cour
 from pyscrapers.workers.facebook import scrape_facebook
 from pyscrapers.workers.getpocket import getpocket_download
 from pyscrapers.workers.instagram import scrape_instagram
+from pyscrapers.workers.audible import audible
 from pyscrapers.workers.mamba_ru import scrape_mambaru
 from pyscrapers.workers.pornhub import download_search, print_stars_all_detailed, download_url
 from pyscrapers.workers.sxyprn import sxyprn_download
@@ -206,6 +207,21 @@ def instagram_stories():
     logger.setLevel(ConfigLogging.loglevel)
     session = ExtSession()
     instagram_stories_download(session, logger)
+
+
+@register_endpoint(
+    description="Download audible books list",
+    configs=[
+        ConfigRequests,
+        ConfigLogging,
+        ConfigDebugUrls,
+        ConfigCookiesSource,
+    ],
+)
+def audible_books():
+    logger = logging.getLogger(LOGGER_NAME)
+    logger.setLevel(ConfigLogging.loglevel)
+    audible(logger)
 
 
 @register_main(

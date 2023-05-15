@@ -56,8 +56,8 @@ class ExtSession(requests.Session):
         ua = UserAgent()
         self.headers["User-Agent"] = ua.chrome
 
-    def my_get(self, url: str):
-        return self.get(url, timeout=(ConfigRequests.connect_timeout, ConfigRequests.read_timeout))
+    def get_timeout(self, url: str):
+        return ExtResponse(self.get(url, timeout=(ConfigRequests.connect_timeout, ConfigRequests.read_timeout)))
 
     def ext_get(self, url: str, *args, **kwargs):
         abs_url = urllib.parse.urljoin(self.base, url)

@@ -15,6 +15,8 @@ install_requires = [
     "requests",
     # "hyper",
     "browser-cookie3",
+    # this module is needed by browser-cookies3 but is not listed as it's dependency
+    "dbus-python",
     "pytconf",
     "pylogconf",
     "pornhub-api",
@@ -22,6 +24,7 @@ install_requires = [
     "pyeventroute",
     "fake-useragent",
     "tqdm",
+    "beautifulsoup4",
 ]
 test_requires = [
     "pylint",
