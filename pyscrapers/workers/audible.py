@@ -1,6 +1,7 @@
 """
 Download books from audible
 """
+from typing import List
 from collections import OrderedDict
 from logging import Logger
 from bs4 import BeautifulSoup
@@ -28,6 +29,42 @@ def get_book_data(session: ExtSession, book_id: str) -> OrderedDict:
     return d
 
 
+def add_book_ids(soup, book_ids) -> bool:
+    divs = soup.find_all("div", {"class": "adbl-library-content-row"})
+    more_titles = False
+    for div in divs:
+        book_id = div["id"].split("-")[-1]
+        if book_id not in book_ids:
+            book_ids.append(book_id)
+            more_titles = True
+    return more_titles
+
+
+def add_links(soup, book_ids) -> bool:
+    divs = soup.find_all("div", {"class": "adbl-library-content-row"})
+    more_titles = False
+    for div in divs:
+        contents = div.contents
+        assert len(contents) >= 1
+        div = contents[1]
+        contents = div.contents
+        assert len(contents) >= 1
+        div = contents[1]
+        contents = div.contents
+        assert len(contents) >= 1
+        div = contents[1]
+        contents = div.contents
+        assert len(contents) >= 1
+        a = contents[1]
+        elem_href = a["href"]
+        if elem_href not in book_ids:
+            print(f"appending {elem_href}...")
+            book_ids.append(elem_href)
+            more_titles = True
+    print(len(book_ids))
+    return more_titles
+
+
 def audible(_logger: Logger):
     """
     This does the downloads
@@ -37,8 +74,7 @@ def audible(_logger: Logger):
     """
     session = ExtSession(base="https://www.audible.com")
     page = 1
-    more_titles = True
-    book_ids = []
+    book_ids: List[str] = []
     while True:
         url = f"https://www.audible.com/library/titles?page={page}"
         print(f"getting {url}...")
@@ -53,18 +89,12 @@ def audible(_logger: Logger):
                 handle.write(pretty)
 
         # collect all books ids from the page
-        divs = soup.find_all("div", {"class": "adbl-library-content-row"})
-        more_titles = False
-        for div in divs:
-            book_id = div["id"].split("-")[-1]
-            if book_id not in book_ids:
-                book_ids.append(book_id)
-                more_titles = True
-        if not more_titles:
+        # if not add_book_ids(soup, book_ids):
+        if not add_links(soup, book_ids):
             break
         page += 1
-    # print(book_ids)
+    print(book_ids)
     # print(len(book_ids))
-    books = []
-    for book_id in book_ids:
-        books.append(get_book_data(session, book_id))
+    # books = []
+    # for book_id in book_ids:
+    #     books.append(get_book_data(session, book_id))
