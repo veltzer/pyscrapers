@@ -43,6 +43,7 @@ setuptools.setup(
         "lxml",
         "requests",
         "browser-cookie3",
+        "dbus-python",
         "pytconf",
         "pylogconf",
         "pornhub-api",
@@ -50,6 +51,7 @@ setuptools.setup(
         "pyeventroute",
         "fake-useragent",
         "tqdm",
+        "beautifulsoup4",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
