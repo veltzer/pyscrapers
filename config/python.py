@@ -25,6 +25,7 @@ install_requires = [
     "fake-useragent",
     "tqdm",
     "beautifulsoup4",
+    "pydantic==1.10.13",
 ]
 test_requires = [
     "pylint",

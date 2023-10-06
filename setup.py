@@ -52,6 +52,7 @@ setuptools.setup(
         "fake-useragent",
         "tqdm",
         "beautifulsoup4",
+        "pydantic==1.10.13",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
