@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pyscrapers.workers.instagram &#8212; pyscrapers 0.0.66 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=039e1c02" />
+    <script src="../../../_static/documentation_options.js?v=22d3c163"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
    
@@ -45,7 +45,9 @@
 <span class="kn">from</span> <span class="nn">pyscrapers.core.url_set</span> <span class="kn">import</span> <span class="n">UrlSet</span>
 
 
-<div class="viewcode-block" id="is_rate_limit"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.is_rate_limit">[docs]</a><span class="k">def</span> <span class="nf">is_rate_limit</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="is_rate_limit">
+<a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.is_rate_limit">[docs]</a>
+<span class="k">def</span> <span class="nf">is_rate_limit</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rate limit messages look like this:</span>
 <span class="sd">    { &quot;message&quot;: &quot;rate limited&quot;, &quot;status&quot;: &quot;fail&quot; }</span>
@@ -55,7 +57,10 @@
     <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;fail&quot;</span> <span class="ow">and</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;rate limited&quot;</span></div>
 
 
-<div class="viewcode-block" id="scrape_instagram"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.scrape_instagram">[docs]</a><span class="k">def</span> <span class="nf">scrape_instagram</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_set</span><span class="p">:</span> <span class="n">UrlSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="scrape_instagram">
+<a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.scrape_instagram">[docs]</a>
+<span class="k">def</span> <span class="nf">scrape_instagram</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_set</span><span class="p">:</span> <span class="n">UrlSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;www.instagram.com&#39;</span>
     <span class="c1"># cookie_domain = &#39;.instagram.com&#39;</span>
     <span class="n">base</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s1">&#39;</span>
@@ -82,7 +87,10 @@
     <span class="n">get_urls</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">url_set</span><span class="p">,</span> <span class="n">user_id_json</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_urls"><a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.get_urls">[docs]</a><span class="k">def</span> <span class="nf">get_urls</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">url_set</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_urls">
+<a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.instagram.get_urls">[docs]</a>
+<span class="k">def</span> <span class="nf">get_urls</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">url_set</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
     <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s1">/graphql/query/&#39;</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">50</span>
     <span class="n">query_hashes</span> <span class="o">=</span> <span class="p">[</span>
@@ -141,6 +149,7 @@
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stats_video [</span><span class="si">{</span><span class="n">stats_video</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stats_image [</span><span class="si">{</span><span class="n">stats_image</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stats_shortcode_video [</span><span class="si">{</span><span class="n">stats_shortcode_video</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span></div>
+
 </pre></div>
 
           </div>
