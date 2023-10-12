@@ -23,7 +23,7 @@ version: ${pydmt.helpers.misc.get_version_str()}
 
 ${"##"} github
 
-![License](https://img.shields.io/github/license/veltzer/pytconf)
+![License](https://img.shields.io/github/license/veltzer/${pydmt.helpers.python.get_package_name()})
 
 ${"##"} build
 
