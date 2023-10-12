@@ -27,7 +27,7 @@ ALL_TESTS:=out/tests.stamp
 ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
 ALL_PYTHON:=$(shell find $(ALL_PACKAGES) -type f -and -name "*.py")
 # We do it this way because we cannot rely on the current path (in CI/CD it could be anything, and we
-# don't want to run python as above
+# dont want to run python as above
 PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
