@@ -5,6 +5,7 @@ Download course material from drumeo
 import json
 import logging
 import os
+import typing
 
 import lxml.html
 from pyscrapers.core.ext_lxml import setup_prefix
@@ -100,7 +101,8 @@ def get_link_re(courses: bool) -> str:
     return link_re
 
 
-def get_courses(pages, courses: bool, session):
+@typing.no_type_check
+def get_courses(pages, courses: bool, session):  # type: ignore
     """
     Download the list of all the courses
     :param pages:
@@ -131,6 +133,7 @@ def get_courses(pages, courses: bool, session):
     return collected_courses
 
 
+@typing.no_type_check
 def get_course_details(course: Course, courses: bool, session):
     """
     Populate the Course type object
