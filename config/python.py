@@ -9,6 +9,9 @@ make_requires = [
     "pymakehelper",
     "pydmt",
     "sphinx",
+    "types-beautifulsoup4",
+    "types-tqdm",
+    "lxml-stubs",
 ]
 install_requires = [
     "lxml",
