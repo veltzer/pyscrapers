@@ -2,7 +2,7 @@ import setuptools
 
 
 def get_readme():
-    with open('README.rst') as f:
+    with open("README.rst") as f:
         return f.read()
 
 
