@@ -6,7 +6,7 @@ keywords = [
     "social",
     "facebook",
     "instagram",
-    "vk.com",
+    "vk",
     "download",
     "pics",
 ]
