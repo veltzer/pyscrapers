@@ -29,7 +29,7 @@ setuptools.setup(
         "social",
         "facebook",
         "instagram",
-        "vk.com",
+        "vk",
         "download",
         "pics",
     ],
