@@ -1,19 +1,14 @@
-console_scripts = [
+from typing import List
+
+
+console_scripts: List[str] = [
     "pyscrapers=pyscrapers.main:main",
 ]
-dev_requires = [
+config_requires: List[str] = []
+dev_requires: List[str] = [
     "pypitools",
 ]
-make_requires = [
-    "pyclassifiers",
-    "pymakehelper",
-    "pydmt",
-    "sphinx",
-    "types-beautifulsoup4",
-    "types-tqdm",
-    "lxml-stubs",
-]
-install_requires = [
+install_requires: List[str] = [
     "lxml",
     "requests",
     # "hyper",
@@ -30,7 +25,16 @@ install_requires = [
     "beautifulsoup4",
     "pydantic==1.10.13",
 ]
-test_requires = [
+make_requires: List[str] = [
+    "pyclassifiers",
+    "pymakehelper",
+    "pydmt",
+    "sphinx",
+    "types-beautifulsoup4",
+    "types-tqdm",
+    "lxml-stubs",
+]
+test_requires: List[str] = [
     "pylint",
     "pytest",
     "pytest-cov",
@@ -40,3 +44,4 @@ test_requires = [
     "mypy",
     "types-requests",
 ]
+requires = config_requires + install_requires + make_requires + test_requires
