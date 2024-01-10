@@ -29,7 +29,6 @@ make_requires: List[str] = [
     "pyclassifiers",
     "pymakehelper",
     "pydmt",
-    "sphinx",
     "types-beautifulsoup4",
     "types-tqdm",
     "lxml-stubs",
