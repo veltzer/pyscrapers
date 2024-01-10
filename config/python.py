@@ -4,9 +4,11 @@ from typing import List
 console_scripts: List[str] = [
     "pyscrapers=pyscrapers.main:main",
 ]
-config_requires: List[str] = []
 dev_requires: List[str] = [
     "pypitools",
+]
+config_requires: List[str] = [
+    "pyclassifiers",
 ]
 install_requires: List[str] = [
     "lxml",
@@ -26,7 +28,6 @@ install_requires: List[str] = [
     "pydantic==1.10.13",
 ]
 make_requires: List[str] = [
-    "pyclassifiers",
     "pymakehelper",
     "pydmt",
     "types-beautifulsoup4",
