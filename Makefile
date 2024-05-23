@@ -54,7 +54,6 @@ $(ALL_TESTS): $(ALL_PYTHON)
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest tests
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m flake8 $(ALL_PACKAGES)
-	$(Q)pymakehelper only_print_on_error $(PYTHON) -m unittest discover -s .
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m mypy .
 	$(Q)pymakehelper touch_mkdir $@
