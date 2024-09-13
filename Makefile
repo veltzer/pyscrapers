@@ -11,7 +11,7 @@ DO_CHECK_SYNTAX:=1
 ########
 # code #
 ########
-PYTHON=python3
+PYTHON=python
 ALL_TESTS:=out/tests.stamp
 ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
 ALL_PYTHON:=$(shell find $(ALL_PACKAGES) -type f -and -name "*.py")
@@ -108,7 +108,7 @@ inspect:
 
 .PHONY: py-spy
 py-spy:
-	$(Q)sudo env "PATH=$$PATH" python3 -m $(MAIN_MODULE)
+	$(Q)sudo env "PATH=$$PATH" $(PYTHON) -m $(MAIN_MODULE)
 
 .PHONY: pyinstrument
 pyinstrument:
