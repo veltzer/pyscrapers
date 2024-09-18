@@ -33,11 +33,6 @@ Q:=@
 #.SILENT:
 endif # DO_MKDBG
 
-# dependency on the makefile itself
-ifeq ($(DO_ALLDEP),1)
-.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
-endif # DO_ALLDEP
-
 ifeq ($(DO_CHECK_SYNTAX),1)
 ALL+=$(ALL_SH_STAMP)
 endif # DO_CHECK_SYNTAX
@@ -137,3 +132,10 @@ $(ALL_SH_STAMP): out/%.stamp: % .shellcheckrc
 	$(info doing [$@])
 	$(Q)shellcheck --shell=bash $<
 	$(Q)pymakehelper touch_mkdir $@
+
+##########
+# alldep #
+##########
+ifeq ($(DO_ALLDEP),1)
+.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
+endif # DO_ALLDEP
