@@ -21,7 +21,7 @@ PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
 ALL:=$(ALL_TESTS)
-ALL_SH:=$(shell find src -name "*.sh" 2> /dev/null)
+ALL_SH:=$(shell find src -type f -and -name "*.sh" 2> /dev/null)
 ALL_SH_STAMP:=$(addprefix out/, $(addsuffix .stamp, $(ALL_SH)))
 
 # silent stuff
@@ -89,8 +89,8 @@ black:
 
 .PHONY: clean
 clean:
-	$(Q)find . -name "*.pyc" -or -name "*.pyo" -delete
-	$(Q)find . -name "__pycache__" -exec rm -rf {} \;
+	$(Q)find . -type f -and \( -name "*.pyc" -or -name "*.pyo" \) -delete
+	$(Q)find . -type d -and -name "__pycache__" -exec rm -rf {} \;
 
 .PHONY: clean_hard
 clean_hard:
