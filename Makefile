@@ -45,7 +45,7 @@ endif # DO_CHECK_SYNTAX
 all: $(ALL)
 	@true
 
-$(ALL_TESTS): $(ALL_PYTHON)
+$(ALL_TESTS): $(ALL_PYTHON) .pylintrc .flake8 .mypy.ini
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest tests
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m flake8 $(ALL_PACKAGES)
