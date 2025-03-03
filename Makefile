@@ -139,3 +139,5 @@ $(ALL_SH_STAMP): out/%.stamp: % .shellcheckrc
 ifeq ($(DO_ALLDEP),1)
 .EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
 endif # DO_ALLDEP
+
+.DELETE_ON_ERROR:
