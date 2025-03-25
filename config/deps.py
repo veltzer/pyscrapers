@@ -1,3 +1,7 @@
+"""
+os level dependencies for this project
+"""
+
 packages = [
     # this is for the compilation of the "dbus-python" python package which is
     # half native
