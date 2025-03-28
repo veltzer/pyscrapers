@@ -1,3 +1,5 @@
+""" mamba_ru.py """
+
 import json
 
 from pyscrapers.core.url_set import UrlSet

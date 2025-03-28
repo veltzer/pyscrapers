@@ -1,3 +1,6 @@
+""" json.py """
+
+
 def find_paths(element, json):
     paths = []
     to_search = [("", json)]

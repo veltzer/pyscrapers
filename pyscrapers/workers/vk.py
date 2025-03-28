@@ -1,3 +1,5 @@
+""" vk.py """
+
 import json
 import logging
 

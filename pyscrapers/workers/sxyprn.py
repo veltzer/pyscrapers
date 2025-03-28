@@ -1,3 +1,5 @@
+""" sxyprn.py """
+
 import tempfile
 import urllib.parse
 from logging import Logger
