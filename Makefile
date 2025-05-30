@@ -21,8 +21,9 @@ PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
 MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
 ALL:=$(ALL_TESTS)
-ALL_SH:=$(shell find src -type f -and -name "*.sh" 2> /dev/null)
-ALL_SH_STAMP:=$(addprefix out/, $(addsuffix .stamp, $(ALL_SH)))
+
+ALL_SH_SRC:=$(shell find src -type f -and -name "*.sh" 2> /dev/null)
+ALL_SH_CHECK:=$(addprefix out/, $(addsuffix .check, $(ALL_SH_SRC)))
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -34,7 +35,7 @@ Q:=@
 endif # DO_MKDBG
 
 ifeq ($(DO_CHECK_SYNTAX),1)
-ALL+=$(ALL_SH_STAMP)
+ALL+=$(ALL_SH_CHECK)
 endif # DO_CHECK_SYNTAX
 
 #########
@@ -117,8 +118,8 @@ debug:
 	$(info ALL_PYTHON is $(ALL_PYTHON))
 	$(info MAIN_SCRIPT is $(MAIN_SCRIPT))
 	$(info MAIN_MODULE is $(MAIN_MODULE))
-	$(info ALL_SH is $(ALL_SH))
-	$(info ALL_SH_STAMP is $(ALL_SH_STAMP))
+	$(info ALL_SH_SRC is $(ALL_SH_SRC))
+	$(info ALL_SH_CHECK is $(ALL_SH_CHECK))
 
 .PHONY: install
 install:
@@ -128,9 +129,9 @@ install:
 ############
 # patterns #
 ############
-$(ALL_SH_STAMP): out/%.stamp: % .shellcheckrc
+$(ALL_SH_CHECK): out/%.check: % .shellcheckrc
 	$(info doing [$@])
-	$(Q)shellcheck --shell=bash $<
+	$(Q)shellcheck --shell=bash --external-sources --source-path="$${HOME}" $<
 	$(Q)pymakehelper touch_mkdir $@
 
 ##########
