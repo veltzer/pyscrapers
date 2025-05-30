@@ -6,7 +6,7 @@ DO_MKDBG:=0
 # do you want dependency on the Makefile itself ?
 DO_ALLDEP:=1
 # do you want to check bash syntax?
-DO_CHECK_SYNTAX:=1
+DO_SH_SYNTAX:=1
 
 ########
 # code #
@@ -22,8 +22,8 @@ MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
 ALL:=$(ALL_TESTS)
 
-ALL_SH_SRC:=$(shell find . -type f -name "*.sh" -and -not -path "./.venv/*" -printf "%P\n")
-ALL_SH_CHECK:=$(addprefix out/, $(addsuffix .check, $(ALL_SH_SRC)))
+SH_SRC:=$(shell find . -type f -name "*.sh" -and -not -path "./.venv/*" -and -not -path "./node_modules/*" -printf "%P\n")
+SH_CHECK:=$(addprefix out/, $(addsuffix .check, $(SH_SRC)))
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -34,9 +34,9 @@ Q:=@
 #.SILENT:
 endif # DO_MKDBG
 
-ifeq ($(DO_CHECK_SYNTAX),1)
-ALL+=$(ALL_SH_CHECK)
-endif # DO_CHECK_SYNTAX
+ifeq ($(DO_SH_SYNTAX),1)
+ALL+=$(SH_CHECK)
+endif # DO_SH_SYNTAX
 
 #########
 # rules #
@@ -104,7 +104,7 @@ inspect:
 
 .PHONY: py-spy
 py-spy:
-	$(Q)sudo env "PATH=$$PATH" $(PYTHON) -m $(MAIN_MODULE)
+	$(Q)sudo env "PATH=$${PATH}" $(PYTHON) -m $(MAIN_MODULE)
 
 .PHONY: pyinstrument
 pyinstrument:
@@ -118,18 +118,23 @@ debug:
 	$(info ALL_PYTHON is $(ALL_PYTHON))
 	$(info MAIN_SCRIPT is $(MAIN_SCRIPT))
 	$(info MAIN_MODULE is $(MAIN_MODULE))
-	$(info ALL_SH_SRC is $(ALL_SH_SRC))
-	$(info ALL_SH_CHECK is $(ALL_SH_CHECK))
+	$(info SH_SRC is $(SH_SRC))
+	$(info SH_CHECK is $(SH_CHECK))
 
 .PHONY: install
 install:
 	$(info doing [$@])
 	$(Q)pymakehelper symlink_install --source_folder src --target_folder ~/install/bin
 
+.PHONY: first_line_stats
+first_line_stats:
+	$(info doing [$@])
+	$(Q)head -1 -q $(SH_SRC) | sort -u
+
 ############
 # patterns #
 ############
-$(ALL_SH_CHECK): out/%.check: % .shellcheckrc
+$(SH_CHECK): out/%.check: % .shellcheckrc
 	$(info doing [$@])
 	$(Q)shellcheck --shell=bash --external-sources --source-path="$${HOME}" $<
 	$(Q)pymakehelper touch_mkdir $@
