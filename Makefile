@@ -22,7 +22,7 @@ MAIN_SCRIPT:=$(PACKAGE_NAME)/main.py
 MAIN_MODULE:=$(PACKAGE_NAME).main
 ALL:=$(ALL_TESTS)
 
-ALL_SH_SRC:=$(shell find src -type f -and -name "*.sh" 2> /dev/null)
+ALL_SH_SRC:=$(shell find . -type f -name "*.sh" -and -not -path "./.venv/*" -printf "%P\n")
 ALL_SH_CHECK:=$(addprefix out/, $(addsuffix .check, $(ALL_SH_SRC)))
 
 # silent stuff
