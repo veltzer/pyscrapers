@@ -22,6 +22,9 @@ setuptools.setup(
     name="${pydmt.helpers.project.get_name()}",
     version="${pydmt.helpers.misc.get_version_str()}",
     packages=${pydmt.helpers.python.array_indented(1, pydmt.helpers.python.find_packages(pydmt.helpers.python.get_package_name()))},
+    package_data={
+		"${pydmt.helpers.python.get_package_name()}": ["*.json"],
+    },
     # from here all is optional
     description="${config.project.description_short}",
     long_description=get_readme(),
