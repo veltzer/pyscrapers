@@ -36,7 +36,7 @@ class UrlSet:
             self.urls_set.add(url)
             self.urls_list.append(url)
 
-    def extend(self, urls: List[str]) -> None:
+    def extend(self, urls: list[str]) -> None:
         for url in urls:
             self.append(url)
 

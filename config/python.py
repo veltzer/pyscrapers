@@ -1,17 +1,13 @@
-""" python depedencies for this project """
-from typing import List
+""" python deps for this project """
 
-
-console_scripts: List[str] = [
+console_scripts: list[str] = [
     "pyscrapers=pyscrapers.main:main",
 ]
-dev_requires: List[str] = [
-    "pypitools",
-]
-config_requires: List[str] = [
+
+config_requires: list[str] = [
     "pyclassifiers",
 ]
-install_requires: List[str] = [
+install_requires: list[str] = [
     "lxml",
     "requests",
     # "hyper",
@@ -28,21 +24,20 @@ install_requires: List[str] = [
     "beautifulsoup4",
     "pydantic==1.10.13",
 ]
-build_requires: List[str] = [
-    "pymakehelper",
+build_requires: list[str] = [
     "pydmt",
-    "types-beautifulsoup4",
-    "types-tqdm",
-    "lxml-stubs",
+    "pymakehelper",
 ]
-test_requires: List[str] = [
+test_requires: list[str] = [
     "pylint",
     "pytest",
     "pytest-cov",
-    "pyflakes",
-    "pyre-check",
-    "flake8",
     "mypy",
+    "pyre-check",
+    # types
     "types-requests",
+    "types-beautifulsoup4",
+    "types-tqdm",
+    "lxml-stubs",
 ]
 requires = config_requires + install_requires + build_requires + test_requires

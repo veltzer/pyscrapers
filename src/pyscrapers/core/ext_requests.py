@@ -31,9 +31,9 @@ class ExtResponse:
 
     def save_text(self, filename: str = "/tmp/temp"):
         try:
-            with open(filename, "wt") as handle:
+            with open(filename, "w") as handle:
                 handle.write(self.res.content.decode())
-        except IOError:
+        except OSError:
             os.unlink(filename)
 
     def save_binary(self, filename: str = "/tmp/temp") -> None:
@@ -41,7 +41,7 @@ class ExtResponse:
             with open(filename, 'wb') as handle:
                 self.res.raw.decode_content = True
                 shutil.copyfileobj(self.res.raw, handle)
-        except IOError:
+        except OSError:
             os.unlink(filename)
 
 

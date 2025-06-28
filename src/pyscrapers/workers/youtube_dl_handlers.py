@@ -34,7 +34,7 @@ def youtube_dl_download_url(url: str) -> None:
     youtube_dl_download_urls([url])
 
 
-def youtube_dl_download_urls(urls: List[str]) -> None:
+def youtube_dl_download_urls(urls: list[str]) -> None:
     if not ConfigDownload.download:
         return
     logger = logging.getLogger(LOGGER_NAME)

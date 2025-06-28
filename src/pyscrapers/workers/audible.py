@@ -19,7 +19,7 @@ def get_book_data(session: ExtSession, book_id: str) -> OrderedDict:
     )
     if ConfigDebugUrls.save:
         pretty = soup.prettify()
-        with open("/tmp/single.html", "wt") as handle:
+        with open("/tmp/single.html", "w") as handle:
             handle.write(pretty)
     d = OrderedDict()
     divs = soup.find_all("h1", {"class": "bc-heading"})
@@ -74,7 +74,7 @@ def audible(_logger: Logger):
     """
     session = ExtSession(base="https://www.audible.com")
     page = 1
-    book_ids: List[str] = []
+    book_ids: list[str] = []
     while True:
         url = f"https://www.audible.com/library/titles?page={page}"
         print(f"getting {url}...")
@@ -85,7 +85,7 @@ def audible(_logger: Logger):
         )
         if ConfigDebugUrls.save:
             pretty = soup.prettify()
-            with open(f"/tmp/page{page}.html", "wt") as handle:
+            with open(f"/tmp/page{page}.html", "w") as handle:
                 handle.write(pretty)
 
         # collect all books ids from the page
