@@ -4,7 +4,6 @@ import logging
 import os
 import urllib.parse
 from collections import Counter
-from typing import List
 
 from pyscrapers.configs import ConfigDownload
 from pyscrapers.core.ext_requests import download

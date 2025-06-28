@@ -49,7 +49,7 @@ dependencies = [
     "fake-useragent",
     "tqdm",
     "beautifulsoup4",
-    "pydantic==1.10.13",
+    "pydantic",
 ]
 
 [project.urls]

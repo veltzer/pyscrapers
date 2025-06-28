@@ -22,7 +22,7 @@ install_requires: list[str] = [
     "fake-useragent",
     "tqdm",
     "beautifulsoup4",
-    "pydantic==1.10.13",
+    "pydantic",
 ]
 build_requires: list[str] = [
     "pydmt",
@@ -31,9 +31,8 @@ build_requires: list[str] = [
 test_requires: list[str] = [
     "pylint",
     "pytest",
-    "pytest-cov",
     "mypy",
-    "pyre-check",
+    "ruff",
     # types
     "types-requests",
     "types-beautifulsoup4",
