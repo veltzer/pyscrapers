@@ -223,7 +223,7 @@ def download_course(course, session):
         os.makedirs(folder_name)
     details = os.path.join(folder_name, "details.txt")
     if not os.path.isfile(details):
-        with open(details, "wt") as file_handle:
+        with open(details, "w") as file_handle:
             print(f"course_number: {course.number}", file=file_handle)
             print(f"course_name: {course.name}", file=file_handle)
             print(f"course_difficulty: {course.diff}", file=file_handle)

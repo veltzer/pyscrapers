@@ -116,7 +116,7 @@ def get_number_of_pages(root) -> int:
     return number_of_pages
 
 
-def get_urls_from_page(root) -> List[str]:
+def get_urls_from_page(root) -> list[str]:
     """
     return urls from page
     :param root:
