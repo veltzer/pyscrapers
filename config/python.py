@@ -1,8 +1,8 @@
 """ python deps for this project """
 
-console_scripts: list[str] = [
-    "pyscrapers=pyscrapers.main:main",
-]
+scripts: dict[str,str] = {
+    "pyscrapers": "pyscrapers.main:main",
+}
 
 config_requires: list[str] = [
     "pyclassifiers",
