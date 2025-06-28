@@ -7,7 +7,6 @@ References:
 import logging
 import tempfile
 from itertools import islice
-from typing import List
 
 import pornhub_api
 from pornhub_api import PornhubApi

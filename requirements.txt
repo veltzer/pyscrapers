@@ -64,6 +64,7 @@ referencing==0.36.2
 requests==2.32.3
 roman-numerals-py==3.1.0
 rpds-py==0.25.1
+ruff==0.12.1
 smmap==5.0.2
 snowballstemmer==3.0.1
 soupsieve==2.7

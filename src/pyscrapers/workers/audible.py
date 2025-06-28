@@ -1,7 +1,6 @@
 """
 Download books from audible
 """
-from typing import List
 from collections import OrderedDict
 from logging import Logger
 from bs4 import BeautifulSoup
