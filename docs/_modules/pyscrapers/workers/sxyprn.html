@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscrapers.workers.sxyprn &#8212; pyscrapers Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=86ab457a"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pyscrapers.workers.sxyprn</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; sxyprn.py &quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.parse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.sessions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Session</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyscrapers.configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigUrl</span><span class="p">,</span> <span class="n">ConfigDebugUrls</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyscrapers.core.url_set</span><span class="w"> </span><span class="kn">import</span> <span class="n">UrlSet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyscrapers.core.ext_lxml</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_html_dom_content</span><span class="p">,</span> <span class="n">get_element_as_bytes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyscrapers.workers.youtube_dl_handlers</span><span class="w"> </span><span class="kn">import</span> <span class="n">youtube_dl_download_urls</span>
+
+
+<div class="viewcode-block" id="url_generator">
+<a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.sxyprn.url_generator">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">url_generator</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">yield</span> <span class="n">url</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">?page=</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">30</span></div>
+
+
+
+<div class="viewcode-block" id="sxyprn_download">
+<a class="viewcode-back" href="../../../pyscrapers.workers.html#pyscrapers.workers.sxyprn.sxyprn_download">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sxyprn_download</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This does the downloads</span>
+<span class="sd">    :param session:</span>
+<span class="sd">    :param logger:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url_parsed</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">ConfigUrl</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+    <span class="c1"># noinspection PyProtectedMember</span>
+    <span class="n">base_url</span> <span class="o">=</span> <span class="n">url_parsed</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fragment</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">geturl</span><span class="p">()</span>
+
+    <span class="n">num_pages</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="n">UrlSet</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">url_generator</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ConfigUrl</span><span class="o">.</span><span class="n">url</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;loading [</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_pages</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">num_pages</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;//div[contains(@class,&#39;ctrl_el&#39;)]&quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">num_pages</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">num_pages</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">ConfigDebugUrls</span><span class="o">.</span><span class="n">save</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;writing file [</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">get_element_as_bytes</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;//a[contains(@class,&#39;js-pop&#39;)]&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
+            <span class="n">href</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urljoin</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">href</span><span class="p">)</span>
+            <span class="n">no_fluff</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fragment</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">geturl</span><span class="p">()</span>
+            <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">no_fluff</span><span class="p">)</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">counter</span> <span class="o">==</span> <span class="n">num_pages</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got total [</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)</span><span class="si">}</span><span class="s2">] urls&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got [</span><span class="si">{</span><span class="n">urls</span><span class="o">.</span><span class="n">appended_twice</span><span class="si">}</span><span class="s2">] appended twice urls&quot;</span><span class="p">)</span>
+    <span class="n">youtube_dl_download_urls</span><span class="p">(</span><span class="n">urls</span><span class="o">.</span><span class="n">urls_list</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">pyscrapers</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pyscrapers</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Mark Veltzer.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
