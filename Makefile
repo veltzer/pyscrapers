@@ -14,7 +14,7 @@ DO_SH_SYNTAX:=1
 PYTHON=python
 ALL_TESTS:=out/tests.stamp
 ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */__init__.py)))
-ALL_PYTHON:=$(shell find $(ALL_PACKAGES) -type f -and -name "*.py")
+ALL_PYTHON:=$(shell find src -type f -and -name "*.py")
 # We do it this way because we cannot rely on the current path (in CI/CD it could be anything, and we
 # dont want to run python as above
 PACKAGE_NAME:=$(filter-out tests config examples,$(ALL_PACKAGES))
