@@ -38,33 +38,57 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-pyscrapers.core.ffprobe">
-<span id="pyscrapers-core-ffprobe-module"></span><h2>pyscrapers.core.ffprobe module<a class="headerlink" href="#module-pyscrapers.core.ffprobe" title="Link to this heading">¶</a></h2>
-<p>This is a module that returns information about video streams based on running ffprobe
-as a subprocess.</p>
-<p>References:
-- <a class="reference external" href="http://stackoverflow.com/questions/3844430/how-to-get-the-duration-of-a-video-in-python/3844467">http://stackoverflow.com/questions/3844430/how-to-get-the-duration-of-a-video-in-python/3844467</a></p>
+<section id="module-pyscrapers.core.cookies">
+<span id="pyscrapers-core-cookies-module"></span><h2>pyscrapers.core.cookies module<a class="headerlink" href="#module-pyscrapers.core.cookies" title="Link to this heading">¶</a></h2>
+<p>There are helpers for cookies</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.ffprobe.duration">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ffprobe.</span></span><span class="sig-name descname"><span class="pre">duration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vid_file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#duration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.duration" title="Link to this definition">¶</a></dt>
-<dd><p>Video’s duration in seconds, return a float number</p>
+<dt class="sig sig-object py" id="pyscrapers.core.cookies.print_cookies">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.cookies.</span></span><span class="sig-name descname"><span class="pre">print_cookies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cookies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/cookies.html#print_cookies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.cookies.print_cookies" title="Link to this definition">¶</a></dt>
+<dd><p>Print the cookies from a specific domain
+:param cookies:
+:param domain:
+:return:</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscrapers.core.ext_lxml">
+<span id="pyscrapers-core-ext-lxml-module"></span><h2>pyscrapers.core.ext_lxml module<a class="headerlink" href="#module-pyscrapers.core.ext_lxml" title="Link to this heading">¶</a></h2>
+<p>This module is s set of utilities for this entire project</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_lxml.get_element_as_bytes">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_lxml.</span></span><span class="sig-name descname"><span class="pre">get_element_as_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_lxml.html#get_element_as_bytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_lxml.get_element_as_bytes" title="Link to this definition">¶</a></dt>
+<dd><p>turn xml element from etree to bytes
+:param element:
+:return:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.ffprobe.height">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ffprobe.</span></span><span class="sig-name descname"><span class="pre">height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#height"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.height" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.ffprobe.probe">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ffprobe.</span></span><span class="sig-name descname"><span class="pre">probe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vid_file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#probe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.probe" title="Link to this definition">¶</a></dt>
-<dd><p>Give a json from ffprobe command line</p>
-<p>&#64;vid_file_path : The absolute (full) path of the video file, string.</p>
+<dt class="sig sig-object py" id="pyscrapers.core.ext_lxml.get_element_as_string">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_lxml.</span></span><span class="sig-name descname"><span class="pre">get_element_as_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_lxml.html#get_element_as_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_lxml.get_element_as_string" title="Link to this definition">¶</a></dt>
+<dd><p>turn xml element from etree to string
+:param element:
+:return:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.core.ffprobe.width">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ffprobe.</span></span><span class="sig-name descname"><span class="pre">width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.width" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pyscrapers.core.ext_lxml.get_html_dom_content">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_lxml.</span></span><span class="sig-name descname"><span class="pre">get_html_dom_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_lxml.html#get_html_dom_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_lxml.get_html_dom_content" title="Link to this definition">¶</a></dt>
+<dd><p>Get the content from a request
+:param response:
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_lxml.print_element">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_lxml.</span></span><span class="sig-name descname"><span class="pre">print_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_lxml.html#print_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_lxml.print_element" title="Link to this definition">¶</a></dt>
+<dd><p>print xml elements from etree
+:param element:
+:return:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscrapers.core.ext_lxml.setup_prefix">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ext_lxml.</span></span><span class="sig-name descname"><span class="pre">setup_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ext_lxml.html#setup_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ext_lxml.setup_prefix" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -137,6 +161,45 @@ as a subprocess.</p>
 <dd><p>Activate the debugging features of the requests module
 :return:</p>
 </dd></dl>
+
+</section>
+<section id="module-pyscrapers.core.ffprobe">
+<span id="pyscrapers-core-ffprobe-module"></span><h2>pyscrapers.core.ffprobe module<a class="headerlink" href="#module-pyscrapers.core.ffprobe" title="Link to this heading">¶</a></h2>
+<p>This is a module that returns information about video streams based on running ffprobe
+as a subprocess.</p>
+<p>References:
+- <a class="reference external" href="http://stackoverflow.com/questions/3844430/how-to-get-the-duration-of-a-video-in-python/3844467">http://stackoverflow.com/questions/3844430/how-to-get-the-duration-of-a-video-in-python/3844467</a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscrapers.core.ffprobe.duration">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ffprobe.</span></span><span class="sig-name descname"><span class="pre">duration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vid_file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#duration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.duration" title="Link to this definition">¶</a></dt>
+<dd><p>Video’s duration in seconds, return a float number</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscrapers.core.ffprobe.height">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ffprobe.</span></span><span class="sig-name descname"><span class="pre">height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#height"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.height" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscrapers.core.ffprobe.probe">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ffprobe.</span></span><span class="sig-name descname"><span class="pre">probe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vid_file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#probe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.probe" title="Link to this definition">¶</a></dt>
+<dd><p>Give a json from ffprobe command line</p>
+<p>&#64;vid_file_path : The absolute (full) path of the video file, string.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscrapers.core.ffprobe.width">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.ffprobe.</span></span><span class="sig-name descname"><span class="pre">width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/ffprobe.html#width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.ffprobe.width" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscrapers.core.json">
+<span id="pyscrapers-core-json-module"></span><h2>pyscrapers.core.json module<a class="headerlink" href="#module-pyscrapers.core.json" title="Link to this heading">¶</a></h2>
+<p>json.py</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscrapers.core.json.find_paths">
+<span class="sig-prename descclassname"><span class="pre">pyscrapers.core.json.</span></span><span class="sig-name descname"><span class="pre">find_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/core/json.html#find_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.core.json.find_paths" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="module-pyscrapers.core.url_set">
