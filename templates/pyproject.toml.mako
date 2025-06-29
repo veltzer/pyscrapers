@@ -53,3 +53,22 @@ line-length = 130
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/${config.project.name}"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/${config.project.name}/",
+    "README.md",
+    "LICENSE",
+    "pyproject.toml"
+]
+exclude = [
+    ".gitignore",
+    ".github/",
+    "tests/",
+    "docs/",
+    "config/",
+    "*.md",
+]
