@@ -4,6 +4,21 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.githubpages",
 ]
+import os
+import sys
+
+# Add the project's 'src' directory to the Python path.
+# This allows Sphinx to find and import your package.
+sys.path.insert(0, os.path.abspath("../src"))
+sys.path.insert(0, os.path.abspath(".."))
+
+# Treat all warnings as errors.
+# This can also be set by passing the -W flag to the sphinx-build command.
+warning_is_error = True
+
+# Enable "nit-picky mode". This will issue warnings for all missing
+# cross-references (e.g., a link to a class that doesn't exist).
+# nitpicky = True
 
 import config.project
 project = config.project.name
