@@ -3,11 +3,13 @@ beautifulsoup4
 browser-cookie3
 dbus-python
 fake-useragent
+hatch
 lxml
 lxml-stubs
 mypy
 pornhub-api
 pyclassifiers
+pycmdtools
 pydantic
 pydmt
 pyeventroute
