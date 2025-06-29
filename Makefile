@@ -52,7 +52,6 @@ $(ALL_TESTS): $(ALL_PYTHON) .pylintrc .mypy.ini
 	$(Q)pymakehelper error_on_print $(PYTHON) -m pylint --reports=n --score=n src $(ALL_PACKAGES) 
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m mypy src $(ALL_PACKAGES) 
 	$(Q)pymakehelper touch_mkdir $@
-# $(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 
 .PHONY: pytest
 pytest:
@@ -65,10 +64,6 @@ pylint:
 .PHONY: unittest
 unittest:
 	$(Q)$(PYTHON) -m unittest discover -s .
-
-.PHONY: cov
-cov:
-	$(Q)pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 
 .PHONY: pyre
 pyre:
