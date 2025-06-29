@@ -46,7 +46,7 @@ pyclassifiers==0.0.19
 pycodestyle==2.13.0
 pycryptodomex==3.23.0
 pydantic==1.10.13
-pydmt==0.3.19
+pydmt==0.3.22
 pyeventroute==0.0.6
 pyfakeuse==0.0.9
 pyflakes==3.3.2
