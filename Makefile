@@ -13,7 +13,7 @@ DO_PYTHON:=1
 ########
 # code #
 ########
-ALL_PACKAGES:=$(patsubst %/,%,$(dir $(wildcard */*/__init__.py */__init__.py)))
+ALL_PACKAGES:=src config tests
 ALL_PYTHON:=$(shell find $(ALL_PACKAGES) -type f -and -name "*.py")
 PACKAGE_NAME:=$(shell python -c "import config.project; print(config.project.name)")
 
