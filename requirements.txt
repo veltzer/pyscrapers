@@ -63,7 +63,7 @@ pycmdtools==0.0.85
 pycparser==2.22
 pycryptodomex==3.23.0
 pydantic==1.10.22
-pydmt==0.3.23
+pydmt==0.3.26
 pyeventroute==0.0.6
 pyfakeuse==0.0.9
 Pygments==2.19.2
