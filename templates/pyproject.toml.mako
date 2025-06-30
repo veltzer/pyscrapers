@@ -77,3 +77,6 @@ exclude = [
 python_version = "3.12"
 warn_return_any = true
 warn_unused_configs = true
+
+[tool.hatch.envs.default]
+installer = "uv"
