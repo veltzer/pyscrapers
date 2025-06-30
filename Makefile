@@ -42,7 +42,6 @@ endif # DO_PYTHON
 #########
 # rules #
 #########
-
 .PHONY: all
 all: $(ALL)
 	@true
@@ -74,6 +73,10 @@ debug:
 	$(info SH_SRC is $(SH_SRC))
 	$(info SH_CHECK is $(SH_CHECK))
 
+.PHONY: install
+install:
+	$(info doing [$@])
+	$(Q)pymakehelper symlink_install --source_folder scripts --target_folder ~/install/bin
 ############
 # patterns #
 ############
