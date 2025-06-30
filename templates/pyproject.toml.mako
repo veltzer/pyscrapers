@@ -72,3 +72,8 @@ exclude = [
     "config/",
     "*.md",
 ]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
