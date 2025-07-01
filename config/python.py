@@ -1,12 +1,7 @@
 """ python deps for this project """
 
-scripts: dict[str,str] = {
-    "pyscrapers": "pyscrapers.main:main",
-}
+import config.shared
 
-config_requires: list[str] = [
-    "pyclassifiers",
-]
 install_requires: list[str] = [
     "lxml",
     "requests",
@@ -24,21 +19,16 @@ install_requires: list[str] = [
     "beautifulsoup4",
     "pydantic",
 ]
-build_requires: list[str] = [
-    "hatch",
-    "pydmt",
-    "pymakehelper",
-    "pycmdtools",
-]
-test_requires: list[str] = [
-    "pylint",
-    "pytest",
-    "mypy",
-    "ruff",
-    # types
+build_requires: list[str] = config.shared.PBUILD
+test_requires: list[str] = config.shared.PTEST
+types_requires: list[str] = [
     "types-requests",
     "types-beautifulsoup4",
     "types-tqdm",
     "lxml-stubs",
 ]
-requires = config_requires + install_requires + build_requires + test_requires
+requires = install_requires + build_requires + test_requires + types_requires
+
+scripts: dict[str,str] = {
+    "pyscrapers": "pyscrapers.main:main",
+}
