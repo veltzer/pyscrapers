@@ -250,68 +250,8 @@ If you want more you have to do a follow-up AJAX request to the server.</p>
 </dd></dl>
 
 </section>
-<section id="module-pyscrapers.workers.pornhub">
-<span id="pyscrapers-workers-pornhub-module"></span><h2>pyscrapers.workers.pornhub module<a class="headerlink" href="#module-pyscrapers.workers.pornhub" title="Link to this heading">¶</a></h2>
-<p>Module to handle scraping of pornhub.</p>
-<p>References:
-- <a class="reference external" href="https://pypi.org/project/pornhub-api/">https://pypi.org/project/pornhub-api/</a></p>
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.download_search">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">download_search</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#download_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.download_search" title="Link to this definition">¶</a></dt>
-<dd><p>Download movies from pornhub</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.download_url">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">download_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#download_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.download_url" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.get_code">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">get_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ValueError</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#get_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.get_code" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.get_number_of_pages">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">get_number_of_pages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#get_number_of_pages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.get_number_of_pages" title="Link to this definition">¶</a></dt>
-<dd><p>return number of pages for a pornstar
-:param root:
-:return:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.get_urls_from_page">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">get_urls_from_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#get_urls_from_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.get_urls_from_page" title="Link to this definition">¶</a></dt>
-<dd><p>return urls from page
-:param root:
-:return:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.print_categories">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">print_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PornhubApi</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#print_categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.print_categories" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.print_stars_all">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">print_stars_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PornhubApi</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#print_stars_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.print_stars_all" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.print_stars_all_detailed">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">print_stars_all_detailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PornhubApi</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#print_stars_all_detailed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.print_stars_all_detailed" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.print_tags">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">print_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PornhubApi</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#print_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.print_tags" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="pyscrapers.workers.pornhub.url_generator">
-<span class="sig-prename descclassname"><span class="pre">pyscrapers.workers.pornhub.</span></span><span class="sig-name descname"><span class="pre">url_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyscrapers/workers/pornhub.html#url_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscrapers.workers.pornhub.url_generator" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<section id="pyscrapers-workers-pornhub-module">
+<h2>pyscrapers.workers.pornhub module<a class="headerlink" href="#pyscrapers-workers-pornhub-module" title="Link to this heading">¶</a></h2>
 </section>
 <section id="module-pyscrapers.workers.sxyprn">
 <span id="pyscrapers-workers-sxyprn-module"></span><h2>pyscrapers.workers.sxyprn module<a class="headerlink" href="#module-pyscrapers.workers.sxyprn" title="Link to this heading">¶</a></h2>
