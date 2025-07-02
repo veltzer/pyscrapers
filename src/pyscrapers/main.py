@@ -5,10 +5,9 @@ import logging
 import shelve
 
 import pylogconf.core
-from pornhub_api import PornhubApi
 from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
-from pyscrapers.configs import ConfigCookiesSource, ConfigSiteId, ConfigPornhubSearch, \
+from pyscrapers.configs import ConfigCookiesSource, ConfigSiteId, \
     ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, ConfigDebugUrls, ConfigRequests, \
     ConfigUser
 from pyscrapers.core.url_set import UrlSet
@@ -21,7 +20,6 @@ from pyscrapers.workers.getpocket import getpocket_download
 from pyscrapers.workers.instagram import scrape_instagram
 from pyscrapers.workers.audible import audible
 from pyscrapers.workers.mamba_ru import scrape_mambaru
-from pyscrapers.workers.pornhub import download_search, print_stars_all_detailed, download_url
 from pyscrapers.workers.sxyprn import sxyprn_download
 from pyscrapers.workers.netflix import netflix_download
 from pyscrapers.workers.instagram_stories import instagram_stories_download
@@ -96,42 +94,6 @@ def drumeo():
                 d[course.number] = course
             download_course(list_of_courses[i], session)
     session.close()
-
-
-@register_endpoint(
-    description="print stars all detailed",
-)
-def pornhub_stars_all_detailed():
-    api = PornhubApi()
-    print_stars_all_detailed(api)
-
-
-@register_endpoint(
-    description="Download search results from pornhub",
-    configs=[
-        ConfigPornhubSearch,
-        ConfigDownload,
-        ConfigYoutubeDl,
-    ],
-)
-def pornhub_download_search():
-    download_search()
-
-
-@register_endpoint(
-    description="Download url videos from pornhub",
-    configs=[
-        ConfigRequests,
-        ConfigDebugUrls,
-        ConfigCookiesSource,
-        ConfigUrl,
-        ConfigDownload,
-        ConfigYoutubeDl,
-    ],
-)
-def pornhub_download_url():
-    session = ExtSession()
-    download_url(session)
 
 
 @register_endpoint(
