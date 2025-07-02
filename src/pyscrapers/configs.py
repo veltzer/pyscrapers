@@ -94,49 +94,6 @@ class ConfigUser(Config):
     )
 
 
-class ConfigPornhubSearch(Config):
-    """
-    Parameters for search
-    """
-    query = ParamCreator.create_str(
-        help_string="What is the query string?",
-    )
-    use_ordering = ParamCreator.create_bool(
-        help_string="use ordering in the search operation",
-        default=True,
-    )
-    ordering = ParamCreator.create_choice(
-        choice_list=["longest", "featured", "newest", "mostviewed", "rating"],
-        help_string="by which ordering to fetch result?",
-        default="longest",
-    )
-    use_period = ParamCreator.create_bool(
-        help_string="use period in the search operation",
-        default=False,
-    )
-    period = ParamCreator.create_choice(
-        choice_list=["weekly", "monthly", "alltime"],
-        help_string="what period to search?",
-        default="weekly",
-    )
-    use_tags = ParamCreator.create_bool(
-        help_string="should we use tags in search?",
-        default=False,
-    )
-    tags = ParamCreator.create_list_str(
-        help_string="tags to be used in search",
-        default=[],
-    )
-    literal = ParamCreator.create_str(
-        help_string="literal for tags (one character)",
-        default="f",
-    )
-    limit = ParamCreator.create_int_or_none(
-        help_string="Limit on search results or None for no limit",
-        default=100,
-    )
-
-
 class ConfigYoutubeDl(Config):
     """
     Configuration for youtube downloads
@@ -156,7 +113,7 @@ class ConfigUrl(Config):
     Parameters for what url to download
     """
     url = ParamCreator.create_str(
-        help_string="url to download (e.g. https://www.pornhub.com/model/lily)"
+        help_string="url to download"
     )
 
 
