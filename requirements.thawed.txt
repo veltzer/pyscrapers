@@ -7,7 +7,6 @@ hatch
 lxml
 lxml-stubs
 mypy
-pornhub-api
 pyclassifiers
 pycmdtools
 pydantic
