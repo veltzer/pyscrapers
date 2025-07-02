@@ -11,7 +11,6 @@ install_requires: list[str] = [
     "dbus-python",
     "pytconf",
     "pylogconf",
-    "pornhub-api",
     "youtube-dl",
     "pyeventroute",
     "fake-useragent",

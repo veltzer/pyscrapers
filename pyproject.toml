@@ -43,7 +43,6 @@ dependencies = [
     "dbus-python",
     "pytconf",
     "pylogconf",
-    "pornhub-api",
     "youtube-dl",
     "pyeventroute",
     "fake-useragent",
