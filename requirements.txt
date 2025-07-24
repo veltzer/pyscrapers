@@ -6,7 +6,7 @@ attrs==25.3.0
 babel==2.17.0
 beautifulsoup4==4.13.4
 browser-cookie3==0.20.1
-certifi==2025.6.15
+certifi==2025.7.14
 cffi==1.17.1
 charset-normalizer==3.4.2
 click==8.2.1
@@ -18,7 +18,7 @@ docutils==0.21.2
 fake-useragent==1.5.1
 filelock==3.18.0
 gitdb==4.0.12
-gitpython==3.1.44
+gitpython==3.1.45
 h11==0.16.0
 hatch==1.14.1
 hatchling==1.27.0
@@ -35,7 +35,7 @@ jaraco-context==6.0.1
 jaraco-functools==4.2.1
 jeepney==0.9.0
 jinja2==3.1.6
-jsonschema==4.24.0
+jsonschema==4.25.0
 jsonschema-specifications==2025.4.1
 keyring==25.6.0
 logging-tree==1.10
@@ -64,7 +64,7 @@ pycparser==2.22
 pycryptodomex==3.23.0
 pydantic==2.11.7
 pydantic-core==2.33.2
-pydmt==0.3.26
+pydmt==0.3.27
 pyeventroute==0.0.6
 pyfakeuse==0.0.9
 pygments==2.19.2
@@ -106,7 +106,7 @@ types-beautifulsoup4==4.12.0.20250516
 types-html5lib==1.1.11.20250516
 types-requests==2.32.4.20250611
 types-tqdm==4.67.0.20250516
-typing-extensions==4.14.0
+typing-extensions==4.14.1
 typing-inspection==0.4.1
 tzdata==2025.2
 unidecode==1.4.0
