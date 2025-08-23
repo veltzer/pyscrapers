@@ -80,3 +80,6 @@ warn_unused_configs = true
 
 [tool.hatch.envs.default]
 installer = "uv"
+
+[tool.uv.pip]
+prerelease = "deny"
