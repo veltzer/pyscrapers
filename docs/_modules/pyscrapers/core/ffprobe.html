@@ -51,7 +51,7 @@
 <span class="sd">    @vid_file_path : The absolute (full) path of the video file, string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vid_file_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Give ffprobe a full file path of the video&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Give ffprobe a full file path of the video&quot;</span><span class="p">)</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;ffprobe&quot;</span><span class="p">,</span>
@@ -88,23 +88,23 @@
 <div class="viewcode-block" id="duration">
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ffprobe.duration">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">duration</span><span class="p">(</span><span class="n">vid_file_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Video&#39;s duration in seconds, return a float number</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Videos duration in seconds, return a float number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_json</span> <span class="o">=</span> <span class="n">probe</span><span class="p">(</span><span class="n">vid_file_path</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="s1">&#39;format&#39;</span> <span class="ow">in</span> <span class="n">_json</span><span class="p">:</span>
-        <span class="k">if</span> <span class="s1">&#39;duration&#39;</span> <span class="ow">in</span> <span class="n">_json</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">_json</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">][</span><span class="s1">&#39;duration&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s2">&quot;format&quot;</span> <span class="ow">in</span> <span class="n">_json</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;duration&quot;</span> <span class="ow">in</span> <span class="n">_json</span><span class="p">[</span><span class="s2">&quot;format&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">_json</span><span class="p">[</span><span class="s2">&quot;format&quot;</span><span class="p">][</span><span class="s2">&quot;duration&quot;</span><span class="p">])</span>
 
-    <span class="k">if</span> <span class="s1">&#39;streams&#39;</span> <span class="ow">in</span> <span class="n">_json</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;streams&quot;</span> <span class="ow">in</span> <span class="n">_json</span><span class="p">:</span>
         <span class="c1"># commonly stream 0 is the video</span>
-        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">_json</span><span class="p">[</span><span class="s1">&#39;streams&#39;</span><span class="p">]:</span>
-            <span class="k">if</span> <span class="s1">&#39;duration&#39;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">_json</span><span class="p">[</span><span class="s2">&quot;streams&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s2">&quot;duration&quot;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;duration&quot;</span><span class="p">])</span>
 
-    <span class="c1"># if everything didn&#39;t happen,</span>
-    <span class="c1"># we got here because no single &#39;return&#39; in the above happen.</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;I found no duration&#39;</span><span class="p">)</span></div>
+    <span class="c1"># if everything didn&quot;t happen,</span>
+    <span class="c1"># we got here because no single &quot;return&quot; in the above happen.</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;I found no duration&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 

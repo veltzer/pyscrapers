@@ -45,10 +45,10 @@
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_lxml.setup_prefix">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setup_prefix</span><span class="p">():</span>
     <span class="c1"># register regular expressions with lxml</span>
-    <span class="c1"># this means that we can use regular expression functions like &#39;match&#39;</span>
-    <span class="c1"># by specifying &#39;re:match&#39; in our xpath expressions</span>
+    <span class="c1"># this means that we can use regular expression functions like &quot;match&quot;</span>
+    <span class="c1"># by specifying &quot;re:match&quot; in our xpath expressions</span>
     <span class="n">ns</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">FunctionNamespace</span><span class="p">(</span><span class="s2">&quot;http://exslt.org/regular-expressions&quot;</span><span class="p">)</span>
-    <span class="n">ns</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;re&#39;</span></div>
+    <span class="n">ns</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;re&quot;</span></div>
 
 
 

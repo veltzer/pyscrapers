@@ -59,7 +59,7 @@
     <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">ext_lxml</span><span class="o">.</span><span class="n">get_html_dom_content</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-    <span class="n">elements_img</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//img&#39;</span><span class="p">)</span>
+    <span class="n">elements_img</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;//img&quot;</span><span class="p">)</span>
     <span class="n">url_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elements_img</span><span class="p">)</span></div>
 
 </pre></div>

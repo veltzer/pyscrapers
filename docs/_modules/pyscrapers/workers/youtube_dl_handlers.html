@@ -93,20 +93,20 @@
     <span class="c1"># all options are here:</span>
     <span class="c1"># https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/YoutubeDL.py#L128-L278</span>
     <span class="n">ydl_opts</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;bestaudio/best&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;bestaudio/best&quot;</span><span class="p">,</span>
         <span class="c1"># this shuts everything down</span>
-        <span class="c1"># &#39;logger&#39;: logger,</span>
-        <span class="s1">&#39;nooverwrites&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;ignoreerrors&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;restrict&#39;</span>
-        <span class="c1"># &#39;hls_prefer_native&#39;: True,</span>
-        <span class="s1">&#39;fixup&#39;</span><span class="p">:</span> <span class="s1">&#39;never&#39;</span><span class="p">,</span>
-        <span class="c1"># why is this &#39;outtmpl&#39; here and &#39;output&#39; on the cmd line?</span>
+        <span class="c1"># &quot;logger&quot;: logger,</span>
+        <span class="s2">&quot;nooverwrites&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;ignoreerrors&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;restrict&quot;</span>
+        <span class="c1"># &quot;hls_prefer_native&quot;: True,</span>
+        <span class="s2">&quot;fixup&quot;</span><span class="p">:</span> <span class="s2">&quot;never&quot;</span><span class="p">,</span>
+        <span class="c1"># why is this &quot;outtmpl&quot; here and &quot;output&quot; on the cmd line?</span>
         <span class="s2">&quot;outtmpl&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%(title).100s</span><span class="s2">-</span><span class="si">%(id)s</span><span class="s2">.</span><span class="si">%(ext)s</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;passing options </span><span class="si">{</span><span class="n">ydl_opts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ConfigYoutubeDl</span><span class="o">.</span><span class="n">use_archive</span><span class="p">:</span>
-        <span class="n">ydl_opts</span><span class="p">[</span><span class="s1">&#39;download_archive&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ConfigYoutubeDl</span><span class="o">.</span><span class="n">archive_file</span>
+        <span class="n">ydl_opts</span><span class="p">[</span><span class="s2">&quot;download_archive&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ConfigYoutubeDl</span><span class="o">.</span><span class="n">archive_file</span>
     <span class="k">with</span> <span class="n">youtube_dl</span><span class="o">.</span><span class="n">YoutubeDL</span><span class="p">(</span><span class="n">ydl_opts</span><span class="p">)</span> <span class="k">as</span> <span class="n">ydl</span><span class="p">:</span>
         <span class="n">ydl</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span></div>
 
