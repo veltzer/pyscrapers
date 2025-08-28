@@ -82,4 +82,4 @@ warn_unused_configs = true
 installer = "uv"
 
 [tool.uv.pip]
-prerelease = "deny"
+prerelease = "disallow"
