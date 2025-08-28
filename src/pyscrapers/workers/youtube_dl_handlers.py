@@ -40,19 +40,19 @@ def youtube_dl_download_urls(urls: list[str]) -> None:
     # all options are here:
     # https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/YoutubeDL.py#L128-L278
     ydl_opts = {
-        'format': 'bestaudio/best',
+        "format": "bestaudio/best",
         # this shuts everything down
-        # 'logger': logger,
-        'nooverwrites': True,
-        'ignoreerrors': True,
-        'restrict'
-        # 'hls_prefer_native': True,
-        'fixup': 'never',
-        # why is this 'outtmpl' here and 'output' on the cmd line?
+        # "logger": logger,
+        "nooverwrites": True,
+        "ignoreerrors": True,
+        "restrict"
+        # "hls_prefer_native": True,
+        "fixup": "never",
+        # why is this "outtmpl" here and "output" on the cmd line?
         "outtmpl": "%(title).100s-%(id)s.%(ext)s",
     }
     logger.debug(f"passing options {ydl_opts}")
     if ConfigYoutubeDl.use_archive:
-        ydl_opts['download_archive'] = ConfigYoutubeDl.archive_file
+        ydl_opts["download_archive"] = ConfigYoutubeDl.archive_file
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download(urls)

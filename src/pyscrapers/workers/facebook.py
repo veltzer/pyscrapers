@@ -24,5 +24,5 @@ def scrape_facebook(user_id: str, session, url_set: UrlSet) -> None:
     result = session.get(url)
     root = pyscrapers.core.ext_lxml.get_html_dom_content(result)
 
-    elements_img = root.xpath('//img')
+    elements_img = root.xpath("//img")
     url_set.append(elements_img)

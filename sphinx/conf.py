@@ -7,7 +7,7 @@ extensions = [
 import os
 import sys
 
-# Add the project's 'src' directory to the Python path.
+# Add the projects "src" directory to the Python path.
 # This allows Sphinx to find and import your package.
 sys.path.insert(0, os.path.abspath("../src"))
 sys.path.insert(0, os.path.abspath(".."))
@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath(".."))
 warning_is_error = True
 
 # Enable "nit-picky mode". This will issue warnings for all missing
-# cross-references (e.g., a link to a class that doesn't exist).
+# cross-references (e.g., a link to a class that doesnt exist).
 # nitpicky = True
 
 import config.project
@@ -38,6 +38,6 @@ rst_epilog = f"""
 .. |project| replace:: {project}
 """
 # title without a version
-html_title = '%s Documentation' % project
+html_title = "%s Documentation" % project
 # This is the default
-# html_title = '%s %s Documentation' % (project, version)
+# html_title = "%s %s Documentation" % (project, version)

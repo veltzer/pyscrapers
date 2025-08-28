@@ -119,14 +119,14 @@ def get_courses(pages, courses: bool, session):  # type: ignore
             root = lxml.html.fromstring(lesson_list)
             links = root.xpath(f"//a[re:match(@href,\"{get_link_re(courses)}\")]")
             assert len(links) == 2, len(links)
-            course.number = links[0].get('href').split("/")[-1]
-            titles = root.xpath('//h2[@class="card-title"]')
+            course.number = links[0].get("href").split("/")[-1]
+            titles = root.xpath("//h2[@class=\"card-title\"]")
             assert len(titles) == 1
             course.name = titles[0].text
-            instructors = root.xpath('//p[@class="card-sub-title card-instructor"]')
+            instructors = root.xpath("//p[@class=\"card-sub-title card-instructor\"]")
             assert len(instructors) == 1
             course.instructor = instructors[0].text
-            diffs = root.xpath('//h3[@class="card-difficulty"]')
+            diffs = root.xpath("//h3[@class=\"card-difficulty\"]")
             assert len(diffs) == 1
             course.diff = diffs[0].text.strip()
             collected_courses.append(course)
@@ -152,11 +152,11 @@ def get_course_details(course: Course, courses: bool, session):
         class_text = "event-toggle download-lesson"
     lessons = root.xpath(f"//a[@class=\"{class_text}\"]")
     for lesson in lessons:
-        lesson_num = lesson.get('href').split('/')[-1]
+        lesson_num = lesson.get("href").split("/")[-1]
         course.add_lesson(lesson_num)
-    resources = root.xpath('//a[re:match(text(), "All Course Resources")]')
+    resources = root.xpath("//a[re:match(text(), \"All Course Resources\")]")
     if len(resources) == 1:
-        resource = resources[0].get('href')
+        resource = resources[0].get("href")
         course.resources = "http:" + resource
     if not courses:
         get_videos(root, course, session)
@@ -189,21 +189,21 @@ def get_videos(root, course, session):
     :return:
     """
     logger = logging.getLogger(__name__)
-    videos = root.xpath('//div[@data-video-load-url]')
+    videos = root.xpath("//div[@data-video-load-url]")
     for video in videos:
-        video_url = video.get('data-video-load-url')
+        video_url = video.get("data-video-load-url")
         logger.info("url for video info is [%s]", video_url)
         result = session.get(video_url)
         result.raise_for_status()
         content = result.content.decode()
         data = json.loads(content)
-        if 'error' in data:
-            logger.info("error [%s]", data['error'])
+        if "error" in data:
+            logger.info("error [%s]", data["error"])
             raise ValueError("errors, try later")
-        if 'video-quality-urls' not in data:
+        if "video-quality-urls" not in data:
             logger.info("did not find video-quality-urls")
             return
-        video_urls = data['video-quality-urls']
+        video_urls = data["video-quality-urls"]
         quality_numbers = sorted([int(x) for x in video_urls.keys()])
         best_vid_key = str(quality_numbers[-1])
         # print(quality_numbers, best_vid_key)

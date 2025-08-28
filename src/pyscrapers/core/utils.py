@@ -11,7 +11,7 @@ def get_http_status_string(code: int):
     """
     This function returns a description of an HTTP status code (404 - not found etc).
     Unfortunately, the requests module does not provide a clean API for this so
-    we must access a protected member (underscore member) of 'requests.status_code'.
+    we must access a protected member (underscore member) of "requests.status_code".
     See:
     https://stackoverflow.com/questions/24718557/get-the-description-of-a-status-code-in-python-requests
     :param code:

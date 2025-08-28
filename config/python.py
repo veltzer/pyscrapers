@@ -7,7 +7,7 @@ install_requires: list[str] = [
     "requests",
     # "hyper",
     "browser-cookie3",
-    # this module is needed by browser-cookies3 but is not listed as it's dependency
+    # this module is needed by browser-cookies3 but is not listed as its dependency
     "dbus-python",
     "pytconf",
     "pylogconf",

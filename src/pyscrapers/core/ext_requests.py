@@ -38,7 +38,7 @@ class ExtResponse:
 
     def save_binary(self, filename: str = "/tmp/temp") -> None:
         try:
-            with open(filename, 'wb') as handle:
+            with open(filename, "wb") as handle:
                 self.res.raw.decode_content = True
                 shutil.copyfileobj(self.res.raw, handle)
         except OSError:
@@ -72,13 +72,13 @@ class ExtSession(requests.Session):
         Download a single url to a file
         """
         logger = logging.getLogger(__name__)
-        logger.info('downloading [%s] to [%s]', source, target)
+        logger.info("downloading [%s] to [%s]", source, target)
         if os.path.isfile(target):
-            logger.info('skipping [%s]', target)
+            logger.info("skipping [%s]", target)
             return
         response = self.ext_get(source, stream=True)
         response.save_text(target)
-        logger.info('written [%s]...', target)
+        logger.info("written [%s]...", target)
 
     def download_video_if_wider(self, source: str, target: str, width: int) -> bool:
         """
@@ -90,16 +90,16 @@ class ExtSession(requests.Session):
         :return:
         """
         logger = logging.getLogger(__name__)
-        logger.info('downloading [%s] to [%s]', source, target)
+        logger.info("downloading [%s] to [%s]", source, target)
         if os.path.isfile(target):
             file_width = pyscrapers.core.ffprobe.height(target)
             if file_width >= width:
-                logger.info('skipping because video with width exists [%s] %s %s', target, file_width, width)
+                logger.info("skipping because video with width exists [%s] %s %s", target, file_width, width)
                 return True
-            logger.info('continuing with download because of width [%s] %s %s', target, file_width, width)
+            logger.info("continuing with download because of width [%s] %s %s", target, file_width, width)
         response = self.ext_get(source, stream=True)
         response.save_binary(target)
-        logger.info('written [%s]...', target)
+        logger.info("written [%s]...", target)
         return True
 
 
@@ -114,18 +114,18 @@ def setup():
         requests_log.propagate = True
 
 
-CONTENT_LENGTH_HEADER = 'content-length'
+CONTENT_LENGTH_HEADER = "content-length"
 BLOCK_SIZE = 1024 * 1024
 
 
 def download(response, filename: str) -> None:
     if CONTENT_LENGTH_HEADER in response.headers:
-        total_size_in_bytes = int(response.headers.get('content-length', 0))
+        total_size_in_bytes = int(response.headers.get("content-length", 0))
         assert total_size_in_bytes != 0
-        progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True, disable=not ConfigRequests.progress)
+        progress_bar = tqdm(total=total_size_in_bytes, unit="iB", unit_scale=True, disable=not ConfigRequests.progress)
         have_total = True
     else:
-        progress_bar = tqdm(unit='iB', unit_scale=True, disable=not ConfigRequests.progress)
+        progress_bar = tqdm(unit="iB", unit_scale=True, disable=not ConfigRequests.progress)
         have_total = False
     # pylint: disable=broad-except
     try:

@@ -16,7 +16,7 @@ def probe(vid_file_path):
     @vid_file_path : The absolute (full) path of the video file, string.
     """
     if isinstance(vid_file_path, str):
-        raise ValueError('Give ffprobe a full file path of the video')
+        raise ValueError("Give ffprobe a full file path of the video")
 
     args = [
         "ffprobe",
@@ -44,20 +44,20 @@ def height(vid):
 
 
 def duration(vid_file_path):
-    """ Video's duration in seconds, return a float number
+    """ Videos duration in seconds, return a float number
     """
     _json = probe(vid_file_path)
 
-    if 'format' in _json:
-        if 'duration' in _json['format']:
-            return float(_json['format']['duration'])
+    if "format" in _json:
+        if "duration" in _json["format"]:
+            return float(_json["format"]["duration"])
 
-    if 'streams' in _json:
+    if "streams" in _json:
         # commonly stream 0 is the video
-        for s in _json['streams']:
-            if 'duration' in s:
-                return float(s['duration'])
+        for s in _json["streams"]:
+            if "duration" in s:
+                return float(s["duration"])
 
-    # if everything didn't happen,
-    # we got here because no single 'return' in the above happen.
-    raise ValueError('I found no duration')
+    # if everything didn"t happen,
+    # we got here because no single "return" in the above happen.
+    raise ValueError("I found no duration")
