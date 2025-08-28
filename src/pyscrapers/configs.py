@@ -104,7 +104,7 @@ class ConfigYoutubeDl(Config):
     )
     archive_file = ParamCreator.create_existing_file(
         help_string="What file to use as archive?",
-        default=os.path.expanduser('~/.config/youtube-dl-archive'),
+        default=os.path.expanduser("~/.config/youtube-dl-archive"),
     )
 
 

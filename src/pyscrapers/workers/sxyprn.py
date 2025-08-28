@@ -39,14 +39,14 @@ def sxyprn_download(session: Session, logger: Logger):
         response.raise_for_status()
         root = get_html_dom_content(response)
         if num_pages is None:
-            num_pages = len(root.xpath("//div[contains(@class,'ctrl_el')]"))
+            num_pages = len(root.xpath("//div[contains(@class,\"ctrl_el\")]"))
             if num_pages == 0:
                 num_pages = 1
         if ConfigDebugUrls.save:
             with tempfile.NamedTemporaryFile(delete=False) as f:
                 logger.info(f"writing file [{f.name}]")
                 f.write(get_element_as_bytes(root))
-        elements = root.xpath("//a[contains(@class,'js-pop')]")
+        elements = root.xpath("//a[contains(@class,\"js-pop\")]")
         for element in elements:
             href = element.attrib["href"]
             url = urllib.parse.urljoin(base_url, href)

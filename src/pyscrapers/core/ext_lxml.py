@@ -10,10 +10,10 @@ import lxml.etree
 
 def setup_prefix():
     # register regular expressions with lxml
-    # this means that we can use regular expression functions like 'match'
-    # by specifying 're:match' in our xpath expressions
+    # this means that we can use regular expression functions like "match"
+    # by specifying "re:match" in our xpath expressions
     ns = lxml.etree.FunctionNamespace("http://exslt.org/regular-expressions")
-    ns.prefix = 're'
+    ns.prefix = "re"
 
 
 def get_html_dom_content(response):
