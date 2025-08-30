@@ -2,7 +2,7 @@
 os level dependencies for this project
 """
 
-packages = [
+packages: list[str] = [
     # this is for the compilation of the "dbus-python" python package which is
     # half native
     # "libdbus-glib-1-dev",
