@@ -51,6 +51,7 @@ out/tests.stamp: $(ALL_PYTHON) .pylintrc .mypy.ini
 	$(Q)pymakehelper only_print_on_error ruff check $(ALL_PACKAGES)
 	$(Q)pylint $(ALL_PACKAGES) 
 	$(Q)pymakehelper only_print_on_error mypy $(ALL_PACKAGES) 
+	$(Q)rg '(?<!\\)'\' --type py --pcre2 && exit 1 || exit 0
 	$(Q)pymakehelper touch_mkdir $@
 
 .PHONY: clean
