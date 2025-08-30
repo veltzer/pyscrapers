@@ -56,7 +56,7 @@ pytidylib==0.3.2
 pytz==2025.2
 pyyaml==6.0.2
 referencing==0.36.2
-requests==2.32.4
+requests==2.32.5
 roman-numerals-py==3.1.0
 rpds-py==0.27.0
 ruff==0.12.8
@@ -78,7 +78,7 @@ types-beautifulsoup4==4.12.0.20250516
 types-html5lib==1.1.11.20250809
 types-requests==2.32.4.20250809
 types-tqdm==4.67.0.20250809
-typing-extensions==4.14.1
+typing-extensions==4.15.0
 typing-inspection==0.4.1
 tzdata==2025.2
 unidecode==1.4.0
