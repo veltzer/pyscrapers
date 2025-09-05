@@ -20,7 +20,7 @@ iniconfig==2.1.0
 isort==6.0.1
 jeepney==0.9.0
 jinja2==3.1.6
-jsonschema==4.25.0
+jsonschema==4.25.1
 jsonschema-specifications==2025.4.1
 logging-tree==1.10
 lxml==6.0.0
@@ -42,7 +42,7 @@ pycmdtools==0.0.85
 pycryptodomex==3.23.0
 pydantic==2.12.0a1
 pydantic-core==2.37.2
-pydmt==0.3.27
+pydmt==0.3.32
 pyeventroute==0.0.6
 pyfakeuse==0.0.9
 pygments==2.19.2
@@ -58,7 +58,7 @@ pyyaml==6.0.2
 referencing==0.36.2
 requests==2.32.5
 roman-numerals-py==3.1.0
-rpds-py==0.27.0
+rpds-py==0.27.1
 ruff==0.12.8
 six==1.17.0
 smmap==5.0.2
