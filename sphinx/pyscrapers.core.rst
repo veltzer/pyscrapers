@@ -9,61 +9,61 @@ pyscrapers.core.cookies module
 
 .. automodule:: pyscrapers.core.cookies
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.core.ext\_lxml module
 --------------------------------
 
 .. automodule:: pyscrapers.core.ext_lxml
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.core.ext\_requests module
 ------------------------------------
 
 .. automodule:: pyscrapers.core.ext_requests
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.core.ffprobe module
 ------------------------------
 
 .. automodule:: pyscrapers.core.ffprobe
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.core.json module
 ---------------------------
 
 .. automodule:: pyscrapers.core.json
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.core.url\_set module
 -------------------------------
 
 .. automodule:: pyscrapers.core.url_set
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.core.utils module
 ----------------------------
 
 .. automodule:: pyscrapers.core.utils
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: pyscrapers.core
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
