@@ -18,37 +18,37 @@ pyscrapers.configs module
 
 .. automodule:: pyscrapers.configs
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.main module
 ----------------------
 
 .. automodule:: pyscrapers.main
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.static module
 ------------------------
 
 .. automodule:: pyscrapers.static
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pyscrapers.utils module
 -----------------------
 
 .. automodule:: pyscrapers.utils
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: pyscrapers
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
