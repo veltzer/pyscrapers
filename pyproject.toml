@@ -40,7 +40,6 @@ dependencies = [
     "lxml",
     "requests",
     "browser-cookie3",
-    "dbus-python",
     "pytconf",
     "pylogconf",
     "youtube-dl",

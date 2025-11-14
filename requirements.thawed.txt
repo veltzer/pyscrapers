@@ -1,7 +1,6 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 beautifulsoup4
 browser-cookie3
-dbus-python
 fake-useragent
 lxml
 lxml-stubs
