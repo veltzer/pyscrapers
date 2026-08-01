@@ -59,8 +59,8 @@ ${"##"} codacy stuff
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/${config.project.codacy_id})](https://www.codacy.com/app/jarrekk/imgkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=${config.personal.github_username}/${pydmt.helpers.python.get_package_name()}&amp;utm_campaign=Badge_Grade)
 % endif
 
-% if os.path.isfile("../snipplets/main.md.mako"):
-<%include file="../snipplets/main.md.mako" />
+% if os.path.isfile("../snippets/main.md.mako"):
+<%include file="../snippets/main.md.mako" />
 % endif
 
 ${"##"} contact me

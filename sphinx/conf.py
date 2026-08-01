@@ -33,7 +33,7 @@ release = ".".join(str(x) for x in config.version.tup)
 html_theme_options = {
         "show_powered_by": False,
 }
-# allow us to use |project| in our snipplets and rst files
+# allow us to use |project| in our snippets and rst files
 rst_epilog = f"""
 .. |project| replace:: {project}
 """
