@@ -14,6 +14,7 @@ enabled = false
 [dependencies]
 pip = [
     "lxml",
+    "lxml-stubs",
     "requests",
     "browser-cookie3",
     "pytconf",

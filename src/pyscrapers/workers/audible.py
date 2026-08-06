@@ -18,6 +18,7 @@ def get_book_data(session: ExtSession, book_id: str) -> OrderedDict:
     )
     if ConfigDebugUrls.save:
         pretty = soup.prettify()
+        assert isinstance(pretty, str)
         with open("/tmp/single.html", "w") as handle:
             handle.write(pretty)
     d = OrderedDict()
@@ -84,6 +85,7 @@ def audible(_logger: Logger):
         )
         if ConfigDebugUrls.save:
             pretty = soup.prettify()
+            assert isinstance(pretty, str)
             with open(f"/tmp/page{page}.html", "w") as handle:
                 handle.write(pretty)
 
