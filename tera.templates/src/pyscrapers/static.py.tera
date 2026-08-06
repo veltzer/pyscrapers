@@ -1,0 +1,6 @@
+{% set project = load_lua(path="config/project.lua") -%}
+""" version which can be consumed from within the module """
+VERSION_STR = "{{ version_str(path="config/version.lua") }}"
+DESCRIPTION = "{{ project.DESCRIPTION_SHORT }}"
+APP_NAME = "{{ project.NAME }}"
+LOGGER_NAME = "{{ project.NAME }}"
