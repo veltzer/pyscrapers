@@ -32,9 +32,8 @@ version: 0.0.67
 ![PyPI - Downloads](https://img.shields.io/pypi/dw/pyscrapers)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pyscrapers)
 
-
-
 ## contact me
+
 [mailto](mailto:mark.veltzer@gmail.com)
 ![gitter](https://img.shields.io/gitter/room/veltzer/mark.veltzer)
 ![discord](https://img.shields.io/discord/719336281624281119)

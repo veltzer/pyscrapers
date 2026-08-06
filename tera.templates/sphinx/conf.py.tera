@@ -1,3 +1,5 @@
+{% set project_cfg = load_lua(path="config/project.lua") -%}
+{% set personal = load_lua(path="config/personal.lua") -%}
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
@@ -20,11 +22,11 @@ warning_is_error = True
 # cross-references (e.g., a link to a class that doesnt exist).
 # nitpicky = True
 
-project = "pyscrapers"
-author = "Mark Veltzer"
-project_copyright = "2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Mark Veltzer"
-version = "0.0.67"
-release = "0.0.67"
+project = "{{ project_cfg.NAME }}"
+author = "{{ personal.FULLNAME }}"
+project_copyright = "{{ copyright_years() }} {{ personal.FULLNAME }}"
+version = "{{ version_str(path="config/version.lua") }}"
+release = "{{ version_str(path="config/version.lua") }}"
 
 html_theme_options = {
         "show_powered_by": False,
