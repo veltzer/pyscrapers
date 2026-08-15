@@ -2,7 +2,6 @@
 
 import browser_cookie3
 
-
 from pyscrapers.configs import ConfigCookiesSource
 
 

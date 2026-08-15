@@ -5,29 +5,35 @@ import logging
 import shelve
 
 import pylogconf.core
-from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
+from pytconf import config_arg_parse_and_launch, register_endpoint, register_main
 
-from pyscrapers.configs import ConfigCookiesSource, ConfigSiteId, \
-    ConfigYoutubeDl, ConfigDownload, ConfigLogging, ConfigUrl, ConfigDebugUrls, ConfigRequests, \
-    ConfigUser
-from pyscrapers.core.url_set import UrlSet
+import pyscrapers.core.ext_requests
+from pyscrapers.configs import (
+    ConfigCookiesSource,
+    ConfigDebugUrls,
+    ConfigDownload,
+    ConfigLogging,
+    ConfigRequests,
+    ConfigSiteId,
+    ConfigUrl,
+    ConfigUser,
+    ConfigYoutubeDl,
+)
 from pyscrapers.core.ext_requests import ExtSession
-from pyscrapers.static import APP_NAME, VERSION_STR, LOGGER_NAME, DESCRIPTION
-from pyscrapers.workers.drumeo import get_number_of_pages, get_courses, get_course_details, get_course_urls, \
-    download_course
+from pyscrapers.core.url_set import UrlSet
+from pyscrapers.static import APP_NAME, DESCRIPTION, LOGGER_NAME, VERSION_STR
+from pyscrapers.workers.audible import audible
+from pyscrapers.workers.drumeo import download_course, get_course_details, get_course_urls, get_courses, get_number_of_pages
 from pyscrapers.workers.facebook import scrape_facebook
 from pyscrapers.workers.getpocket import getpocket_download
 from pyscrapers.workers.instagram import scrape_instagram
-from pyscrapers.workers.audible import audible
-from pyscrapers.workers.mamba_ru import scrape_mambaru
-from pyscrapers.workers.sxyprn import sxyprn_download
-from pyscrapers.workers.netflix import netflix_download
 from pyscrapers.workers.instagram_stories import instagram_stories_download
+from pyscrapers.workers.mamba_ru import scrape_mambaru
+from pyscrapers.workers.netflix import netflix_download
+from pyscrapers.workers.sxyprn import sxyprn_download
 from pyscrapers.workers.travelgirls import scrape_travelgirls
 from pyscrapers.workers.vk import scrape_vk
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
-
-import pyscrapers.core.ext_requests
 
 
 @register_endpoint(

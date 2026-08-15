@@ -3,9 +3,11 @@ Download books from audible
 """
 from collections import OrderedDict
 from logging import Logger
+
 from bs4 import BeautifulSoup
-from pyscrapers.core.ext_requests import ExtSession
+
 from pyscrapers.configs import ConfigDebugUrls
+from pyscrapers.core.ext_requests import ExtSession
 
 
 def get_book_data(session: ExtSession, book_id: str) -> OrderedDict:

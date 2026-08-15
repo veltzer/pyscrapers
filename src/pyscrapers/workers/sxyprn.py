@@ -3,11 +3,12 @@
 import tempfile
 import urllib.parse
 from logging import Logger
+
 from requests.sessions import Session
 
-from pyscrapers.configs import ConfigUrl, ConfigDebugUrls
+from pyscrapers.configs import ConfigDebugUrls, ConfigUrl
+from pyscrapers.core.ext_lxml import get_element_as_bytes, get_html_dom_content
 from pyscrapers.core.url_set import UrlSet
-from pyscrapers.core.ext_lxml import get_html_dom_content, get_element_as_bytes
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_urls
 
 
@@ -52,7 +53,7 @@ def sxyprn_download(session: Session, logger: Logger):
             url = urllib.parse.urljoin(base_url, href)
             no_fluff = urllib.parse.urlparse(url)._replace(params="", query="", fragment="").geturl()
             urls.append(no_fluff)
-        counter += 1
+        counter += 1  # noqa: SIM113 - paging loop, not an iteration over a sequence
         if counter == num_pages:
             break
     session.close()
