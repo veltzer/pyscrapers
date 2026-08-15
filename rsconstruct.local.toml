@@ -25,4 +25,6 @@ pip = [
     "tqdm",
     "beautifulsoup4",
     "pydantic",
+    "types-requests",
+    "types-tqdm",
 ]
