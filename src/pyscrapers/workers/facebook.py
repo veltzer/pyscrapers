@@ -5,7 +5,7 @@ download photos from facebook
 
 import logging
 
-import pyscrapers.core.utils
+import pyscrapers.core.ext_lxml
 from pyscrapers.core.url_set import UrlSet
 
 
