@@ -1,5 +1,6 @@
 """ travelgirls.py """
 
+import pyscrapers.core.ext_lxml
 import pyscrapers.core.utils
 from pyscrapers.core.url_set import UrlSet
 
