@@ -8,6 +8,7 @@ import os
 import typing
 
 import lxml.html
+
 from pyscrapers.core.ext_lxml import setup_prefix
 from pyscrapers.core.ext_requests import ExtSession
 
@@ -204,7 +205,7 @@ def get_videos(root, course, session):
             logger.info("did not find video-quality-urls")
             return
         video_urls = data["video-quality-urls"]
-        quality_numbers = sorted([int(x) for x in video_urls.keys()])
+        quality_numbers = sorted(int(x) for x in video_urls)
         best_vid_key = str(quality_numbers[-1])
         # print(quality_numbers, best_vid_key)
         best_vid = video_urls[best_vid_key]

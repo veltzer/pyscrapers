@@ -1,6 +1,7 @@
 """ instagram_stories.py """
 
 from logging import Logger
+
 from pyscrapers.configs import ConfigUser
 from pyscrapers.core.ext_requests import ExtSession
 

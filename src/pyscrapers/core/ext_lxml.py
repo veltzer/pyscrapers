@@ -4,8 +4,8 @@ This module is s set of utilities for this entire project
 
 
 import lxml
-import lxml.html
 import lxml.etree
+import lxml.html
 
 
 def setup_prefix():

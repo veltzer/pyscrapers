@@ -3,8 +3,8 @@ This module is s set of utilities for this entire project
 """
 
 
-import urllib.parse
 import http.client
+import urllib.parse
 
 
 def get_http_status_string(code: int):

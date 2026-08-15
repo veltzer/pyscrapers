@@ -1,6 +1,7 @@
 """ netflix.py """
 
 from logging import Logger
+
 from requests.sessions import Session
 
 

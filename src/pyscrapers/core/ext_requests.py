@@ -1,22 +1,18 @@
 """ ext_requests.py """
 
+import http.client
+import logging
 import os
 import shutil
 import urllib
 
-import http.client
-import logging
-
 import requests
+from fake_useragent import UserAgent
 from tqdm import tqdm
 
-from fake_useragent import UserAgent
-
+import pyscrapers.core.ffprobe
 from pyscrapers.configs import ConfigRequests
 from pyscrapers.utils import get_cookies
-
-import pyscrapers.core.ffprobe
-
 
 FAIL = True
 
@@ -133,9 +129,9 @@ def download(response, filename: str) -> None:
             for data in response.iter_content(BLOCK_SIZE):
                 progress_bar.update(len(data))
                 file_handle.write(data)
-    except (Exception, KeyboardInterrupt, SystemError) as e:
+    except (Exception, KeyboardInterrupt, SystemError):
         os.unlink(filename)
-        raise e
+        raise
     progress_bar.close()
     if have_total and ConfigRequests.progress:
         assert progress_bar.n == total_size_in_bytes, f"something wrong {progress_bar.n} =! {total_size_in_bytes}"

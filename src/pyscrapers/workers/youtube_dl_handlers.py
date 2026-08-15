@@ -9,7 +9,7 @@ import logging
 
 import youtube_dl
 
-from pyscrapers.configs import ConfigYoutubeDl, ConfigUrl, ConfigDownload
+from pyscrapers.configs import ConfigDownload, ConfigUrl, ConfigYoutubeDl
 from pyscrapers.static import LOGGER_NAME
 
 

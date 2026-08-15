@@ -16,7 +16,7 @@ def probe(vid_file_path):
     @vid_file_path : The absolute (full) path of the video file, string.
     """
     if isinstance(vid_file_path, str):
-        raise ValueError("Give ffprobe a full file path of the video")
+        raise TypeError("Give ffprobe a full file path of the video")
 
     args = [
         "ffprobe",
@@ -48,9 +48,8 @@ def duration(vid_file_path):
     """
     _json = probe(vid_file_path)
 
-    if "format" in _json:
-        if "duration" in _json["format"]:
-            return float(_json["format"]["duration"])
+    if "format" in _json and "duration" in _json["format"]:
+        return float(_json["format"]["duration"])
 
     if "streams" in _json:
         # commonly stream 0 is the video
