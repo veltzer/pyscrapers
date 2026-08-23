@@ -21,6 +21,7 @@ version: {{ version_str(path="config/version.lua") }}
 {% for wf in workflow_names() -%}
 ![{{ wf.name }}](https://github.com/{{ personal.GITHUB_USERNAME }}/{{ project.NAME }}/workflows/{{ wf.name }}/badge.svg)
 {% endfor %}
+{%- if project.PYPI | default(value=false) %}
 ## pypi
 
 ![PyPI - Status](https://img.shields.io/pypi/status/{{ project.NAME }})
@@ -34,7 +35,8 @@ version: {{ version_str(path="config/version.lua") }}
 ![PyPI - Downloads](https://img.shields.io/pypi/dd/{{ project.NAME }})
 ![PyPI - Downloads](https://img.shields.io/pypi/dw/{{ project.NAME }})
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/{{ project.NAME }})
-
+{% endif -%}
+{% include "tera.snippets/main.md.tera" ignore missing %}
 ## contact me
 
 [mailto](mailto:{{ personal.EMAIL }})

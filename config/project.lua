@@ -10,3 +10,4 @@ KEYWORDS = {
     "download",
     "pics",
 }
+PYPI = true
