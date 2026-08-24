@@ -5,8 +5,6 @@
 
 [analyzer.tera]
 
-[analyzer.markdown]
-
 [analyzer.python]
 
 # ─── templating ──────────────────────────────────────────────────────────────
@@ -25,16 +23,6 @@ dep_auto = [
 ]
 src_dirs = ["tera.templates"]
 
-# ─── markdown ────────────────────────────────────────────────────────────────
-
-[processor.rumdl]
-src_dirs = ["src", "docs"]
-
-[processor.zspell]
-src_dirs = ["src", "docs"]
-
-# ─── python ──────────────────────────────────────────────────────────────────
-
 [processor.ruff]
 src_dirs = ["src", "config", "tests"]
 
@@ -51,14 +39,6 @@ enabled = false
 [processor.pytest]
 src_dirs = ["tests"]
 
-# ─── shell ───────────────────────────────────────────────────────────────────
-
-[processor.shellcheck]
-src_dirs = ["src", "docs", "config"]
-args = ["--severity=error", "--shell=bash"]
-
-# ─── lua ─────────────────────────────────────────────────────────────────────
-
 [processor.luacheck]
 src_dirs = ["config"]
 
@@ -66,18 +46,6 @@ src_dirs = ["config"]
 
 [processor.taplo]
 src_dirs = ["."]
-
-[processor.htmlhint]
-src_dirs = ["src"]
-
-[processor.tidy]
-src_dirs = ["src"]
-
-[processor.eslint]
-src_dirs = ["config"]
-args = ["-c", "config/eslint.config.js"]
-
-# ─── merged from rsconstruct.local.toml ─────────────────────────────────────
 
 # Runtime deps so CI (rsconstruct tools install-deps) can run pytest.
 [dependencies]
