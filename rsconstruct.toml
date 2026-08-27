@@ -32,10 +32,6 @@ src_dirs = ["src", "config", "tests"]
 [processor.mypy]
 src_dirs = ["src", "config", "tests"]
 
-[processor.requirements]
-src_dirs = ["src", "config", "tests"]
-enabled = false
-
 [processor.pytest]
 src_dirs = ["tests"]
 
@@ -46,22 +42,3 @@ src_dirs = ["config"]
 
 [processor.taplo]
 src_dirs = ["."]
-
-# Runtime deps so CI (rsconstruct tools install-deps) can run pytest.
-[dependencies]
-pip = [
-    "lxml",
-    "lxml-stubs",
-    "requests",
-    "browser-cookie3",
-    "pytconf",
-    "pylogconf",
-    "youtube-dl",
-    "pyeventroute",
-    "fake-useragent",
-    "tqdm",
-    "beautifulsoup4",
-    "pydantic",
-    "types-requests",
-    "types-tqdm",
-]
