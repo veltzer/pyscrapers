@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pyscrapers"
 version = "0.0.67"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 authors = [
 	{ name = "Mark Veltzer", email = "mark.veltzer@gmail.com" }
 ]
@@ -32,7 +32,7 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Utilities",
     "License :: OSI Approved :: MIT License",
 ]
@@ -86,7 +86,7 @@ exclude = [
 ]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.14"
 warn_return_any = true
 warn_unused_configs = true
 
