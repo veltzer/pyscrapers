@@ -21,7 +21,7 @@ def is_rate_limit(response) -> bool:
     :param response:
     :return:
     """
-    return response["status"] == "fail" and response["message"] == "rate limited"
+    return bool(response["status"] == "fail" and response["message"] == "rate limited")
 
 
 def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:

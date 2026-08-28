@@ -30,7 +30,7 @@ def get_number_of_pages(courses: bool, session: ExtSession) -> int:
     result.raise_for_status()
     content = result.content.decode()
     obj = json.loads(content)
-    d_page_count = obj["pageCount"]
+    d_page_count: int = obj["pageCount"]
     return d_page_count
 
 
