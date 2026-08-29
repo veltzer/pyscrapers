@@ -113,6 +113,10 @@ prerelease = "disallow"
 
 [dependency-groups]
 dev = [
+    "mypy",
+    "pylint",
+    "pytest",
+    "ruff",
     "lxml-stubs",
     "types-requests",
     "types-tqdm",
