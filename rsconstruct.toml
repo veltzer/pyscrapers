@@ -38,6 +38,18 @@ src_dirs = ["tests"]
 [processor.luacheck]
 src_dirs = ["config"]
 
+# ─── documentation ───────────────────────────────────────────────────────────
+
+# build the Sphinx documentation from sphinx/ into docs/; autodoc imports the
+# package from src/, so the sources are inputs too
+[processor.sphinx]
+src_dirs = ["sphinx"]
+output_dir = "docs"
+dep_inputs = ["src/pyscrapers/*.py"]
+# -E -a: full cold build every run, no incremental caching; -d keeps the
+# (now write-only) doctree cache out of docs/, which is published to Pages
+args = ["-d", "out/sphinx-doctrees", "-E", "-a"]
+
 # ─── toml / yaml / json ──────────────────────────────────────────────────────
 
 [processor.taplo]
