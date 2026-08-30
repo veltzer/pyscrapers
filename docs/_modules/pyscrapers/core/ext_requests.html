@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
     <script src="../../../_static/documentation_options.js?v=86ab457a"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
    
@@ -31,25 +31,21 @@
           <div class="body" role="main">
             
   <h1>Source code for pyscrapers.core.ext_requests</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot; ext_requests.py &quot;&quot;&quot;</span>
+<span></span><span class="sd">""" ext_requests.py """</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">http.client</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">http.client</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fake_useragent</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserAgent</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">fake_useragent</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserAgent</span>
-
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyscrapers.core.ffprobe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyscrapers.configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigRequests</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyscrapers.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cookies</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyscrapers.core.ffprobe</span>
-
 
 <span class="n">FAIL</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -69,9 +65,9 @@
 
 <div class="viewcode-block" id="ExtResponse.save_text">
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_requests.ExtResponse.save_text">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">save_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/tmp/temp&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"/tmp/temp"</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
                 <span class="n">handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
         <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
@@ -79,9 +75,9 @@
 
 <div class="viewcode-block" id="ExtResponse.save_binary">
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_requests.ExtResponse.save_binary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">save_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/tmp/temp&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"/tmp/temp"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">decode_content</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
@@ -93,17 +89,17 @@
 <div class="viewcode-block" id="ExtSession">
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_requests.ExtSession">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExtSession</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Inherit from requests.Session and add capabilities</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="sd">    """</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="n">cookies</span> <span class="o">=</span> <span class="n">get_cookies</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">cookies</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">cookies</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">base</span>
         <span class="n">ua</span> <span class="o">=</span> <span class="n">UserAgent</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ua</span><span class="o">.</span><span class="n">chrome</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">"User-Agent"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ua</span><span class="o">.</span><span class="n">chrome</span>
 
 <div class="viewcode-block" id="ExtSession.get_timeout">
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_requests.ExtSession.get_timeout">[docs]</a>
@@ -123,41 +119,41 @@
 <div class="viewcode-block" id="ExtSession.download_url">
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_requests.ExtSession.download_url">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">download_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Download a single url to a file</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;downloading [</span><span class="si">%s</span><span class="s2">] to [</span><span class="si">%s</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"downloading [</span><span class="si">%s</span><span class="s2">] to [</span><span class="si">%s</span><span class="s2">]"</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;skipping [</span><span class="si">%s</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"skipping [</span><span class="si">%s</span><span class="s2">]"</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
             <span class="k">return</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext_get</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">response</span><span class="o">.</span><span class="n">save_text</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;written [</span><span class="si">%s</span><span class="s2">]...&quot;</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"written [</span><span class="si">%s</span><span class="s2">]..."</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ExtSession.download_video_if_wider">
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_requests.ExtSession.download_video_if_wider">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">download_video_if_wider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Download a video if it is wider than a certain width</span>
 <span class="sd">        :param source:</span>
 <span class="sd">        :param target:</span>
 <span class="sd">        :param width:</span>
 <span class="sd">        :param self:</span>
 <span class="sd">        :return:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;downloading [</span><span class="si">%s</span><span class="s2">] to [</span><span class="si">%s</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"downloading [</span><span class="si">%s</span><span class="s2">] to [</span><span class="si">%s</span><span class="s2">]"</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
             <span class="n">file_width</span> <span class="o">=</span> <span class="n">pyscrapers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">ffprobe</span><span class="o">.</span><span class="n">height</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">file_width</span> <span class="o">&gt;=</span> <span class="n">width</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;skipping because video with width exists [</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">file_width</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"skipping because video with width exists [</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">file_width</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
                 <span class="k">return</span> <span class="kc">True</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;continuing with download because of width [</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">file_width</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"continuing with download because of width [</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">file_width</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext_get</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">response</span><span class="o">.</span><span class="n">save_binary</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;written [</span><span class="si">%s</span><span class="s2">]...&quot;</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"written [</span><span class="si">%s</span><span class="s2">]..."</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 </div>
 
@@ -166,18 +162,18 @@
 <div class="viewcode-block" id="setup">
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_requests.setup">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Activate the debugging features of the requests module</span>
 <span class="sd">    :return:</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">ConfigRequests</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
         <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="o">.</span><span class="n">debuglevel</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">requests_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;requests.packages.urllib3&quot;</span><span class="p">)</span>
+        <span class="n">requests_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"requests.packages.urllib3"</span><span class="p">)</span>
         <span class="n">requests_log</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 
 
-<span class="n">CONTENT_LENGTH_HEADER</span> <span class="o">=</span> <span class="s2">&quot;content-length&quot;</span>
+<span class="n">CONTENT_LENGTH_HEADER</span> <span class="o">=</span> <span class="s2">"content-length"</span>
 <span class="n">BLOCK_SIZE</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
 
 
@@ -185,25 +181,25 @@
 <a class="viewcode-back" href="../../../pyscrapers.core.html#pyscrapers.core.ext_requests.download">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">CONTENT_LENGTH_HEADER</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">:</span>
-        <span class="n">total_size_in_bytes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content-length&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">total_size_in_bytes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content-length"</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
         <span class="k">assert</span> <span class="n">total_size_in_bytes</span> <span class="o">!=</span> <span class="mi">0</span>
-        <span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">total_size_in_bytes</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;iB&quot;</span><span class="p">,</span> <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">ConfigRequests</span><span class="o">.</span><span class="n">progress</span><span class="p">)</span>
+        <span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">total_size_in_bytes</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">"iB"</span><span class="p">,</span> <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">ConfigRequests</span><span class="o">.</span><span class="n">progress</span><span class="p">)</span>
         <span class="n">have_total</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">&quot;iB&quot;</span><span class="p">,</span> <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">ConfigRequests</span><span class="o">.</span><span class="n">progress</span><span class="p">)</span>
+        <span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">"iB"</span><span class="p">,</span> <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">ConfigRequests</span><span class="o">.</span><span class="n">progress</span><span class="p">)</span>
         <span class="n">have_total</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="c1"># pylint: disable=broad-except</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">BLOCK_SIZE</span><span class="p">):</span>
                 <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
                 <span class="n">file_handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">SystemError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">SystemError</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">raise</span>
     <span class="n">progress_bar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">have_total</span> <span class="ow">and</span> <span class="n">ConfigRequests</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="n">progress_bar</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="n">total_size_in_bytes</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;something wrong </span><span class="si">{</span><span class="n">progress_bar</span><span class="o">.</span><span class="n">n</span><span class="si">}</span><span class="s2"> =! </span><span class="si">{</span><span class="n">total_size_in_bytes</span><span class="si">}</span><span class="s2">&quot;</span></div>
+        <span class="k">assert</span> <span class="n">progress_bar</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="n">total_size_in_bytes</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"something wrong </span><span class="si">{</span><span class="n">progress_bar</span><span class="o">.</span><span class="n">n</span><span class="si">}</span><span class="s2"> =! </span><span class="si">{</span><span class="n">total_size_in_bytes</span><span class="si">}</span><span class="s2">"</span></div>
 
 </pre></div>
 

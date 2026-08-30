@@ -117,6 +117,7 @@ dev = [
     "pylint",
     "pytest",
     "ruff",
+    "sphinx",
     "lxml-stubs",
     "types-requests",
     "types-tqdm",
