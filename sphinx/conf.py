@@ -4,8 +4,10 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.githubpages",
 ]
+import datetime
 import os
 import sys
+import tomllib
 
 # Add the projects "src" directory to the Python path.
 # This allows Sphinx to find and import your package.
@@ -20,11 +22,17 @@ warning_is_error = True
 # cross-references (e.g., a link to a class that doesnt exist).
 # nitpicky = True
 
-project = "pyscrapers"
-author = "Mark Veltzer"
-project_copyright = "2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Mark Veltzer"
-version = "0.0.67"
-release = "0.0.67"
+# This file is byte-identical in every repository: everything repo-specific
+# (project name, version, author) is read at build time from pyproject.toml.
+_here = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(_here, "..", "pyproject.toml"), "rb") as _f:
+    _meta = tomllib.load(_f)["project"]
+
+project = _meta["name"]
+author = _meta["authors"][0]["name"]
+version = _meta["version"]
+release = version
+project_copyright = f"{datetime.date.today().year} {author}"
 
 html_theme_options = {
         "show_powered_by": False,

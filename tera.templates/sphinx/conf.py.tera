@@ -1,13 +1,13 @@
-{% set project_cfg = load_lua(path="config/project.lua") -%}
-{% set personal = load_lua(path="config/personal.lua") -%}
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
     "sphinx.ext.viewcode",
     "sphinx.ext.githubpages",
 ]
+import datetime
 import os
 import sys
+import tomllib
 
 # Add the projects "src" directory to the Python path.
 # This allows Sphinx to find and import your package.
@@ -22,11 +22,17 @@ warning_is_error = True
 # cross-references (e.g., a link to a class that doesnt exist).
 # nitpicky = True
 
-project = "{{ project_cfg.NAME }}"
-author = "{{ personal.FULLNAME }}"
-project_copyright = "{{ copyright_years() }} {{ personal.FULLNAME }}"
-version = "{{ version_str(path="config/version.lua") }}"
-release = "{{ version_str(path="config/version.lua") }}"
+# This file is byte-identical in every repository: everything repo-specific
+# (project name, version, author) is read at build time from pyproject.toml.
+_here = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(_here, "..", "pyproject.toml"), "rb") as _f:
+    _meta = tomllib.load(_f)["project"]
+
+project = _meta["name"]
+author = _meta["authors"][0]["name"]
+version = _meta["version"]
+release = version
+project_copyright = f"{datetime.date.today().year} {author}"
 
 html_theme_options = {
         "show_powered_by": False,
