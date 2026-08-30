@@ -5,6 +5,7 @@ extensions = [
     "sphinx.ext.githubpages",
 ]
 import datetime
+import importlib.metadata
 import os
 import sys
 import tomllib
@@ -27,6 +28,21 @@ warning_is_error = True
 _here = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(_here, "..", "pyproject.toml"), "rb") as _f:
     _meta = tomllib.load(_f)["project"]
+
+# The rendered HTML depends on the exact versions of sphinx and its rendering
+# stack: building with any other version silently rewrites every page of the
+# published docs/ tree. Refuse to build unless the running toolchain matches
+# uv.lock, so a shell with the wrong environment active fails loudly instead
+# of producing different output.
+with open(os.path.join(_here, "..", "uv.lock"), "rb") as _f:
+    _locked = {p["name"]: p["version"] for p in tomllib.load(_f)["package"]}
+for _pkg in ("sphinx", "docutils", "alabaster"):
+    _running = importlib.metadata.version(_pkg)
+    if _running != _locked[_pkg]:
+        raise RuntimeError(
+            f"{_pkg} {_running} does not match uv.lock ({_locked[_pkg]}); "
+            "the docs would render differently - activate this repository's venv"
+        )
 
 project = _meta["name"]
 author = _meta["authors"][0]["name"]
