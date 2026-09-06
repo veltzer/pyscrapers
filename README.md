@@ -1,3 +1,6 @@
+<!-- This file is generated. Do not edit it by hand: your changes will be
+     lost on the next build. Edit the template it is rendered from, or the
+     values that template reads, and build again. -->
 # *pyscrapers* project by Mark Veltzer
 
 description: project to produce various useful scrapers
