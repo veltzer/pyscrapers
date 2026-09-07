@@ -39,6 +39,12 @@ src_dirs = ["config"]
 
 # build the Sphinx documentation from sphinx/ into docs/; autodoc imports the
 # package from src/, so the sources are inputs too
+# CI uploads this directory as the Pages artifact, replacing the old
+# "legacy" mode that served docs/ straight off master. The sphinx processor
+# below generates it, so it is build output and no longer committed.
+[pages]
+dir = "docs"
+
 [processor.sphinx]
 src_dirs = ["sphinx"]
 output_dir = "docs"
