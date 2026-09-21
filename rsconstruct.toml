@@ -27,8 +27,6 @@ src_dirs = ["tera.templates"]
 [processor.ruff]
 src_dirs = ["src", "config", "tests"]
 
-[processor.pylint]
-src_dirs = ["src", "config", "tests"]
 
 [processor.mypy]
 src_dirs = ["src", "config", "tests"]
