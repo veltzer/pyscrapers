@@ -28,7 +28,7 @@ src_dirs = ["tera.templates"]
 src_dirs = ["src", "config", "tests"]
 
 
-[processor.checker.mypy]
+[processor.checker.pyrefly]
 src_dirs = ["src", "config", "tests"]
 
 [processor.checker.pytest]
