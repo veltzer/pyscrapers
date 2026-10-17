@@ -38,13 +38,14 @@ src_dirs = ["config"]
 [pages]
 dir = "docs"
 
-[processor.creator.sphinx]
-src_dirs = ["sphinx"]
+# Sphinx plans its own output: every page, index and static file is a product,
+# restored from cache when nothing it depends on changed. All of them depend on
+# what Sphinx reads outside sphinx/: the package autodoc imports from src/, and
+# pyproject.toml and uv.lock, which conf.py reads for the version and the
+# pinned toolchain.
+[processor.mass_generator.sphinx]
 output_dir = "docs"
-dep_inputs = ["src/pyscrapers/*.py"]
-# -E -a: full cold build every run, no incremental caching; -d keeps the
-# (now write-only) doctree cache out of docs/, which is published to Pages
-args = ["-d", "out/sphinx-doctrees", "-E", "-a"]
+dep_inputs = ["src/pyscrapers/**/*.py", "pyproject.toml", "uv.lock"]
 
 # ─── toml / yaml / json ──────────────────────────────────────────────────────
 
