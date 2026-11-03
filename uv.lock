@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.14"
 
 [[package]]
@@ -47,7 +47,7 @@ name = "browser-cookie3"
 version = "0.20.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "jeepney", marker = "'bsd' in sys_platform or sys_platform == 'linux'" },
+    { name = "jeepney", marker = "sys_platform == 'linux' or 'bsd' in sys_platform" },
     { name = "lz4" },
     { name = "pycryptodomex" },
     { name = "shadowcopy", marker = "sys_platform == 'win32'" },
