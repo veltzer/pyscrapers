@@ -5,7 +5,7 @@
 
 description: project to produce various useful scrapers
 
-project website: https://veltzer.github.io/pyscrapers
+project website: <https://veltzer.github.io/pyscrapers>
 
 author: Mark Veltzer
 
