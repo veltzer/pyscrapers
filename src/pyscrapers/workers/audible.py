@@ -48,14 +48,14 @@ def add_links(soup, book_ids) -> bool:
     for div in divs:
         contents = div.contents
         assert len(contents) >= 1
-        div = contents[1]
-        contents = div.contents
+        inner = contents[1]
+        contents = inner.contents
         assert len(contents) >= 1
-        div = contents[1]
-        contents = div.contents
+        inner = contents[1]
+        contents = inner.contents
         assert len(contents) >= 1
-        div = contents[1]
-        contents = div.contents
+        inner = contents[1]
+        contents = inner.contents
         assert len(contents) >= 1
         a = contents[1]
         elem_href = a["href"]

@@ -1,14 +1,15 @@
+import datetime
+import importlib.metadata
+import os
+import sys
+import tomllib
+
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
     "sphinx.ext.viewcode",
     "sphinx.ext.githubpages",
 ]
-import datetime
-import importlib.metadata
-import os
-import sys
-import tomllib
 
 # Add the projects "src" directory to the Python path.
 # This allows Sphinx to find and import your package.
@@ -48,7 +49,7 @@ project = _meta["name"]
 author = _meta["authors"][0]["name"]
 version = _meta["version"]
 release = version
-project_copyright = f"{datetime.date.today().year} {author}"
+project_copyright = f"{datetime.datetime.now(tz=datetime.UTC).year} {author}"
 
 html_theme_options = {
         "show_powered_by": False,
@@ -58,6 +59,6 @@ rst_epilog = f"""
 .. |project| replace:: {project}
 """
 # title without a version
-html_title = "%s Documentation" % project
+html_title = f"{project} Documentation"
 # This is the default
 # html_title = "%s %s Documentation" % (project, version)

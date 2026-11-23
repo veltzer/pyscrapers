@@ -49,7 +49,7 @@ class ExtSession(requests.Session):
         super().__init__()
         cookies = get_cookies()
         if cookies is not None:
-            self.cookies = cookies
+            self.cookies.update(cookies)
         self.base = base
         ua = UserAgent()
         self.headers["User-Agent"] = ua.chrome
@@ -119,10 +119,9 @@ def download(response, filename: str) -> None:
         total_size_in_bytes = int(response.headers.get("content-length", 0))
         assert total_size_in_bytes != 0
         progress_bar = tqdm(total=total_size_in_bytes, unit="iB", unit_scale=True, disable=not ConfigRequests.progress)
-        have_total = True
     else:
+        total_size_in_bytes = None
         progress_bar = tqdm(unit="iB", unit_scale=True, disable=not ConfigRequests.progress)
-        have_total = False
     # pylint: disable=broad-except
     try:
         with open(filename, "wb") as file_handle:
@@ -133,5 +132,5 @@ def download(response, filename: str) -> None:
         os.unlink(filename)
         raise
     progress_bar.close()
-    if have_total and ConfigRequests.progress:
+    if total_size_in_bytes is not None and ConfigRequests.progress:
         assert progress_bar.n == total_size_in_bytes, f"something wrong {progress_bar.n} =! {total_size_in_bytes}"

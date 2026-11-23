@@ -65,7 +65,7 @@ def get_urls(logger, session, base, url_set, user_id):
     stats_video = 0
     stats_image = 0
     stats_shortcode_video = 0
-    for query_hash, key in zip(query_hashes, keys):
+    for query_hash, key in zip(query_hashes, keys, strict=True):
         logger.info(f"size of list is [{len(url_set.urls_list)}]")
         has_next_page = True
         end_cursor = None

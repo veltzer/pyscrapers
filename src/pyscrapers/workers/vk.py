@@ -6,6 +6,7 @@ import logging
 import lxml.etree
 import lxml.html
 
+from pyscrapers.core.ext_lxml import xpath_elements
 from pyscrapers.core.url_set import UrlSet
 
 
@@ -19,12 +20,11 @@ def get_my_content(r):
     str_content = r.content.decode(errors="ignore")
     str_content = str_content[str_content.find("<input"):]
     c = str.encode("<html><body>") + str.encode(str_content) + str.encode("</body></html>")
-    root = lxml.html.fromstring(c)
-    return root
+    return lxml.html.fromstring(c)
 
 
 def yield_json_objs_and_base(r):
-    for x in get_my_content(r).xpath("//a[@onclick]"):
+    for x in xpath_elements(get_my_content(r), "//a[@onclick]"):
         onclick = x.attrib["onclick"]
         if onclick.startswith("return showPhoto"):
             json_str = onclick[onclick.find("{"):onclick.rfind("}") + 1]
@@ -88,12 +88,18 @@ def get_total_images(logger, session, url, user_id):
     r = session.post(url, data=data)
     root = get_my_content(r)
 
-    e_albums = root.xpath("//div[@class=\"photos_album_title_wrap\"]")
+    e_albums = xpath_elements(root, "//div[@class=\"photos_album_title_wrap\"]")
     albums = {}
     for x in e_albums:
-        name_of_album = x.getparent().getparent().getparent().getparent().attrib["id"].split("?")[0]
+        ancestor = x
+        for _ in range(4):
+            parent = ancestor.getparent()
+            assert parent is not None
+            ancestor = parent
+        name_of_album = ancestor.attrib["id"].split("?")[0]
         e_len = x.xpath(".//div[@class=\"photos_album_counter fl_r\"]/text()")
-        albums[name_of_album] = int(e_len[0])
+        assert isinstance(e_len, list)
+        albums[name_of_album] = int(str(e_len[0]))
     logger.debug(albums)
     total_images = 0
     for v in albums.values():

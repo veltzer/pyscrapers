@@ -55,10 +55,10 @@ class Course:
         nice representation of this object
         :return:
         """
-        return ",".join([
+        return ",".join(str(x) for x in [
             self.number, self.name, self.instructor, self.diff,
-            str(self.lessons), str(self.resources),
-            str(self.videos)])
+            self.lessons, self.resources,
+            self.videos])
 
     def add_lesson(self, lesson):
         """
@@ -103,7 +103,7 @@ def get_link_re(courses: bool) -> str:
 
 
 @typing.no_type_check
-def get_courses(pages, courses: bool, session):  # type: ignore
+def get_courses(pages, courses: bool, session):
     """
     Download the list of all the courses
     :param pages:
@@ -147,10 +147,7 @@ def get_course_details(course: Course, courses: bool, session):
     result.raise_for_status()
     content = result.content.decode()
     root = lxml.html.fromstring(content)
-    if courses:
-        class_text = "course-lesson"
-    else:
-        class_text = "event-toggle download-lesson"
+    class_text = "course-lesson" if courses else "event-toggle download-lesson"
     lessons = root.xpath(f"//a[@class=\"{class_text}\"]")
     for lesson in lessons:
         lesson_num = lesson.get("href").split("/")[-1]

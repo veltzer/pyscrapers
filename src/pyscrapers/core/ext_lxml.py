@@ -16,7 +16,7 @@ def setup_prefix():
     ns.prefix = "re"
 
 
-def get_html_dom_content(response):
+def get_html_dom_content(response) -> lxml.html.HtmlElement:
     """
     Get the content from a request
     :param response:
@@ -24,8 +24,17 @@ def get_html_dom_content(response):
     """
     response.raise_for_status()
     str_content = response.content.decode()
-    root = lxml.html.fromstring(str_content)
-    return root
+    return lxml.html.fromstring(str_content)
+
+
+def xpath_elements(element: lxml.html.HtmlElement, expression: str) -> list[lxml.html.HtmlElement]:
+    """
+    Run an xpath expression that selects elements and return them as a typed list
+    (lxml types the raw result of xpath() as a union of everything it can return)
+    """
+    result = element.xpath(expression)
+    assert isinstance(result, list)
+    return [x for x in result if isinstance(x, lxml.html.HtmlElement)]
 
 
 def get_element_as_bytes(element):
