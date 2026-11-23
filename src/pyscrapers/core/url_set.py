@@ -28,7 +28,7 @@ class UrlSet:
         :return:
         """
         logger = logging.getLogger(__name__)
-        logger.debug(f"collecting [{url}]")
+        logger.debug("collecting [%s]", url)
         if url in self.urls_set:
             self.appended_twice += 1
         else:
@@ -73,7 +73,7 @@ class UrlSet:
         skipped = 0
         downloads_per_suffix = Counter()
         logger = logging.getLogger(__name__)
-        logger.info(f"got [{len(self.urls_list)}] urls")
+        logger.info("got [%s] urls", len(self.urls_list))
         if ConfigDownload.download:
             for url in self.urls_list:
                 parse_result = urllib.parse.urlparse(url)
@@ -82,14 +82,14 @@ class UrlSet:
                 filename = self.get_filename(suffix)
                 if filename is None:
                     skipped += 1
-                    logger.info(f"skipping [{path}]...")
+                    logger.info("skipping [%s]...", path)
                     continue
 
-                logger.info(f"downloading [{path}] to [{filename}]...")
+                logger.info("downloading [%s] to [%s]...", path, filename)
                 response = session.get(url, stream=True)
                 response.raise_for_status()
                 downloads_per_suffix[suffix] += 1
                 download(response, filename)
-                logger.info(f"written [{filename}]...")
-        logger.info(f"skipped [{skipped}]...")
+                logger.info("written [%s]...", filename)
+        logger.info("skipped [%s]...", skipped)
         logger.info(downloads_per_suffix)

@@ -122,7 +122,6 @@ def download(response, filename: str) -> None:
     else:
         total_size_in_bytes = None
         progress_bar = tqdm(unit="iB", unit_scale=True, disable=not ConfigRequests.progress)
-    # pylint: disable=broad-except
     try:
         with open(filename, "wb") as file_handle:
             for data in response.iter_content(BLOCK_SIZE):

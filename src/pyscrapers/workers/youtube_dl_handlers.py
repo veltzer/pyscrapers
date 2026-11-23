@@ -51,7 +51,7 @@ def youtube_dl_download_urls(urls: list[str]) -> None:
         # why is this "outtmpl" here and "output" on the cmd line?
         "outtmpl": "%(title).100s-%(id)s.%(ext)s",
     }
-    logger.debug(f"passing options {ydl_opts}")
+    logger.debug("passing options %s", ydl_opts)
     if ConfigYoutubeDl.use_archive:
         ydl_opts["download_archive"] = ConfigYoutubeDl.archive_file
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:

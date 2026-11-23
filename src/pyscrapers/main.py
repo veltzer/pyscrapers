@@ -89,10 +89,10 @@ def drumeo():
             print(f"got [{len(list_of_courses)}] courses")
             d["courses"] = list_of_courses
         for i, course in enumerate(list_of_courses):
-            logger.info(f"course number [{i}]")
+            logger.info("course number [%s]", i)
             if course.number in d and course.number not in reload:
                 list_of_courses[i] = d[course.number]
-                logger.info(f"got from cache [{list_of_courses[i]}]")
+                logger.info("got from cache [%s]", list_of_courses[i])
             else:
                 get_course_details(course, courses=courses, session=session)
                 get_course_urls(course, courses=courses, session=session)

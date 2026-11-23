@@ -66,7 +66,7 @@ def get_urls(logger, session, base, url_set, user_id):
     stats_image = 0
     stats_shortcode_video = 0
     for query_hash, key in zip(query_hashes, keys, strict=True):
-        logger.info(f"size of list is [{len(url_set.urls_list)}]")
+        logger.info("size of list is [%s]", len(url_set.urls_list))
         has_next_page = True
         end_cursor = None
         while has_next_page:
@@ -107,6 +107,6 @@ def get_urls(logger, session, base, url_set, user_id):
                 if "display_url" in inner_node:
                     url_set.append(inner_node["display_url"])
                     stats_image += 1
-    logger.info(f"stats_video [{stats_video}]")
-    logger.info(f"stats_image [{stats_image}]")
-    logger.info(f"stats_shortcode_video [{stats_shortcode_video}]")
+    logger.info("stats_video [%s]", stats_video)
+    logger.info("stats_image [%s]", stats_image)
+    logger.info("stats_shortcode_video [%s]", stats_shortcode_video)

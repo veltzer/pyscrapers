@@ -61,6 +61,11 @@ dependencies = [
 pyscrapers = "pyscrapers.main:main"
 
 [tool.pytest.ini_options]
+# Every strictness check pytest has (strict_config, strict_markers,
+# strict_xfail, strict_parametrization_ids), and every warning fails the
+# test that raised it rather than scrolling past in the summary.
+strict = true
+filterwarnings = ["error"]
 pythonpath = ["src"]
 
 [tool.hatch.build.targets.wheel]

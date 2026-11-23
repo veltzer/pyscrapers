@@ -20,7 +20,7 @@ def scrape_facebook(user_id: str, session, url_set: UrlSet) -> None:
     logger = logging.getLogger(__name__)
 
     url = f"https://www.facebook.com/{user_id}/workers"
-    logger.debug(f"url is [{url}]")
+    logger.debug("url is [%s]", url)
     result = session.get(url)
     root = pyscrapers.core.ext_lxml.get_html_dom_content(result)
 

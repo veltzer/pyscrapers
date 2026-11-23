@@ -32,10 +32,9 @@ def sxyprn_download(session: Session, logger: Logger):
     base_url = url_parsed._replace(path="", params="", query="", fragment="").geturl()
 
     num_pages = None
-    counter = 0
     urls = UrlSet()
-    for url in url_generator(url=ConfigUrl.url):
-        logger.info(f"loading [{url}]")
+    for counter, url in enumerate(url_generator(url=ConfigUrl.url), start=1):
+        logger.info("loading [%s]", url)
         response = session.get(url)
         response.raise_for_status()
         root = get_html_dom_content(response)
@@ -45,7 +44,7 @@ def sxyprn_download(session: Session, logger: Logger):
                 num_pages = 1
         if ConfigDebugUrls.save:
             with tempfile.NamedTemporaryFile(delete=False) as f:
-                logger.info(f"writing file [{f.name}]")
+                logger.info("writing file [%s]", f.name)
                 f.write(get_element_as_bytes(root))
         elements = xpath_elements(root, "//a[contains(@class,\"js-pop\")]")
         for element in elements:
@@ -53,10 +52,9 @@ def sxyprn_download(session: Session, logger: Logger):
             full_url = urllib.parse.urljoin(base_url, href)
             no_fluff = urllib.parse.urlparse(full_url)._replace(params="", query="", fragment="").geturl()
             urls.append(no_fluff)
-        counter += 1  # noqa: SIM113 - paging loop, not an iteration over a sequence
         if counter == num_pages:
             break
     session.close()
-    logger.info(f"got total [{len(urls.urls_list)}] urls")
-    logger.info(f"got [{urls.appended_twice}] appended twice urls")
+    logger.info("got total [%s] urls", len(urls.urls_list))
+    logger.info("got [%s] appended twice urls", urls.appended_twice)
     youtube_dl_download_urls(urls.urls_list)
