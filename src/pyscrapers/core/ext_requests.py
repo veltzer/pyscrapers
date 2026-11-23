@@ -5,6 +5,7 @@ import logging
 import os
 import shutil
 import urllib
+import urllib.parse
 
 import requests
 from fake_useragent import UserAgent
@@ -127,7 +128,7 @@ def download(response, filename: str) -> None:
             for data in response.iter_content(BLOCK_SIZE):
                 progress_bar.update(len(data))
                 file_handle.write(data)
-    except (Exception, KeyboardInterrupt, SystemError):
+    except (Exception, KeyboardInterrupt):
         os.unlink(filename)
         raise
     progress_bar.close()
