@@ -97,16 +97,6 @@ search-path = [
     "src",
     ".",
 ]
-# Third-party libraries without type information.
-ignore-missing-imports = [
-    "browser_cookie3.*",
-    "fake_useragent.*",
-    "pyeventroute.*",
-    "pylogconf.*",
-    "pytconf.*",
-    "tqdm.*",
-    "youtube_dl.*",
-]
 
 [tool.pyrefly.errors]
 no-any-return = "error"
