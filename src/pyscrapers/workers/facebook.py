@@ -4,9 +4,12 @@ download photos from facebook
 
 
 import logging
+from typing import TYPE_CHECKING
 
 import pyscrapers.core.ext_lxml
-from pyscrapers.core.url_set import UrlSet
+
+if TYPE_CHECKING:
+    from pyscrapers.core.url_set import UrlSet
 
 
 def scrape_facebook(user_id: str, session, url_set: UrlSet) -> None:

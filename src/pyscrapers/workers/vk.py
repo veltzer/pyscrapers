@@ -2,12 +2,15 @@
 
 import json
 import logging
+from typing import TYPE_CHECKING
 
 import lxml.etree
 import lxml.html
 
 from pyscrapers.core.ext_lxml import xpath_elements
-from pyscrapers.core.url_set import UrlSet
+
+if TYPE_CHECKING:
+    from pyscrapers.core.url_set import UrlSet
 
 
 def get_my_content(r):

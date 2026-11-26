@@ -2,12 +2,15 @@
 Download books from audible
 """
 from collections import OrderedDict
-from logging import Logger
+from typing import TYPE_CHECKING
 
 from bs4 import BeautifulSoup
 
 from pyscrapers.configs import ConfigDebugUrls
 from pyscrapers.core.ext_requests import ExtSession
+
+if TYPE_CHECKING:
+    from logging import Logger
 
 
 def get_book_data(session: ExtSession, book_id: str) -> OrderedDict:

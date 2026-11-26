@@ -1,9 +1,13 @@
 """ instagram_stories.py """
 
-from logging import Logger
+
+from typing import TYPE_CHECKING
 
 from pyscrapers.configs import ConfigUser
 from pyscrapers.core.ext_requests import ExtSession
+
+if TYPE_CHECKING:
+    from logging import Logger
 
 
 def instagram_stories_download(_session: ExtSession, _logger: Logger):

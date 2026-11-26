@@ -8,10 +8,12 @@ If you want more you have to do a follow-up AJAX request to the server.
 import json
 import logging
 import time
+from typing import TYPE_CHECKING
 
 import pyeventroute.route
 
-from pyscrapers.core.url_set import UrlSet
+if TYPE_CHECKING:
+    from pyscrapers.core.url_set import UrlSet
 
 
 def is_rate_limit(response) -> bool:

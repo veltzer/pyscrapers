@@ -1,8 +1,12 @@
 """ netflix.py """
 
-from logging import Logger
 
-from requests.sessions import Session
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from logging import Logger
+
+    from requests.sessions import Session
 
 
 def netflix_download(_session: Session, _logger: Logger):

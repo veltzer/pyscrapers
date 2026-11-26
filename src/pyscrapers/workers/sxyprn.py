@@ -2,14 +2,17 @@
 
 import tempfile
 import urllib.parse
-from logging import Logger
-
-from requests.sessions import Session
+from typing import TYPE_CHECKING
 
 from pyscrapers.configs import ConfigDebugUrls, ConfigUrl
 from pyscrapers.core.ext_lxml import get_element_as_bytes, get_html_dom_content, xpath_elements
 from pyscrapers.core.url_set import UrlSet
 from pyscrapers.workers.youtube_dl_handlers import youtube_dl_download_urls
+
+if TYPE_CHECKING:
+    from logging import Logger
+
+    from requests.sessions import Session
 
 
 def url_generator(url: str):

@@ -1,8 +1,10 @@
 """ mamba_ru.py """
 
 import json
+from typing import TYPE_CHECKING
 
-from pyscrapers.core.url_set import UrlSet
+if TYPE_CHECKING:
+    from pyscrapers.core.url_set import UrlSet
 
 
 def scrape_mambaru(user_id: str, session, url_set: UrlSet) -> None:

@@ -1,8 +1,12 @@
 """ getpocket.py """
 
-from logging import Logger
 
-from requests.sessions import Session
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from logging import Logger
+
+    from requests.sessions import Session
 
 
 def getpocket_download(session: Session, _logger: Logger):

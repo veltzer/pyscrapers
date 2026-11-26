@@ -10,7 +10,9 @@ import typing
 import lxml.html
 
 from pyscrapers.core.ext_lxml import setup_prefix
-from pyscrapers.core.ext_requests import ExtSession
+
+if typing.TYPE_CHECKING:
+    from pyscrapers.core.ext_requests import ExtSession
 
 setup_prefix()
 
