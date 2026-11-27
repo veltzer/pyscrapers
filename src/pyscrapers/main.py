@@ -77,7 +77,7 @@ def drumeo():
     session = ExtSession()
     logger = logging.getLogger(__name__)
     courses = False
-    reload = {}
+    reload: set[int] = set()
     with shelve.open("cache.db") as d:
         if "courses" in d:
             list_of_courses = d["courses"]
