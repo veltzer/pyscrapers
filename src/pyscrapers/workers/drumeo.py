@@ -17,7 +17,7 @@ if typing.TYPE_CHECKING:
 setup_prefix()
 
 
-def get_number_of_pages(courses: bool, session: ExtSession) -> int:
+def get_number_of_pages(*, courses: bool, session: ExtSession) -> int:
     """
     Get the number of pages for all courses or pages
     :param courses:
@@ -80,7 +80,7 @@ class Course:
         self.videos.append((video, quality))
 
 
-def get_url(courses: bool, page: int) -> str:
+def get_url(*, courses: bool, page: int) -> str:
     if courses:
         url = f"https://www.drumeo.com/laravel/public/members-area/json/lesson-group/courses?page={page}"
     else:
@@ -88,7 +88,7 @@ def get_url(courses: bool, page: int) -> str:
     return url
 
 
-def get_members_url(courses: bool, number: int) -> str:
+def get_members_url(*, courses: bool, number: int) -> str:
     if courses:
         url = f"https://www.drumeo.com/members/lessons/courses/{number}"
     else:
@@ -96,7 +96,7 @@ def get_members_url(courses: bool, number: int) -> str:
     return url
 
 
-def get_link_re(courses: bool) -> str:
+def get_link_re(*, courses: bool) -> str:
     if courses:
         link_re = r"https://www.drumeo.com/laravel/public/members/lessons/courses/\d+"
     else:
@@ -105,7 +105,7 @@ def get_link_re(courses: bool) -> str:
 
 
 @typing.no_type_check
-def get_courses(pages, courses: bool, session):
+def get_courses(pages, *, courses: bool, session):
     """
     Download the list of all the courses
     :param pages:
@@ -115,12 +115,12 @@ def get_courses(pages, courses: bool, session):
     """
     collected_courses = []
     for page in range(1, pages + 1):
-        result = session.get(get_url(courses, page))
+        result = session.get(get_url(courses=courses, page=page))
         result.raise_for_status()
         for lesson_list in json.loads(result.content.decode())["lessonsHtml"]:
             course = Course()
             root = lxml.html.fromstring(lesson_list)
-            links = root.xpath(f"//a[re:match(@href,\"{get_link_re(courses)}\")]")
+            links = root.xpath(f"//a[re:match(@href,\"{get_link_re(courses=courses)}\")]")
             assert len(links) == 2, len(links)
             course.number = links[0].get("href").split("/")[-1]
             titles = root.xpath("//h2[@class=\"card-title\"]")
@@ -137,7 +137,7 @@ def get_courses(pages, courses: bool, session):
 
 
 @typing.no_type_check
-def get_course_details(course: Course, courses: bool, session):
+def get_course_details(course: Course, *, courses: bool, session):
     """
     Populate the Course type object
     :param course:
@@ -145,7 +145,7 @@ def get_course_details(course: Course, courses: bool, session):
     :param session:
     :return:
     """
-    result = session.get(get_members_url(courses, course.number))
+    result = session.get(get_members_url(courses=courses, number=course.number))
     result.raise_for_status()
     content = result.content.decode()
     root = lxml.html.fromstring(content)
@@ -162,7 +162,7 @@ def get_course_details(course: Course, courses: bool, session):
         get_videos(root, course, session)
 
 
-def get_course_urls(course, courses: bool, session):
+def get_course_urls(course, *, courses: bool, session):
     if not courses:
         return
     logger = logging.getLogger(__name__)
