@@ -99,7 +99,11 @@ search-path = [
 ]
 
 [tool.pyrefly.errors]
+implicit-any-attribute = "error"
+instance-var-assign = "error"
+method-assign = "error"
 no-any-return = "error"
+possibly-uninitialized-attribute = "error"
 
 [tool.hatch.envs.default]
 installer = "uv"

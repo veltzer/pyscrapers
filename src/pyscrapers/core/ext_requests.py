@@ -106,7 +106,9 @@ def setup():
     :return:
     """
     if ConfigRequests.debug:
-        http.client.HTTPConnection.debuglevel = 1
+        # http.client reads debuglevel from the class for every connection
+        # that requests opens; there is no instance to set it on
+        http.client.HTTPConnection.debuglevel = 1  # pyrefly: ignore[instance-var-assign]
         requests_log = logging.getLogger("requests.packages.urllib3")
         requests_log.propagate = True
 

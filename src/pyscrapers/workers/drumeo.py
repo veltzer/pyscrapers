@@ -45,11 +45,11 @@ class Course:
         constructor
         """
         self.number = 0
-        self.instructor = None
-        self.name = None
-        self.diff = None
+        self.instructor: str | None = None
+        self.name: str | None = None
+        self.diff: str | None = None
         self.lessons = []
-        self.resources = None
+        self.resources: str | None = None
         self.videos = []
 
     def __repr__(self):
