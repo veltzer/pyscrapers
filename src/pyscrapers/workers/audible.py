@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from logging import Logger
 
 
-def get_book_data(session: ExtSession, book_id: str) -> OrderedDict:
+def get_book_data(session: ExtSession, book_id: str) -> OrderedDict[str, str]:
     url = f"https://www.audible.com/pb/{book_id}"
     print(f"getting {url}...")
     response = session.get_timeout(url)
@@ -26,7 +26,7 @@ def get_book_data(session: ExtSession, book_id: str) -> OrderedDict:
         assert isinstance(pretty, str)
         with open("/tmp/single.html", "w") as handle:
             handle.write(pretty)
-    d = OrderedDict()
+    d: OrderedDict[str, str] = OrderedDict()
     divs = soup.find_all("h1", {"class": "bc-heading"})
     print(divs)
     assert len(divs) == 1
