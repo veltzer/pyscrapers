@@ -11,4 +11,3 @@ def get_cookies():
     if ConfigCookiesSource.browser == "chrome":
         return browser_cookie3.chrome()
     return None
-    # raise ValueError(f"unsupported browser [{ConfigCookiesSource.browser}")

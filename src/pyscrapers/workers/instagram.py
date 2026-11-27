@@ -28,10 +28,8 @@ def is_rate_limit(response) -> bool:
 
 def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
     domain = "www.instagram.com"
-    # cookie_domain = ".instagram.com"
     base = f"https://{domain}"
     user_url = f"{base}/{user_id}/"
-    # url = f"{base}"
     url = "https://i.instagram.com/api/v1/users/web_profile_info"
 
     logger = logging.getLogger(__name__)

@@ -16,7 +16,6 @@ def scrape_travelgirls(user_id: str, session, url_set: UrlSet) -> None:
 
     e_a = pyscrapers.core.ext_lxml.xpath_elements(root, "//a[contains(@class,\"photo\")]")
     for x in e_a:
-        # print(etree.tostring(x, pretty_print=True))
         children = x.getchildren()
         assert len(children) == 1
         img = children[0]

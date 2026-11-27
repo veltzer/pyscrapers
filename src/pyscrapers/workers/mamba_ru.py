@@ -8,8 +8,6 @@ if TYPE_CHECKING:
 
 
 def scrape_mambaru(user_id: str, session, url_set: UrlSet) -> None:
-    # raise ValueError("mamba still not implemented")
-    # main_url = "https://www.mamba.ru/{user_id}".format(user_id=user_id)
     main_url = "https://www.mamba.ru/mobile/api/v5.17.0.0/?reqType=json"
     sys_requests_container = [
         {

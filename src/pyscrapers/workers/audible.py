@@ -100,7 +100,3 @@ def audible(_logger: Logger):
             break
         page += 1
     print(book_ids)
-    # print(len(book_ids))
-    # books = []
-    # for book_id in book_ids:
-    #     books.append(get_book_data(session, book_id))

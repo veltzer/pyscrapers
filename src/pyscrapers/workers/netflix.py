@@ -16,4 +16,3 @@ def netflix_download(_session: Session, _logger: Logger):
     :param logger:
     :return:
     """
-    # url = "netflix.com/xxxx"

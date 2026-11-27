@@ -42,11 +42,9 @@ def youtube_dl_download_urls(urls: list[str]) -> None:
     ydl_opts = {
         "format": "bestaudio/best",
         # this shuts everything down
-        # "logger": logger,
         "nooverwrites": True,
         "ignoreerrors": True,
         "restrict"
-        # "hls_prefer_native": True,
         "fixup": "never",
         # why is this "outtmpl" here and "output" on the cmd line?
         "outtmpl": "%(title).100s-%(id)s.%(ext)s",

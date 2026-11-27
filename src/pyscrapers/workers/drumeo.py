@@ -206,7 +206,6 @@ def get_videos(root, course, session):
         video_urls = data["video-quality-urls"]
         quality_numbers = sorted(int(x) for x in video_urls)
         best_vid_key = str(quality_numbers[-1])
-        # print(quality_numbers, best_vid_key)
         best_vid = video_urls[best_vid_key]
         course.add_video(best_vid, best_vid_key)
 
