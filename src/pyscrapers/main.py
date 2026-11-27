@@ -46,7 +46,7 @@ from pyscrapers.workers.youtube_dl_handlers import youtube_dl_handler
         ConfigLogging,
     ],
 )
-def photos():
+def photos() -> None:
     pyscrapers.core.ext_requests.setup()
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
@@ -73,7 +73,7 @@ def photos():
         ConfigCookiesSource,
     ],
 )
-def drumeo():
+def drumeo() -> None:
     session = ExtSession()
     logger = logging.getLogger(__name__)
     courses = False
@@ -109,7 +109,7 @@ def drumeo():
         ConfigYoutubeDl,
     ],
 )
-def youtube_dl():
+def youtube_dl() -> None:
     youtube_dl_handler()
 
 
@@ -122,7 +122,7 @@ def youtube_dl():
         ConfigLogging,
     ],
 )
-def getpocket():
+def getpocket() -> None:
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     session = ExtSession()
@@ -138,7 +138,7 @@ def getpocket():
         ConfigDebugUrls,
     ],
 )
-def sxyprn():
+def sxyprn() -> None:
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     session = ExtSession()
@@ -153,7 +153,7 @@ def sxyprn():
         ConfigDebugUrls,
     ],
 )
-def netflix_list():
+def netflix_list() -> None:
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     session = ExtSession()
@@ -170,7 +170,7 @@ def netflix_list():
         ConfigCookiesSource,
     ],
 )
-def instagram_stories():
+def instagram_stories() -> None:
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     session = ExtSession()
@@ -186,7 +186,7 @@ def instagram_stories():
         ConfigCookiesSource,
     ],
 )
-def audible_books():
+def audible_books() -> None:
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(ConfigLogging.loglevel)
     audible(logger)
@@ -197,7 +197,7 @@ def audible_books():
     app_name=APP_NAME,
     version=VERSION_STR,
 )
-def main():
+def main() -> None:
     pylogconf.core.setup()
     config_arg_parse_and_launch()
 

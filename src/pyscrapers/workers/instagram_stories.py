@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from logging import Logger
 
 
-def instagram_stories_download(_session: ExtSession, _logger: Logger):
+def instagram_stories_download(_session: ExtSession, _logger: Logger) -> None:
     """
     This does the downloads
     :param session:

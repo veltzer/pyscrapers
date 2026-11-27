@@ -8,15 +8,18 @@ If you want more you have to do a follow-up AJAX request to the server.
 import json
 import logging
 import time
-from typing import TYPE_CHECKING
+from logging import Logger
+from typing import TYPE_CHECKING, Any
 
 import pyeventroute.route
 
 if TYPE_CHECKING:
+
+    from pyscrapers.core.ext_requests import ExtSession
     from pyscrapers.core.url_set import UrlSet
 
 
-def is_rate_limit(response) -> bool:
+def is_rate_limit(response: dict[str, Any]) -> bool:
     """
     Rate limit messages look like this:
     { "message": "rate limited", "status": "fail" }
@@ -26,7 +29,7 @@ def is_rate_limit(response) -> bool:
     return bool(response["status"] == "fail" and response["message"] == "rate limited")
 
 
-def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
+def scrape_instagram(user_id: str, session: ExtSession, url_set: UrlSet) -> None:
     domain = "www.instagram.com"
     base = f"https://{domain}"
     user_url = f"{base}/{user_id}/"
@@ -51,7 +54,7 @@ def scrape_instagram(user_id: str, session, url_set: UrlSet) -> None:
     get_urls(logger, session, base, url_set, user_id_json)
 
 
-def get_urls(logger, session, base, url_set, user_id):
+def get_urls(logger: Logger, session: ExtSession, base: str, url_set: UrlSet, user_id: str) -> None:
     url = f"{base}/graphql/query/"
     count = 50
     query_hashes = [

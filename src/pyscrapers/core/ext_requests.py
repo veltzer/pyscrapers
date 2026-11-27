@@ -6,6 +6,7 @@ import os
 import shutil
 import urllib
 import urllib.parse
+from typing import Any
 
 import requests
 from fake_useragent import UserAgent
@@ -20,13 +21,13 @@ FAIL = True
 
 class ExtResponse:
 
-    def __init__(self, res: requests.Response):
+    def __init__(self, res: requests.Response) -> None:
         self.res = res
 
-    def raise_for_status(self):
+    def raise_for_status(self) -> None:
         return self.res.raise_for_status()
 
-    def save_text(self, filename: str = "/tmp/temp"):
+    def save_text(self, filename: str = "/tmp/temp") -> None:
         try:
             with open(filename, "w") as handle:
                 handle.write(self.res.content.decode())
@@ -46,7 +47,7 @@ class ExtSession(requests.Session):
     """
     Inherit from requests.Session and add capabilities
     """
-    def __init__(self, base: str = ""):
+    def __init__(self, base: str = "") -> None:
         super().__init__()
         cookies = get_cookies()
         if cookies is not None:
@@ -55,10 +56,10 @@ class ExtSession(requests.Session):
         ua = UserAgent()
         self.headers["User-Agent"] = ua.chrome
 
-    def get_timeout(self, url: str):
+    def get_timeout(self, url: str) -> ExtResponse:
         return ExtResponse(self.get(url, timeout=(ConfigRequests.connect_timeout, ConfigRequests.read_timeout)))
 
-    def ext_get(self, url: str, *args, **kwargs):
+    def ext_get(self, url: str, *args: Any, **kwargs: Any) -> ExtResponse:
         abs_url = urllib.parse.urljoin(self.base, url)
         ret = super().get(abs_url, *args, **kwargs)
         ret.raise_for_status()
@@ -100,7 +101,7 @@ class ExtSession(requests.Session):
         return True
 
 
-def setup():
+def setup() -> None:
     """
     Activate the debugging features of the requests module
     :return:
@@ -117,7 +118,7 @@ CONTENT_LENGTH_HEADER = "content-length"
 BLOCK_SIZE = 1024 * 1024
 
 
-def download(response, filename: str) -> None:
+def download(response: requests.Response, filename: str) -> None:
     if CONTENT_LENGTH_HEADER in response.headers:
         total_size_in_bytes = int(response.headers.get("content-length", 0))
         assert total_size_in_bytes != 0

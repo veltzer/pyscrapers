@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from requests.sessions import Session
 
 
-def getpocket_download(session: Session, _logger: Logger):
+def getpocket_download(session: Session, _logger: Logger) -> None:
     """
     This does the heavy lifting
     :param session:

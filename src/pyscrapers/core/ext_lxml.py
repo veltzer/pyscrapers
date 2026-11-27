@@ -3,12 +3,17 @@ This module is s set of utilities for this entire project
 """
 
 
+from typing import TYPE_CHECKING, Any
+
 import lxml
 import lxml.etree
 import lxml.html
 
+if TYPE_CHECKING:
+    import requests
 
-def setup_prefix():
+
+def setup_prefix() -> None:
     # register regular expressions with lxml
     # this means that we can use regular expression functions like "match"
     # by specifying "re:match" in our xpath expressions
@@ -16,7 +21,7 @@ def setup_prefix():
     ns.prefix = "re"
 
 
-def get_html_dom_content(response) -> lxml.html.HtmlElement:
+def get_html_dom_content(response: requests.Response) -> lxml.html.HtmlElement:
     """
     Get the content from a request
     :param response:
@@ -37,7 +42,7 @@ def xpath_elements(element: lxml.html.HtmlElement, expression: str) -> list[lxml
     return [x for x in result if isinstance(x, lxml.html.HtmlElement)]
 
 
-def get_element_as_bytes(element):
+def get_element_as_bytes(element: Any) -> bytes:
     """
     turn xml element from etree to bytes
     :param element:
@@ -46,7 +51,7 @@ def get_element_as_bytes(element):
     return lxml.etree.tostring(element, pretty_print=True)
 
 
-def get_element_as_string(element):
+def get_element_as_string(element: Any) -> str:
     """
     turn xml element from etree to string
     :param element:
@@ -55,7 +60,7 @@ def get_element_as_string(element):
     return lxml.etree.tostring(element, pretty_print=True).decode()
 
 
-def print_element(element):
+def print_element(element: Any) -> None:
     """
     print xml elements from etree
     :param element:

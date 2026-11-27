@@ -7,7 +7,7 @@ import http.client
 import urllib.parse
 
 
-def get_http_status_string(code: int):
+def get_http_status_string(code: int) -> str:
     """
     This function returns a description of an HTTP status code (404 - not found etc).
     Unfortunately, the requests module does not provide a clean API for this so
@@ -21,7 +21,7 @@ def get_http_status_string(code: int):
     return f"http code [{code}], [{http.client.responses[code]}]"
 
 
-def add_http(url, main_url):
+def add_http(url: str, main_url: str):
     """
     add two urls together
     :param url:

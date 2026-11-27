@@ -23,7 +23,7 @@ def url_generator(url: str):
         page += 30
 
 
-def sxyprn_download(session: Session, logger: Logger):
+def sxyprn_download(session: Session, logger: Logger) -> None:
     """
     This does the downloads
     :param session:

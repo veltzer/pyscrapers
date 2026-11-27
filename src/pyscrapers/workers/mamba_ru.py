@@ -4,10 +4,11 @@ import json
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from pyscrapers.core.ext_requests import ExtSession
     from pyscrapers.core.url_set import UrlSet
 
 
-def scrape_mambaru(user_id: str, session, url_set: UrlSet) -> None:
+def scrape_mambaru(user_id: str, session: ExtSession, url_set: UrlSet) -> None:
     main_url = "https://www.mamba.ru/mobile/api/v5.17.0.0/?reqType=json"
     sys_requests_container = [
         {

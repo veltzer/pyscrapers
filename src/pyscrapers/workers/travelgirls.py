@@ -6,10 +6,11 @@ import pyscrapers.core.ext_lxml
 import pyscrapers.core.utils
 
 if TYPE_CHECKING:
+    from pyscrapers.core.ext_requests import ExtSession
     from pyscrapers.core.url_set import UrlSet
 
 
-def scrape_travelgirls(user_id: str, session, url_set: UrlSet) -> None:
+def scrape_travelgirls(user_id: str, session: ExtSession, url_set: UrlSet) -> None:
     main_url = f"https://www.travelgirls.com/member/{user_id}"
     r = session.get(main_url)
     root = pyscrapers.core.ext_lxml.get_html_dom_content(r)

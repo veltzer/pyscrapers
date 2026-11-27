@@ -1,7 +1,9 @@
 """ json.py """
 
+from typing import Any
 
-def find_paths(element, json):
+
+def find_paths(element: str, json: Any) -> list[str]:
     paths = []
     to_search = [("", json)]
     while to_search:

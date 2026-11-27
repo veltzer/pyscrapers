@@ -6,12 +6,12 @@ import urllib.parse
 from collections import Counter
 
 from pyscrapers.configs import ConfigDownload
-from pyscrapers.core.ext_requests import download
+from pyscrapers.core.ext_requests import ExtSession, download
 
 
 class UrlSet:
     """ set of urls, with no duplicates. Can be downloaded """
-    def __init__(self):
+    def __init__(self) -> None:
         """
         constructor
         """
@@ -64,7 +64,7 @@ class UrlSet:
             filename = self.suggest_filename(suffix)
         return filename
 
-    def download(self, session):
+    def download(self, session: ExtSession) -> None:
         """
         download the list
         :param session:

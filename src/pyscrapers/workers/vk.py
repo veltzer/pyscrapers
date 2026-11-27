@@ -2,7 +2,7 @@
 
 import json
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import lxml.etree
 import lxml.html
@@ -10,10 +10,14 @@ import lxml.html
 from pyscrapers.core.ext_lxml import xpath_elements
 
 if TYPE_CHECKING:
+    import requests
+    from lxml.etree import _Element
+
+    from pyscrapers.core.ext_requests import ExtSession
     from pyscrapers.core.url_set import UrlSet
 
 
-def get_my_content(r):
+def get_my_content(r: requests.Response) -> _Element:
     """
     the return from the server in vk is not a standard HTML.
     this is why we must cut it up and cant use the regular
@@ -26,7 +30,7 @@ def get_my_content(r):
     return lxml.html.fromstring(c)
 
 
-def yield_json_objs_and_base(r):
+def yield_json_objs_and_base(r: requests.Response):
     for x in xpath_elements(get_my_content(r), "//a[@onclick]"):
         onclick = x.attrib["onclick"]
         if onclick.startswith("return showPhoto"):
@@ -40,7 +44,7 @@ def yield_json_objs_and_base(r):
             yield json_obj, base
 
 
-def scrape_vk(user_id: str, session, url_set: UrlSet) -> None:
+def scrape_vk(user_id: str, session: ExtSession, url_set: UrlSet) -> None:
     logger = logging.getLogger(__name__)
     url = "https://vk.com/al_photos.php"
 
@@ -61,7 +65,7 @@ def scrape_vk(user_id: str, session, url_set: UrlSet) -> None:
         count += got
 
 
-def get_urls(base, got, json_obj, url_set):
+def get_urls(base: str, got: int, json_obj: Any, url_set: UrlSet):
     largest = 0
     largest_url = None
     min_len = min(len(v) for k, v in json_obj["temp"].items() if k.endswith("_"))
@@ -72,7 +76,8 @@ def get_urls(base, got, json_obj, url_set):
                 if size > largest:
                     largest = size
                     largest_url = v[0]
-        url_set.append(base + largest_url + ".jpg")
+        if largest_url is not None:
+            url_set.append(base + largest_url + ".jpg")
         got += 1
     if min_len == 1:
         for k, v in json_obj["temp"].items():
@@ -82,7 +87,7 @@ def get_urls(base, got, json_obj, url_set):
     return got
 
 
-def get_total_images(logger, session, url, user_id):
+def get_total_images(logger: logging.Logger, session: ExtSession, url: str, user_id: str) -> None:
     data = {
         "act": "show_albums",
         "al": "1",

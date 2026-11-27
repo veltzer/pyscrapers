@@ -14,14 +14,14 @@ from pyscrapers.static import LOGGER_NAME
 
 
 class MyLogger:
-    def debug(self, msg):
+    def debug(self, msg: str) -> None:
         pass
 
-    def warning(self, msg):
+    def warning(self, msg: str) -> None:
         pass
 
     # noinspection PyMethodMayBeStatic
-    def error(self, msg):
+    def error(self, msg: str) -> None:
         print(msg)
 
 

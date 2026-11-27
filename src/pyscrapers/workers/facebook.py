@@ -9,10 +9,11 @@ from typing import TYPE_CHECKING
 import pyscrapers.core.ext_lxml
 
 if TYPE_CHECKING:
+    from pyscrapers.core.ext_requests import ExtSession
     from pyscrapers.core.url_set import UrlSet
 
 
-def scrape_facebook(user_id: str, session, url_set: UrlSet) -> None:
+def scrape_facebook(user_id: str, session: ExtSession, url_set: UrlSet) -> None:
     """
     download photos from facebook
     :param user_id:

@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from requests.sessions import Session
 
 
-def netflix_download(_session: Session, _logger: Logger):
+def netflix_download(_session: Session, _logger: Logger) -> None:
     """
     This does the downloads
     :param session:

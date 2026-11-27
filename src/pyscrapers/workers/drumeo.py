@@ -6,12 +6,15 @@ import json
 import logging
 import os
 import typing
+from typing import Any
 
 import lxml.html
 
 from pyscrapers.core.ext_lxml import setup_prefix
+from pyscrapers.core.ext_requests import ExtSession
 
 if typing.TYPE_CHECKING:
+
     from pyscrapers.core.ext_requests import ExtSession
 
 setup_prefix()
@@ -40,7 +43,7 @@ class Course:
     """
     This is an object representing one course
     """
-    def __init__(self):
+    def __init__(self) -> None:
         """
         constructor
         """
@@ -52,7 +55,7 @@ class Course:
         self.resources: str | None = None
         self.videos = []
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         nice representation of this object
         :return:
@@ -62,7 +65,7 @@ class Course:
             self.lessons, self.resources,
             self.videos])
 
-    def add_lesson(self, lesson):
+    def add_lesson(self, lesson: str) -> None:
         """
         Add a lesson to the course
         :param lesson:
@@ -70,7 +73,7 @@ class Course:
         """
         self.lessons.append(lesson)
 
-    def add_video(self, video, quality):
+    def add_video(self, video: str, quality: str) -> None:
         """
         Add a video to the course
         :param video:
@@ -105,7 +108,7 @@ def get_link_re(*, courses: bool) -> str:
 
 
 @typing.no_type_check
-def get_courses(pages, *, courses: bool, session):
+def get_courses(pages: int, *, courses: bool, session: ExtSession):
     """
     Download the list of all the courses
     :param pages:
@@ -137,7 +140,7 @@ def get_courses(pages, *, courses: bool, session):
 
 
 @typing.no_type_check
-def get_course_details(course: Course, *, courses: bool, session):
+def get_course_details(course: Course, *, courses: bool, session: ExtSession):
     """
     Populate the Course type object
     :param course:
@@ -162,7 +165,7 @@ def get_course_details(course: Course, *, courses: bool, session):
         get_videos(root, course, session)
 
 
-def get_course_urls(course, *, courses: bool, session):
+def get_course_urls(course: Course, *, courses: bool, session: ExtSession) -> None:
     if not courses:
         return
     logger = logging.getLogger(__name__)
@@ -180,7 +183,7 @@ def get_course_urls(course, *, courses: bool, session):
         get_videos(root, course, session)
 
 
-def get_videos(root, course, session):
+def get_videos(root: Any, course: Course, session: ExtSession) -> None:
     """
     Get all the videos pertaining to a certain course
     :param root:
@@ -210,14 +213,14 @@ def get_videos(root, course, session):
         course.add_video(best_vid, best_vid_key)
 
 
-def download_course(course, session):
+def download_course(course: Course, session: ExtSession) -> None:
     """
     Download a course
     :param course:
     :param session:
     :return:
     """
-    folder_name = os.path.join("drumeo", course.number)
+    folder_name = os.path.join("drumeo", str(course.number))
     if not os.path.isdir(folder_name):
         os.makedirs(folder_name)
     details = os.path.join(folder_name, "details.txt")
@@ -228,6 +231,6 @@ def download_course(course, session):
             print(f"course_difficulty: {course.diff}", file=file_handle)
             print(f"instructor: {course.instructor}", file=file_handle)
     if course.resources is not None:
-        session.download_url(course.resources, os.path.join(folder_name, "resources.zip"), session)
+        session.download_url(course.resources, os.path.join(folder_name, "resources.zip"))
     for i, (video, quality) in enumerate(course.videos):
-        session.download_video_if_wider(session, video, os.path.join(folder_name, f"{i}.mp4"), width=int(quality))
+        session.download_video_if_wider(video, os.path.join(folder_name, f"{i}.mp4"), width=int(quality))

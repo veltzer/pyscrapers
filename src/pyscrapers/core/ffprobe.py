@@ -10,7 +10,7 @@ import json
 import subprocess
 
 
-def probe(vid_file_path):
+def probe(vid_file_path: str):
     """ Give a json from ffprobe command line
 
     @vid_file_path : The absolute (full) path of the video file, string.
@@ -33,17 +33,17 @@ def probe(vid_file_path):
     return json.loads(subprocess.check_output(args).decode())
 
 
-def width(vid):
+def width(vid: str) -> int:
     _json = probe(vid)
     return int(_json["streams"][0]["width"])
 
 
-def height(vid):
+def height(vid: str) -> int:
     _json = probe(vid)
     return int(_json["streams"][0]["height"])
 
 
-def duration(vid_file_path):
+def duration(vid_file_path: str) -> float:
     """ Videos duration in seconds, return a float number
     """
     _json = probe(vid_file_path)

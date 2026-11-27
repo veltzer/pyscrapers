@@ -2,7 +2,7 @@
 Download books from audible
 """
 from collections import OrderedDict
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from bs4 import BeautifulSoup
 
@@ -34,7 +34,7 @@ def get_book_data(session: ExtSession, book_id: str) -> OrderedDict[str, str]:
     return d
 
 
-def add_book_ids(soup, book_ids) -> bool:
+def add_book_ids(soup: Any, book_ids: list[str]) -> bool:
     divs = soup.find_all("div", {"class": "adbl-library-content-row"})
     more_titles = False
     for div in divs:
@@ -45,7 +45,7 @@ def add_book_ids(soup, book_ids) -> bool:
     return more_titles
 
 
-def add_links(soup, book_ids) -> bool:
+def add_links(soup: Any, book_ids: list[str]) -> bool:
     divs = soup.find_all("div", {"class": "adbl-library-content-row"})
     more_titles = False
     for div in divs:
@@ -70,7 +70,7 @@ def add_links(soup, book_ids) -> bool:
     return more_titles
 
 
-def audible(_logger: Logger):
+def audible(_logger: Logger) -> None:
     """
     This does the downloads
     :param session:
